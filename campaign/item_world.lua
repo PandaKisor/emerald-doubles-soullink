@@ -36,7 +36,38 @@ return function(mod, data, sources, active)
     local sym = h and h[x .. "," .. y]
     return sym and id(sym) or nil
   end
+  -- Vanilla scripts number the pockets as vanilla's bag does (1 ITEMS,
+  -- 2 POKé BALLS, 3 TMs & HMs, 4 BERRIES, 5 KEY ITEMS), but the campaign bag
+  -- has Inclement's seven, so checkitemtype answers in vanilla's numbers:
+  -- a Friend Ball (Inclement's pocket 6) had no case, and the find-item
+  -- script stopped with the ball still on the ground. MEDICINE and BATTLE
+  -- ITEMS have no vanilla pocket: they take the ITEMS case, and the pocket
+  -- name the script buffers next is rewritten.
+  local ItemsData = require("src.core.game3.items_data")
+  local VANILLA_POCKET = { ITEMS = 1, POKE_BALLS = 2, TM_CASE = 3, BERRY_POUCH = 4, KEY_ITEMS = 5 }
+  local POCKET_NAME = { MEDICINE = "MEDICINE", BATTLE = "BATTLE ITEMS" }
+  W.VANILLA_POCKET, W.POCKET_NAME = VANILLA_POCKET, POCKET_NAME
+  local pocketName = setmetatable({}, { __mode = "k" })
   mod.hooks:wrap("script.command", function(next, ctx, op, row)
+    local runner = ctx and ctx.runner
+    if active() and runner and runner.store and row and (op == "checkitemtype" or op == "bufferstdstring") then
+      local done = next(ctx, op, row)
+      local sctx = runner.ctx
+      if op == "checkitemtype" then
+        local item = tonumber(row[1] or row.item)
+        if item and item >= 0x4000 then item = Flags.getVar(runner.store, sctx, item) end
+        local pocket = item and ItemsData.pocketOf(item)
+        Flags.setVar(runner.store, sctx, 0x800D, VANILLA_POCKET[pocket] or 1)
+        pocketName[sctx] = POCKET_NAME[pocket]
+      elseif pocketName[sctx] then
+        local dest = (tonumber(row.dest or row[1]) or 0) + 1
+        local vars = sctx and sctx.stringVars
+        -- the ITEMS case's name ("put away the X in the ITEMS POCKET.")
+        if vars and tostring(vars[dest]):find("ITEMS", 1, true) then vars[dest] = pocketName[sctx] end
+        pocketName[sctx] = nil
+      end
+      return done
+    end
     if active() and op == "callstd" and row then
       local std = tonumber(row.std or row[1])
       local vm = ctx and ctx.runner

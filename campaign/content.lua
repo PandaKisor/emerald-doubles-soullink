@@ -41,6 +41,7 @@ return function(mod, active)
   Art.install({ Pokemon = Pokemon, MonAnim = require("src.core.game3.mon_anim"),
     MonAnimData = require("src.core.game3.mon_anim_data"), PicCoords = require("src.core.game3.battle.pic_coords") },
     Art.load(function(path) return mod:read("full/species-art/" .. path) end), active)
+  source("campaign/cries.lua")(mod, source)
   source("full/abilities.lua").install({ Pokemon = Pokemon,
     Party = require("src.core.game3.party"), SaveMon = require("src.core.game3.save_mon"),
     State = require("src.core.game3.battle.state"), Evolution = require("src.core.game3.evolution"),

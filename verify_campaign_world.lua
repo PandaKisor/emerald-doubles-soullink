@@ -45,6 +45,34 @@ do
   ModRuntime.call('script.command',function() return false end,{runner=vm},'callstd',{op='callstd',std=2})
   T.eq(Flags.getVar(store,vm.ctx,0x8000),v,'other std scripts are left alone')
 end
+-- vanilla scripts get vanilla's pocket numbers (the find-item script had no
+-- case for Inclement's POKé BALLS pocket 6, so a Friend Ball stayed put)
+do
+  local store=Flags.newStore()
+  local sctx={specialVars={},stringVars={}}
+  local vm={store=store,ctx=sctx}
+  local function pocketCase(sym)
+    Flags.setVar(store,sctx,0x8000,items[sym])
+    ModRuntime.call('script.command',function() Flags.setVar(store,sctx,0x800D,99) return false end,
+      {runner=vm},'checkitemtype',{op='checkitemtype',0x8000})
+    return Flags.getVar(store,sctx,0x800D)
+  end
+  local function bufferedName()
+    ModRuntime.call('script.command',function() sctx.stringVars[3]='ITEMS' return false end,
+      {runner=vm},'bufferstdstring',{op='bufferstdstring',2,0})
+    return sctx.stringVars[3]
+  end
+  T.eq(pocketCase('ITEM_FRIEND_BALL'),2,'a Friend Ball is in the POKé BALLS case')
+  T.eq(pocketCase('ITEM_POTION'),1,'a Potion is in the ITEMS case')
+  T.eq(bufferedName(),'MEDICINE','and is put away in the MEDICINE POCKET')
+  T.eq(pocketCase('ITEM_X_ACCURACY'),1,'an X Accuracy takes the ITEMS case')
+  T.eq(bufferedName(),'BATTLE ITEMS','in the BATTLE ITEMS POCKET')
+  T.eq(pocketCase('ITEM_SOOTHE_BELL'),1,'a Soothe Bell is in ITEMS')
+  T.eq(bufferedName(),'ITEMS','and keeps the ITEMS POCKET name')
+  T.eq(pocketCase('ITEM_TM40_AERIAL_ACE'),3,'a TM is in the TMs & HMs case')
+  T.eq(pocketCase('ITEM_ORAN_BERRY'),4,'a berry is in the BERRIES case')
+  T.eq(pocketCase('ITEM_MACH_BIKE'),5,'a key item is in the KEY ITEMS case')
+end
 -- marts: vanilla stock + Inclement's badge tier + the town's own stock
 local Marts=require('src.core.game3.marts')
 local fortreeKey
