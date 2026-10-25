@@ -341,6 +341,11 @@ ADAPT = {
     # passed TRUE on the branch AnimTask_CanBattlerSwitch opens, which the
     # campaign's version never does (campaign/anim_code.lua)
     ("gFlyBallAttackSpriteTemplate", 2): lambda a: {"args": a[:1]},
+    # Aqua Ring passes BlendColorCycle (selector, delay, blends, target, colour),
+    # one short: the starting blend amount goes back in as 0 (two flashes from
+    # 0 to 10 towards white); left as it was, the colour lands on a blend
+    # amount and the cycle never ends
+    ("BlendColorCycle", 5): lambda a: {"args": a[:3] + [0] + a[3:]},
     # donor: x/y offsets, and TRUE to centre on the target pair; 0, 0, FALSE is vanilla
     ("gSpiderWebSpriteTemplate", 3): lambda a: {"args": []} if a == [0, 0, 0] else {"callback": "IncSpiderWeb"},
 }
@@ -351,9 +356,6 @@ EXCLUDE = {
     # its background fade finishes before the script waits for it (the dip and
     # delays before waitbgfadeout outlast the fade), so the script never ends
     "GIGA_IMPACT": "background fade timing",
-    # the donor's script passes BlendColorCycle one argument short, so the
-    # rest shift (RGB_WHITE lands on a blend amount) and the cycle never ends
-    "AQUA_RING": "BlendColorCycle called one argument short",
 }
 
 

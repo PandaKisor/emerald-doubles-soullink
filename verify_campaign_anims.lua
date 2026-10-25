@@ -39,9 +39,19 @@ T.check(same(Anim.scriptForMove(moves.MOVE_MOONBLAST), own.moves.MOONBLAST), 'Mo
 T.check(pack.campaignLabels == true, "the converted subroutines joined the pack's labels")
 local someLabel = next(own.labels)
 T.check(someLabel == nil or same(pack.labels[someLabel], own.labels[someLabel]), 'with their contents')
-T.check(own.moves.DRACO_METEOR == nil, 'Draco Meteor does not convert (its sprite callback is new)')
-T.check(same(Anim.scriptForMove(moves.MOVE_DRACO_METEOR), pack.moves[moves.MOVE_OUTRAGE]),
-  'so it keeps its stand-in (Outrage)')
+-- every move without its own script still plays its stand-in
+local list = assert(loadfile('../porting/native/campaign/move_list.lua'))()
+local standIns, wrong = 0, {}
+for sym, entry in pairs(list) do
+  if own.moves[sym] == nil and moves['MOVE_' .. sym] then
+    standIns = standIns + 1
+    if not same(Anim.scriptForMove(moves['MOVE_' .. sym]), pack.moves[moves['MOVE_' .. entry.anim]]) then
+      wrong[#wrong + 1] = sym
+    end
+  end
+end
+T.check(standIns > 0, standIns .. ' moves keep their stand-in')
+T.eq(#wrong, 0, 'and play it (' .. table.concat(wrong, ' ') .. ')')
 T.eq(Anim.scriptForMove(moves.MOVE_POUND), pack.moves[moves.MOVE_POUND], 'vanilla moves keep the ROM animation')
 -- donor graphics join the pack's tags beside the ROM's
 local donorTag = next(own.tags or {})
