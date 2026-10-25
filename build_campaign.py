@@ -25,7 +25,7 @@ CAMPAIGN = HERE / "campaign"
 
 MOD_ID = "g3_campaign"
 TITLE = "Emerald Doubles Soul Link"
-VERSION = "0.16.0"
+VERSION = "0.17.0"
 CART_ID = "emerald_doubles_soullink"
 COOP_ID, COOP_VERSION = "g3_coop", "0.8.1"
 # GitHub repos the launcher checks for updates and the release cart downloads from
@@ -661,6 +661,12 @@ def build():
     text, count = dex_entries()
     (OUT / "campaign/dex_entries.lua").write_text(text)
     print(f"{count} Pokédex entries")
+    sys.path.insert(0, str(HERE / "tools"))
+    import anim_convert
+    symbols = re.findall(r"^  ([A-Z_0-9]+) = \{", (CAMPAIGN / "move_list.lua").read_text(), re.M)
+    text, count, skipped = anim_convert.generate(symbols)
+    (OUT / "campaign/move_anims.lua").write_text(text)
+    print(f"{count} of {len(symbols)} new moves with their own animation")
     text, blob, count, missing = cries()
     assert not missing, missing
     (OUT / "campaign/cry_index.lua").write_text(text)
@@ -720,6 +726,10 @@ def pack_coop():
     assert manifest["version"] == COOP_VERSION, manifest["version"]
     assert manifest.get("github") == COOP_REPO, manifest.get("github")
     zpath = GEN3 / f"{COOP_ID}-{COOP_VERSION}.zip"
+    # a version is packed once: modkit's zips aren't byte-for-byte
+    # reproducible, and the cart pins the published one's hash
+    if zpath.exists():
+        return zpath
     subprocess.run([sys.executable, str(native.STOCK / "tools/modkit.py"), "pack", "--quiet",
                     str(COOP_SRC), "-o", str(zpath)], check=True)
     return zpath

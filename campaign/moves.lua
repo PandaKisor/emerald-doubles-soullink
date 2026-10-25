@@ -9,7 +9,9 @@
 --
 --   list   campaign/move_list.lua: moves that run a native effect as is
 --   specs  symbol -> spec from campaign/battle (hits and statuses)
-return function(data, list, specs, active)
+--   own    campaign/move_anims.lua: Inclement's own animations, where they
+--          convert (tools/anim_convert.py); the rest play list's stand-in
+return function(data, list, specs, active, own)
   local Moves = require("src.core.game3.battle.moves")
   local E = require("src.core.game3.battle.effect_ids")
   local Anim = require("src.core.game3.battle.anim")
@@ -99,7 +101,7 @@ return function(data, list, specs, active)
   end
 
   -- id -> battle record template, built once and checked at load
-  local records, anims = {}, {}
+  local records, anims, scripts = {}, {}, {}
   local function add(symbol, entry, spec)
     local id = assert(ids["MOVE_" .. symbol], "Unknown Inclement move " .. symbol)
     local row = assert(data.moves[id], symbol)
@@ -126,6 +128,7 @@ return function(data, list, specs, active)
     end
     records[id] = out
     anims[id] = assert(ids["MOVE_" .. entry.anim], symbol .. ": unknown animation move " .. tostring(entry.anim))
+    scripts[id] = own and own.moves[symbol] or nil
   end
   for symbol, entry in pairs(list) do
     local spec = specs and specs.bySymbol[symbol]
@@ -165,7 +168,18 @@ return function(data, list, specs, active)
     end
     Anim.scriptForMove = function(value, ...)
       local n = bridge.active() and id(value)
-      return scriptForMove(n and bridge.anims[n] or value, ...)
+      local script = n and bridge.scripts[n]
+      local base = scriptForMove(n and bridge.anims[n] or value, ...)
+      if not script then return base end
+      -- Inclement's own animation (campaign/move_anims.lua); its subroutines
+      -- join the ROM pack's labels once the pack has loaded
+      local pack = Anim._pack
+      if not (pack and pack.labels) then return base end
+      if not pack.campaignLabels then
+        for key, ops in pairs(bridge.labels) do pack.labels[key] = ops end
+        pack.campaignLabels = true
+      end
+      return script
     end
     -- status moves with a campaign handler replace the native dispatch
     local runForMove = Effects.runForMove
@@ -195,6 +209,7 @@ return function(data, list, specs, active)
     end
   end
   bridge.data, bridge.active, bridge.records, bridge.anims = data, active, records, anims
+  bridge.scripts, bridge.labels = scripts, own and own.labels or {}
   bridge.supported = {}
   for n in pairs(records) do bridge.supported[n] = true end
   return bridge
