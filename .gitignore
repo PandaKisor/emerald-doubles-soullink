@@ -1,0 +1,6 @@
+generated/
+__pycache__/
+*.pyc
+*.zip
+*.g1rcart
+*.gba
