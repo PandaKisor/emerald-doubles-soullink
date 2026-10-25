@@ -22,7 +22,7 @@ local moves = F.ids.moves
 
 local count = 0
 for _ in pairs(own.moves) do count = count + 1 end
-T.check(count > 300, 'more than 300 new moves have their own animation (' .. count .. ')')
+T.check(count >= 396, 'all 396 new moves have their own animation (' .. count .. ')')
 
 -- battle gets them through the mod's scriptForMove
 Anim._pack, Anim._packLoaded = pack, true
@@ -50,7 +50,7 @@ for sym, entry in pairs(list) do
     end
   end
 end
-T.check(standIns > 0, standIns .. ' moves keep their stand-in')
+print('  ' .. standIns .. ' moves keep their stand-in')
 T.eq(#wrong, 0, 'and play it (' .. table.concat(wrong, ' ') .. ')')
 T.eq(Anim.scriptForMove(moves.MOVE_POUND), pack.moves[moves.MOVE_POUND], 'vanilla moves keep the ROM animation')
 -- donor graphics join the pack's tags beside the ROM's
@@ -82,6 +82,10 @@ for key, ops in pairs(own.labels) do scanOps(ops, key) end
 for i = 1, math.min(#unresolved, 10) do print('  unresolved ' .. unresolved[i]) end
 T.eq(#unresolved, 0, 'every callback and task the converted scripts name exists')
 T.check(own.moves.AQUA_TAIL ~= nil and AnimCallbacks.AnimKnockOffAquaTail ~= nil, "Aqua Tail runs the campaign's port of its callback")
+
+-- START > MOVE ANIMS lists every converted move
+local viewer = F.loader.exports.g3_campaign.campaignAnimViewer
+T.eq(viewer and #viewer.list, count, 'the MOVE ANIMS viewer lists every converted move')
 
 -- every converted script runs to its end, both sides
 for k, ops in pairs(own.labels) do pack.labels[k] = ops end

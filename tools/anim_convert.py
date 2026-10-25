@@ -136,6 +136,7 @@ def split_args(text):
     # GAS also separates macro arguments by spaces ("SOUND_PAN_TARGET 11"),
     # where the space isn't part of an expression
     split = []
+    out = [a.rstrip(";").strip() for a in out]  # "goto ParabolicChargeHeal;"
     for arg in out:
         split.extend(x for x in re.split(r"(?<=[\w)])\s+(?=[\w(])", arg) if x)
     return split
@@ -179,7 +180,8 @@ def engine_registry():
     own = open(os.path.join(HERE, "../campaign/anim_code.lua")).read()
     for line in re.findall(r"^  ((?:(?:CB|NEW)\.\w+(?:, )?)+) = ", own, re.M):
         cbs |= set(re.findall(r"(?:CB|NEW)\.(\w+)", line))
-    tasks |= set(re.findall(r"^  TASK\.(\w+) = ", own, re.M))
+    for line in re.findall(r"^  ((?:TASK\.\w+(?:, )?)+) = ", own, re.M):
+        tasks |= set(re.findall(r"TASK\.(\w+)", line))
     return cbs, tasks
 
 
@@ -205,6 +207,16 @@ class CData:
         self.oams = {}
         for m in re.finditer(r"const struct OamData (\w+)\s*=\s*\{(.*?)\};", text, re.S):
             self.oams[m[1]] = dict(re.findall(r"\.(\w+)\s*=\s*([^,]+?)\s*(?:,|$)", m[2].strip()))
+        # OAM written as raw attribute words (static const u16 sX[] = {a0, a1, a2, 0})
+        self.raw_oams = {}
+        dims = {0: ((8, 8), (16, 16), (32, 32), (64, 64)), 1: ((16, 8), (32, 8), (32, 16), (64, 32)),
+                2: ((8, 16), (8, 32), (16, 32), (32, 64))}
+        for m in re.finditer(r"const u16 (\w+)\[\]\s*=\s*\{([^}]*)\}", text):
+            words = [int(x, 0) for x in re.findall(r"0x[0-9A-Fa-f]+|\d+", m[2])]
+            if len(words) >= 3 and (words[0] >> 14) in dims:
+                w, h = dims[words[0] >> 14][(words[1] >> 14) & 3]
+                self.raw_oams[m[1]] = {"w": w, "h": h, "affineMode": (words[0] >> 8) & 3,
+                                       "objBlend": ((words[0] >> 10) & 3) == 1, "priority": (words[2] >> 10) & 3}
         self.seqs, self.tables = {}, {}
         for kind in ("AnimCmd", "AffineAnimCmd"):
             for m in re.finditer(r"const union %s (\w+)\[\]\s*=\s*\{(.*?)\};" % kind, text, re.S):
@@ -218,6 +230,8 @@ class CData:
     def oam(self, name):
         name = re.sub(r"^\([^)]*\)\s*", "", name.strip())  # (const struct OamData *) &sX
         o = self.oams.get(name.lstrip("&").strip())
+        if o is None and name.lstrip("&").strip() in self.raw_oams:
+            return self.raw_oams[name.lstrip("&").strip()]
         if o is None:
             raise Unsupported("oam " + name)
         shape = re.search(r"(\d+)x(\d+)", o.get("shape", "") + o.get("size", ""))
@@ -292,6 +306,7 @@ COMPATIBLE = {
     "SoundTask_PlayCryWithEcho", "SmokescreenImpact", "gLeerSpriteTemplate",
     "SoundTask_WaitForCry", "StartSinAnimTimer", "GetAttackerSide", "Rollout", "StretchAttackerUp",
     "RotateMonSpriteToSide", "MoonlightEndFade", "ShakeTargetBasedOnMovePowerOrDmg", "DragonDanceWaver",
+    "BlendPalInAndOutByTag", "BlendBattleAnimPal",
 }
 
 
@@ -322,9 +337,10 @@ def _acid_droplet(a):
 
 
 def _shock_wave(a):
-    # donor arg 0: which battler the bolt runs to; ANIM_TARGET is vanilla
+    # donor arg 0: which battler the bolt runs to; ANIM_TARGET is vanilla, any
+    # other runs the campaign's IncShockWaveProgressingBolt
     if a[0] != 1:
-        raise Unsupported("ShockWaveProgressingBolt to a battler other than the target")
+        return {"task": "IncShockWaveProgressingBolt"}
     return {"args": []}
 
 
@@ -336,6 +352,7 @@ ADAPT = {
     ("gElectricitySpriteTemplate", 5): _electricity,
     ("gAcidPoisonBubbleSpriteTemplate", 7): _acid_bubble,
     ("ShockWaveProgressingBolt", 1): _shock_wave,
+    ("ShockWaveLightning", 1): lambda a: {"args": []} if a[0] == 1 else {"task": "IncShockWaveLightning"},
     ("gAcidPoisonDropletSpriteTemplate", 6): _acid_droplet,
     # donor arg 1: leave the attacker invisible (U-turn switching out); only
     # passed TRUE on the branch AnimTask_CanBattlerSwitch opens, which the
@@ -351,12 +368,17 @@ ADAPT = {
 }
 
 
+# Donor templates campaign tasks create directly (no script names them)
+TASK_TEMPLATES = ["gSteelBeamSmallOrbSpriteTemplate"]
+
 # Moves that convert but don't run right on the engine; they keep their stand-in.
-EXCLUDE = {
-    # its background fade finishes before the script waits for it (the dip and
-    # delays before waitbgfadeout outlast the fade), so the script never ends
-    "GIGA_IMPACT": "background fade timing",
-}
+EXCLUDE = {}
+
+# Giga Impact waits for its background fade after the attacker's dip and
+# slide, which the engine runs ~10 frames slower than the GBA: the fade has
+# finished by then and waitbgfadeout would wait forever. The fade is always
+# done at that point, so the wait is dropped (waitbgfadein still syncs).
+NO_BG_FADE_OUT_WAIT = {"GIGA_IMPACT"}
 
 
 class Converter:
@@ -703,6 +725,12 @@ def convert_moves(symbols, pack=None, conv=None):
             continue
         try:
             ops, labels = conv.convert(labels_of.get(sym, "Move_" + sym))
+            if sym in NO_BG_FADE_OUT_WAIT:
+                for seq in [ops] + list(labels.values()):
+                    for op in seq:
+                        if op["op"] == "waitbgfadeout":
+                            op.clear()
+                            op["op"] = "nop"
             done[sym] = {"ops": ops, "labels": labels}
         except Unsupported as x:
             skipped[sym] = str(x)
@@ -733,6 +761,10 @@ def generate(symbols):
         labels.update(row["labels"])
         for seq in [row["ops"]] + list(row["labels"].values()):
             used.update(op["template"] for op in seq or [] if op.get("op") == "createsprite")
+    # templates a campaign task creates itself (campaign/anim_code.lua)
+    for name in TASK_TEMPLATES:
+        conv.new_template(name)
+        used.add(name)
     templates = {name: t["entry"] for name, t in conv.new_templates.items() if name in used}
     # donor graphics the converted moves load or draw
     want = set()
