@@ -50,4 +50,7 @@ for name in pairs(tasks) do taskList[#taskList + 1] = name end
 table.sort(taskList)
 local moves = {}
 for id, ops in pairs(pack.moves or {}) do moves[tostring(id)] = ops end
-io.write(json({ moves = moves, labels = pack.labels or {}, templates = templates, tasks = taskList, tags = tags }))
+local bgs = {}
+for id in pairs(pack.animBgs or {}) do if type(id) == "number" then bgs[#bgs + 1] = id end end
+table.sort(bgs)
+io.write(json({ moves = moves, labels = pack.labels or {}, templates = templates, tasks = taskList, tags = tags, bgs = bgs }))

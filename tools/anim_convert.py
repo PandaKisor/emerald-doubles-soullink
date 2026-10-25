@@ -30,6 +30,30 @@ class Unsupported(Exception):
     pass
 
 
+def strip_comments(text):
+    """C comments out, scanning left to right (a "//" inside /* */, or "/*"
+    after //, is not a comment start)"""
+    out, i, n = [], 0, len(text)
+    while i < n:
+        if text.startswith("/*", i):
+            j = text.find("*/", i + 2)
+            i = n if j < 0 else j + 2
+            out.append(" ")
+        elif text.startswith("//", i):
+            j = text.find("\n", i)
+            i = n if j < 0 else j
+        elif text[i] == '"':
+            j = i + 1
+            while j < n and text[j] != '"':
+                j += 2 if text[j] == "\\" else 1
+            out.append(text[i:j + 1])
+            i = j + 1
+        else:
+            out.append(text[i])
+            i += 1
+    return "".join(out)
+
+
 def load_pack():
     out = subprocess.run(["luajit", os.path.join(HERE, "dump_anim_pack.lua"), PACK],
                          check=True, capture_output=True, text=True).stdout
@@ -53,13 +77,13 @@ class Consts:
     """#defines from the headers the script file includes, evaluated as C."""
 
     def __init__(self):
-        self.raw = {"TRUE": "1", "FALSE": "0"}
+        # ANIM_ATTCKER: a typo in the donor's Hammer Arm / Wake-Up Slap scripts
+        self.raw = {"TRUE": "1", "FALSE": "0", "ANIM_ATTCKER": "ANIM_ATTACKER"}
         for h in HEADERS:
             path = os.path.join(DONOR, "include/constants", h)
             if not os.path.exists(path):
                 continue
-            # both comment kinds in one pass: a "//" comment may hold "/*"
-            text = re.sub(r"//[^\n]*|/\*.*?\*/", "", open(path).read(), flags=re.S)
+            text = strip_comments(open(path).read())
             text = text.replace("\\\n", " ")
             for m in re.finditer(r"^\s*#define\s+(\w+)(\([^)]*\))?\s+(.+?)\s*(?://.*)?$", text, re.M):
                 if m[2]:
@@ -148,6 +172,9 @@ def engine_registry():
     """the engine's sprite callbacks and visual/sound tasks, by name"""
     out = subprocess.run(["luajit", CB_KEYS], cwd=STOCK, check=True, capture_output=True, text=True).stdout
     cbs = {l[3:] for l in out.splitlines() if l.startswith("cb ")}
+    # the campaign's own (campaign/anim_code.lua)
+    own = open(os.path.join(HERE, "../campaign/anim_code.lua")).read()
+    cbs |= set(re.findall(r"^  CB\.(\w+) = function", own, re.M))
     tasks = {l[5:] for l in out.splitlines() if l.startswith("task ")}
     return cbs, tasks
 
@@ -158,7 +185,7 @@ def c_sources():
     files.append(os.path.join(DONOR, "gflib/sprite.c"))
     text = ""
     for f in files:
-        text += re.sub(r"//[^\n]*|/\*.*?\*/", "", open(f).read(), flags=re.S) + "\n"
+        text += strip_comments(open(f).read()) + "\n"
     return text
 
 
@@ -185,7 +212,8 @@ class CData:
                 self.tables[(kind, m[1])] = m[2]
 
     def oam(self, name):
-        o = self.oams.get(name.lstrip("&"))
+        name = re.sub(r"^\([^)]*\)\s*", "", name.strip())  # (const struct OamData *) &sX
+        o = self.oams.get(name.lstrip("&").strip())
         if o is None:
             raise Unsupported("oam " + name)
         shape = re.search(r"(\d+)x(\d+)", o.get("shape", "") + o.get("size", ""))
@@ -244,6 +272,80 @@ class CData:
         return out
 
 
+# Vanilla tasks and templates the donor calls with a different argument
+# count. Checked against the donor's C:
+# COMPATIBLE: the donor's function reads no argument vanilla's doesn't (extra
+#   trailing arguments it ignores), or relies on an argument it doesn't pass
+#   keeping its last value. Only sprites see that last value (they copy the
+#   VM's args, as the GBA's gBattleAnimArgs); a task reads its own argument
+#   list, so a task called with fewer is refused (Aqua Ring's BlendColorCycle
+#   never ended)
+COMPATIBLE = {
+    "ShakeMonInPlace", "ShakeMon", "SoundTask_LoopSEAdjustPanning", "BlendColorCycle",
+    "gHorizontalLungeSpriteTemplate", "BlendBattleAnimPalExclude", "Splash", "StretchTargetUp",
+    "RockMonBackAndForth", "gFireSpreadSpriteTemplate", "gGrantingStarsSpriteTemplate",
+    "gSlideMonToOriginalPosSpriteTemplate", "StartSlidingBg", "AlphaFadeIn", "WindUpLunge",
+    "SoundTask_PlayCryWithEcho", "SmokescreenImpact", "gLeerSpriteTemplate",
+    "SoundTask_WaitForCry", "StartSinAnimTimer", "GetAttackerSide", "Rollout", "StretchAttackerUp",
+    "RotateMonSpriteToSide", "MoonlightEndFade", "ShakeTargetBasedOnMovePowerOrDmg", "DragonDanceWaver",
+}
+
+
+def _invert_flags(a):
+    # donor: one bit field (1 bg, 2 attacker, 4 target, 8/16 partners);
+    # vanilla: bg, attacker, target each 0x100 when inverted (0x101 as the
+    # ROM's scripts write it; partners dropped)
+    return {"args": [0x101 if a[0] & bit else 0 for bit in (1, 2, 4)]}
+
+
+def _electricity(a):
+    # donor arg 4: the battler the spark sits on; vanilla always the target
+    return {"args": a[:4]} if a[4] == 1 else {"callback": "IncElectricity"}
+
+
+def _acid_bubble(a):
+    # donor arg 6: aim at the target pair's average position; FALSE is vanilla
+    if a[6] != 0:
+        raise Unsupported("gAcidPoisonBubbleSpriteTemplate aimed at the average position")
+    return {"args": a[:6]}
+
+
+def _acid_droplet(a):
+    # donor arg 5: start from the target pair's average position; FALSE is vanilla
+    if a[5] != 0:
+        raise Unsupported("gAcidPoisonDropletSpriteTemplate from the average position")
+    return {"args": a[:5]}
+
+
+def _shock_wave(a):
+    # donor arg 0: which battler the bolt runs to; ANIM_TARGET is vanilla
+    if a[0] != 1:
+        raise Unsupported("ShockWaveProgressingBolt to a battler other than the target")
+    return {"args": []}
+
+
+# ADAPT: the donor gave the call a new meaning; (name, donor count) -> how to
+# run it with vanilla's arguments, or the campaign's own version
+# (campaign/anim_code.lua)
+ADAPT = {
+    ("InvertScreenColor", 1): _invert_flags,
+    ("gElectricitySpriteTemplate", 5): _electricity,
+    ("gAcidPoisonBubbleSpriteTemplate", 7): _acid_bubble,
+    ("ShockWaveProgressingBolt", 1): _shock_wave,
+    ("gAcidPoisonDropletSpriteTemplate", 6): _acid_droplet,
+    # donor: x/y offsets, and TRUE to centre on the target pair; 0, 0, FALSE is vanilla
+    ("gSpiderWebSpriteTemplate", 3): lambda a: {"args": []} if a == [0, 0, 0] else {"callback": "IncSpiderWeb"},
+}
+
+
+# Moves that convert but don't run right on the engine; they keep their stand-in.
+EXCLUDE = {
+    # its background fade finishes before the script waits for it (the dip and
+    # delays before waitbgfadeout outlast the fade), so the script never ends
+    "GIGA_IMPACT": "background fade timing",
+}
+
+
 class Converter:
     def __init__(self, pack):
         self.pack = pack
@@ -253,6 +355,7 @@ class Converter:
         self.tag_names = vanilla_tag_names()
         self.known_tags = set(pack["tags"])
         self.known_tasks = set(pack["tasks"])
+        self.known_bgs = set(pack.get("bgs", []))
         self.templates = pack["templates"]
         self.battlers = battler_names()
         self.cdata = CData(self.c)
@@ -261,6 +364,7 @@ class Converter:
         self.known_tasks |= engine_tasks
         self.new_templates = {}
         self.new_tags = {}
+        self.new_bgs = set()
         # how many arguments vanilla passes each task and template: the donor
         # changed some (InvertScreenColor takes one, not three), and the
         # engine implements vanilla's
@@ -299,6 +403,18 @@ class Converter:
         n = name[len("AnimTask_"):] if name.startswith("AnimTask_") else name
         if n not in self.known_tasks:
             raise Unsupported("task " + name)
+        return n
+
+    def bg(self, expr):
+        """a battle background the ROM has (the donor added its own past vanilla's)"""
+        n = self.num(expr) & 0xFF
+        if n not in self.known_bgs:
+            # a donor background, built from its art (anim_gfx.background)
+            try:
+                anim_gfx.background(n)
+            except (anim_gfx.Unsupported, OSError) as x:
+                raise Unsupported(f"background {expr.strip()}: {x}")
+            self.new_bgs.add(n)
         return n
 
     def num(self, expr):
@@ -358,9 +474,16 @@ class Converter:
         self.new_templates[name] = {"ir": ir, "entry": entry}
         return ir
 
+    def adapt(self, key, args):
+        """ADAPT's rewrite for a donor call vanilla runs differently, else None"""
+        rule = ADAPT.get((key, len(args)))
+        return rule(args) if rule else None
+
     def check_args(self, key, args):
         if key in self.new_templates or (key not in self.arity and key in self.known_tasks):
             return  # no vanilla use to compare with
+        if key in COMPATIBLE and (len(args) > max(self.arity.get(key, {0})) or key.endswith("Template")):
+            return
         if len(args) not in self.arity.get(key, ()):
             raise Unsupported(f"{key} with {len(args)} arguments (vanilla: {sorted(self.arity.get(key, ()))})")
 
@@ -395,14 +518,20 @@ class Converter:
             else:
                 byte = self.num(a[1]) & 0xFF
                 args = [self.s16(x) for x in a[3:3 + self.num(a[2])]]
+            change = self.adapt(tmpl, args)
+            if change:
+                args = change.get("args", args)
+            else:
+                self.check_args(tmpl, args)
             op = {"op": "createsprite", "template": tmpl, "animBattler": "target" if byte >= 0x80 else "attacker",
                   "subpriority": byte % 0x80, "args": args, "w": info.get("w", 32), "h": info.get("h", 32)}
-            self.check_args(tmpl, args)
             if info.get("tag"):
                 self.size_tag(info["tag"], info.get("w", 32), info.get("h", 32))
             for k in ("tag", "palTag", "callback", "noGfx"):
                 if info.get(k) is not None:
                     op[k] = info[k]
+            if change and "callback" in change:
+                op["callback"] = change["callback"]
             ops.append(op)
         elif macro in ("createvisualtask", "launchtask"):
             if macro == "createvisualtask":
@@ -410,7 +539,11 @@ class Converter:
             else:
                 pri, args = self.num(a[1]), [self.s16(x) for x in a[3:3 + self.num(a[2])]]
             name = self.task(a[0])
-            self.check_args(name, args)
+            change = self.adapt(name, args)
+            if change:
+                args, name = change.get("args", args), change.get("task", name)
+            else:
+                self.check_args(name, args)
             ops.append({"op": "createvisualtask", "task": name, "priority": pri, "args": args})
         elif macro == "createsoundtask":
             name, args = self.task(a[0]), [self.s16(x) for x in a[1:]]
@@ -462,7 +595,7 @@ class Converter:
         elif macro == "jumpifmoveturn":
             ops.append({"op": "jumpifmoveturn", "turn": self.num(a[0]) & 0xFF, "label": self.ref(a[1])})
         elif macro in ("fadetobg", "changebg"):
-            ops.append({"op": macro, "bg": self.num(a[0]) & 0xFF})
+            ops.append({"op": macro, "bg": self.bg(a[0])})
         elif macro == "playsewithpan":
             ops.append({"op": "playsewithpan", "se": self.num(a[0]) & 0xFFFF, "pan": self.s8(a[1])})
         elif macro == "setpan":
@@ -494,8 +627,7 @@ class Converter:
         elif macro == "jumpifcontest":
             ops.append({"op": "jumpifcontest", "label": self.ref(a[0])})
         elif macro == "fadetobgfromset":
-            ops.append({"op": "fadetobgfromset", "bg1": self.num(a[0]) & 0xFF, "bg2": self.num(a[1]) & 0xFF,
-                        "bg3": self.num(a[2]) & 0xFF})
+            ops.append({"op": "fadetobgfromset", "bg1": self.bg(a[0]), "bg2": self.bg(a[1]), "bg3": self.bg(a[2])})
         elif macro in ("monbgprio_28", "monbgprio_2A", "splitbgprio", "splitbgprio_foes"):
             op = {"op": "splitbgprio", "battler": self.battlers.get(self.num(a[0]) & 0xFF, "target")}
             if macro in ("monbgprio_2A", "splitbgprio_foes"):
@@ -529,6 +661,9 @@ def convert_moves(symbols, pack=None, conv=None):
     labels_of = move_labels()
     done, skipped = {}, {}
     for sym in symbols:
+        if sym in EXCLUDE:
+            skipped[sym] = "excluded: " + EXCLUDE[sym]
+            continue
         try:
             ops, labels = conv.convert(labels_of.get(sym, "Move_" + sym))
             done[sym] = {"ops": ops, "labels": labels}
@@ -577,8 +712,18 @@ def generate(symbols):
         entry["file"], entry["idxFile"] = f"anim_tags/{name}.png", f"anim_tags/{name}.idx.png"
         files[entry["file"]], files[entry["idxFile"]] = rgba, ipng
         tags[name] = entry
+    bgs = {}
+    for row in done.values():
+        for seq in [row["ops"]] + list(row["labels"].values()):
+            for op in seq or []:
+                for k in ("bg", "bg1", "bg2", "bg3"):
+                    if op.get(k) in conv.new_bgs and op[k] not in bgs:
+                        rgba, ipng, entry = anim_gfx.background(op[k])
+                        entry["file"], entry["idxFile"] = f"anim_bgs/{op[k]}.png", f"anim_bgs/{op[k]}.idx.png"
+                        files[entry["file"]], files[entry["idxFile"]] = rgba, ipng
+                        bgs[op[k]] = entry
     data = {"moves": {sym: row["ops"] for sym, row in done.items()}, "labels": labels, "templates": templates,
-            "tags": tags}
+            "tags": tags, "bgs": bgs}
     text = ("-- Generated by build_campaign.py (tools/anim_convert.py) from Inclement's\n"
             "-- data/battle_anim_scripts.s: the moves whose animation uses only what the\n"
             "-- vanilla ROM has (templates: donor sprite templates, built from its C, for\n"

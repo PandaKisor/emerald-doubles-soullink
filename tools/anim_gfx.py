@@ -46,7 +46,7 @@ def _base(sym):
     path = GFX.get(sym)
     if not path:
         raise Unsupported("no file for " + sym)
-    return os.path.join(DONOR, re.sub(r"\.(4bpp|gbapal)(\.lz)?$", "", path))
+    return os.path.join(DONOR, re.sub(r"\.(4bpp|gbapal|bin)(\.lz)?$", "", path))
 
 
 def tiles_of(tag):
@@ -123,6 +123,111 @@ def sheet(tag, frame_w=None, frame_h=None):
     return out[0], out[1], entry
 
 
+def _bg_table():
+    """donor background id -> (image, palette, tilemap) symbols"""
+    import sys as _s
+    _s.path.insert(0, HERE)
+    import anim_convert
+    consts = anim_convert.Consts()
+    src = anim_convert.strip_comments(open(os.path.join(DONOR, "src/battle_anim.c")).read())
+    body = src[src.index("gBattleAnimBackgroundTable[]"):]
+    body = body[:body.index("};")]
+    out = {}
+    for m in re.finditer(r"\[(\w+)\]\s*=\s*\{(\w+),\s*(\w+),\s*(\w+)\}", body):
+        try:
+            out[consts.value(m[1])] = (m[2], m[3], m[4])
+        except anim_convert.Unsupported:
+            pass
+    return out
+
+
+BG_TABLE = None
+
+
+def background(bg_id):
+    """(rgba PNG, index PNG, animBgs entry) for a donor background, decoded as
+    the extractor's decode_bg does (opaque index 0, first 16 colours)"""
+    global BG_TABLE
+    if BG_TABLE is None:
+        BG_TABLE = _bg_table()
+    row = BG_TABLE.get(bg_id)
+    if not row:
+        raise Unsupported(f"no background {bg_id}")
+    img, pal, tmap = (_base(sym) for sym in row)
+    tiles = []
+    im = Image.open(img + ".png")
+    if im.mode != "P":
+        raise Unsupported(f"{img}.png is {im.mode}")
+    w, h = im.size
+    px = im.load()
+    for ty in range(h // 8):
+        for tx in range(w // 8):
+            tiles.append([px[tx * 8 + x, ty * 8 + y] & 0xF for y in range(8) for x in range(8)])
+    if os.path.exists(pal + ".pal"):
+        lines = open(pal + ".pal").read().split()
+        rgb = [tuple(int(v) for v in lines[3 + i * 3:6 + i * 3]) for i in range(int(lines[2]))]
+    else:
+        flat = Image.open(pal + ".png").getpalette() or []
+        rgb = [tuple(flat[i * 3:i * 3 + 3]) for i in range(len(flat) // 3)]
+    ints = [(r >> 3) | ((g >> 3) << 5) | ((b >> 3) << 10) for r, g, b in (rgb + [(0, 0, 0)] * 16)[:16]]
+    raw = open(tmap + ".bin", "rb").read()
+    entries = len(raw) // 2
+    mw = 64 if entries >= 2048 else 32
+    mh = max(1, min(32, entries // mw))
+    W, H = mw * 8, mh * 8
+    cols = [((c & 31) * 8, ((c >> 5) & 31) * 8, ((c >> 10) & 31) * 8) for c in ints]
+    rgba = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+    idx = Image.new("RGBA", (W, H), (0, 0, 0, 255))
+    rp, ip = rgba.load(), idx.load()
+    for e in range(mw * mh):
+        v = raw[e * 2] | (raw[e * 2 + 1] << 8)
+        tile, hf, vf = v & 1023, (v >> 10) & 1, (v >> 11) & 1
+        sbx, inb = e // 1024, e % 1024
+        tx, ty = inb % 32 + sbx * 32, inb // 32
+        if tile >= len(tiles):
+            continue
+        t = tiles[tile]
+        for row in range(8):
+            for col in range(8):
+                ci = t[row * 8 + col]
+                x = tx * 8 + (7 - col if hf else col)
+                y = ty * 8 + (7 - row if vf else row)
+                c = cols[ci]
+                rp[x, y] = (c[0], c[1], c[2], 255)
+                ip[x, y] = (ci * 17, ci * 17, ci * 17, 255)
+    out = []
+    for i2 in (rgba, idx):
+        buf = io.BytesIO()
+        i2.save(buf, "PNG")
+        out.append(buf.getvalue())
+    return out[0], out[1], {"pal": ints, "w": W, "h": H, "opaque0": True}
+
+
+def check_bgs():
+    import subprocess, json
+    ids = subprocess.run(["luajit", "-e", f"""
+      local p = dofile({json.dumps(os.path.join(CACHE_TAGS, 'pack.lua'))})
+      for id, b in pairs(p.animBgs) do if type(id) == 'number' then print(id, b.file) end end"""],
+        check=True, capture_output=True, text=True).stdout.split()
+    same, diff = 0, []
+    for i in range(0, len(ids), 2):
+        bid, f = int(ids[i]), ids[i + 1]
+        try:
+            rgba, _, _ = background(bid)
+        except Unsupported as x:
+            diff.append(f"{bid}: {x}")
+            continue
+        mine = Image.open(io.BytesIO(rgba)).convert("RGBA")
+        rom = Image.open(os.path.join(CACHE_TAGS, f)).convert("RGBA")
+        if mine.size == rom.size and list(mine.get_flattened_data()) == list(rom.get_flattened_data()):
+            same += 1
+        else:
+            diff.append(f"{bid} {f} {mine.size} vs {rom.size}")
+    print(f"vanilla backgrounds: {same} identical to the ROM, {len(diff)} differ")
+    for d in diff[:10]:
+        print("  ", d)
+
+
 def check():
     """Rebuild vanilla's sheets from the donor art and compare with the ROM's."""
     import json, subprocess
@@ -161,3 +266,4 @@ def check():
 if __name__ == "__main__":
     if "--check" in sys.argv:
         check()
+        check_bgs()

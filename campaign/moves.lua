@@ -213,8 +213,36 @@ return function(data, list, specs, active, own)
   bridge.scripts, bridge.labels = scripts, own and own.labels or {}
   -- the donor graphics those animations draw (tools/anim_gfx.py sheets in
   -- the mod's anim_tags/), as the ROM's tags are: RGBA sheet + index sheet
-  local tags, read = own and own.tags or {}, own and own.read
+  local tags, bgs, read = own and own.tags or {}, own and own.bgs or {}, own and own.read
+  local function image(file)
+    local bytes = read and love and love.graphics and read(file)
+    if not bytes then return nil end
+    local ok, img = pcall(function()
+      local i = love.graphics.newImage(love.image.newImageData(love.filesystem.newFileData(bytes, file)))
+      i:setFilter("nearest", "nearest")
+      return i
+    end)
+    return ok and img or nil
+  end
   function bridge.installTags(pack)
+    -- donor battle backgrounds (anim_bgs/), as the ROM's animBgs are
+    if type(pack.animBgs) == "table" then
+      for id, t in pairs(bgs) do
+        if pack.animBgs[id] == nil then
+          local info = {}
+          for k, v in pairs(t) do info[k] = v end
+          pack.animBgs[id] = info
+          local img = image(info.file)
+          if img then
+            pcall(function() img:setWrap("repeat", "repeat") end)
+            info.image = img
+            local idx = image(info.idxFile)
+            if idx then pcall(function() idx:setWrap("repeat", "repeat") end) end
+            info.idxImage = idx or false
+          end
+        end
+      end
+    end
     if type(pack.tags) ~= "table" then return end
     local AnimPal = require("src.core.game3.battle.anim_pal")
     for name, t in pairs(tags) do
@@ -222,17 +250,10 @@ return function(data, list, specs, active, own)
         local info = {}
         for k, v in pairs(t) do info[k] = v end
         pack.tags[name] = info
-        local bytes = read and love and love.graphics and read(info.file)
-        if bytes then
-          local ok, image = pcall(function()
-            local img = love.graphics.newImage(love.image.newImageData(love.filesystem.newFileData(bytes, info.file)))
-            img:setFilter("nearest", "nearest")
-            return img
-          end)
-          if ok and image then
-            info.image, info.w, info.h = image, image:getWidth(), image:getHeight()
-            pcall(AnimPal.hydrateIndex, info, name, image, read)
-          end
+        local img = image(info.file)
+        if img then
+          info.image, info.w, info.h = img, img:getWidth(), img:getHeight()
+          pcall(AnimPal.hydrateIndex, info, name, img, read)
         end
       end
     end

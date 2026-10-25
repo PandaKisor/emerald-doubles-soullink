@@ -22,7 +22,7 @@ local moves = F.ids.moves
 
 local count = 0
 for _ in pairs(own.moves) do count = count + 1 end
-T.check(count > 270, 'more than 270 new moves have their own animation (' .. count .. ')')
+T.check(count > 300, 'more than 300 new moves have their own animation (' .. count .. ')')
 
 -- battle gets them through the mod's scriptForMove
 Anim._pack, Anim._packLoaded = pack, true
@@ -39,9 +39,9 @@ T.check(same(Anim.scriptForMove(moves.MOVE_MOONBLAST), own.moves.MOONBLAST), 'Mo
 T.check(pack.campaignLabels == true, "the converted subroutines joined the pack's labels")
 local someLabel = next(own.labels)
 T.check(someLabel == nil or same(pack.labels[someLabel], own.labels[someLabel]), 'with their contents')
-T.check(own.moves.ACCELEROCK == nil, 'Accelerock does not convert (changed arguments)')
-T.check(same(Anim.scriptForMove(moves.MOVE_ACCELEROCK), pack.moves[moves.MOVE_ROCK_SLIDE]),
-  'so it keeps its stand-in (Rock Slide)')
+T.check(own.moves.AQUA_TAIL == nil, 'Aqua Tail does not convert (its sprite callback is new)')
+T.check(same(Anim.scriptForMove(moves.MOVE_AQUA_TAIL), pack.moves[moves.MOVE_WATERFALL]),
+  'so it keeps its stand-in (Waterfall)')
 T.eq(Anim.scriptForMove(moves.MOVE_POUND), pack.moves[moves.MOVE_POUND], 'vanilla moves keep the ROM animation')
 -- donor graphics join the pack's tags beside the ROM's
 local donorTag = next(own.tags or {})
@@ -51,6 +51,7 @@ T.check(donorTag ~= nil and pack.tags[donorTag].file:find('^anim_tags/') ~= nil,
 -- every converted script runs to its end, both sides
 for k, ops in pairs(own.labels) do pack.labels[k] = ops end
 for k, t in pairs(own.tags or {}) do if pack.tags[k] == nil then pack.tags[k] = t end end
+for k, t in pairs(own.bgs or {}) do if pack.animBgs[k] == nil then pack.animBgs[k] = t end end
 local rp, logs = print, {}
 local errors, timeouts, ran = 0, 0, 0
 local function run(label, script, side)

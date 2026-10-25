@@ -26,6 +26,7 @@ return function(mod, active)
   local anims = source("campaign/move_anims.lua")
   anims.install = source("campaign/anim_templates.lua")
   anims.read = function(path) return mod:read(path) end
+  source("campaign/anim_code.lua")()
   local moves = source("campaign/moves.lua")(data, source("campaign/move_list.lua"), specs, active, anims)
   local battleMoves = {}
   for id in pairs(routeMoves.supported) do battleMoves[id] = true end
