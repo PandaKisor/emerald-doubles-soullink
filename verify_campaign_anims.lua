@@ -39,14 +39,39 @@ T.check(same(Anim.scriptForMove(moves.MOVE_MOONBLAST), own.moves.MOONBLAST), 'Mo
 T.check(pack.campaignLabels == true, "the converted subroutines joined the pack's labels")
 local someLabel = next(own.labels)
 T.check(someLabel == nil or same(pack.labels[someLabel], own.labels[someLabel]), 'with their contents')
-T.check(own.moves.AQUA_TAIL == nil, 'Aqua Tail does not convert (its sprite callback is new)')
-T.check(same(Anim.scriptForMove(moves.MOVE_AQUA_TAIL), pack.moves[moves.MOVE_WATERFALL]),
-  'so it keeps its stand-in (Waterfall)')
+T.check(own.moves.DRACO_METEOR == nil, 'Draco Meteor does not convert (its sprite callback is new)')
+T.check(same(Anim.scriptForMove(moves.MOVE_DRACO_METEOR), pack.moves[moves.MOVE_OUTRAGE]),
+  'so it keeps its stand-in (Outrage)')
 T.eq(Anim.scriptForMove(moves.MOVE_POUND), pack.moves[moves.MOVE_POUND], 'vanilla moves keep the ROM animation')
 -- donor graphics join the pack's tags beside the ROM's
 local donorTag = next(own.tags or {})
 T.check(donorTag ~= nil and pack.tags[donorTag] ~= nil, 'donor graphics join the pack (' .. tostring(donorTag) .. ')')
 T.check(donorTag ~= nil and pack.tags[donorTag].file:find('^anim_tags/') ~= nil, 'from the mod\'s anim_tags')
+
+-- every callback and task a converted script names exists (no silent
+-- fallback to the engine's default sprite or stub task)
+local AnimCallbacks = require('src.core.game3.battle.anim_callbacks')
+local unresolved = {}
+local function scanOps(ops, where)
+  for _, op in ipairs(ops or {}) do
+    if op.op == 'createsprite' and op.callback and not op.noGfx then
+      local clean = op.callback:gsub('^Anim', '')
+      if not (AnimCallbacks[op.callback] or AnimCallbacks[clean] or AnimCallbacks['Anim' .. clean]) then
+        unresolved[#unresolved + 1] = 'callback ' .. op.callback .. ' @' .. where
+      end
+    elseif op.op == 'createvisualtask' or op.op == 'createsoundtask' then
+      local key = tostring(op.task):gsub('^g', '')
+      if not (AnimTasks.REGISTRY[op.task] or AnimTasks.REGISTRY[key] or AnimTasks.REGISTRY['AnimTask_' .. key]) then
+        unresolved[#unresolved + 1] = 'task ' .. tostring(op.task) .. ' @' .. where
+      end
+    end
+  end
+end
+for sym, ops in pairs(own.moves) do scanOps(ops, sym) end
+for key, ops in pairs(own.labels) do scanOps(ops, key) end
+for i = 1, math.min(#unresolved, 10) do print('  unresolved ' .. unresolved[i]) end
+T.eq(#unresolved, 0, 'every callback and task the converted scripts name exists')
+T.check(own.moves.AQUA_TAIL ~= nil and AnimCallbacks.AnimKnockOffAquaTail ~= nil, "Aqua Tail runs the campaign's port of its callback")
 
 -- every converted script runs to its end, both sides
 for k, ops in pairs(own.labels) do pack.labels[k] = ops end

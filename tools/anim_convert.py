@@ -85,7 +85,8 @@ class Consts:
                 continue
             text = strip_comments(open(path).read())
             text = text.replace("\\\n", " ")
-            for m in re.finditer(r"^\s*#define\s+(\w+)(\([^)]*\))?\s+(.+?)\s*(?://.*)?$", text, re.M):
+            # [ \t], not \s: a value-less define must not take the next line as its value
+            for m in re.finditer(r"^[ \t]*#define[ \t]+(\w+)(\([^)]*\))?[ \t]+(.+?)[ \t]*$", text, re.M):
                 if m[2]:
                     continue  # function-like: only RGB is handled
                 self.raw.setdefault(m[1], m[3])
@@ -172,10 +173,13 @@ def engine_registry():
     """the engine's sprite callbacks and visual/sound tasks, by name"""
     out = subprocess.run(["luajit", CB_KEYS], cwd=STOCK, check=True, capture_output=True, text=True).stdout
     cbs = {l[3:] for l in out.splitlines() if l.startswith("cb ")}
-    # the campaign's own (campaign/anim_code.lua)
-    own = open(os.path.join(HERE, "../campaign/anim_code.lua")).read()
-    cbs |= set(re.findall(r"^  CB\.(\w+) = function", own, re.M))
     tasks = {l[5:] for l in out.splitlines() if l.startswith("task ")}
+    # the campaign's own (campaign/anim_code.lua): "CB.X = ", "NEW.X = ",
+    # "CB.X, CB.Y = ", "TASK.X = "
+    own = open(os.path.join(HERE, "../campaign/anim_code.lua")).read()
+    for line in re.findall(r"^  ((?:(?:CB|NEW)\.\w+(?:, )?)+) = ", own, re.M):
+        cbs |= set(re.findall(r"(?:CB|NEW)\.(\w+)", line))
+    tasks |= set(re.findall(r"^  TASK\.(\w+) = ", own, re.M))
     return cbs, tasks
 
 
@@ -333,6 +337,10 @@ ADAPT = {
     ("gAcidPoisonBubbleSpriteTemplate", 7): _acid_bubble,
     ("ShockWaveProgressingBolt", 1): _shock_wave,
     ("gAcidPoisonDropletSpriteTemplate", 6): _acid_droplet,
+    # donor arg 1: leave the attacker invisible (U-turn switching out); only
+    # passed TRUE on the branch AnimTask_CanBattlerSwitch opens, which the
+    # campaign's version never does (campaign/anim_code.lua)
+    ("gFlyBallAttackSpriteTemplate", 2): lambda a: {"args": a[:1]},
     # donor: x/y offsets, and TRUE to centre on the target pair; 0, 0, FALSE is vanilla
     ("gSpiderWebSpriteTemplate", 3): lambda a: {"args": []} if a == [0, 0, 0] else {"callback": "IncSpiderWeb"},
 }
@@ -343,6 +351,9 @@ EXCLUDE = {
     # its background fade finishes before the script waits for it (the dip and
     # delays before waitbgfadeout outlast the fade), so the script never ends
     "GIGA_IMPACT": "background fade timing",
+    # the donor's script passes BlendColorCycle one argument short, so the
+    # rest shift (RGB_WHITE lands on a blend amount) and the cycle never ends
+    "AQUA_RING": "BlendColorCycle called one argument short",
 }
 
 
@@ -431,6 +442,9 @@ class Converter:
     def convert(self, label):
         """(ops, labels) for the script starting at `label`."""
         self.labels = {}
+        # gBattleAnimArgs as the script leaves them: a call sets only the
+        # arguments it passes, the rest keep their last value
+        self.argstate = [0] * 8
         ops = self.run(label)
         return ops, self.labels
 
@@ -479,6 +493,19 @@ class Converter:
         rule = ADAPT.get((key, len(args)))
         return rule(args) if rule else None
 
+    def remember(self, args):
+        for i, v in enumerate(args[:8]):
+            self.argstate[i] = v
+
+    def pad_task(self, key, args):
+        """a task called with fewer arguments than vanilla passes reads the
+        rest as the GBA left them (Aqua Ring's BlendColorCycle); the engine's
+        tasks read only their own list, so pass them explicitly"""
+        need = max(self.arity.get(key, {0}))
+        if key in COMPATIBLE and len(args) < need:
+            return args + self.argstate[len(args):need]
+        return args
+
     def check_args(self, key, args):
         if key in self.new_templates or (key not in self.arity and key in self.known_tasks):
             return  # no vanilla use to compare with
@@ -523,6 +550,7 @@ class Converter:
                 args = change.get("args", args)
             else:
                 self.check_args(tmpl, args)
+            self.remember(args)
             op = {"op": "createsprite", "template": tmpl, "animBattler": "target" if byte >= 0x80 else "attacker",
                   "subpriority": byte % 0x80, "args": args, "w": info.get("w", 32), "h": info.get("h", 32)}
             if info.get("tag"):
@@ -543,11 +571,15 @@ class Converter:
             if change:
                 args, name = change.get("args", args), change.get("task", name)
             else:
+                args = self.pad_task(name, args)
                 self.check_args(name, args)
+            self.remember(args)
             ops.append({"op": "createvisualtask", "task": name, "priority": pri, "args": args})
         elif macro == "createsoundtask":
             name, args = self.task(a[0]), [self.s16(x) for x in a[1:]]
+            args = self.pad_task(name, args)
             self.check_args(name, args)
+            self.remember(args)
             ops.append({"op": "createsoundtask", "task": name, "args": args})
         elif macro == "jumpifdoublebattle":
             # every battle in the campaign is a double
@@ -589,7 +621,10 @@ class Converter:
             ops.extend([{"op": "goto", "label": self.ref(a[0])}, {"op": "end"}])
             return True
         elif macro == "setarg":
-            ops.append({"op": "setarg", "argId": self.num(a[0]) & 0xFF, "value": self.s16(a[1])})
+            arg_id, value = self.num(a[0]) & 0xFF, self.s16(a[1])
+            if arg_id < 8:
+                self.argstate[arg_id] = value
+            ops.append({"op": "setarg", "argId": arg_id, "value": value})
         elif macro == "choosetwoturnanim":
             ops.append({"op": "choosetwoturnanim", "label1": self.ref(a[0]), "label2": self.ref(a[1])})
         elif macro == "jumpifmoveturn":
