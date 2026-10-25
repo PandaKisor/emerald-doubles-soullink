@@ -22,7 +22,7 @@ local moves = F.ids.moves
 
 local count = 0
 for _ in pairs(own.moves) do count = count + 1 end
-T.check(count > 220, 'more than 220 new moves have their own animation (' .. count .. ')')
+T.check(count > 270, 'more than 270 new moves have their own animation (' .. count .. ')')
 
 -- battle gets them through the mod's scriptForMove
 Anim._pack, Anim._packLoaded = pack, true
@@ -43,9 +43,14 @@ T.check(own.moves.ACCELEROCK == nil, 'Accelerock does not convert (changed argum
 T.check(same(Anim.scriptForMove(moves.MOVE_ACCELEROCK), pack.moves[moves.MOVE_ROCK_SLIDE]),
   'so it keeps its stand-in (Rock Slide)')
 T.eq(Anim.scriptForMove(moves.MOVE_POUND), pack.moves[moves.MOVE_POUND], 'vanilla moves keep the ROM animation')
+-- donor graphics join the pack's tags beside the ROM's
+local donorTag = next(own.tags or {})
+T.check(donorTag ~= nil and pack.tags[donorTag] ~= nil, 'donor graphics join the pack (' .. tostring(donorTag) .. ')')
+T.check(donorTag ~= nil and pack.tags[donorTag].file:find('^anim_tags/') ~= nil, 'from the mod\'s anim_tags')
 
 -- every converted script runs to its end, both sides
 for k, ops in pairs(own.labels) do pack.labels[k] = ops end
+for k, t in pairs(own.tags or {}) do if pack.tags[k] == nil then pack.tags[k] = t end end
 local rp, logs = print, {}
 local errors, timeouts, ran = 0, 0, 0
 local function run(label, script, side)

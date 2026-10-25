@@ -177,6 +177,7 @@ return function(data, list, specs, active, own)
       if not (pack and pack.labels) then return base end
       if not pack.campaignLabels then
         for key, ops in pairs(bridge.labels) do pack.labels[key] = ops end
+        bridge.installTags(pack)
         pack.campaignLabels = true
       end
       return script
@@ -210,6 +211,32 @@ return function(data, list, specs, active, own)
   end
   bridge.data, bridge.active, bridge.records, bridge.anims = data, active, records, anims
   bridge.scripts, bridge.labels = scripts, own and own.labels or {}
+  -- the donor graphics those animations draw (tools/anim_gfx.py sheets in
+  -- the mod's anim_tags/), as the ROM's tags are: RGBA sheet + index sheet
+  local tags, read = own and own.tags or {}, own and own.read
+  function bridge.installTags(pack)
+    if type(pack.tags) ~= "table" then return end
+    local AnimPal = require("src.core.game3.battle.anim_pal")
+    for name, t in pairs(tags) do
+      if pack.tags[name] == nil then
+        local info = {}
+        for k, v in pairs(t) do info[k] = v end
+        pack.tags[name] = info
+        local bytes = read and love and love.graphics and read(info.file)
+        if bytes then
+          local ok, image = pcall(function()
+            local img = love.graphics.newImage(love.image.newImageData(love.filesystem.newFileData(bytes, info.file)))
+            img:setFilter("nearest", "nearest")
+            return img
+          end)
+          if ok and image then
+            info.image, info.w, info.h = image, image:getWidth(), image:getHeight()
+            pcall(AnimPal.hydrateIndex, info, name, image, read)
+          end
+        end
+      end
+    end
+  end
   -- the donor sprite templates those animations use, beside vanilla's
   if own and own.templates and own.install then own.install(own.templates) end
   bridge.supported = {}

@@ -25,6 +25,7 @@ return function(mod, active)
   for symbol, spec in pairs(source("campaign/battle/statuses.lua")(U, field)) do specs.bySymbol[symbol] = spec end
   local anims = source("campaign/move_anims.lua")
   anims.install = source("campaign/anim_templates.lua")
+  anims.read = function(path) return mod:read(path) end
   local moves = source("campaign/moves.lua")(data, source("campaign/move_list.lua"), specs, active, anims)
   local battleMoves = {}
   for id in pairs(routeMoves.supported) do battleMoves[id] = true end

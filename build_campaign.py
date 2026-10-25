@@ -25,7 +25,7 @@ CAMPAIGN = HERE / "campaign"
 
 MOD_ID = "g3_campaign"
 TITLE = "Emerald Doubles Soul Link"
-VERSION = "0.18.0"
+VERSION = "0.19.0"
 CART_ID = "emerald_doubles_soullink"
 COOP_ID, COOP_VERSION = "g3_coop", "0.8.1"
 # GitHub repos the launcher checks for updates and the release cart downloads from
@@ -664,8 +664,11 @@ def build():
     sys.path.insert(0, str(HERE / "tools"))
     import anim_convert
     symbols = re.findall(r"^  ([A-Z_0-9]+) = \{", (CAMPAIGN / "move_list.lua").read_text(), re.M)
-    text, count, skipped = anim_convert.generate(symbols)
+    text, count, skipped, files = anim_convert.generate(symbols)
     (OUT / "campaign/move_anims.lua").write_text(text)
+    for rel, data in files.items():  # donor sprite sheets (tools/anim_gfx.py)
+        (OUT / rel).parent.mkdir(parents=True, exist_ok=True)
+        (OUT / rel).write_bytes(data)
     print(f"{count} of {len(symbols)} new moves with their own animation")
     text, blob, count, missing = cries()
     assert not missing, missing
