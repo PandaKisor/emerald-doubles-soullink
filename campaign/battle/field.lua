@@ -72,7 +72,8 @@ return function(mod, U, active)
   Engine.moveEndEffects = function(M, ...)
     if F.active() and M and M.target and M.user and M.target ~= M.user and not M.noEffect
         and M.target.campaignBeakBlast and not U.movedThisTurn(M.adapter, M.target)
-        and U.hasContact(M.move) and not M.adapter:status(M.user) and not U.hasType(M.user, T.FIRE) then
+        and U.hasContact(M.move) and not M.adapter:status(M.user) and not U.hasType(M.user, T.FIRE)
+        and not (F.items and F.items.held and F.items.held(M.user) == "PROTECTIVE_PADS") then
       M.adapter:applyStatus(M.user, "BRN", M.target)
       M.adapter:statusAnim(M.user, "BRN")
       M.adapter:sayText("STRINGID_PKMNWASBURNED", { eff = M.user })
@@ -360,7 +361,9 @@ return function(mod, U, active)
     local shield = target.campaignShieldTurn == ad._st.turn and target.campaignShield or nil
     local status = (tonumber(move.power) or 0) <= 0
     if status and (shield == "KINGS" or shield == "OBSTRUCT") then return false end
-    if shield and U.hasContact(move) and user ~= target and not ad:isFainted(user) then
+    -- (Protective Pads: the holder makes no contact with the shield)
+    local padded = F.items and F.items.held and F.items.held(user) == "PROTECTIVE_PADS"
+    if shield and U.hasContact(move) and not padded and user ~= target and not ad:isFainted(user) then
       if shield == "SPIKY" and F.abilities and F.abilities.magicGuard(ad, user) then
         -- Magic Guard: no harm from the spikes
       elseif shield == "SPIKY" then

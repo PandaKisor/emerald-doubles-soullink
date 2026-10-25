@@ -1,13 +1,20 @@
 #!/usr/bin/env python3
 """Where the campaign's items come from on the vanilla world: Inclement's
 item placements, gifts and shop stock, matched onto vanilla Emerald's.
-  balls / hidden  same map and tile as a vanilla item ball / hidden item
-  gifts           a vanilla script (same label) handing out a different item
+  balls / hidden  same map and tile as a vanilla item ball / hidden item; a
+                  vanilla one left over takes the nearest unpaired Inclement
+                  one on its map, up to 5 tiles away
+  gifts           a vanilla script (same label) handing out a different item,
+                  or a gym's TM gift Inclement renamed (GiveAerialAce ->
+                  GiveRoost)
   marts           town marts sell Inclement's badge-tier stock plus the town's
                   own Inclement stock; specialty shops take the Inclement list
                   on the same map that overlaps them most
   orphans         items Inclement gives through NPCs vanilla doesn't have:
-                  sold at that town's mart instead
+                  sold at that town's mart instead (the next town's, when it
+                  has none); items Inclement places on tiles vanilla doesn't
+                  use, found nowhere else, go to the mart of the first town
+                  with one reached once that area is (PLACED_AREA_TOWN)
 Writes campaign/item_sources.lua. Usage: gen_item_sources.py <vanilla.json>"""
 import json, re, glob, os, sys
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -23,7 +30,7 @@ dump = subprocess.run(['luajit', '-', DATA], input='''
 local D=arg[1]
 local man=dofile(D.."manifest.lua") local out={}
 for _,f in ipairs(man.files.items) do for id,row in pairs(dofile(D..f)) do
-  out[#out+1]=string.format("%q:[%d,%q]", row.symbol, id, tostring(row.pocket)) end end
+  out[#out+1]=string.format("%q:[%d,%q,%d]", row.symbol, id, tostring(row.pocket), tonumber(row.price) or 0) end end
 print("{"..table.concat(out,",").."}")''', capture_output=True, text=True, check=True).stdout
 ITEMS = json.loads(dump)
 ID = {k: v[0] for k, v in ITEMS.items()}
@@ -44,7 +51,8 @@ scripts = {}
 gift_labels = {}
 for f in glob.glob(os.path.join(DONOR, 'maps/*/scripts.inc')) + glob.glob(os.path.join(DONOR, 'scripts/*.inc')):
     txt = open(f, errors='ignore').read()
-    for m in re.finditer(r'^(\w+)::[^\n]*\n((?:[ \t].*\n|\n)+?)(?=^\w+::|\Z)', txt, re.M):
+    # (local labels have one colon: "X: @ 81FC878")
+    for m in re.finditer(r'^(\w+)::?[^\n]*\n((?:[ \t].*\n|\n)+?)(?=^\w+::?|\Z)', txt, re.M):
         body = m.group(2)
         it = re.search(r'finditem (ITEM_\w+)', body)
         if it: scripts[m.group(1)] = it.group(1)
@@ -61,20 +69,31 @@ for f in glob.glob(os.path.join(DONOR, 'maps/*/map.json')):
         if b.get('type') == 'hidden_item':
             inc_hidden[(mp, b['x'], b['y'])] = b['item']
 
+NEAR = 5
 def sub_table(rows, inc, by_local=False):
     out, matched, changed = {}, 0, 0
+    taken = set((r['map'], r['x'], r['y']) for r in rows)
+    pair = {}
     for r in rows:
         k = (r['map'], r['x'], r['y'])
-        if k not in inc: continue
+        if k in inc: pair[k] = k; continue
+        near = sorted((abs(x - r['x']) + abs(y - r['y']), (m, x, y)) for (m, x, y) in inc
+                      if m == r['map'] and (m, x, y) not in taken)
+        if near and near[0][0] <= NEAR:
+            pair[k] = near[0][1]
+            taken.add(near[0][1])
+    for r in rows:
+        k = (r['map'], r['x'], r['y'])
+        if k not in pair: continue
         matched += 1
-        sym = inc[k]
+        sym = inc[pair[k]]
         if usable(sym) and ID.get(sym) != r['item']:
             slot = str(r['localId']) if by_local else '%d,%d' % (r['x'], r['y'])
             out.setdefault(r['map'], {})[slot] = sym
             changed += 1
-    return out, matched, changed
-balls, bm, bc = sub_table(vanilla['balls'], inc_balls, True)
-hidden, hm, hc = sub_table(vanilla['hidden'], inc_hidden)
+    return out, matched, changed, set(pair.values())
+balls, bm, bc, paired_balls = sub_table(vanilla['balls'], inc_balls, True)
+hidden, hm, hc, paired_hidden = sub_table(vanilla['hidden'], inc_hidden)
 
 # gifts: same label, different item
 def label_map(label):
@@ -82,17 +101,31 @@ def label_map(label):
     for d, mp in dir_map.items():
         if label.startswith(d + '_') and (best is None or len(d) > len(best[0])): best = (d, mp)
     return best
+# a gym TM gift Inclement renamed: the one unmatched Inclement TM gift on the
+# same map, with the same trailing number (GiveAerialAce2 -> GiveRoost2)
+GIVE = re.compile(r'^(\w+_EventScript_Give)\w*?(\d*)$')
+vanilla_labels = set(g['label'] for g in vanilla['gifts'])
+def is_tm(sym): return sym.startswith('ITEM_TM') or sym.startswith('ITEM_HM')
+renamed = {}
+for g in vanilla['gifts']:
+    m = GIVE.match(g['label'])
+    if g['label'] in gift_labels or not m or len(g['items']) != 1 or not is_tm(NAME.get(g['items'][0], '')): continue
+    cands = [l for l, its in gift_labels.items() if l not in vanilla_labels and len(its) == 1 and is_tm(its[0])
+             and GIVE.match(l) and GIVE.match(l).group(1) == m.group(1) and GIVE.match(l).group(2) == m.group(2)]
+    if len(cands) == 1: renamed[g['label']] = cands[0]
 gifts, gift_count = {}, 0
-vanilla_gift_labels = set()
+vanilla_gift_labels = set(renamed.values())
 for g in vanilla['gifts']:
     vanilla_gift_labels.add(g['label'])
-    inc = gift_labels.get(g['label'])
+    inc = gift_labels.get(renamed.get(g['label'], g['label']))
     lm = label_map(g['label'])
     if not inc or not lm or len(inc) != len(g['items']): continue
     for v, i in zip(g['items'], inc):
         if usable(i) and ID.get(i) != v:
             gifts.setdefault(g['key'], {})[str(v)] = i
             gift_count += 1
+# towns without a general mart: their items go to the next town's
+NO_MART = {'DewfordTown': 'SlateportCity', 'LilycoveCity': 'MossdeepCity', 'PacifidlogTown': 'SootopolisCity'}
 # orphan gifts: Inclement labels with no vanilla script
 orphans = {}
 vanilla_labels_all = set(x['label'] for x in vanilla['gifts']) | set(x['label'] for x in vanilla['marts'])
@@ -104,7 +137,7 @@ for label, items in gift_labels.items():
     if not town: continue
     for i in items:
         if usable(i) and ITEMS[i][1] != 'KEY_ITEMS' and not i.startswith('ITEM_HM'):
-            orphans.setdefault(town.group(1), []).append(i)
+            orphans.setdefault(NO_MART.get(town.group(1), town.group(1)), []).append(i)
 
 # marts
 inc_marts = {}
@@ -156,6 +189,48 @@ for vm in vanilla['marts']:
         if best:
             marts[vm['key']] = {'kind': 'fixed', 'items': [x for x in best if usable(x)], 'label': vm['label']}
 
+# placed orphans: Inclement items on tiles vanilla doesn't use, with no
+# source above, go to the mart of the first town with one that's reached
+# once their area is (Surf areas: Fortree; Dive: Sootopolis)
+PLACED_AREA_TOWN = [
+    ('EM_PETALBURG_WOODS', 'RustboroCity'), ('EM_METEOR_FALLS', 'FallarborTown'),
+    ('EM_DEWFORD_', 'SlateportCity'), ('EM_GRANITE_CAVE', 'SlateportCity'),
+    ('EM_EMBER_PATH', 'LavaridgeTown'), ('EM_ASHEN_WOODS', 'LavaridgeTown'), ('EM_SANDSTREWN_RUINS', 'LavaridgeTown'),
+    ('EM_VERDANTURF_MEADOW', 'VerdanturfTown'), ('EM_ROUTE117', 'VerdanturfTown'),
+    ('EM_SEASPRAY_CAVE', 'FortreeCity'), ('EM_SCORCHED_SLAB', 'FortreeCity'), ('EM_ROUTE119', 'FortreeCity'),
+    ('EM_ROUTE115', 'FortreeCity'), ('EM_ROUTE110_TRICK_HOUSE', 'FortreeCity'), ('EM_NEW_MAUVILLE', 'FortreeCity'),
+    ('EM_MT_PYRE', 'MossdeepCity'), ('EM_SAFARI_ZONE', 'MossdeepCity'), ('EM_AQUA_HIDEOUT', 'MossdeepCity'),
+    ('EM_MAGMA_HIDEOUT', 'MossdeepCity'), ('EM_ROUTE124', 'MossdeepCity'),
+    ('EM_UNDERWATER_', 'SootopolisCity'), ('EM_ROUTE131', 'SootopolisCity'), ('EM_SKY_PILLAR', 'SootopolisCity'),
+]
+def placed_town(mp):
+    for prefix, town in PLACED_AREA_TOWN:
+        if mp.startswith(prefix): return town
+    return None
+have_sym = set()
+for r in vanilla['balls'] + vanilla['hidden']: have_sym.add(NAME.get(r['item']))
+for g in vanilla['gifts']: have_sym.update(NAME.get(i) for i in g['items'])
+for m in vanilla['marts']: have_sym.update(NAME.get(i) for i in m['items'])
+for t in (balls, hidden, gifts):
+    for mp in t.values(): have_sym.update(mp.values())
+for t in tiers: have_sym.update(t)
+for m in marts.values(): have_sym.update(m.get('extra') or m.get('items') or [])
+town_mart = {}
+for key, m in marts.items():
+    t = re.match(r'(\w+?)_Mart', m['label'])
+    if m['kind'] == 'general' and t: town_mart.setdefault(t.group(1), key)
+placed, unplaced = {}, []
+for inc, paired in ((inc_balls, paired_balls), (inc_hidden, paired_hidden)):
+    for k in sorted(inc):
+        sym = inc[k]
+        if k in paired or not usable(sym) or sym in have_sym: continue
+        town = placed_town(k[0])
+        key = town and town_mart.get(town)
+        if not key: unplaced.append((k[0], sym)); continue
+        if sym not in marts[key]['extra']: marts[key]['extra'].append(sym)
+        placed.setdefault(town, []).append(sym)
+        have_sym.add(sym)
+
 def lua(v, ind=''):
     if isinstance(v, dict):
         items = []
@@ -166,14 +241,24 @@ def lua(v, ind=''):
     if isinstance(v, list): return '{ ' + ', '.join(lua(x, ind) for x in v) + ' }'
     if isinstance(v, str): return json.dumps(v)
     return str(v)
-data = {'balls': balls, 'hidden': hidden, 'gifts': gifts, 'tiers': tiers, 'marts': marts}
+# a mart item Inclement prices at 0 (it was a gift there) would be free:
+# TMs cost 3000, anything else 2000
+prices = {}
+for lst in [m.get('extra') or m.get('items') or [] for m in marts.values()] + tiers:
+    for x in lst:
+        if ITEMS[x][2] == 0: prices[x] = 3000 if x.startswith('ITEM_TM') else 2000
+data = {'prices': prices, 'balls': balls, 'hidden': hidden, 'gifts': gifts, 'tiers': tiers, 'marts': marts}
 open(OUT, 'w').write('-- Generated by tools/gen_item_sources.py from Inclement Emerald\'s maps and\n'
                      '-- scripts and the vanilla ROM\'s (item balls, hidden items, gifts, marts).\n'
                      'return ' + lua(data) + '\n')
 print('balls: %d vanilla, %d matched by tile, %d changed' % (len(vanilla['balls']), bm, bc))
 print('hidden: %d vanilla, %d matched, %d changed' % (len(vanilla['hidden']), hm, hc))
 print('gifts changed: %d; orphan items moved to marts: %s' % (gift_count, {k: v for k, v in orphans.items()}))
+print('gym TM gifts renamed: %s' % renamed)
+print('placed items moved to marts: %s' % placed)
+if unplaced: print('placed items with no source and no town:', unplaced)
 print('marts: %d general, %d specialty' % (sum(1 for m in marts.values() if m['kind'] == 'general'), sum(1 for m in marts.values() if m['kind'] == 'fixed')))
+print('mart prices set (Inclement has 0):', sorted(prices))
 print('tier sizes', [len(t) for t in tiers])
 
 # audit: evolution items with no source on the campaign's world

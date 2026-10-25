@@ -62,6 +62,9 @@ return function(mod, U, F)
   -- donor effects that must not run the same-named Gen 3 handler
   local NOT_NATIVE = { SOUL_DEW = true, LIGHT_BALL = true }
   local effectOf = HeldItems.effectOf
+  -- Ripen: while HeldItems.normal runs for a Ripen holder (ripening, below),
+  -- a confusion berry heals twice as much (its parameter is the divisor)
+  local ripening = false
   HeldItems.effectOf = function(item, ...)
     if F.active() then
       local row = rowOf(item)
@@ -71,8 +74,11 @@ return function(mod, U, F)
         local code = not NOT_NATIVE[name] and H[NATIVE_ALIAS[name] or name]
         if code then
           local native, nativeParam = effectOf(item, ...)
-          local param = tonumber(f.holdEffectParam)
-          return code, param or (native == code and nativeParam) or 0
+          local param = tonumber(f.holdEffectParam) or (native == code and nativeParam) or 0
+          if ripening and code >= H.CONFUSE_SPICY and code <= H.CONFUSE_SOUR and param > 1 then
+            param = math.max(1, param / 2)  -- the handler floors maxHp / param
+          end
+          return code, param
         end
         return 0, 0
       end
@@ -359,7 +365,11 @@ return function(mod, U, F)
   local normal = HeldItems.normal
   HeldItems.normal = function(ad, b, moveTurn, ...)
     if F.active() and b and ad:hp(b) > 0 and I.pinch(ad, b) then return true end
-    return normal(ad, b, moveTurn, ...)
+    ripening = F.active() and b and F.abilities and F.abilities.ripen(b) and true or false
+    local ok, r = pcall(normal, ad, b, moveTurn, ...)
+    ripening = false
+    if not ok then error(r, 0) end
+    return r
   end
 
   -- Focus Sash: survives a knockout from full HP --------------------------------
@@ -528,6 +538,130 @@ return function(mod, U, F)
       end
     end
     return bad
+  end
+
+  -- Utility Umbrella (pokeemerald-1.13 IsBattlerWeatherAffected): sun and
+  -- rain don't reach the holder. The donor checks the attacker's item for
+  -- the damage modifier, Weather Ball and Solar Beam, the target's for
+  -- Thunder and Hurricane, and the holder's for its abilities and healing
+  local WRules = require("src.core.game3.battle.rules")
+  function I.umbrella(b) return type(b) == "table" and has(b, "UTILITY_UMBRELLA") end
+  local function sunOrRain(st)
+    local kind = st and WRules.weather.kind(st.weather)
+    return kind == "SUN" or kind == "RAIN"
+  end
+  -- the weather as b feels it
+  function I.weatherFor(ad, b)
+    local w = ad and WRules.weather.effective(ad._st, ad) or nil
+    if (w == "SUN" or w == "RAIN") and b and I.umbrella(b) then return nil end
+    return w
+  end
+  -- runs fn with sun or rain hidden while b (holding the umbrella) is involved
+  function I.underUmbrella(st, b, fn, ...)
+    if not (F.active() and st and b and I.umbrella(b) and sunOrRain(st)) then return fn(...) end
+    local saved = st.weather
+    st.weather = nil
+    local out = { pcall(fn, ...) }
+    st.weather = saved
+    if not out[1] then error(out[2], 0) end
+    return unpack(out, 2, table.maxn(out))
+  end
+  local Damage = require("src.core.game3.battle.damage")
+  local calc = Damage.calc
+  Damage.calc = function(attacker, defender, moveId, opts, ...)
+    if F.active() and type(opts) == "table" and attacker and I.umbrella(attacker) then
+      local kind = opts.weatherKind or WRules.weather.kind(opts.weather)
+      if kind == "SUN" or kind == "RAIN" then
+        local o = {}
+        for k, v in pairs(opts) do o[k] = v end
+        o.weatherKind, o.weather = nil, nil
+        opts = o
+      end
+    end
+    return calc(attacker, defender, moveId, opts, ...)
+  end
+  -- Thunder / Hurricane accuracy: the target's umbrella (both accuracy paths
+  -- are the move context's accuracyCheck)
+  local newContext = Engine.newContext
+  Engine.newContext = function(...)
+    local ctx = newContext(...)
+    local mt = type(ctx) == "table" and getmetatable(ctx)
+    if mt and mt.accuracyCheck and not mt._campaignUmbrella then
+      mt._campaignUmbrella = true
+      local check = mt.accuracyCheck
+      mt.accuracyCheck = function(self, ...)
+        local st = self.st or (self.adapter and self.adapter._st)
+        return I.underUmbrella(st, self.target, check, self, ...)
+      end
+    end
+    return ctx
+  end
+  -- the holder's healing moves and Solar Beam
+  local E = require("src.core.game3.battle.effect_ids")
+  local WEATHER_MOVES = { [E.MORNING_SUN] = true, [E.SYNTHESIS] = true, [E.MOONLIGHT] = true, [E.SOLAR_BEAM] = true }
+  local resolveMove = Engine.resolveMove
+  Engine.resolveMove = function(user, target, moveId, slot, adapter, st, ...)
+    -- (user is the battler's slot; State.occupant gives the battler)
+    local b = F.active() and user and st and State.occupant(st, user)
+    local mv = type(b) == "table" and I.umbrella(b) and Moves.get(moveId)
+    if mv and WEATHER_MOVES[tonumber(mv.effect)] then
+      return I.underUmbrella(st, b, resolveMove, user, target, moveId, slot, adapter, st, ...)
+    end
+    return resolveMove(user, target, moveId, slot, adapter, st, ...)
+  end
+  -- Rain Dish (a native ability)
+  local Abilities = require("src.core.game3.battle.abilities")
+  local endTurn = Abilities.endTurn
+  Abilities.endTurn = function(ad, b, ...)
+    return I.underUmbrella(ad and ad._st, b, endTurn, ad, b, ...)
+  end
+
+  -- Shed Shell (CanBattlerEscape): the holder can always be switched out,
+  -- whatever traps it, Ingrain included
+  local canSwitch = Engine.canSwitch
+  Engine.canSwitch = function(st, ad, battler, ...)
+    if F.active() and battler and has(battler, "SHED_SHELL") then return true end
+    return canSwitch(st, ad, battler, ...)
+  end
+
+  -- Adrenaline Orb (BattleScript_TryAdrenalineOrb): Intimidate aimed at the
+  -- holder raises its Speed instead of going to waste (abilities.lua calls this)
+  function I.intimidated(ad, b)
+    if not has(b, "ADRENALINE_ORB") or ad:isFainted(b) or U.stage(b, "speed") >= 6 then return end
+    local name = itemName(b)
+    if Secondary.changeStat(ad, b, "speed", 1, { allowPtr = true, certain = true, noMsg = true }) == "worked" then
+      consume(ad, b)
+      ad:playAnim("general", "HELD_ITEM_EFFECT", b, b)
+      U.say(ad, "Using " .. name .. ", the Speed of " .. U.name(ad, b) .. " rose!")
+    end
+  end
+
+  -- Destiny Knot: when Attract or Cute Charm makes the holder fall in love,
+  -- the other one falls in love with it too (the knot stays)
+  local function canFallFor(ad, b, other)
+    if b.expInfatuated or ad:isFainted(b) or ad:abilityOf(b) == "OBLIVIOUS" then return false end
+    if F.abilities and F.abilities.has(ad, b, "AROMA_VEIL") then return false end
+    local mb, mo = ad:mon(b), ad:mon(other)
+    local gb, go = mb and mb.gender, mo and mo.gender
+    return gb and go and gb ~= "U" and go ~= "U" and gb ~= go
+  end
+  local moveEndKnot = Engine.moveEndEffects
+  Engine.moveEndEffects = function(M, ...)
+    if F.active() and M and M.adapter then
+      local ad = M.adapter
+      for _, b in ipairs({ M.user, M.target }) do
+        local source = b and b.expInfatuated and b.expInfatuatedWith
+        if source and b.campaignKnotFrom ~= source and has(b, "DESTINY_KNOT") and canFallFor(ad, source, b) then
+          b.campaignKnotFrom = source
+          source.expInfatuated = true
+          source.expInfatuatedBy = b.side
+          source.expInfatuatedWith = b
+          ad:playAnim("general", "HELD_ITEM_EFFECT", b, b)
+          U.say(ad, U.name(ad, source) .. " fell in love because of the Destiny Knot!")
+        end
+      end
+    end
+    return moveEndKnot(M, ...)
   end
 
   return I

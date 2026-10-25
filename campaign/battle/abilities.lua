@@ -12,8 +12,9 @@
 -- Form-changing abilities (Zen Mode, Stance Change, Schooling, Disguise, ...)
 -- switch the battler to the form's species for the battle: sprite, typing
 -- and stats follow; the party Pokémon is untouched. Mega-only abilities
--- (Parental Bond, Primal weathers) stay inert, and so do Dancer and the
--- out-of-battle ones (Ball Fetch, Honey Gather).
+-- (Parental Bond, Primal weathers) stay inert. Ball Fetch picks up the
+-- first missed Poké Ball at the end of a turn; Honey Gather runs with the
+-- after-battle Pickup step.
 return function(mod, U, F)
   local State = require("src.core.game3.battle.state")
   local Secondary = require("src.core.game3.battle.effects.secondary")
@@ -114,6 +115,11 @@ return function(mod, U, F)
   local function say(ad, text) ad:say(text) end
   local function nm(ad, b) return U.name(ad, b) end
   local function weather(ad) return ad and Rules.weather.effective(ad._st, ad) or nil end
+  -- the weather as battler b feels it (Utility Umbrella keeps sun and rain off)
+  local function weatherFor(ad, b)
+    if F.items and F.items.weatherFor then return F.items.weatherFor(ad, b) end
+    return weather(ad)
+  end
   local function statusOf(ad, b)
     if ad then return ad:status(b) end
     local s = b and (b.status or (b.mon and b.mon.status))
@@ -346,6 +352,11 @@ return function(mod, U, F)
     if not F.active() or not b or not ad or s >= 0xFFFFFFFF then return s end
     local k = key(ad, b)
     local w = weather(ad)
+    -- Utility Umbrella: the native Swift Swim / Chlorophyll doubling doesn't apply
+    if ((k == "SWIFT_SWIM" and w == "RAIN") or (k == "CHLOROPHYLL" and w == "SUN"))
+        and F.items and F.items.umbrella and F.items.umbrella(b) then
+      s = math.floor(s / 2)
+    end
     if (k == "SAND_RUSH" and w == "SAND") or (k == "SLUSH_RUSH" and w == "HAIL")
         or (k == "SURGE_SURFER" and F.terrain(ad._st) == "ELECTRIC") then
       s = s * 2
@@ -448,7 +459,7 @@ return function(mod, U, F)
     local function both(f) atk, spa = mul(atk, f), mul(spa, f) end
     local function used(f) if isPhysical then atk = mul(atk, f) else spa = mul(spa, f) end end
     if k == "SLOW_START" and (attacker.campaignSlowStart or 0) > 0 then both(0.5)
-    elseif k == "SOLAR_POWER" and not isPhysical and w == "SUN" then spa = mul(spa, 1.5)
+    elseif k == "SOLAR_POWER" and not isPhysical and weatherFor(ad, attacker) == "SUN" then spa = mul(spa, 1.5)
     elseif k == "DEFEATIST" and hp(ad, attacker) <= math.floor(maxHp(ad, attacker) / 2) then both(0.5)
     elseif PINCH[k] and moveType == PINCH[k] then
       -- Inclement: 1.2x outside a pinch; the native formula adds 1.5x in one
@@ -456,7 +467,7 @@ return function(mod, U, F)
       local pinch = hp(ad, attacker) <= math.floor(maxHp(ad, attacker) / 3)
       if k == "VENGEANCE" then used(pinch and 1.5 or 1.2)
       elseif not pinch then used(1.2) end
-    elseif k == "FLOWER_GIFT" and cherrim(attacker) and w == "SUN" and isPhysical then atk = mul(atk, 1.5)
+    elseif k == "FLOWER_GIFT" and cherrim(attacker) and weatherFor(ad, attacker) == "SUN" and isPhysical then atk = mul(atk, 1.5)
     elseif k == "STAKEOUT" and ad and defender.campaignEnteredTurn == ad._st.turn and (ad._st.turn or 0) > 0 then used(2)
     elseif k == "WHITEOUT" and moveType == T.ICE and w == "HAIL" then used(1.5)
     end
@@ -464,7 +475,7 @@ return function(mod, U, F)
     if attacker.expFlashFire and moveType == T.FIRE then used(1.5) end
     if ad then
       local p = partnerOf(ad, attacker)
-      if p and key(ad, p) == "FLOWER_GIFT" and cherrim(p) and w == "SUN" and isPhysical then atk = mul(atk, 1.5) end
+      if p and key(ad, p) == "FLOWER_GIFT" and cherrim(p) and weatherFor(ad, p) == "SUN" and isPhysical then atk = mul(atk, 1.5) end
     end
     -- the defender's abilities against the attack stat
     if dk == "THICK_FAT" and isPhysical and (moveType == T.FIRE or moveType == T.ICE) then atk = mul(atk, 0.5)
@@ -473,7 +484,7 @@ return function(mod, U, F)
     if dk == "FUR_COAT" then def = def * 2
     elseif dk == "GRASS_PELT" and F.terrain(ad and ad._st) == "GRASSY" then def = mul(def, 1.5)
     elseif dk == "PUNK_ROCK" and flag(move, "FLAG_SOUND") then def, spd = def * 2, spd * 2
-    elseif dk == "FLOWER_GIFT" and cherrim(defender) and w == "SUN" then spd = mul(spd, 1.5) end
+    elseif dk == "FLOWER_GIFT" and cherrim(defender) and weatherFor(ad, defender) == "SUN" then spd = mul(spd, 1.5) end
     if ad then
       local p = partnerOf(ad, defender)
       if p and key(ad, p) == "FLOWER_GIFT" and cherrim(p) and w == "SUN" then spd = mul(spd, 1.5) end
@@ -715,7 +726,7 @@ return function(mod, U, F)
   -- status conditions ---------------------------------------------------------------------
   local function guardedStatus(ad, b, status)
     local k = key(ad, b)
-    local w = weather(ad)
+    local w = weatherFor(ad, b)
     if k == "COMATOSE" then return "COMATOSE" end
     if k == "LEAF_GUARD" and w == "SUN" then return k end
     if (k == "WATER_BUBBLE" or k == "WATER_VEIL") and status == "BRN" then return k end
@@ -865,6 +876,10 @@ return function(mod, U, F)
               end
             end
             if alive(ad, foe) and fk == "RATTLED" then boost(ad, foe, "speed", 1, fk) end
+            -- Adrenaline Orb answers Intimidate (not through a Substitute)
+            if alive(ad, foe) and (foe.substituteHP or 0) <= 0 and F.items and F.items.intimidated then
+              F.items.intimidated(ad, foe)
+            end
           end
         end
         return true
@@ -1446,11 +1461,28 @@ return function(mod, U, F)
     say(ad, nm(ad, b) .. "'s " .. A.name(why) .. " cured its status condition!")
     return true
   end
+  -- Ball Fetch: the battle remembers the last Poké Ball thrown (a catch ends
+  -- the battle, so a ball still remembered at the end of a turn missed)
+  local BattleItems = require("src.core.game3.battle.items")
+  local useItem = BattleItems.use
+  BattleItems.use = function(st, adapter, bag, session, itemId, ...)
+    if F.active() and type(st) == "table" and BattleItems.isBall(itemId) then st.campaignLastBall = itemId end
+    return useItem(st, adapter, bag, session, itemId, ...)
+  end
   local EOT = {
+    -- battle_util.c ABILITY_BALL_FETCH: once a battle, into an empty hand
+    BALL_FETCH = function(ad, b)
+      local st = ad._st
+      local ball = st and st.campaignLastBall
+      if not ball or st.campaignFetchedBall or U.item(b) ~= 0 then return end
+      st.campaignFetchedBall = true
+      U.setItem(b, ball)
+      say(ad, nm(ad, b) .. " found a " .. U.itemName(ball) .. "!")
+    end,
     HARVEST = function(ad, b)
       local berry = b.campaignLastBerry or (b.expUsedHeldItem and U.isBerry(b.expUsedHeldItem) and b.expUsedHeldItem)
       if U.item(b) ~= 0 or not berry then return end
-      if weather(ad) == "SUN" or ad:roll(0, 1) == 0 then
+      if weatherFor(ad, b) == "SUN" or ad:roll(0, 1) == 0 then
         U.setItem(b, berry)
         b.campaignLastBerry, b.expUsedHeldItem = nil, nil
         say(ad, nm(ad, b) .. " harvested one " .. U.itemName(berry) .. "!")
@@ -1458,7 +1490,7 @@ return function(mod, U, F)
       end
     end,
     DRY_SKIN = function(ad, b)
-      local w = weather(ad)
+      local w = weatherFor(ad, b)
       if w == "SUN" then
         ad:applyHpLoss(b, math.max(1, math.floor(ad:maxHp(b) / 8)))
         say(ad, nm(ad, b) .. "'s Dry Skin takes its toll!")
@@ -1468,12 +1500,12 @@ return function(mod, U, F)
       end
     end,
     SOLAR_POWER = function(ad, b)
-      if weather(ad) == "SUN" then
+      if weatherFor(ad, b) == "SUN" then
         ad:applyHpLoss(b, math.max(1, math.floor(ad:maxHp(b) / 8)))
         say(ad, nm(ad, b) .. "'s Solar Power takes its toll!")
       end
     end,
-    HYDRATION = function(ad, b) if weather(ad) == "RAIN" then cure(ad, b, "HYDRATION") end end,
+    HYDRATION = function(ad, b) if weatherFor(ad, b) == "RAIN" then cure(ad, b, "HYDRATION") end end,
     ICE_BODY = function(ad, b)
       if weather(ad) == "HAIL" and ad:hp(b) < ad:maxHp(b) and not U.healBlocked(b) then
         U.heal(ad, b, ad:maxHp(b) / 16)
@@ -1519,10 +1551,39 @@ return function(mod, U, F)
       end
     end,
   }
+  A.EOT = EOT
   EOT.HUNGER_SWITCH = function(ad, b)
     local f = formOf(b)
     if f == "MORPEKO" then changeForm(ad, b, "MORPEKO_HANGRY", nm(ad, b) .. " transformed!")
     elseif f == "MORPEKO_HANGRY" then changeForm(ad, b, "MORPEKO", nm(ad, b) .. " transformed!") end
+  end
+  -- Honey Gather (battle_script_commands.c Cmd_pickup): after the battle, a
+  -- holder with an empty hand finds Honey, (level - 1) / 10 * 5 + 5 percent
+  local Prize = require("src.core.game3.battle.prize")
+  local Pokemon = require("src.core.game3.pokemon")
+  local HONEY
+  for id, row in pairs(data.items or {}) do if row.symbol == "ITEM_HONEY" then HONEY = id end end
+  local pickup = Prize.pickup
+  Prize.pickup = function(party, random, rules, ...)
+    local picked = pickup(party, random, rules, ...)
+    if not (F.active() and HONEY and ID.HONEY_GATHER and type(party) == "table") then return picked end
+    if rules and (rules.pickup == false or rules.noPickup) then return picked end
+    random = random or require("src.core.game3.rng").Random
+    for i = 1, 6 do
+      local mon = party[i]
+      local species = type(mon) == "table" and tonumber(mon.species)
+      if species and species ~= 0 and not (mon.isEgg or mon.egg)
+        and (tonumber(mon.item) or 0) == 0 and (tonumber(mon.heldItem) or 0) == 0 then
+        local ability = (Pokemon.inclementAbilityForMon and Pokemon.inclementAbilityForMon(mon, species))
+          or tonumber(mon.abilityId) or tonumber(mon.ability)
+        local band = math.min(9, math.floor(((tonumber(mon.level) or 1) - 1) / 10))
+        if ability == ID.HONEY_GATHER and (band + 1) * 5 > random() % 100 then
+          mon.item, mon.heldItem = HONEY, HONEY
+          if type(picked) == "table" then picked[#picked + 1] = { slot = i, item = HONEY } end
+        end
+      end
+    end
+    return picked
   end
   Residuals.register("campaign_abilities", function(ctx)
     local ad, b = ctx.adapter, ctx.target or ctx.user
@@ -1773,14 +1834,14 @@ return function(mod, U, F)
 
   -- Dancer: after another Pokémon's dance move, each Dancer on the field
   -- dances along (a called move: no PP, and the copy isn't copied again).
-  -- Petal Dance stays out: a called rampage would lock the dancer in.
-  local RAMPAGE_EFFECT = E.RAMPAGE
+  -- A copied Petal Dance locks the dancer into the rampage, as in the donor
+  -- (MOVE_EFFECT_THRASH): the locked turns use the move by id, with no PP.
   local bookkeeping = Engine.moveEndBookkeeping
   Engine.moveEndBookkeeping = function(M, ...)
     local result = bookkeeping(M, ...)
     if not F.active() or not M or not M.user or not M.adapter or not M.st or M.st.over then return result end
     if (M.opts and (M.opts.campaignDancer or M.opts.called)) or M.failed or M.campaignDanced then return result end
-    if not flag(M.move, "FLAG_DANCE") or tonumber(M.move.effect) == RAMPAGE_EFFECT then return result end
+    if not flag(M.move, "FLAG_DANCE") then return result end
     M.campaignDanced = true
     local ad, st = M.adapter, M.st
     local dancers = {}

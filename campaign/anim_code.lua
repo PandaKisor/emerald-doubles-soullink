@@ -1164,14 +1164,53 @@ return function()
     t.func = waitAffine
   end)
 
-  -- Tasks that ask the battle for its state answer with the default, which
-  -- plays the move's base animation: Techno Blast without a Drive, Terrain
-  -- Pulse off terrain, Shell Side Arm as special
-  local function answerZero(t, vm)
-    vm.args[0] = 0
-    AnimTasks.destroy(t)
+  -- Tasks that ask the battle for its state (battle_anim_new.c): outside a
+  -- battle, or with no state to read, they answer 0, the base animation
+  local State = require("src.core.game3.battle.state")
+  local function battleOf(vm, which)
+    local Battle = require("src.core.game3.battle")
+    local ad = Battle._adapter
+    local st = (ad and ad._st) or (Battle.getState and Battle.getState())
+    local Field = require("src.core.game3.battle.moves")._campaignField
+    if not (st and Field and Field.U) then return nil end
+    local id = which == "target" and vm:targetId() or vm:attackerId()
+    return State.battler(st, id), st, ad, Field
   end
-  TASK.TechnoBlast, TASK.TerrainPulse, TASK.ShellSideArm = answerZero, answerZero, answerZero
+  local function answer(fn)
+    return function(t, vm)
+      local ok, v = pcall(fn, vm)
+      vm.args[0] = ok and tonumber(v) or 0
+      AnimTasks.destroy(t)
+    end
+  end
+  -- AnimTask_TechnoBlast: the Drive's type
+  TASK.TechnoBlast = answer(function(vm)
+    local b, _, _, Field = battleOf(vm)
+    local row = b and Field.U.itemRow(Field.U.item(b))
+    local f = row and row.sourceFields
+    if f and f.holdEffect == "HOLD_EFFECT_DRIVE" and f.secondaryId then
+      return Field.U.TYPE[f.secondaryId:gsub("^TYPE_", "")]
+    end
+  end)
+  -- AnimTask_TerrainPulse: the terrain's type, for a grounded attacker
+  TASK.TerrainPulse = answer(function(vm)
+    local b, st, ad, Field = battleOf(vm)
+    local terrain = b and ad and Field.terrain(st)
+    if not terrain or not Field.U.grounded(ad, b) then return 0 end
+    local T = Field.U.TYPE
+    return ({ ELECTRIC = T.ELECTRIC, GRASSY = T.GRASS, MISTY = T.FAIRY, PSYCHIC = T.PSYCHIC })[terrain]
+  end)
+  -- AnimTask_ShellSideArm: TRUE when it hits physically (the same ratio
+  -- campaign/battle/hits.lua picks the category by)
+  TASK.ShellSideArm = answer(function(vm)
+    local b = battleOf(vm)
+    local d = battleOf(vm, "target")
+    if not (b and d) then return 0 end
+    local mon, tm = b.mon or {}, d.mon or {}
+    local phys = (tonumber(mon.attack or mon.atk) or 0) / math.max(1, tonumber(tm.defense or tm.def) or 1)
+    local spec = (tonumber(mon.spAtk or mon.spa) or 0) / math.max(1, tonumber(tm.spDef or tm.spd) or 1)
+    return phys > spec and 1 or 0
+  end)
 
   -- AnimTask_SetAnimTargetToAttackerOpposite (Gravity): the battler opposite
   -- the attacker becomes the target (BATTLE_OPPOSITE); the next animation
@@ -1267,21 +1306,29 @@ return function()
   end
 
   -- SoundTask_PlaySeChangingVolume (Heal Block): plays SE arg 0 at pan arg 1
-  -- for as long as its volume ramp (args 2-5) lasts; the engine's sound has
-  -- no per-effect volume, so the ramp only times the task
+  -- at volume arg 2 (of 256), then every arg 5 + 1 frames moves it by arg 3
+  -- until it reaches arg 4 (battle_anim_sound_tasks.c)
+  local Audio = require("src.core.game3.audio")
   TASK.SoundTask_PlaySeChangingVolume = function(t, vm)
     local a = vm.args
     P.se(a[0], a[1])
-    local cur, step, target, delay = a[2] or 0, a[3] or 0, a[4] or 0, a[5] or 0
+    local list = Audio._seSources
+    local src = list and list[#list]
+    local function volume(v)
+      if src then pcall(function() src:setVolume(math.max(0, math.min(256, v)) / 256) end) end
+    end
+    local initial, step, target, delay = a[2] or 0, a[3] or 0, a[4] or 0, a[5] or 0
+    local cur, frames = initial, 0
+    volume(cur)
     if step == 0 then return AnimTasks.destroy(t) end
-    local rising, frames = cur < target, 0
     t.func = function(tt)
+      local due = frames >= delay
       frames = frames + 1
-      if frames > delay then
-        frames = 0
-        cur = math.max(0, math.min(256, cur + step))
-        if (rising and cur >= target) or (not rising and cur <= target) then AnimTasks.destroy(tt) end
-      end
+      if not due then return end
+      frames = 0
+      cur = math.max(0, math.min(256, cur + step))
+      volume(cur)
+      if (initial < target and cur >= target) or (initial >= target and cur <= target) then AnimTasks.destroy(tt) end
     end
   end
 

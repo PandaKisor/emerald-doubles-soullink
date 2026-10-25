@@ -7,7 +7,8 @@
 --   * town marts sell vanilla's stock plus Inclement's badge-tier stock and
 --     the town's own Inclement stock (evolution items, battle items, special
 --     balls, and items Inclement gives through NPCs vanilla doesn't have);
---     specialty shops sell Inclement's list for them
+--     specialty shops sell Inclement's list for them; an item Inclement
+--     gives for free (price 0) costs what sources.prices says
 return function(mod, data, sources, active)
   local Flags = require("src.core.game3.scripting.flags")
   local Map = require("src.core.game3.map")
@@ -98,6 +99,25 @@ return function(mod, data, sources, active)
   end
 
   -- marts
+  -- a mart item Inclement prices at 0 (a gift there) costs sources.prices
+  -- (full/inventory.lua replaces ItemsData.info after this runs, so the
+  -- wrapper goes on whatever is there when a mart opens)
+  local priceOf = {}
+  for sym, price in pairs(sources.prices or {}) do
+    if id(sym) then priceOf[id(sym)] = price end
+  end
+  local priced
+  local function wrapPrices()
+    if ItemsData.info == priced then return end
+    local info0 = ItemsData.info
+    priced = function(item, ...)
+      local info = info0(item, ...)
+      if active() and info and (tonumber(info.price) or 0) == 0 and priceOf[info.id] then info.price = priceOf[info.id] end
+      return info
+    end
+    ItemsData.info = priced
+  end
+  W.wrapPrices = wrapPrices
   local function badges()
     local Space = package.loaded["src.core.game3.scripting.space"]
     local store = Space and Space.store
@@ -112,6 +132,7 @@ return function(mod, data, sources, active)
   Marts.itemsFor = function(key, ...)
     local list, entry = itemsFor(key, ...)
     if not active() then return list, entry end
+    wrapPrices()
     local k = type(key) == "string" and key or (entry and entry.key)
     local m = k and sources.marts[k]
     if not m then return list, entry end

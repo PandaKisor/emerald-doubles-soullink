@@ -335,4 +335,75 @@ if wanted('choice lock') then
   local bad=Engine.moveLimitations(b,ad)
   T.check(bad[2] and not bad[1],'Choice Scarf locks the move menu')
 end
+-- items that answer abilities and contact (campaign/battle/items.lua)
+scenario('Adrenaline Orb answers Intimidate',{{ability='INTIMIDATE'},{'MEW'}},{{'MEW',item='ITEM_ADRENALINE_ORB'},{'MEW'}},'Speed of')
+scenario('Destiny Knot passes Attract back',{{'RATTATA',gender='M',moves={'ATTRACT'}},{'RATTATA',gender='M',moves={'ATTRACT'}}},
+  {{'RATTATA',gender='F',item='ITEM_DESTINY_KNOT'},{'RATTATA',gender='F',item='ITEM_DESTINY_KNOT'}},'because of the Destiny Knot')
+scenario('Spiky Shield hurts contact',{{'MEW'},{'MEW'}},{{'MEW',moves={'SPIKY_SHIELD'}},{'MEW',moves={'SPIKY_SHIELD'}}},'Spiky Shield')
+scenario('Protective Pads: no Spiky Shield damage',{{'MEW',item='ITEM_PROTECTIVE_PADS'},{'MEW',item='ITEM_PROTECTIVE_PADS'}},
+  {{'MEW',moves={'SPIKY_SHIELD'}},{'MEW',moves={'SPIKY_SHIELD'}}},'protected itself',{absent='hurt by'})
+
+-- Ripen: a confusion berry heals twice as much (the divisor halves)
+if wanted('Ripen doubles a confusion berry') then
+  local HeldItems=require('src.core.game3.battle.held_items')
+  local H=HeldItems.HOLD
+  local seen={}
+  local effectOf=HeldItems.effectOf
+  HeldItems.effectOf=function(...)
+    local code,param=effectOf(...)
+    if code and code>=H.CONFUSE_SPICY and code<=H.CONFUSE_SOUR then seen[#seen+1]=param end
+    return code,param
+  end
+  local function run(ability)
+    seen={}
+    local label='Ripen doubles a confusion berry: '..(ability or 'no ability')..' eats it'
+    if next(only) then only[label]=true end
+    scenario(label,{{'MEW',level=12},{'MEW',level=12}},
+      {{ability or 'MEW',ability=ability,level=40,item='ITEM_FIGY_BERRY',hp=0.3},{ability or 'MEW',ability=ability,level=40,item='ITEM_FIGY_BERRY',hp=0.3}},'Figy Berry')
+    local lo for _,p in ipairs(seen) do lo=math.min(lo or p,p) end
+    return lo
+  end
+  local plain,ripe=run(nil),run('RIPEN')
+  HeldItems.effectOf=effectOf
+  T.eq(plain,2,'Figy Berry heals 1/2 without Ripen')
+  T.eq(ripe,1,'Ripen doubles a confusion berry')
+end
+scenario('Dancer copies Petal Dance',{{'MEW',level=60,moves={'PETAL_DANCE'}},{'MEW',level=60,moves={'GROWL'}}},
+  {{ability='DANCER',level=60},{ability='DANCER',level=60}},'Dancer copied the dance',
+  {check=function(list,joined) return joined:find('Petal Dance',1,true)~=nil or joined:find('PETAL DANCE',1,true)~=nil end})
+
+-- Ball Fetch: the missed ball, once a battle, into an empty hand
+if wanted('Ball Fetch') then
+  local BattleItems=require('src.core.game3.battle.items')
+  local fst={playerSide={},enemySide={},battlers={},turn=1}
+  local fad=Adapter.new(fst,function() end)
+  local b=battler('MEW',30,'player','BALL_FETCH')
+  fst.battlers[1]=b
+  local ball=items.ITEM_GREAT_BALL
+  pcall(BattleItems.use,fst,fad,{},nil,ball)
+  T.eq(fst.campaignLastBall,ball,'Ball Fetch: the battle remembers the thrown ball')
+  Battle._adapter=fad
+  A.EOT.BALL_FETCH(fad,b)
+  T.eq(tonumber(b.item),ball,'Ball Fetch picks up the missed ball')
+  b.item=0
+  A.EOT.BALL_FETCH(fad,b)
+  T.eq(tonumber(b.item),0,'Ball Fetch: only once a battle')
+  Battle._adapter=nil
+end
+-- Honey Gather: with the after-battle Pickup step
+if wanted('Honey Gather') then
+  local Prize=require('src.core.game3.battle.prize')
+  local sp,slot=holder('HONEY_GATHER')
+  -- (the fixture sets abilityNum after the mon is built; the game refreshes)
+  local refresh=F.P._inclementAbilities.refresh
+  local m=refresh(F.mon(sp,100,{'TACKLE'},{abilityNum=slot}))
+  m.item,m.heldItem=0,0
+  Prize.pickup({m},function() return 0 end,{})
+  T.eq(tonumber(m.item),items.ITEM_HONEY,'Honey Gather finds Honey')
+  local n=refresh(F.mon(sp,1,{'TACKLE'},{abilityNum=slot}))
+  n.item,n.heldItem=0,0
+  Prize.pickup({n},function() return 99 end,{})
+  T.eq(tonumber(n.item) or 0,0,'Honey Gather: 5% at level 1 misses a high roll')
+end
+
 T.finish('campaign abilities')

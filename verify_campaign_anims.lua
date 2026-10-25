@@ -139,4 +139,39 @@ T.eq(errors, 0, 'no Lua error across ' .. ran .. ' runs')
 T.eq(timeouts, 0, 'every converted animation ends')
 T.eq(taskErrors, 0, 'no task/sprite callback error logged')
 
+-- the tasks that read the battle pick the variant from its state
+do
+  local Battle = require('src.core.game3.battle')
+  local State = require('src.core.game3.battle.state')
+  local Adapter = require('src.core.game3.battle.adapter')
+  local items = F.ids.items
+  local function mk(name, side, id, extra)
+    local b = State.makeBattler(F.mon(name, 50, { 'TACKLE' }, extra), side, { partyIndex = 1, id = id })
+    return b
+  end
+  local atk, def = mk('MEW', 'player', 0), mk('MEW', 'enemy', 1)
+  local st = { playerSide = {}, enemySide = {}, battlers = { [0] = atk, [1] = def }, player = atk, enemy = def, turn = 1 }
+  local ad = Adapter.new(st, function() end)
+  local saved = Battle._adapter
+  Battle._adapter = ad
+  local function ask(task)
+    local vm = { args = {}, attackerId = function() return 0 end, targetId = function() return 1 end }
+    local t = { data = {} }
+    AnimTasks.REGISTRY[task](t, vm)
+    return vm.args[0]
+  end
+  T.eq(State.battler(st, 0), atk, 'battle state lookup for the anim tasks')
+  T.eq(ask('TechnoBlast'), 0, 'Techno Blast without a Drive: base animation')
+  atk.item = items.ITEM_BURN_DRIVE
+  T.eq(ask('TechnoBlast'), 10, 'Techno Blast with the Burn Drive: Fire')
+  T.eq(ask('TerrainPulse'), 0, 'Terrain Pulse off terrain: base animation')
+  st.campaignField = { terrain = 'ELECTRIC', terrainTurns = 5 }
+  T.eq(ask('TerrainPulse'), 13, 'Terrain Pulse on Electric Terrain: Electric')
+  atk.mon.attack, atk.mon.spAtk = 200, 50
+  T.eq(ask('ShellSideArm'), 1, 'Shell Side Arm physical when Attack wins')
+  atk.mon.attack, atk.mon.spAtk = 50, 200
+  T.eq(ask('ShellSideArm'), 0, 'Shell Side Arm special otherwise')
+  Battle._adapter = saved
+end
+
 T.finish('campaign move animations')

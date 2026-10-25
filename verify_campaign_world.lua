@@ -103,4 +103,30 @@ for _,sym in ipairs({'ITEM_DUSK_STONE','ITEM_SHINY_STONE','ITEM_DAWN_STONE','ITE
     'ITEM_WHIPPED_DREAM','ITEM_SACHET'}) do
   T.check(sources[sym],sym..' can be obtained')
 end
+-- gym TM gifts Inclement renamed (GiveAerialAce -> GiveRoost) give its TM
+for _,sym in ipairs({'ITEM_TM51_ROOST','ITEM_TM72_VOLT_SWITCH','ITEM_TM55_SCALD'}) do
+  local key,v=giftKey(sym)
+  T.check(key~=nil,sym..' replaces the gym leader\'s vanilla TM')
+  if key then T.eq(W.substitute('ANY',0,v,0,key),items[sym],sym..' through the gym script') end
+end
+-- a leftover vanilla ball takes the nearest Inclement one on its map
+local r111=S.balls.EM_ROUTE111 or {}
+local rockSlide=false
+for _,sym in pairs(r111) do if sym=='ITEM_TM63_ROCK_SLIDE' then rockSlide=true end end
+T.check(rockSlide,'Route 111: the HP Up ball a tile off gives TM63 Rock Slide')
+-- items Inclement places on tiles vanilla doesn't use are sold nearby
+local function martOf(label) for k,m in pairs(S.marts) do if m.label==label then return k,m end end end
+local _,lava=martOf('LavaridgeTown_Mart_EventScript_Clerk')
+local sold={}
+for _,sym in ipairs(lava and lava.extra or {}) do sold[sym]=true end
+T.check(sold.ITEM_TM89_U_TURN and sold.ITEM_SAIL_FOSSIL,'Lavaridge sells Ashen Woods\' U-turn TM and the ruins\' fossils')
+local _,slate=martOf('SlateportCity_Mart_EventScript_Clerk')
+sold={}
+for _,sym in ipairs(slate and slate.extra or {}) do sold[sym]=true end
+T.check(sold.ITEM_EVIOLITE,'Dewford has no mart: its NPC items are sold in Slateport')
+-- a TM Inclement gives away (price 0) isn't free in a mart
+local ItemsData=require('src.core.game3.items_data')
+T.eq(ItemsData.info(items.ITEM_TM58_ENDURE).price,3000,'a gifted TM costs 3000 in a mart')
+T.check((ItemsData.info(items.ITEM_POTION).price or 0)>0,'other prices stay')
+
 T.finish('campaign item world')

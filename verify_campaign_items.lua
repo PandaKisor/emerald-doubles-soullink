@@ -52,6 +52,26 @@ gemD.side='enemy'
 local gemBase=dmg(gemA,gemD,'TACKLE')
 gemA.item=items.ITEM_NORMAL_GEM
 T.check(math.abs(dmg(gemA,gemD,'TACKLE')/gemBase-1.3)<0.08,'a gem boosts its type by 1.3')
+-- Utility Umbrella: the attacker's umbrella drops the rain boost (the donor
+-- checks the attacker's item for the damage modifier)
+do
+  local a,d=battler('MEW',50),battler('MEW',50)
+  d.side='enemy'
+  local rain=dmg(a,d,'SURF',{weatherKind='RAIN'})
+  local plain=dmg(a,d,'SURF')
+  T.check(rain>plain,'rain boosts Surf ('..plain..' -> '..rain..')')
+  a.item=items.ITEM_UTILITY_UMBRELLA;a.mon.item=a.item
+  T.eq(dmg(a,d,'SURF',{weatherKind='RAIN'}),plain,'Utility Umbrella: no rain boost for the holder\'s Surf')
+end
+-- Shed Shell: the holder can switch out of a trap
+do
+  local Engine=require('src.core.game3.battle.engine')
+  local b=battler('MEW',50)
+  b.expTrapped=true
+  T.eq((Engine.canSwitch({},nil,b)),false,'a trapped battler can\'t switch')
+  b.item=items.ITEM_SHED_SHELL;b.mon.item=b.item
+  T.eq((Engine.canSwitch({},nil,b)),true,'Shed Shell: it can')
+end
 -- speed and type immunity
 local scarf=battler('MEW',50)
 local ad=require('src.core.game3.battle.adapter').new({playerSide={},enemySide={},battlers={}},function() end)
