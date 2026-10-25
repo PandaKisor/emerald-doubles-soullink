@@ -22,7 +22,7 @@ local moves = F.ids.moves
 
 local count = 0
 for _ in pairs(own.moves) do count = count + 1 end
-T.check(count > 150, 'more than 150 new moves have their own animation (' .. count .. ')')
+T.check(count > 220, 'more than 220 new moves have their own animation (' .. count .. ')')
 
 -- battle gets them through the mod's scriptForMove
 Anim._pack, Anim._packLoaded = pack, true

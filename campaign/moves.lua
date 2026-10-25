@@ -210,6 +210,8 @@ return function(data, list, specs, active, own)
   end
   bridge.data, bridge.active, bridge.records, bridge.anims = data, active, records, anims
   bridge.scripts, bridge.labels = scripts, own and own.labels or {}
+  -- the donor sprite templates those animations use, beside vanilla's
+  if own and own.templates and own.install then own.install(own.templates) end
   bridge.supported = {}
   for n in pairs(records) do bridge.supported[n] = true end
   return bridge

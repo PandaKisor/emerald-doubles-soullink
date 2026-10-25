@@ -138,6 +138,109 @@ def parse_script_file():
     return blocks, order
 
 
+CB_KEYS = os.path.join(HERE, "dump_anim_registry.lua")
+
+
+def engine_registry():
+    """the engine's sprite callbacks and visual/sound tasks, by name"""
+    out = subprocess.run(["luajit", CB_KEYS], cwd=STOCK, check=True, capture_output=True, text=True).stdout
+    cbs = {l[3:] for l in out.splitlines() if l.startswith("cb ")}
+    tasks = {l[5:] for l in out.splitlines() if l.startswith("task ")}
+    return cbs, tasks
+
+
+def c_sources():
+    files = [os.path.join(DONOR, "src", f) for f in sorted(os.listdir(os.path.join(DONOR, "src")))
+             if f.startswith("battle_anim") and f.endswith(".c")]
+    files.append(os.path.join(DONOR, "gflib/sprite.c"))
+    text = ""
+    for f in files:
+        text += re.sub(r"//[^\n]*|/\*.*?\*/", "", open(f).read(), flags=re.S) + "\n"
+    return text
+
+
+class CData:
+    """Sprite templates, OAM shapes and frame/affine tables from the donor's C."""
+
+    def __init__(self, consts):
+        self.c = consts
+        text = c_sources()
+        self.templates = {}
+        for m in re.finditer(r"const struct SpriteTemplate (\w+)\s*=\s*\{(.*?)\};", text, re.S):
+            self.templates[m[1]] = dict(re.findall(r"\.(\w+)\s*=\s*([^,]+?)\s*(?:,|$)", m[2].strip()))
+        self.oams = {}
+        for m in re.finditer(r"const struct OamData (\w+)\s*=\s*\{(.*?)\};", text, re.S):
+            self.oams[m[1]] = dict(re.findall(r"\.(\w+)\s*=\s*([^,]+?)\s*(?:,|$)", m[2].strip()))
+        self.seqs, self.tables = {}, {}
+        for kind in ("AnimCmd", "AffineAnimCmd"):
+            for m in re.finditer(r"const union %s (\w+)\[\]\s*=\s*\{(.*?)\};" % kind, text, re.S):
+                self.seqs[(kind, m[1])] = m[2]
+            # single commands: static const union AnimCmd sDummyAnim = ANIMCMD_END;
+            for m in re.finditer(r"const union %s (\w+)\s*=\s*\{?\s*([A-Z_]+(?:\([^;]*?\))?)\s*\}?\s*;" % kind, text):
+                self.seqs[(kind, m[1])] = m[2]
+            for m in re.finditer(r"const union %s\s*\*\s*const (\w+)\[\w*\]\s*=\s*\{(.*?)\};" % kind, text, re.S):
+                self.tables[(kind, m[1])] = m[2]
+
+    def oam(self, name):
+        o = self.oams.get(name.lstrip("&"))
+        if o is None:
+            raise Unsupported("oam " + name)
+        shape = re.search(r"(\d+)x(\d+)", o.get("shape", "") + o.get("size", ""))
+        if not shape:
+            raise Unsupported("oam shape " + name)
+        affine = {"ST_OAM_AFFINE_OFF": 0, "ST_OAM_AFFINE_NORMAL": 1, "ST_OAM_AFFINE_ERASE": 2,
+                  "ST_OAM_AFFINE_DOUBLE": 3}.get(o.get("affineMode", "ST_OAM_AFFINE_OFF"), 0)
+        return {"w": int(shape[1]), "h": int(shape[2]), "affineMode": affine,
+                "objBlend": o.get("objMode") == "ST_OAM_OBJ_BLEND",
+                "priority": self.c.value(o["priority"]) if "priority" in o else 0}
+
+    def seq(self, kind, name):
+        body = self.seqs.get((kind, name))
+        if body is None:
+            raise Unsupported(kind + " " + name)
+        out = []
+        for cmd in re.findall(r"(\w+)\s*(\((?:[^()]|\([^()]*\))*\))?", body):
+            op, args = cmd[0], split_args(cmd[1][1:-1]) if cmd[1] else []
+            if op == "ANIMCMD_FRAME":
+                row = {"f": self.c.value(args[0]), "d": self.c.value(args[1])}
+                for extra in args[2:]:
+                    k, _, v = extra.partition("=")
+                    if self.c.value(v):
+                        row[{".hFlip": "h", ".vFlip": "v"}.get(k.strip(), "x")] = True
+                out.append(row)
+            elif op == "AFFINEANIMCMD_FRAME":
+                def sx(v, bits):
+                    v = self.c.value(v) & ((1 << bits) - 1)
+                    return v - (1 << bits) if v >= 1 << (bits - 1) else v
+                out.append({"xs": sx(args[0], 16), "ys": sx(args[1], 16), "r": sx(args[2], 8),
+                            "d": self.c.value(args[3]) & 0xFF})
+            elif op in ("ANIMCMD_JUMP", "AFFINEANIMCMD_JUMP"):
+                out.append({"jump": self.c.value(args[0])})
+            elif op in ("ANIMCMD_LOOP", "AFFINEANIMCMD_LOOP"):
+                out.append({"loop": self.c.value(args[0])})
+            elif op in ("ANIMCMD_END", "AFFINEANIMCMD_END", "AFFINEANIMCMD_END_ALT", "ANIM_END", "AFFINE_ANIM_END"):
+                out.append({"e": True})
+            else:
+                raise Unsupported(f"{kind} command {op} in {name}")
+        return out
+
+    def table(self, kind, name):
+        if name in ("NULL", "0"):
+            return None
+        body = self.tables.get((kind, name))
+        if body is None:
+            raise Unsupported(kind + " table " + name)
+        out, i = {}, 0
+        for item in split_args(body):
+            m = re.match(r"\[(.+?)\]\s*=\s*(\w+)", item)
+            if m:
+                i = self.c.value(m[1])
+                item = m[2]
+            out[i] = self.seq(kind, item.strip().lstrip("&").strip())
+            i += 1
+        return out
+
+
 class Converter:
     def __init__(self, pack):
         self.pack = pack
@@ -149,6 +252,11 @@ class Converter:
         self.known_tasks = set(pack["tasks"])
         self.templates = pack["templates"]
         self.battlers = battler_names()
+        self.cdata = CData(self.c)
+        self.callbacks, engine_tasks = engine_registry()
+        # tasks the engine registers beyond what vanilla's moves use
+        self.known_tasks |= engine_tasks
+        self.new_templates = {}
         # how many arguments vanilla passes each task and template: the donor
         # changed some (InvertScreenColor takes one, not three), and the
         # engine implements vanilla's
@@ -202,7 +310,42 @@ class Converter:
             self.labels[key] = self.run(label)
         return key
 
+    def new_template(self, name):
+        """A donor template vanilla doesn't have, built from its C when its
+        graphics are vanilla's and the engine has its callback: the IR fields
+        plus the engine template-table entry (anim_port/g1_templates.lua)."""
+        if name in self.new_templates:
+            return self.new_templates[name]["ir"]
+        t = self.cdata.templates.get(name)
+        if t is None:
+            raise Unsupported("template " + name)
+        def tagname(expr):
+            expr = expr.strip()
+            if expr in ("0", "TAG_NONE", "0xFFFF"):
+                return None
+            return self.tag(expr)[0]
+        tag, pal = tagname(t.get("tileTag", "0")), tagname(t.get("paletteTag", "0"))
+        cb = t.get("callback", "SpriteCallbackDummy").strip()
+        short = cb[4:] if cb.startswith("Anim") and cb[4:] in self.callbacks else cb
+        if short not in self.callbacks:
+            raise Unsupported("callback " + cb)
+        oam = self.cdata.oam(t.get("oam", "").strip())
+        entry = dict(oam, tag=tag, pal=pal or tag,
+                     anims=self.cdata.table("AnimCmd", t.get("anims", "gDummySpriteAnimTable").strip())
+                     or {0: [{"e": True}]},
+                     affine=self.cdata.table("AffineAnimCmd", t.get("affineAnims", "gDummySpriteAffineAnimTable").strip())
+                     or {0: [{"e": True}]})
+        ir = {"tag": tag, "callback": short, "w": oam["w"], "h": oam["h"]}
+        if pal and pal != tag:
+            ir["palTag"] = pal
+        if tag is None:
+            ir["noGfx"] = True
+        self.new_templates[name] = {"ir": ir, "entry": entry}
+        return ir
+
     def check_args(self, key, args):
+        if key in self.new_templates or (key not in self.arity and key in self.known_tasks):
+            return  # no vanilla use to compare with
         if len(args) not in self.arity.get(key, ()):
             raise Unsupported(f"{key} with {len(args)} arguments (vanilla: {sorted(self.arity.get(key, ()))})")
 
@@ -229,9 +372,7 @@ class Converter:
             raise Unsupported("conditional assembly")
         if macro in ("createsprite", "launchtemplate"):
             tmpl = a[0]
-            info = self.templates.get(tmpl)
-            if not info:
-                raise Unsupported("template " + tmpl)
+            info = self.templates.get(tmpl) or self.new_template(tmpl)
             if macro == "createsprite":
                 battler = self.num(a[1])
                 byte = (0x80 if battler == 1 else 0) | (self.num(a[2]) & 0x7F)
@@ -365,9 +506,9 @@ def move_labels():
     return {sym: table[n] for sym, n in ids.items() if n < len(table)}
 
 
-def convert_moves(symbols, pack=None):
+def convert_moves(symbols, pack=None, conv=None):
     """{symbol: {"ops": [...], "labels": {...}}} and {symbol: reason} for the rest."""
-    conv = Converter(pack or load_pack())
+    conv = conv or Converter(pack or load_pack())
     labels_of = move_labels()
     done, skipped = {}, {}
     for sym in symbols:
@@ -396,14 +537,19 @@ def to_lua(v, ind=""):
 def generate(symbols):
     """campaign/move_anims.lua: {moves = {SYMBOL = ops}, labels = {...}},
     the skipped moves and why"""
-    done, skipped = convert_moves(symbols)
-    labels = {}
+    conv = Converter(load_pack())
+    done, skipped = convert_moves(symbols, conv=conv)
+    labels, used = {}, set()
     for row in done.values():
         labels.update(row["labels"])
-    data = {"moves": {sym: row["ops"] for sym, row in done.items()}, "labels": labels}
+        for seq in [row["ops"]] + list(row["labels"].values()):
+            used.update(op["template"] for op in seq or [] if op.get("op") == "createsprite")
+    templates = {name: t["entry"] for name, t in conv.new_templates.items() if name in used}
+    data = {"moves": {sym: row["ops"] for sym, row in done.items()}, "labels": labels, "templates": templates}
     text = ("-- Generated by build_campaign.py (tools/anim_convert.py) from Inclement's\n"
             "-- data/battle_anim_scripts.s: the moves whose animation uses only what the\n"
-            "-- vanilla ROM has. The rest keep their stand-in (campaign/move_list.lua).\n"
+            "-- vanilla ROM has (templates: donor sprite templates, built from its C, for\n"
+            "-- anim_port/g1_templates.lua). The rest keep their stand-in (move_list.lua).\n"
             "return " + to_lua(data) + "\n")
     return text, len(done), skipped
 

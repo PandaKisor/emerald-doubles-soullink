@@ -23,8 +23,9 @@ return function(mod, active)
     if symbol ~= "STATUS_ARG" then specs.bySymbol[symbol] = spec end
   end
   for symbol, spec in pairs(source("campaign/battle/statuses.lua")(U, field)) do specs.bySymbol[symbol] = spec end
-  local moves = source("campaign/moves.lua")(data, source("campaign/move_list.lua"), specs, active,
-    source("campaign/move_anims.lua"))
+  local anims = source("campaign/move_anims.lua")
+  anims.install = source("campaign/anim_templates.lua")
+  local moves = source("campaign/moves.lua")(data, source("campaign/move_list.lua"), specs, active, anims)
   local battleMoves = {}
   for id in pairs(routeMoves.supported) do battleMoves[id] = true end
   for id in pairs(moves.supported) do battleMoves[id] = true end
