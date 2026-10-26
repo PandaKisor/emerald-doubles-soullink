@@ -3,6 +3,7 @@
 -- the campaign cart, then runs scripted battles. Run from
 -- Gen3Mod/gen1recomp-0.3.73 with luajit.
 package.path='./?.lua;./?/init.lua;'..package.path
+local extraFiles = ...
 local T=require('tests.modkit')
 local function read(p) local f=assert(io.open(p,'rb'));local s=f:read('*a');f:close();return s end
 -- generated/campaign holds the built mod, the g3_coop release it pairs with
@@ -10,6 +11,7 @@ local function read(p) local f=assert(io.open(p,'rb'));local s=f:read('*a');f:cl
 local root='../porting/native/generated/campaign'
 local files={}
 for rel in io.popen('cd '..root..' && find mods carts -type f'):lines() do files[rel]=read(root..'/'..rel) end
+for rel, body in pairs(extraFiles or {}) do files[rel] = body end
 local fs=T.sdk.memfs(files);love.filesystem=fs
 local Version=require('src.core.GameVersion');Version.set('emerald')
 local SD=require('src.core.SaveData');SD.setCart('emerald_doubles_soullink')

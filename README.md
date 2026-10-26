@@ -26,11 +26,33 @@ Each release has a new cart. Download it and import it over the old one, then
 press **Install required mods** again. Your save carries over. Both players
 must be on the same release to play together.
 
+## Additional mods
+
+The cart is **open**: enable other Emerald/Gen 3 mods in the launcher's
+**MODS** screen and they load after the campaign and co-op mods. You do not
+need to break the cart's seal or add them to its manifest. Gen 1-only mods
+still need Gen 3 support, and compatibility depends on the individual mod.
+Both co-op players should use matching gameplay mods.
+
 ## Co-op
 
 One player hosts and the other joins by address (direct connection, port 7777
 by default). Set it up in game from **START > CO-OP**. Soul Link and level caps
 start on; each player can change their rules in **F7 > RULES**.
+
+## Leveling without grinding
+
+Choose **START > RARE CANDY** to receive a reusable Rare Candy and pick a
+Pokémon. It also works from **BAG > MEDICINE**, never runs out when used,
+and keeps the normal move-learning and evolution prompts. With level caps
+on, it stops at the current cap; turn caps off in **F7 > RULES** to level
+up to 100. Existing saves can use it immediately.
+
+**START > REPEL: OFF/ON** toggles unlimited Repel for this save. While on,
+wild Pokémon below your first healthy Pokémon's level are repelled, without
+using items or running out of steps. Save the game to keep your choice.
+The starter counts as Littleroot Town's Soul Link encounter, including in
+existing run records, so it does not use Route 101's encounter.
 
 ## What's in this repo
 

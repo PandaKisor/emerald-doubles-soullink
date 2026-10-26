@@ -25,9 +25,9 @@ CAMPAIGN = HERE / "campaign"
 
 MOD_ID = "g3_campaign"
 TITLE = "Emerald Doubles Soul Link"
-VERSION = "0.24.0"
+VERSION = "0.25.0"
 CART_ID = "emerald_doubles_soullink"
-COOP_ID, COOP_VERSION = "g3_coop", "0.8.3"
+COOP_ID, COOP_VERSION = "g3_coop", "0.8.4"
 # GitHub repos the launcher checks for updates and the release cart downloads from
 REPO, COOP_REPO = "PandaKisor/emerald-doubles-soullink", "PandaKisor/g3-coop"
 COOP_SRC = GEN3 / "coop/g3_coop"
@@ -161,6 +161,12 @@ def stock_modules(native_dir):
 
 
 LIB_PATCHES = (
+    # The campaign makes Rare Candy reusable in both the party controller
+    # (which also learns moves/evolves) and the direct item-use API.
+    ("full/restoratives.lua", "      Bag.remove(menu._bag,item,1)\n",
+     "      if not (b.reusableCandy and b.reusableCandy()) then Bag.remove(menu._bag,item,1) end\n"),
+    ("full/restoratives.lua", '        Bag.remove(bag,item,1);return true,"level"\n',
+     '        if not (b.reusableCandy and b.reusableCandy()) then Bag.remove(bag,item,1) end;return true,"level"\n'),
     # drain moves heal the donor's argument percentage of the damage
     ("lib/hit.lua", "  local heal = math.floor((M.hpDealt or 0) / 2)\n",
      "  local heal = math.floor((M.hpDealt or 0) * (tonumber(M.move.drainPercent) or 50) / 100)\n"
@@ -713,11 +719,11 @@ def cart_text(hashes=None):
             f'["id"]="{CART_ID}",\n["title"]="{TITLE}",\n["version"]="{VERSION}",\n'
             '["author"]="Aeryk Kisor",\n'
             '["summary"]="Vanilla Emerald with Inclement Pokémon, every battle a double, co-op with Soul Link and level caps.",\n'
-            '["base"]="emerald",\n["engine"]=">=0.3.73",\n["shell"]="#26734D",\n["seal"]="sealed",\n'
+            '["base"]="emerald",\n["engine"]=">=0.3.73",\n["shell"]="#26734D",\n["seal"]="open",\n'
             f'["mods"]={{\n[1]={{\n{pin(MOD_ID, VERSION, REPO)}\n}},\n'
             f'[2]={{\n{pin(COOP_ID, COOP_VERSION, COOP_REPO)},\n'
-            # a sealed cart passes its mods only these options: Soul Link and
-            # level caps start on (each player can change them in game, F7 > RULES)
+            # Cart defaults; the open cart also permits player preferences
+            # and additional enabled mods after the campaign/co-op pair.
             '["options"]={\n["soullink"]=true,\n["sl_caps"]=true\n}\n}\n},\n'
             f'["load_order"]={{\n[1]="{MOD_ID}",\n[2]="{COOP_ID}"\n}}\n}}\n}}\n')
 
