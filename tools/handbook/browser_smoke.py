@@ -27,7 +27,8 @@ server=http.server.HTTPServer(('127.0.0.1',0),Report)
 threading.Thread(target=server.serve_forever,daemon=True).start()
 url=f'http://127.0.0.1:{server.server_port}/report'
 harness=(HERE/'browser_smoke.js').read_text().replace('__REPORT_URL__',url)
-html=source.read_text().replace('<body>','<body><script>window.smokeErrors=[];window.onerror=(...a)=>smokeErrors.push(String(a[0]));</script>')
+sample=(NATIVE/'generated/handbook/guide-sync-sample.json').read_text()  # written by verify_campaign_qol.lua
+html=source.read_text().replace('<body>','<body><script>window.smokeErrors=[];window.onerror=(...a)=>smokeErrors.push(String(a[0]));window.syncSample='+json.dumps(sample).replace('<','\\u003c')+';</script>')
 page=OUT/'smoke.html'
 page.write_text(html.replace('</body>',f'<script>{harness}</script></body>'))
 profile=OUT/f'profile-{time.time_ns()}'
@@ -44,7 +45,7 @@ with (OUT/'firefox.log').open('w') as log:
     (OUT/'report.json').write_text(json.dumps(report[-1],indent=2))
     print(json.dumps(report[-1],indent=2),flush=True)
     if not report[-1].get('ok'):raise SystemExit(1)
-    for view,size,extra in [('guide','1440,1400','&chapter=0&open=3'),('guide','1440,1400','&chapter=1&open=5'),('trainers','1440,1200',''),('calculator','1440,1200',''),('wild','1440,1000',''),('route','1440,1100',''),('guide','390,1400','&chapter=0&open=4'),('calculator','390,1100','')]:
+    for view,size,extra in [('guide','1440,1400','&chapter=0&open=3'),('guide','1440,1400','&chapter=1&open=5'),('trainers','1440,1200',''),('calculator','1440,1200',''),('wild','1440,1000',''),('route','1440,1100',''),('guide','1440,1400','&chapter=0&open=1,3&sync=1'),('guide','1440,900','&chapter=4&sync=1'),('guide','390,1400','&chapter=0&open=1&sync=1'),('guide','390,1400','&chapter=0&open=4'),('calculator','390,1100','')]:
         dest=OUT/f'{view}{extra.replace("&","-").replace("=","")}-{size.split(",")[0]}.png'
         subprocess.run(command+['--screenshot',str(dest),'--window-size',size,page.as_uri()+'?preview='+view+extra],stdout=log,stderr=log,env=env,check=True,timeout=40)
         print(dest,flush=True)

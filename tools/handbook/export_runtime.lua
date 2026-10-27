@@ -182,13 +182,14 @@ for map,ev in pairs(events) do
       local h=handouts(o.scriptKey)
       if #h==1 and h[1].std==1 then
         out.sources[#out.sources+1]={kind='Item ball',map=map,x=o.x,y=o.y,
-          label=labelOf[o.scriptKey],localId=o.localId,
+          label=labelOf[o.scriptKey],localId=o.localId,flag=(tonumber(o.flag) or 0)>0 and tonumber(o.flag) or nil,
           item=W.substitute(map,1,h[1].item,o.localId,o.scriptKey) or h[1].item}
       end
     end
     for _,b in ipairs(ev.bgEvents or {}) do
       if b.type=='hidden_item' then
-        out.sources[#out.sources+1]={kind='Hidden item',map=map,x=b.x,y=b.y,item=W.hiddenAt(map,b.x,b.y) or b.item}
+        out.sources[#out.sources+1]={kind='Hidden item',map=map,x=b.x,y=b.y,item=W.hiddenAt(map,b.x,b.y) or b.item,
+          flag=(tonumber(b.flag or b.hiddenFlag) or 0)>0 and tonumber(b.flag or b.hiddenFlag) or nil}
       end
     end
   end

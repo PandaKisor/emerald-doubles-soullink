@@ -46,6 +46,16 @@ def normalize(raw, manifest, coop):
     for row in maps.values():
         row["name"] = friendly(row["name"])
     data["maps"] = maps
+    # each map's region-map section (Soul Link counts one encounter per section):
+    # from the donor's map.json files and MAPSEC numbers, vanilla names unchanged
+    donor = PROJECT / "pokeemerald-1.13"
+    secs = {name: int(num, 16) for name, num in re.findall(r"#define (MAPSEC_\w+)\s+(0x[0-9A-Fa-f]+)",
+                                                         (donor / "include/constants/region_map_sections.h").read_text())}
+    for mj in (donor / "data/maps").glob("*/map.json"):
+        info = json.loads(mj.read_text())
+        mid = "EM_" + info.get("id", "")[4:]
+        if mid in maps and info.get("region_map_section") in secs:
+            maps[mid]["mapsec"] = secs[info["region_map_section"]]
 
     def place(row):
         row["mapName"] = maps.get(row.get("map"), {}).get("name", "Shared event / location not resolved")

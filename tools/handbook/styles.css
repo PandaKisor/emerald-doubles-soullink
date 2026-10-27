@@ -292,3 +292,35 @@ dialog li{margin-bottom:4px;font-size:13px}
   .damage-range{font-size:36px}
 }
 .result-panel h2{display:flex;align-items:center;gap:2px;flex-wrap:wrap}
+
+/* game sync ---------------------------------------------------------------- */
+.sync-chip{font-size:12px;color:var(--ink2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:42vw}
+.sync-chip small{color:var(--muted);margin-left:4px}
+.sync-panel{margin-top:12px;padding:12px;font-size:12px}
+.sync-panel .footnote{margin:6px 0 0}
+.party-row{display:flex;flex-wrap:wrap;gap:4px;margin-top:4px}
+.party-mon{display:flex;flex-direction:column;align-items:center;border:1px solid var(--line);background:var(--panel2);border-radius:8px;padding:2px 3px 1px;cursor:pointer;min-width:40px}
+.party-mon:hover{border-color:var(--accent)}
+.party-mon span:last-child{font-size:10px;font-weight:700;color:var(--ink2);line-height:1}
+.check-line{display:flex;gap:6px;align-items:center;margin-top:8px;cursor:pointer}
+.pill.won{background:var(--accent-soft);color:var(--accent2)}
+.pill.link{background:color-mix(in srgb,var(--blue) 16%,transparent);color:var(--blue)}
+.trainer.beaten{opacity:.72}
+.trainer.beaten .trainer-head{background:linear-gradient(90deg,var(--accent-soft),transparent 70%)}
+.boss-chip.won{outline:2px solid var(--accent);outline-offset:-2px}
+.item-list li.got{opacity:.6}
+.item-list li.got b{text-decoration:line-through;text-decoration-color:var(--accent)}
+.chapter-link.locked{opacity:.6}
+.chapter-hero.locked{border-style:dashed}
+.chapter-hero.locked .button{margin-top:10px}
+.links{display:grid;gap:6px}
+.link-row{display:grid;grid-template-columns:minmax(90px,1fr) 1.4fr 1.4fr auto;gap:8px;align-items:center;padding:6px 10px;border:1px solid var(--line);border-radius:10px;background:var(--panel2)}
+.link-row .side{display:flex;align-items:center;gap:4px;min-width:0}
+.link-row .side span{font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.link-row .side small{color:var(--muted)}
+.link-row.dead,.link-row.broken{border-color:var(--red);background:var(--red-soft)}
+.link-row.alive{border-color:color-mix(in srgb,var(--accent) 50%,var(--line))}
+#sync-help{max-width:560px}
+#sync-help .paths{padding-left:18px}
+#sync-help code{font-family:var(--mono);font-size:12px;background:var(--bg2);padding:1px 4px;border-radius:4px;word-break:break-all}
+@media (max-width:720px){.top-tools{flex-wrap:wrap}.link-row{grid-template-columns:1fr 1fr}.link-row b{grid-column:1/-1}.sync-chip{max-width:100%;order:3;flex-basis:100%}}

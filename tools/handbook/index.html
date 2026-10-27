@@ -6,7 +6,7 @@
 <body>
 <header class="top"><div class="top-inner">
  <a class="brand" href="#guide"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 2 29 11 24 29H8L3 11Z" fill="#14a073"/><path d="M16 2 22 11 16 29 10 11Z" fill="#46d39f"/><path d="M3 11h26L16 2Z" fill="#7ce8bf"/><path d="M10 11 16 29 8 29 3 11Z" fill="#0d7a57"/></svg><div><b>Emerald Field Guide</b><span>Doubles · Soul Link · <span id="version"></span></span></div></a>
- <div class="top-tools"><span class="save-state" id="save-state">Saved on this browser</span><button class="button small" id="theme-toggle" title="Switch light / dark">◐ Theme</button><button class="button small" id="about-open">About</button></div>
+ <div class="top-tools"><span class="sync-chip" id="sync-chip"></span><button class="button small primary" id="sync-load" title="Load guide-sync.bin from your game">Load game</button><span class="save-state" id="save-state">Saved on this browser</span><button class="button small" id="theme-toggle" title="Switch light / dark">◐ Theme</button><button class="button small" id="about-open">About</button></div>
  <nav class="tabs" aria-label="Guide sections">
   <button data-tab="guide" class="active">Route guide</button>
   <button data-tab="trainers">Trainers</button>
@@ -20,6 +20,7 @@
  <section id="guide" class="page active" aria-label="Route guide">
   <div class="guide">
    <aside><nav class="chapters" id="chapters" aria-label="Chapters"></nav>
+    <div class="panel sync-panel" id="sync-panel"></div>
     <div class="panel rival-picker"><div class="tiny-label">Rival battles show</div>
      <div>Your starter</div><div class="segmented" id="rival-starter"></div>
      <div style="margin-top:8px">Your rival</div><div class="segmented" id="rival-gender"></div>
@@ -74,9 +75,15 @@
 </main>
 <footer>Emerald Doubles Soul Link · stock Gen1Recomp 0.3.73 · an offline companion, everything is inside this file. <button class="text-button" id="about-footer">About &amp; limits</button></footer>
 <datalist id="species-list"></datalist><datalist id="move-list"></datalist><datalist id="item-list"></datalist><datalist id="map-list"></datalist>
-<input type="file" id="import-file" accept=".json,application/json" hidden>
+<input type="file" id="import-file" accept=".json,application/json" hidden><input type="file" id="sync-file" accept=".bin,.json" hidden>
 <div id="toast" role="status"></div>
 <dialog id="about"><div class="panel-head"><h2>About this guide</h2><button class="button small" id="about-close">Close</button></div><div id="about-content"></div></dialog>
+<dialog id="sync-help"><div class="panel-head"><h2>Load your game</h2><button class="button small" id="sync-help-close">Close</button></div>
+ <p>In the game, open <b>START › GUIDE SYNC</b> (saving also syncs). The game writes <code>guide-sync.bin</code> into its data folder:</p>
+ <ul class="paths"><li><b>Linux</b> <code>~/.local/share/pokemon-love2d/</code></li><li><b>Windows</b> <code>%APPDATA%\pokemon-love2d\</code></li><li><b>macOS</b> <code>~/Library/Application Support/pokemon-love2d/</code></li></ul>
+ <p>Then <code>mod_storage › emerald › <i>your playthrough</i> › g3_campaign › guide-sync.bin</code>. The game names the first characters of the playthrough folder when you sync.</p>
+ <p class="footnote">Chrome and Edge remember the file: after the first pick, <b>Reload</b> reads it again in one click. Firefox and Safari ask for the file each time. In co-op your partner’s party and box come along once you have played together.</p>
+ <div class="toolbar"><button class="button primary" id="sync-pick">Choose guide-sync.bin…</button><button class="button" id="sync-forget">Forget loaded game</button></div></dialog>
 <script id="guide-data" type="application/json">/* DATA */</script>
 <script>/* CALCULATOR */</script><script>/* APP */</script>
 </body></html>

@@ -198,14 +198,59 @@ W.wrapPrices()
 local ItemsData = require('src.core.game3.items_data')
 T.eq(ItemsData.info(oran).price, 100, 'marts charge 100 for an Oran Berry')
 T.eq(ItemsData.info(F.ids.items.ITEM_LUM_BERRY).price, 500, 'and 500 for a Lum Berry')
+-- field guide sync: START > GUIDE SYNC and every save write guide-sync.bin (0.37.0)
+local GS = F.campaign.guideSync
+local syncEntry
+for _, e in ipairs(entries()) do if e.id == 'g3_campaign_guide' then syncEntry = e end end
+T.check(syncEntry and syncEntry.label == 'GUIDE SYNC', 'START menu offers GUIDE SYNC')
+local gs = F.session()
+gs.party = { ivMon, F.mon('ZIGZAGOON', 7, {'TACKLE'}, { isEgg = true }) }
+gs.flags[0x820] = true -- FLAG_BADGE01_GET
+gs.storage = { boxes = { { mons = { [3] = F.mon('WURMPLE', 4, {'TACKLE'}) } } } }
+gs.map, gs.x, gs.y = 'EM_ROUTE104', 12, 30
+ivMon.personality, ivMon.ability, ivMon.abilityId = 13, nil, nil
+local shared, partnerSnap = nil, { name = 'MAY', party = { { 280, 33 } }, box = {} }
+local tracker = { run = {}, d = { areaName = function(a) return a == 16 and 'ROUTE 101' or '?' end } }
+function tracker:view()
+  return { pairs = { { a = 16, status = 'alive', mine = { state = 'caught', s = 261, u = '1:2' }, theirs = { state = 'caught', s = 265, u = '3:4' } } },
+           banned = { ['9:9'] = true }, names = { ['1:2'] = 'ZIGGY' } }
+end
+local gsGame = { phase = 'field', save = { version = 'emerald', meta = { playthroughId = 'guidetest' } },
+  mods = { exports = { g3_coop = { levelCap = function() return 19 end, partnerGuide = function() return partnerSnap end,
+    shareGuide = function(d) shared = d end, tracker = function() return tracker end } } } }
+local snap = GS.snapshot(gsGame, gs)
+T.eq(snap.format, 'emerald-guide-sync', 'snapshot names its format')
+T.eq(#snap.party, 1, 'eggs are left out of the party')
+local r = snap.party[1]
+T.eq(r[1], F.species('TREECKO'), 'species'); T.eq(r[2], 20, 'level'); T.eq(r[5], 13, 'nature from personality')
+T.eq(r[6], 31, 'HP IV first'); T.eq(r[9], 30, 'Sp. Atk IV fourth'); T.eq(r[17], 252, 'Speed EV last')
+T.eq(r[18], F.move('POUND'), 'first move')
+T.eq(r[4], F.P.abilities(F.species('TREECKO'))[2], 'ability as battles pick it (odd personality: second)')
+T.eq(#snap.box, 1, 'box mons are listed'); T.eq(snap.box[1][1], F.species('WURMPLE'), 'box species')
+local hasBadge = false
+for _, f in ipairs(snap.flags) do if f == 0x820 then hasBadge = true end end
+T.check(hasBadge, 'set flags are listed')
+T.eq(snap.player.cap, 19, 'level cap'); T.eq(snap.player.map, 'EM_ROUTE104', 'current map')
+T.eq(snap.partner, partnerSnap, 'partner party comes from co-op')
+T.eq(snap.soulLink.rows[1].name, 'ROUTE 101', 'Soul Link rows carry the area name')
+T.eq(snap.soulLink.rows[1].mine[4], 'ZIGGY', 'and the nickname'); T.eq(snap.soulLink.banned[1], '9:9', 'banned uids')
+T.check(GS.write(gsGame, gs), 'guide sync writes to mod storage')
+T.check(shared and #shared.party == 1, 'this player\'s party is shared with the partner')
+local body = love.filesystem.read(GS.path(gsGame))
+T.check(type(body) == 'string' and body:find('"emerald-guide-sync"', 1, true), 'guide-sync.bin holds the JSON at ' .. tostring(GS.path(gsGame)))
+local back = require('src.link.Json').decode(body)
+T.eq(back and back.party[1][1], F.species('TREECKO'), 'the file decodes')
+-- the field guide's browser smoke test loads this exact file
+do local f = io.open('../porting/native/generated/handbook/guide-sync-sample.json', 'wb') if f then f:write(body) f:close() end end
 SD.setCart(nil)
 T.check(not R.enabled(s), 'repel is scoped to the campaign cart')
 T.check(not C.grant(s), 'candy grant is scoped to the campaign cart')
 T.check(not K.grant(F.session()), 'starter kit is scoped to the campaign cart')
+T.check(not GS.write(gsGame, gs), 'guide sync is scoped to the campaign cart')
 T.eq(H.heal(Runtime._game, s), 0, 'healing is scoped to the campaign cart')
 for _, e in ipairs(entries()) do
   T.check(e.id ~= 'g3_campaign_candy' and e.id ~= 'g3_campaign_repel' and e.id ~= 'g3_campaign_heal'
-    and e.id ~= 'g3_campaign_relearn' and e.id ~= 'g3_campaign_ivs',
+    and e.id ~= 'g3_campaign_relearn' and e.id ~= 'g3_campaign_ivs' and e.id ~= 'g3_campaign_guide',
     'no campaign shortcuts on vanilla')
 end
-T.finish('campaign reusable candy, repel, team healing, relearner, IV check, starter kit and berries')
+T.finish('campaign reusable candy, repel, team healing, relearner, IV check, starter kit, berries and guide sync')

@@ -38,12 +38,12 @@
   const roxanne = trainers.find(t => t.symbol === 'TRAINER_ROXANNE_1');
   const baseState = {a: freshMon(277), d: roxanne ? {...freshMon(roxanne.party[0].species), ...roxanne.party[0], stages: fullStats(0), hp: null} : freshMon(74), move: 71,
     field: {doubles: true, spread: false, crit: false, weather: '', terrain: '', power: null}, badges: 0, plan: {name: 'Our Hoenn run', stops: []},
-    chapter: 0, guideDone: {}, rival: {starter: 'TREECKO', gender: 'MAY'}};
+    chapter: 0, guideDone: {}, rival: {starter: 'TREECKO', gender: 'MAY'}, spoilers: 'hide', revealed: {}};
   const KEY = 'emerald-field-guide-v1';
   let state = structuredClone(baseState), storageOk = true, timer, currentTab = 'guide';
   try {
     const raw = localStorage.getItem(KEY);
-    if (raw) { const s = JSON.parse(raw); if (s.a && s.d && D.species[s.a.species] && D.species[s.d.species] && s.plan?.stops && Array.isArray(s.plan.stops)) state = {...baseState, ...s, field: {...baseState.field, ...s.field}, rival: {...baseState.rival, ...s.rival}, guideDone: s.guideDone || {}}; }
+    if (raw) { const s = JSON.parse(raw); if (s.a && s.d && D.species[s.a.species] && D.species[s.d.species] && s.plan?.stops && Array.isArray(s.plan.stops)) state = {...baseState, ...s, field: {...baseState.field, ...s.field}, rival: {...baseState.rival, ...s.rival}, guideDone: s.guideDone || {}, revealed: s.revealed || {}}; }
   } catch { storageOk = false; }
   if (!(state.chapter >= 0 && state.chapter < G.length)) state.chapter = 0;
   function save() { try { localStorage.setItem(KEY, JSON.stringify(state)); $('save-state').textContent = 'Saved on this browser'; } catch { storageOk = false; $('save-state').textContent = 'Use Export to keep your plan'; } }
@@ -76,6 +76,102 @@
   }
   document.querySelectorAll('[data-tab]').forEach(b => b.addEventListener('click', () => switchTab(b.dataset.tab)));
 
+  // game sync: guide-sync.bin from START > GUIDE SYNC (campaign/guide_sync.lua) --------
+  // mon rows: species, level, item, ability, nature, IVs x6, EVs x6, moves x4, hp, maxHp, uid, nickname
+  const SYNC = 'emerald-field-guide-sync', BADGE = 0x820, TRAINER_FLAG = 0x500;
+  let sync = null, flags = new Set(), syncHandle = null;
+  // Lua encodes an empty table as {}: lists are normalized here
+  const arr = x => Array.isArray(x) ? x : [];
+  function validSync(v) {
+    if (!v || typeof v !== 'object' || v.format !== 'emerald-guide-sync') return null;
+    for (const k of ['party', 'box', 'flags']) v[k] = arr(v[k]);
+    if (v.partner && typeof v.partner === 'object') { v.partner.party = arr(v.partner.party); v.partner.box = arr(v.partner.box); } else v.partner = null;
+    if (v.soulLink && typeof v.soulLink === 'object') { v.soulLink.rows = arr(v.soulLink.rows); v.soulLink.banned = arr(v.soulLink.banned); } else v.soulLink = null;
+    return v;
+  }
+  function useSync(v, at) {
+    sync = v; flags = new Set(v?.flags || []);
+    if (v) { sync.loadedAt = at || sync.loadedAt || Date.now(); state.badges = badgeCount(); }
+  }
+  try { useSync(validSync(JSON.parse(localStorage.getItem(SYNC) || 'null'))); } catch {}
+  function monFrom(r) {
+    if (!Array.isArray(r) || !D.species[r[0]]) return null;
+    const ivs = Object.fromEntries(C.keys.map((k, i) => [k, +r[5 + i] || 0])), evs = Object.fromEntries(C.keys.map((k, i) => [k, +r[11 + i] || 0]));
+    return {...freshMon(r[0], r[1] || 1), item: r[2] || 0, ability: r[3] || D.species[r[0]].abilities[0] || 0, nature: r[4] || 0, ivs, evs,
+      moves: r.slice(17, 21).filter(id => id > 0 && D.moves[id]), hp: r[21] > 0 && r[21] < r[22] ? r[21] : null, nickname: r[24] || ''};
+  }
+  // every Pokémon the guide knows from the game, as [key, label, mon]
+  function syncMons() {
+    if (!sync) return [];
+    const out = [], who = sync.partner?.name || 'Partner';
+    const add = (rows, key, label) => (rows || []).forEach((r, i) => { const m = monFrom(r); if (m) out.push([key + ':' + i, label, m]); });
+    add(sync.party, 'p', 'Your party'); add(sync.partner?.party, 'q', who + '’s party'); add(sync.box, 'b', 'Your boxes'); add(sync.partner?.box, 'r', who + '’s boxes');
+    return out;
+  }
+  const syncMon = key => syncMons().find(x => x[0] === key)?.[2];
+  const badgeCount = () => [0, 1, 2, 3, 4, 5, 6, 7].filter(i => flags.has(BADGE + i)).length;
+  const beaten = t => !!sync && !!t && flags.has(TRAINER_FLAG + t.id);
+  const pickedUp = src => !!sync && src.flag > 0 && flags.has(src.flag);
+  // the chapter you are on: one per badge, then the League
+  const reached = () => sync ? Math.min(G.length - 1, badgeCount()) : G.length - 1;
+  const locked = ci => !!sync && state.spoilers !== 'show' && ci > reached() && !state.revealed?.[ci];
+  function syncAge() { const m = Math.round((Date.now() - sync.loadedAt) / 60000); return m < 1 ? 'just now' : m < 60 ? m + ' min ago' : m < 1440 ? Math.round(m / 60) + ' h ago' : Math.round(m / 1440) + ' d ago'; }
+  function renderSyncChip() {
+    $('sync-chip').innerHTML = sync ? `<b>${esc(sync.player?.name || 'Your game')}</b> · ${badgeCount()} badge${badgeCount() === 1 ? '' : 's'}${sync.player?.cap ? ' · cap ' + sync.player.cap : ''} · ${esc(mapName(sync.player?.map))} <small>${syncAge()}</small>` : '';
+    $('sync-load').textContent = sync ? (syncHandle ? 'Reload ↻' : 'Load game') : 'Load game';
+  }
+  function monChip(key, m) {
+    return `<button class="party-mon" data-sync-mon="${key}" title="${esc((m.nickname ? m.nickname + ' · ' : '') + name('species', m.species))} · load into the calculator">${icon(m.species)}<span>${m.level}</span></button>`;
+  }
+  function renderSyncPanel() {
+    const el = $('sync-panel');
+    if (!sync) { el.innerHTML = `<div class="tiny-label">Your game</div><p class="footnote">Load <b>guide-sync.bin</b> to tick off beaten trainers and found items, show both parties and your Soul Link pairs, and hide spoilers past your badges.</p><button class="button small full" data-sync-help>How to load your game</button>`; return; }
+    const mine = (sync.party || []).map((r, i) => [i, monFrom(r)]).filter(x => x[1]), theirs = (sync.partner?.party || []).map((r, i) => [i, monFrom(r)]).filter(x => x[1]);
+    const sl = sync.soulLink?.rows || [], alive = sl.filter(r => r.status === 'alive').length, dead = sl.filter(r => r.status === 'dead' || r.status === 'broken').length;
+    el.innerHTML = `<div class="tiny-label">${esc(sync.player?.name || 'You')}</div><div class="party-row">${mine.map(([i, m]) => monChip('p:' + i, m)).join('')}</div>
+      ${sync.partner ? `<div class="tiny-label" style="margin-top:8px">${esc(sync.partner.name || 'Partner')}</div><div class="party-row">${theirs.map(([i, m]) => monChip('q:' + i, m)).join('') || '<span class="footnote">No party shared yet</span>'}</div>` : ''}
+      ${sl.length ? `<div class="footnote">Soul Link: ${alive} linked pair${alive === 1 ? '' : 's'} alive · ${dead} lost</div>` : ''}
+      <label class="check-line"><input type="checkbox" id="spoilers" ${state.spoilers === 'show' ? 'checked' : ''}> Show chapters past my badges</label>
+      <p class="footnote">Click a Pokémon to load it into the calculator.</p>`;
+    $('spoilers').onchange = () => { state.spoilers = $('spoilers').checked ? 'show' : 'hide'; save(); rerender(); renderChapters(); };
+  }
+  function loadSync(text, quiet) {
+    let v; try { v = validSync(JSON.parse(text)); } catch { v = null; }
+    if (!v) { toast('That file is not a guide sync from this campaign.'); return false; }
+    useSync(v, Date.now());
+    try { localStorage.setItem(SYNC, JSON.stringify(sync)); } catch {}
+    state.chapter = reached(); save();
+    renderSyncChip(); renderSyncPanel(); $('badges').value = state.badges; switchTab(currentTab);
+    if (!quiet) toast(`Loaded ${sync.player?.name || 'your game'}: ${badgeCount()} badges, ${sync.party.length} in the party${sync.partner ? ', partner included' : ''}${v.campaign && v.campaign !== D.meta.campaignVersion ? ' (game on ' + v.campaign + ', guide ' + D.meta.campaignVersion + ')' : ''}.`);
+    return true;
+  }
+  // Chrome / Edge: keep the file handle in IndexedDB so Reload is one click
+  const idb = (mode, fn) => new Promise((ok, fail) => {
+    try { const r = indexedDB.open('emerald-field-guide', 1); r.onupgradeneeded = () => r.result.createObjectStore('h'); r.onerror = () => fail(r.error);
+      r.onsuccess = () => { const tx = r.result.transaction('h', mode), q = fn(tx.objectStore('h')); tx.oncomplete = () => ok(q?.result); tx.onerror = () => fail(tx.error); }; } catch (e) { fail(e); }
+  });
+  async function readHandle(h) {
+    if ((await h.queryPermission?.({mode: 'read'})) !== 'granted' && (await h.requestPermission?.({mode: 'read'})) !== 'granted') throw Error('Permission to read the file was refused.');
+    return loadSync(await (await h.getFile()).text());
+  }
+  async function pickSync() {
+    $('sync-help').close();
+    if (!window.showOpenFilePicker) { $('sync-file').click(); return; }
+    try {
+      const [h] = await showOpenFilePicker({id: 'guide-sync', types: [{description: 'Guide sync', accept: {'application/octet-stream': ['.bin'], 'application/json': ['.json']}}]});
+      if (await readHandle(h)) { syncHandle = h; try { await idb('readwrite', st => st.put(h, 'sync')); } catch {} renderSyncChip(); }
+    } catch (e) { if (e.name !== 'AbortError') $('sync-file').click(); }
+  }
+  $('sync-load').onclick = async () => {
+    if (syncHandle) { try { await readHandle(syncHandle); return; } catch (e) { toast(e.message || 'Could not read the file again; choose it once more.'); } }
+    $('sync-help').showModal();
+  };
+  $('sync-pick').onclick = pickSync;
+  $('sync-help-close').onclick = () => $('sync-help').close();
+  $('sync-forget').onclick = () => { useSync(null); syncHandle = null; try { localStorage.removeItem(SYNC); idb('readwrite', st => st.delete('sync')).catch(() => {}); } catch {} $('sync-help').close(); renderSyncChip(); renderSyncPanel(); switchTab(currentTab); toast('The loaded game was forgotten.'); };
+  $('sync-file').onchange = async () => { const f = $('sync-file').files[0]; if (f) { if (f.size > 8e6) toast('That file is too large.'); else loadSync(await f.text()); } $('sync-file').value = ''; };
+  if (window.indexedDB) idb('readonly', st => st.get('sync')).then(h => { if (h) { syncHandle = h; renderSyncChip(); } }).catch(() => {});
+
   // trainer cards -------------------------------------------------------------------
   const chapterOf = {}, bossIds = new Set();
   G.forEach((c, ci) => { c.bosses.forEach(id => bossIds.add(id)); c.steps.forEach(s => s.trainers.forEach(id => { chapterOf[id] = ci; })); });
@@ -100,8 +196,8 @@
     const cap = capOf(t), story = isStory(t);
     const tags = [cap != null ? `<span class="pill cap">Cap ${cap}</span>` : '', story ? '<span class="pill boss">Story · alone</span>' : '',
       partner ? `<span class="pill tag">Tag battle + ${esc(partner.name)}</span>` : '', t.nativeDouble ? '<span class="pill">Double</span>' : '',
-      t.handpicked ? '<span class="pill hand">Hand-picked</span>' : '<span class="pill">Generated</span>'].join('');
-    return `<article class="panel trainer ${cap != null ? 'boss' : ''}"><div class="trainer-head">${icon(t.party[t.party.length - 1].species, '')}<div class="who"><h3>${esc(t.displayName)}</h3><div class="where">${esc(t.maps.map(m => m.name).join(' · ') || 'Location not mapped')}</div><div class="tags">${tags}</div></div>${t.maps[0] ? `<button class="button small" data-add-map="${esc(t.maps[0].id)}" data-note="${esc('Fight ' + t.displayName)}">+ Plan</button>` : ''}</div>
+      t.handpicked ? '<span class="pill hand">Hand-picked</span>' : '<span class="pill">Generated</span>', beaten(t) ? '<span class="pill won">Beaten ✓</span>' : ''].join('');
+    return `<article class="panel trainer ${cap != null ? 'boss' : ''} ${beaten(t) ? 'beaten' : ''}"><div class="trainer-head">${icon(t.party[t.party.length - 1].species, '')}<div class="who"><h3>${esc(t.displayName)}</h3><div class="where">${esc(t.maps.map(m => m.name).join(' · ') || 'Location not mapped')}</div><div class="tags">${tags}</div></div>${t.maps[0] ? `<button class="button small" data-add-map="${esc(t.maps[0].id)}" data-note="${esc('Fight ' + t.displayName)}">+ Plan</button>` : ''}</div>
       ${extra}${team(t)}${partner ? `<div class="partner-bar">+ Partner: ${esc(partner.displayName)}</div>${team(partner)}` : ''}</article>`;
   }
   // rivals: one card per meeting, showing the variant for the chosen starter + rival
@@ -134,6 +230,11 @@
       toast(`${t.displayName}’s ${name('species', m.species)} loaded as ${side === 'a' ? 'attacker' : 'defender'}.`);
       return;
     }
+    const sm = e.target.closest('[data-sync-mon]');
+    if (sm) { const m = syncMon(sm.dataset.syncMon); if (m) { state.a = structuredClone(m); chooseDefaultMove(); save(); switchTab('calculator'); window.scrollTo(0, 0); toast(`${m.nickname || name('species', m.species)} loaded as attacker.`); } return; }
+    if (e.target.closest('[data-sync-help]')) { $('sync-help').showModal(); return; }
+    const rv = e.target.closest('[data-reveal]');
+    if (rv) { state.revealed[rv.dataset.reveal] = true; save(); renderGuide(); return; }
     const add = e.target.closest('[data-add-map]');
     if (add) { addStop(add.dataset.addMap, add.dataset.note || ''); return; }
     const shop = e.target.closest('[data-shop]');
@@ -152,15 +253,23 @@
   function stepWild(s) { const m = stepMaps(s); return D.wild.filter(w => m.has(w.map)); }
   function stepSources(s) { const m = stepMaps(s); return D.sources.filter(x => x.map && m.has(x.map) && !/Mart|shop/i.test(x.kind)); }
   function stepShops(s) { const m = stepMaps(s); return D.shops.filter(x => x.map && m.has(x.map)); }
-  function chapterDone(ci) { return G[ci].steps.every((_, si) => state.guideDone[stepKey(ci, si)]); }
+  // a rival meeting counts once: any of its starter variants
+  const groupBeaten = g => g.t ? beaten(g.t) : Object.values(g.variants).some(beaten);
+  const stepBeaten = s => rivalGroups(s.trainers).filter(groupBeaten).length;
+  const stepDone = (ci, si) => { const s = G[ci].steps[si], n = rivalGroups(s.trainers).length; return !!state.guideDone[stepKey(ci, si)] || (!!sync && (ci < badgeCount() || n > 0 && stepBeaten(s) === n)); };
+  function chapterDone(ci) { return G[ci].steps.every((_, si) => stepDone(ci, si)); }
+  // Soul Link rows for the step's region-map sections
+  function stepLinks(s) { const secs = new Set(s.maps.map(m => D.maps[m]?.mapsec).filter(x => x != null)); return (sync?.soulLink?.rows || []).filter(r => secs.has(r.a)); }
+  const SL_STATE = {caught: 'caught', failed: 'missed', seen: 'met'};
+  function linkSide(x) { return x ? `${icon(x[1])}<span>${esc(x[3] || name('species', x[1]))}</span><small>${esc(SL_STATE[x[0]] || x[0])}</small>` : '<small class="muted">no encounter yet</small>'; }
   function renderRivalPicker() {
     $('rival-starter').innerHTML = STARTERS.map(([s, id]) => `<button data-rival-starter="${s}" class="${state.rival.starter === s ? 'active' : ''}" title="${esc(clean(s))}">${icon(id)}</button>`).join('');
     $('rival-gender').innerHTML = ['MAY', 'BRENDAN'].map(x => `<button data-rival-gender="${x}" class="${state.rival.gender === x ? 'active' : ''}">${x === 'MAY' ? 'May' : 'Brendan'}</button>`).join('');
   }
   function renderChapters() {
     $('chapters').innerHTML = G.map((c, ci) => {
-      const done = c.steps.filter((_, si) => state.guideDone[stepKey(ci, si)]).length;
-      return `<button class="chapter-link ${ci === state.chapter ? 'active' : ''} ${chapterDone(ci) ? 'done' : ''}" data-chapter="${ci}"><span class="num">${chapterDone(ci) ? '✓' : ci + 1}</span><b>${esc(c.title)}</b><span class="pill cap">${c.cap}</span><small>${done}/${c.steps.length} stops</small></button>`;
+      const done = c.steps.filter((_, si) => stepDone(ci, si)).length;
+      return `<button class="chapter-link ${ci === state.chapter ? 'active' : ''} ${chapterDone(ci) ? 'done' : ''} ${locked(ci) ? 'locked' : ''}" data-chapter="${ci}"><span class="num">${chapterDone(ci) ? '✓' : locked(ci) ? '🔒' : ci + 1}</span><b>${esc(c.title)}</b><span class="pill cap">${c.cap}</span><small>${done}/${c.steps.length} stops</small></button>`;
     }).join('');
     $('chapters').querySelectorAll('[data-chapter]').forEach(b => b.onclick = () => { state.chapter = +b.dataset.chapter; save(); renderGuide(); window.scrollTo(0, 0); });
   }
@@ -174,7 +283,9 @@
     const parts = [];
     if (s.trainers.length) parts.push(`<div><h4>Trainers · ${rivalGroups(s.trainers).length}</h4><div class="grid">${cards(s.trainers)}</div></div>`);
     if (wild.length) parts.push(`<div><h4>Wild Pokémon</h4>${wildBlock(wild)}</div>`);
-    if (src.length) parts.push(`<div><h4>Items · ${src.length}</h4><ul class="item-list">${src.map(x => `<li><b>${esc(name('items', x.item))}</b><small><span class="tag">${esc(x.kind)}</span>${esc(x.mapName)}${x.x != null ? ' · tile ' + x.x + ', ' + x.y : ''}</small></li>`).join('')}</ul></div>`);
+    const links = stepLinks(s);
+    if (links.length) parts.unshift(`<div><h4>Soul Link</h4><div class="links">${links.map(r => `<div class="link-row ${esc(r.status || '')}"><b>${esc(r.name || '')}</b><span class="side">${linkSide(r.mine)}</span><span class="side">${linkSide(r.theirs)}</span><span class="pill">${esc(r.status || '')}</span></div>`).join('')}</div></div>`);
+    if (src.length) parts.push(`<div><h4>Items · ${sync ? src.filter(pickedUp).length + '/' : ''}${src.length}</h4><ul class="item-list">${src.map(x => `<li class="${pickedUp(x) ? 'got' : ''}"><b>${pickedUp(x) ? '✓ ' : ''}${esc(name('items', x.item))}</b><small><span class="tag">${esc(x.kind)}</span>${esc(x.mapName)}${x.x != null ? ' · tile ' + x.x + ', ' + x.y : ''}</small></li>`).join('')}</ul></div>`);
     const tools = [`<button class="button small" data-add-map="${esc(s.primary || s.maps[0] || '')}" data-note="${esc(s.title + (s.note ? ' — ' + s.note : ''))}">+ Add to our plan</button>`];
     if (shops.length) tools.push(`<button class="button small" data-shop="${esc(shops[0].mapName)}">Shop stock: ${esc(shops.map(x => x.label || x.mapName).join(', '))} →</button>`);
     parts.push(`<div class="step-tools">${tools.join('')}</div>`);
@@ -184,13 +295,19 @@
     const ci = state.chapter, c = G[ci];
     const open = keepOpen ? new Set([...document.querySelectorAll('#chapter details[open]')].map(d => d.dataset.step)) : new Set();
     const bosses = c.bosses.map(id => trainerById[id]).filter(Boolean);
+    if (locked(ci)) {
+      $('chapter').innerHTML = `<section class="panel chapter-hero locked"><div><div class="kicker">Chapter ${ci + 1} of ${G.length}</div><h1>${esc(c.title)}</h1><p>You haven’t reached this chapter yet (${badgeCount()} badge${badgeCount() === 1 ? '' : 's'}). Its trainers, teams and items stay hidden until you do.</p><button class="button" data-reveal="${ci}">Show it anyway</button></div><div class="cap-box"><small>Level cap</small><strong>${c.cap}</strong></div></section>
+        <div class="toolbar" style="margin-top:14px">${ci > 0 ? `<button class="button" data-chapter-go="${ci - 1}">← ${esc(G[ci - 1].title)}</button>` : ''}</div>`;
+      $('chapter').querySelectorAll('[data-chapter-go]').forEach(b => b.onclick = () => { state.chapter = +b.dataset.chapterGo; save(); renderGuide(); window.scrollTo(0, 0); });
+      return;
+    }
     $('chapter').innerHTML = `<section class="panel chapter-hero"><div><div class="kicker">Chapter ${ci + 1} of ${G.length}</div><h1>${esc(c.title)}</h1><p>${esc(c.intro)}</p></div>
       <div class="cap-box"><small>Level cap</small><strong>${c.cap}</strong></div>
-      <div class="bosses">${bosses.map(t => { const top = t.party.reduce((a, m) => m.level >= a.level ? m : a); return `<span class="boss-chip" data-jump="${t.id}">${icon(top.species)}${esc(t.displayName.replace(/^Pkmn Trainer |^Pokémon Trainer /, ''))}<span class="lv">${top.level}</span></span>`; }).join('')}</div></section>
+      <div class="bosses">${bosses.map(t => { const top = t.party.reduce((a, m) => m.level >= a.level ? m : a); return `<span class="boss-chip ${beaten(t) ? 'won' : ''}" data-jump="${t.id}">${icon(top.species)}${esc(t.displayName.replace(/^Pkmn Trainer |^Pokémon Trainer /, ''))}<span class="lv">${top.level}</span></span>`; }).join('')}</div></section>
       <div class="steps">${c.steps.map((s, si) => {
         const wild = stepWild(s), mons = [...new Set(wild.flatMap(w => w.slots.map(x => x.species)))], items = stepSources(s).length;
-        const nTrainers = rivalGroups(s.trainers).length, done = !!state.guideDone[stepKey(ci, si)];
-        return `<details class="panel step ${done ? 'done' : ''}" data-step="${si}" ${open.has(String(si)) ? 'open' : ''}><summary><span class="step-num" data-done="${si}" title="Mark this stop done">${done ? '✓' : si + 1}</span><h3>${esc(s.title)}</h3><span class="step-counts">${nTrainers ? `<span class="pill">${nTrainers} trainer${nTrainers === 1 ? '' : 's'}</span>` : ''}${mons.length ? `<span class="pill">${mons.length} wild</span>` : ''}${items ? `<span class="pill">${items} item${items === 1 ? '' : 's'}</span>` : ''}</span>${s.note ? `<span class="step-note">${esc(s.note)}</span>` : ''}${mons.length ? `<span class="step-icons">${mons.slice(0, 16).map(id => icon(id)).join('')}</span>` : ''}</summary><div class="step-body">${open.has(String(si)) ? stepBody(ci, si) : ''}</div></details>`;
+        const nTrainers = rivalGroups(s.trainers).length, done = stepDone(ci, si), won = sync ? stepBeaten(s) : 0, nLinks = stepLinks(s).length;
+        return `<details class="panel step ${done ? 'done' : ''}" data-step="${si}" ${open.has(String(si)) ? 'open' : ''}><summary><span class="step-num" data-done="${si}" title="Mark this stop done">${done ? '✓' : si + 1}</span><h3>${esc(s.title)}</h3><span class="step-counts">${nTrainers ? `<span class="pill ${sync && won === nTrainers ? 'won' : ''}">${sync ? won + '/' : ''}${nTrainers} trainer${nTrainers === 1 ? '' : 's'}</span>` : ''}${nLinks ? `<span class="pill link">${nLinks} link${nLinks === 1 ? '' : 's'}</span>` : ''}${mons.length ? `<span class="pill">${mons.length} wild</span>` : ''}${items ? `<span class="pill">${items} item${items === 1 ? '' : 's'}</span>` : ''}</span>${s.note ? `<span class="step-note">${esc(s.note)}</span>` : ''}${mons.length ? `<span class="step-icons">${mons.slice(0, 16).map(id => icon(id)).join('')}</span>` : ''}</summary><div class="step-body">${open.has(String(si)) ? stepBody(ci, si) : ''}</div></details>`;
       }).join('')}</div>
       <div class="toolbar" style="margin-top:14px;justify-content:space-between">${ci > 0 ? `<button class="button" data-chapter-go="${ci - 1}">← ${esc(G[ci - 1].title)}</button>` : '<span></span>'}${ci < G.length - 1 ? `<button class="button primary" data-chapter-go="${ci + 1}">${esc(G[ci + 1].title)} →</button>` : ''}</div>`;
     const root = $('chapter');
@@ -202,7 +319,7 @@
       if (d) { d.open = true; d.scrollIntoView({behavior: 'smooth'}); }
     });
   }
-  function renderGuide() { renderChapters(); renderRivalPicker(); renderChapter(false); }
+  function renderGuide() { renderChapters(); renderRivalPicker(); renderSyncPanel(); renderChapter(false); }
 
   // trainers tab --------------------------------------------------------------------
   let trainerLimit = 20, wildLimit = 24, itemLimit = 24;
@@ -212,8 +329,9 @@
   const trainerOrder = [...trainers].sort((a, b) => (chapterOf[a.id] ?? 99) - (chapterOf[b.id] ?? 99) || Math.max(...a.party.map(m => m.level)) - Math.max(...b.party.map(m => m.level)) || a.id - b.id);
   function renderTrainers() {
     const query = norm($('trainer-search').value), filter = $('trainer-filter').value, chapter = $('trainer-chapter').value;
-    const found = trainerOrder.filter(t => (!query || trainerIndex.get(t.id).includes(query)) && (filter !== 'authored' || t.handpicked) && (filter !== 'boss' || isStory(t)) && (chapter === '' || chapterOf[t.id] === +chapter));
-    $('trainer-count').textContent = `${found.length} trainers · ${Math.min(trainerLimit, found.length)} shown · in story order`;
+    const hidden = trainerOrder.filter(t => locked(chapterOf[t.id] ?? -1)).length;
+    const found = trainerOrder.filter(t => !locked(chapterOf[t.id] ?? -1) && (!query || trainerIndex.get(t.id).includes(query)) && (filter !== 'authored' || t.handpicked) && (filter !== 'boss' || isStory(t)) && (chapter === '' || chapterOf[t.id] === +chapter));
+    $('trainer-count').textContent = `${found.length} trainers · ${Math.min(trainerLimit, found.length)} shown · in story order${hidden ? ` · ${hidden} past your badges hidden` : ''}`;
     $('trainer-results').innerHTML = found.slice(0, trainerLimit).map(t => trainerCard(t)).join('') || empty('No trainers found', 'Try a trainer name, place, or Pokémon.');
     $('trainer-more').hidden = found.length <= trainerLimit;
   }
@@ -267,6 +385,7 @@
     const abilityRows = [[0, 'No ability'], ...sp.abilities.filter(x => x > 0).map(id => [id, name('abilities', id)])];
     if (m.ability && !abilityRows.some(r => r[0] === m.ability)) abilityRows.push([m.ability, name('abilities', m.ability)]);
     return `<div class="combatant-head"><span class="seat"><b>${isA ? 'A' : 'B'}</b>${isA ? 'ATTACKER' : 'DEFENDER'}</span><div>${typePills(sp.types)}</div></div>
+     ${sync ? `<label class="field">From your game<select data-from-game="${side}"><option value="">Choose a Pokémon…</option>${(() => { const groups = {}; for (const [k, label, mm] of syncMons()) (groups[label] ||= []).push(`<option value="${k}">${esc((mm.nickname && mm.nickname !== name('species', mm.species).toUpperCase() ? mm.nickname + ' · ' : '') + name('species', mm.species))} Lv${mm.level}</option>`); return Object.entries(groups).map(([l, o]) => `<optgroup label="${esc(l)}">${o.join('')}</optgroup>`).join(''); })()}</select></label>` : ''}
      <div class="form-grid species-row">${icon(m.species, 'big')}<label class="field">Pokémon<input data-mon="${side}" data-key="species" list="species-list" value="${esc(name('species', m.species))}" autocomplete="off"></label><label class="field">Level<input data-mon="${side}" data-key="level" type="number" min="1" max="100" value="${m.level}"></label></div>
      <div class="form-grid"><label class="field">Ability<select data-mon="${side}" data-key="ability">${options(abilityRows, m.ability)}</select></label><label class="field">Held item<input data-mon="${side}" data-key="item" list="item-list" value="${m.item ? esc(name('items', m.item)) : ''}" placeholder="No item"></label></div>
      <div class="form-grid three"><label class="field">Nature<select data-mon="${side}" data-key="nature">${options(Object.entries(D.natures).map(([id, n]) => [id, n.name]), m.nature)}</select></label><label class="field">Current HP<input data-mon="${side}" data-key="hp" type="number" min="1" max="${st.hp}" value="${m.hp ?? st.hp}" title="Maximum HP: ${st.hp}"></label><label class="field">Status<select data-mon="${side}" data-key="status">${options([['', 'Healthy'], ['BRN', 'Burn'], ['PAR', 'Paralysis'], ['PSN', 'Poison'], ['TOX', 'Bad poison'], ['SLP', 'Sleep'], ['FRZ', 'Freeze']], m.status)}</select></label></div>
@@ -287,6 +406,7 @@
       if (side === 'a' && k === 'species') chooseDefaultMove();
       renderCalc(); save();
     }));
+    document.querySelectorAll('[data-from-game]').forEach(el => el.addEventListener('change', () => { const m = syncMon(el.value); if (!m) return; state[el.dataset.fromGame] = structuredClone(m); if (el.dataset.fromGame === 'a') chooseDefaultMove(); renderCalc(); save(); }));
     document.querySelectorAll('[data-edit]').forEach(el => el.addEventListener('toggle', () => { state[el.dataset.edit].editOpen = el.open; save(); }));
   }
   function chooseDefaultMove() { const found = (state.a.moves || []).find(id => D.moves[id]?.category !== 'status'); if (found) state.move = found; syncSpread(); }
@@ -395,7 +515,8 @@
   $('about-footer').onclick = $('about-open').onclick = () => $('about').showModal(); $('about-close').onclick = () => $('about').close();
   document.querySelector('.brand').onclick = e => { e.preventDefault(); switchTab('guide'); };
 
-  updatePlanBadge(); switchTab(location.hash.slice(1) || 'guide');
+  if (sync) $('badges').value = state.badges;
+  renderSyncChip(); updatePlanBadge(); switchTab(location.hash.slice(1) || 'guide');
   // A small explicit test surface for the offline browser smoke harness.
-  window.GuideTest = {get state() { return state; }, data: D, addStop, addChapter, renderCalc, renderRoute, renderGuide, switchTab, validatePlan, lookup};
+  window.GuideTest = {get state() { return state; }, get sync() { return sync; }, loadSync, data: D, addStop, addChapter, renderCalc, renderRoute, renderGuide, switchTab, validatePlan, lookup};
 })();

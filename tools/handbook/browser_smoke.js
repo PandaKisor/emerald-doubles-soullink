@@ -5,7 +5,9 @@
  try{
   const G=window.GuideTest;ok(G,'Guide boots from a local HTML file');
   if(params.has('preview')){
-   const view=params.get('preview');G.state.chapter=Number(params.get('chapter')||0);G.switchTab(view);
+   const view=params.get('preview');
+   if(params.has('sync')){const v=JSON.parse(window.syncSample),c=G.data.routeGuide[0];v.flags.push(...c.steps.slice(0,6).flatMap(s=>s.trainers).map(id=>0x500+id),...G.data.sources.filter(x=>x.flag&&c.steps[3].maps.includes(x.map)).slice(0,1).map(x=>x.flag));G.loadSync(JSON.stringify(v),true);}
+   G.state.chapter=Number(params.get('chapter')||0);G.switchTab(view);
    if(view==='guide')for(const i of (params.get('open')||'').split(',').filter(Boolean)){const d=document.querySelector(`details[data-step="${i}"]`);d.open=true;d.dispatchEvent(new Event('toggle'));}
    if(view==='route'){G.addChapter(0);change(document.querySelector('[data-stop-key="mine"]'),'Treecko','input');change(document.querySelector('[data-stop-key="partner"]'),'Torchic','input');}
    if(view==='trainers'){change($('trainer-filter'),'authored');}
@@ -13,6 +15,7 @@
   }
   if(sessionStorage.getItem('smokeReload')){
    ok(G.state.plan.name==='Shared Hoenn plan','Plan name survives reload');
+   ok(G.sync&&G.sync.player.name,'The loaded game survives reload');
    ok(G.state.plan.stops.some(s=>s.mine==='Treecko'&&s.partner==='Torchic'),'Both players’ encounter notes survive reload');
    checks.push(...JSON.parse(sessionStorage.getItem('smokeChecks')));sessionStorage.removeItem('smokeReload');
    G.switchTab('calculator');
@@ -66,6 +69,28 @@
    window.confirm=()=>true;await $('import-file').onchange();
    ok(G.state.plan.stops[0].mine==='Treecko'&&G.state.plan.stops[0].partner==='Torchic','Import restores both players and route');
    let rejected=false;try{G.validatePlan({format:'emerald-field-guide-plan',schema:1,plan:{stops:[{map:'bogus'}]}});}catch{rejected=true;}ok(rejected,'Invalid imported map is rejected');
+   // game sync: the snapshot verify_campaign_qol.lua wrote, plus a beaten Roxanne and one picked-up item
+   const snap=JSON.parse(window.syncSample),rox=G.data.trainers.find(t=>t.symbol==='TRAINER_ROXANNE_1');
+   const ch0=G.data.routeGuide[0],itemStep=ch0.steps.findIndex(s=>G.data.sources.some(x=>x.flag&&s.maps.includes(x.map))),item=G.data.sources.find(x=>x.flag&&ch0.steps[itemStep].maps.includes(x.map));
+   snap.flags.push(item.flag,...ch0.steps.find(s=>s.trainers.includes(rox.id)).trainers.map(id=>0x500+id));
+   const linkStep=ch0.steps.findIndex(s=>s.maps.some(m=>G.data.maps[m].mapsec===snap.soulLink.rows[0].a));
+   ok(G.loadSync(JSON.stringify(snap))&&G.sync.party.length===1,'Load a game sync file');
+   ok(!G.loadSync('{"format":"nope"}'),'A foreign file is refused');
+   ok($('sync-chip').textContent.includes('1 badge'),'Header shows the loaded game');
+   G.switchTab('guide');ok(G.state.chapter===1,'Guide jumps to the chapter you are on');
+   ok(document.querySelector('#chapters [data-chapter="0"] .num').textContent==='✓','Chapters with their badge are done');
+   document.querySelector('#chapters [data-chapter="3"]').click();ok($('chapter').textContent.includes('reached this chapter yet')&&!$('chapter').querySelector('.trainer'),'Chapters past your badges stay hidden');
+   $('chapter').querySelector('[data-reveal]').click();ok(document.querySelector('#chapter details.step'),'Reveal a hidden chapter');
+   G.switchTab('trainers');change($('trainer-search'),'','input');ok($('trainer-count').textContent.includes('past your badges hidden'),'Trainer list hides spoilers');
+   G.switchTab('guide');document.querySelector('#chapters [data-chapter="0"]').click();
+   const roxStep=ch0.steps.findIndex(s=>s.trainers.includes(rox.id)),rd=document.querySelector(`details[data-step="${roxStep}"]`);rd.open=true;rd.dispatchEvent(new Event('toggle'));
+   ok(rd.querySelector('.trainer.beaten .pill.won'),'Beaten trainers are marked');ok(rd.querySelector('.step-num').textContent==='✓','A stop with every trainer beaten is done');
+   const idd=document.querySelector(`details[data-step="${itemStep}"]`);idd.open=true;idd.dispatchEvent(new Event('toggle'));ok(idd.querySelector('.item-list li.got'),'Picked-up items are ticked');
+   const ld=document.querySelector(`details[data-step="${linkStep}"]`);ld.open=true;ld.dispatchEvent(new Event('toggle'));ok(ld.querySelector('.link-row')&&ld.textContent.includes('ZIGGY'),'Soul Link pairs show on their stop');
+   ok(document.querySelectorAll('#sync-panel .party-mon').length===2,'Both players’ parties are listed');
+   document.querySelector('#sync-panel [data-sync-mon="p:0"]').click();ok(G.state.a.species===snap.party[0][0]&&G.state.a.ivs.spa===snap.party[0][8]&&G.state.a.evs.spe===snap.party[0][16],'A party Pokémon loads into the calculator with its IVs and EVs');
+   ok(document.querySelector('[data-from-game="d"] option[value="q:0"]'),'Calculator offers both players’ Pokémon');
+   change(document.querySelector('[data-from-game="d"]'),'q:0');ok(G.state.d.species===snap.partner.party[0][0],'Load the partner’s Pokémon as defender');
    ok(!errors.length,'No runtime errors');
    sessionStorage.setItem('smokeChecks',JSON.stringify(checks));sessionStorage.setItem('smokeReload','1');location.reload();return;
   }
