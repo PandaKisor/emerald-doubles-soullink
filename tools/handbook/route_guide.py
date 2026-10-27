@@ -55,6 +55,8 @@ CHAPTERS = [
      ['DAISY', 'AMY_AND_LIV_1', 'MIGUEL_1', 'ANDREW', 'MARCOS', 'RHETT']),
     ('Mauville City', ['MAUVILLE_CITY*'], 'Wally challenges you at the gym door (alone, cap 21). Get a bike here.'),
     ('Cycling Road', ['ROUTE110'], 'The bike path over Route 110.'),
+    ('Route 118 (west)', ['ROUTE118'], 'East of Mauville, no Surf needed. The east bank comes later.',
+     ['WADE', 'DEANDRE', 'ROSE_1', 'DALTON_1']),
     ('Route 117', ['ROUTE117'], 'The Day Care is here.'),
     ('Verdanturf Town', ['VERDANTURF_TOWN*'], 'Rusturf Tunnel’s east side.'),
     ('Route 111 (south)', ['ROUTE111', 'ROUTE111_*'], 'South of the rocks, and the Winstrates’ four battles in a row.',

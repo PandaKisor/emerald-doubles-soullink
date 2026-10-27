@@ -92,7 +92,10 @@ def check():
         abil = {D['abilities'][str(a)]['symbol'][8:] for a in sp['abilities'] if a}
         if ab and ab.group(1) not in abil:
             print(f'{name} {level}: ability {ab.group(1)} not one of {sorted(abil)}'); bad += 1
-        for mv in re.findall(r'"([A-Z0-9_]+)"', m.group(3)):
+        listed = re.findall(r'"([A-Z0-9_]+)"', m.group(3))
+        if len(set(listed)) != len(listed):
+            print(f'{name} {level}: repeats a move {listed}'); bad += 1
+        for mv in listed:
             if MSYM.get(mv) not in lvl | other:
                 print(f'{name} {level}: {mv} not learnable'); bad += 1
     print(f'{bad} unlearnable move(s)')
