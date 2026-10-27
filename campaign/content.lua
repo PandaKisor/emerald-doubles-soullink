@@ -42,6 +42,7 @@ return function(mod, active)
     end
   end
   local trainers = source("campaign/trainers.lua")(mod, data, teams, active)
+  local partnerNpcs = source("campaign/partner_npcs.lua")(mod, trainers, active)
   local world = source("campaign/item_world.lua")(mod, data, source("campaign/item_sources.lua"), active)
 
   Content.install(Pokemon, data, active)
@@ -97,5 +98,5 @@ return function(mod, active)
     Version = require("src.core.GameVersion"), SaveFileIO = require("src.import.SaveFileIO"),
     SaveConvert = require("src.save_convert.SaveConvert") }, data, active)
   return { content = data, save = Save, active = active, learnsets = gate, moves = moves, trainers = trainers, world = world,
-    battleMoves = battleMoves, candy = candy, repel = repel, heal = heal, partyTools = partyTools, starterKit = starterKit, guideSync = guideSync, footprints = footprints }
+    battleMoves = battleMoves, candy = candy, repel = repel, heal = heal, partyTools = partyTools, starterKit = starterKit, guideSync = guideSync, footprints = footprints, partnerNpcs = partnerNpcs }
 end
