@@ -242,6 +242,11 @@ local back = require('src.link.Json').decode(body)
 T.eq(back and back.party[1][1], F.species('TREECKO'), 'the file decodes')
 -- the field guide's browser smoke test loads this exact file
 do local f = io.open('../porting/native/generated/handbook/guide-sync-sample.json', 'wb') if f then f:write(body) f:close() end end
+-- Pokédex footprints for the new species (0.38.1)
+T.check(F.campaign.footprints and F.campaign.footprints.count() > 300, 'new species have Inclement footprints')
+-- Devon 3F: Mr. Stone's renamed gift gives Inclement's Scope Lens (0.38.1)
+local devon = W.sources.gifts['g3:08212595']
+T.eq(devon and devon[tostring(F.ids.items.ITEM_EXP_SHARE)], 'ITEM_SCOPE_LENS', 'Mr. Stone gives a Scope Lens')
 SD.setCart(nil)
 T.check(not R.enabled(s), 'repel is scoped to the campaign cart')
 T.check(not C.grant(s), 'candy grant is scoped to the campaign cart')

@@ -5,8 +5,8 @@ item placements, gifts and shop stock, matched onto vanilla Emerald's.
                   vanilla one left over takes the nearest unpaired Inclement
                   one on its map, up to 5 tiles away
   gifts           a vanilla script (same label) handing out a different item,
-                  or a gym's TM gift Inclement renamed (GiveAerialAce ->
-                  GiveRoost)
+                  or a gift Inclement renamed on the same map (GiveAerialAce ->
+                  GiveRoost, GiveExpShare -> GiveScopeLens)
   marts           town marts sell Inclement's badge-tier stock plus the town's
                   own Inclement stock; specialty shops take the Inclement list
                   on the same map that overlaps them most
@@ -113,6 +113,15 @@ for g in vanilla['gifts']:
     cands = [l for l, its in gift_labels.items() if l not in vanilla_labels and len(its) == 1 and is_tm(its[0])
              and GIVE.match(l) and GIVE.match(l).group(1) == m.group(1) and GIVE.match(l).group(2) == m.group(2)]
     if len(cands) == 1: renamed[g['label']] = cands[0]
+# any other single-item gift Inclement renamed on the same map, when only one
+# renamed candidate exists there (Devon 3F: GiveExpShare -> GiveScopeLens)
+taken = set(renamed.values())
+for g in vanilla['gifts']:
+    m = GIVE.match(g['label'])
+    if g['label'] in gift_labels or g['label'] in renamed or not m or len(g['items']) != 1: continue
+    cands = [l for l, its in gift_labels.items() if l not in vanilla_labels and l not in taken and len(its) == 1
+             and GIVE.match(l) and GIVE.match(l).group(1) == m.group(1) and GIVE.match(l).group(2) == m.group(2)]
+    if len(cands) == 1: renamed[g['label']] = cands[0]; taken.add(cands[0])
 gifts, gift_count = {}, 0
 vanilla_gift_labels = set(renamed.values())
 for g in vanilla['gifts']:

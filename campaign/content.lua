@@ -89,6 +89,7 @@ return function(mod, active)
     mod.path .. "/full/inventory-ui", active)
   source("campaign/wild.lua")(require("src.core.game3.encounters"), data, source("campaign/wild_maps.lua"), active)
   source("campaign/dex.lua")(require("src.ui.game3.rse.mapsec"), Pokemon, source("campaign/dex_entries.lua"), active)
+  local footprints = source("campaign/footprints.lua")(require("src.ui.game3.rse.scene_kit"), source("campaign/footprint_data.lua"), active)
 
   local SD = require("src.core.SaveData")
   local Save = source("full/save.lua")
@@ -96,5 +97,5 @@ return function(mod, active)
     Version = require("src.core.GameVersion"), SaveFileIO = require("src.import.SaveFileIO"),
     SaveConvert = require("src.save_convert.SaveConvert") }, data, active)
   return { content = data, save = Save, active = active, learnsets = gate, moves = moves, trainers = trainers, world = world,
-    battleMoves = battleMoves, candy = candy, repel = repel, heal = heal, partyTools = partyTools, starterKit = starterKit, guideSync = guideSync }
+    battleMoves = battleMoves, candy = candy, repel = repel, heal = heal, partyTools = partyTools, starterKit = starterKit, guideSync = guideSync, footprints = footprints }
 end

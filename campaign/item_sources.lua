@@ -125,6 +125,9 @@ return {
     ["g3:0820dfb1"] = {
       ["322"] = "ITEM_TM72_VOLT_SWITCH"
     },
+    ["g3:08212595"] = {
+      ["182"] = "ITEM_SCOPE_LENS"
+    },
     ["g3:08216646"] = {
       ["328"] = "ITEM_TM51_ROOST"
     },
@@ -266,12 +269,12 @@ return {
       ["label"] = "MauvilleCity_Mart_EventScript_Clerk"
     },
     ["g3:08214f30"] = {
-      ["extra"] = { "ITEM_REPEAT_BALL", "ITEM_TIMER_BALL", "ITEM_NEST_BALL", "ITEM_SCOPE_LENS", "ITEM_FLOAT_STONE", "ITEM_TM98_FALSE_SWIPE", "ITEM_TM80_VENOSHOCK", "ITEM_TM86_GRASS_KNOT", "ITEM_BIG_ROOT", "ITEM_INSECT_PLATE" },
+      ["extra"] = { "ITEM_REPEAT_BALL", "ITEM_TIMER_BALL", "ITEM_NEST_BALL", "ITEM_FLOAT_STONE", "ITEM_TM98_FALSE_SWIPE", "ITEM_TM80_VENOSHOCK", "ITEM_TM86_GRASS_KNOT", "ITEM_BIG_ROOT", "ITEM_INSECT_PLATE" },
       ["kind"] = "general",
       ["label"] = "RustboroCity_Mart_EventScript_PokemartBasic"
     },
     ["g3:08214f58"] = {
-      ["extra"] = { "ITEM_REPEAT_BALL", "ITEM_TIMER_BALL", "ITEM_NEST_BALL", "ITEM_SCOPE_LENS", "ITEM_FLOAT_STONE", "ITEM_TM98_FALSE_SWIPE" },
+      ["extra"] = { "ITEM_REPEAT_BALL", "ITEM_TIMER_BALL", "ITEM_NEST_BALL", "ITEM_FLOAT_STONE", "ITEM_TM98_FALSE_SWIPE" },
       ["kind"] = "general",
       ["label"] = "RustboroCity_Mart_EventScript_PokemartExpanded"
     },
