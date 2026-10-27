@@ -877,6 +877,138 @@ return {
       { "LARVESTA", 28, ability = "FLAME_BODY", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "FLAME_CHARGE", "BUG_BITE", "STRING_SHOT", "FLAME_WHEEL" } },
       { "TORKOAL", 29, ability = "DROUGHT", nature = "MODEST", spread = "stank", item = "SITRUS_BERRY", moves = { "LAVA_PLUME", "CLEAR_SMOG", "PROTECT", "YAWN" } },
     } },
+    -- Chapter 5: Lavaridge to Norman (draft 1, 2026-10-27; cap 31) --------------------
+    -- Route 111 north of the desert (met on the way to Fallarbor): tag battles at 22-23
+    TRAVIS = { partner = "R111N_ROY", party = {
+      { "GOLETT", 22, ability = "IRON_FIST", nature = "ADAMANT", item = "HARD_STONE", moves = { "SHADOW_PUNCH", "MUD_SLAP", "DEFENSE_CURL", "ROLLOUT" } },
+      { "PIDGEOTTO", 22, ability = "BIG_PECKS", nature = "JOLLY", item = "SHARP_BEAK", moves = { "AIR_CUTTER", "QUICK_ATTACK", "FEATHER_DANCE", "GUST" } },
+    } },
+    IRENE = { partner = "R111N_ADA", party = {
+      { "PHANTUMP", 22, ability = "NATURAL_CURE", nature = "IMPISH", spread = "bulk", item = "ORAN_BERRY", moves = { "ASTONISH", "LEECH_SEED", "CONFUSE_RAY", "FEINT_ATTACK" } },
+      { "AZUMARILL", 22, ability = "HUGE_POWER", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "AQUA_JET", "ROLLOUT", "HELPING_HAND", "DEFENSE_CURL" } },
+    } },
+    WILTON_1 = { partner = "R111N_ZED", party = {
+      { "HONEDGE", 23, ability = "NO_GUARD", nature = "ADAMANT", item = "ORAN_BERRY", moves = { "SHADOW_SNEAK", "FURY_CUTTER", "METAL_SOUND", "AERIAL_ACE" } },
+      { "GIBLE", 22, ability = "ROUGH_SKIN", nature = "JOLLY", item = "SOFT_SAND", moves = { "DRAGON_RAGE", "SAND_TOMB", "SLASH", "SAND_ATTACK" } },
+      { "SOLOSIS", 22, ability = "MAGIC_GUARD", nature = "MODEST", spread = "spa", item = "ORAN_BERRY", moves = { "PSYBEAM", "RECOVER", "CHARM", "PROTECT" } },
+    } },
+    BROOKE_1 = { partner = "R111N_MAY", party = {
+      { "MONFERNO", 23, ability = "IRON_FIST", nature = "JOLLY", item = "CHARCOAL", moves = { "MACH_PUNCH", "FLAME_WHEEL", "FAKE_OUT", "TAUNT" } },
+      { "SHELLOS", 22, ability = "STORM_DRAIN", nature = "BOLD", spread = "bulk", item = "ORAN_BERRY", moves = { "MUD_BOMB", "WATER_PULSE", "RECOVER", "HIDDEN_POWER" } },
+      { "ROSELIA", 22, ability = "NATURAL_CURE", nature = "MODEST", spread = "spa", item = "MIRACLE_SEED", moves = { "GIGA_DRAIN", "MAGICAL_LEAF", "STUN_SPORE", "LEECH_SEED" } },
+    } },
+    DAISUKE = { partner = "R111N_KEN", party = {
+      { "TIMBURR", 23, ability = "GUTS", nature = "ADAMANT", item = "FLAME_ORB", moves = { "ROCK_THROW", "MACH_PUNCH", "LOW_KICK", "BULK_UP" } },
+      { "MAKUHITA", 22, ability = "THICK_FAT", nature = "ADAMANT", spread = "tank", item = "ORAN_BERRY", moves = { "FAKE_OUT", "FORCE_PALM", "KNOCK_OFF", "ARM_THRUST" } },
+    } },
+    -- Trick House 2 (after the Dynamo Badge): tag battles at 24-25
+    PAUL = { partner = "TH2_OLI", party = {
+      { "SALANDIT", 24, ability = "CORROSION", nature = "TIMID", spread = "spa", item = "CHARCOAL", moves = { "FLAME_BURST", "SMOG", "DRAGON_RAGE", "SWEET_SCENT" } },
+      { "FOONGUS", 25, ability = "REGENERATOR", nature = "BOLD", spread = "bulk", item = "ORAN_BERRY", moves = { "MEGA_DRAIN", "FEINT_ATTACK", "STUN_SPORE", "ASTONISH" } },
+    } },
+    TED = { partner = "TH2_ABI", party = {
+      { "KIRLIA", 25, ability = "TRACE", nature = "MODEST", spread = "spa", item = "TWISTED_SPOON", moves = { "DRAINING_KISS", "PSYBEAM", "DISARMING_VOICE", "HYPNOSIS" } },
+      { "MEOWTH", 24, ability = "TECHNICIAN", nature = "JOLLY", item = "ORAN_BERRY", moves = { "FAKE_OUT", "FURY_SWIPES", "BITE", "TAUNT" } },
+    } },
+    GEORGIA = { partner = "TH2_ZAC", party = {
+      { "CLEFAIRY", 24, ability = "FRIEND_GUARD", nature = "BOLD", spread = "bulk", item = "ORAN_BERRY", moves = { "FOLLOW_ME", "DISARMING_VOICE", "ENCORE", "SING" } },
+      { "BEAUTIFLY", 25, ability = "SWARM", nature = "MODEST", spread = "spa", item = "SILVER_POWDER", moves = { "SILVER_WIND", "MEGA_DRAIN", "ATTRACT", "STUN_SPORE" } },
+    } },
+    -- Route 111 desert: tag battles at 27-28 in the sandstorm
+    DUSTY_1 = { partner = "DES_RAE", party = {
+      { "GOLETT", 27, ability = "IRON_FIST", nature = "ADAMANT", item = "HARD_STONE", moves = { "SHADOW_PUNCH", "BULLDOZE", "DEFENSE_CURL", "ROLLOUT" } },
+      { "SIGILYPH", 28, ability = "MAGIC_GUARD", nature = "TIMID", spread = "spa", item = "ORAN_BERRY", moves = { "PSYBEAM", "AIR_CUTTER", "TAILWIND", "REFLECT" } },
+      { "SHIELDON", 27, ability = "STURDY", nature = "IMPISH", spread = "bulk", item = "ORAN_BERRY", moves = { "IRON_DEFENSE", "ANCIENT_POWER", "PROTECT", "TAUNT" } },
+    } },
+    DREW = { partner = "DES_HAL", party = {
+      { "SANDSLASH", 28, ability = "SAND_RUSH", nature = "ADAMANT", item = "SOFT_SAND", moves = { "BULLDOZE", "CRUSH_CLAW", "RAPID_SPIN", "ROLLOUT" } },
+      { "CACNEA", 27, ability = "SAND_VEIL", nature = "MODEST", spread = "spa", item = "MIRACLE_SEED", moves = { "NEEDLE_ARM", "PIN_MISSILE", "LEECH_SEED", "SAND_ATTACK" } },
+    } },
+    BEAU = { partner = "DES_IKE", party = {
+      { "AMBIPOM", 28, ability = "TECHNICIAN", nature = "JOLLY", item = "SILK_SCARF", moves = { "FAKE_OUT", "FURY_SWIPES", "SWIFT", "BATON_PASS" } },
+      { "VULLABY", 27, ability = "OVERCOAT", nature = "BOLD", spread = "bulk", item = "ORAN_BERRY", moves = { "AIR_CUTTER", "PLUCK", "KNOCK_OFF", "TAILWIND" } },
+    } },
+    HEIDI = { partner = "DES_FLO", party = {
+      { "MUDBRAY", 28, ability = "STAMINA", nature = "ADAMANT", item = "SOFT_SAND", moves = { "BULLDOZE", "ROCK_SMASH", "DOUBLE_KICK", "IRON_DEFENSE" } },
+      { "GLOOM", 27, ability = "CHLOROPHYLL", nature = "MODEST", spread = "spa", item = "MIRACLE_SEED", moves = { "GIGA_DRAIN", "ACID", "SLEEP_POWDER", "STUN_SPORE" } },
+    } },
+    BECKY = { partner = "DES_LEA", party = {
+      { "SNOVER", 28, ability = "SNOW_WARNING", nature = "MODEST", spread = "spa", item = "NEVER_MELT_ICE", moves = { "ICY_WIND", "RAZOR_LEAF", "MIST", "ICE_SHARD" } },
+      { "PSYDUCK", 27, ability = "CLOUD_NINE", nature = "MODEST", spread = "spa", item = "ORAN_BERRY", moves = { "WATER_PULSE", "CONFUSION", "DISABLE", "FURY_SWIPES" } },
+    } },
+    CELIA = { partner = "DES_NIA", party = {
+      { "IVYSAUR", 28, ability = "CHLOROPHYLL", nature = "MODEST", spread = "spa", item = "MIRACLE_SEED", moves = { "RAZOR_LEAF", "SLEEP_POWDER", "LEECH_SEED", "POISON_POWDER" } },
+      { "LOMBRE", 27, ability = "SWIFT_SWIM", nature = "MODEST", spread = "spa", item = "ORAN_BERRY", moves = { "FAKE_OUT", "MEGA_DRAIN", "BUBBLE", "KNOCK_OFF" } },
+    } },
+    BRYAN = { partner = "DES_OTT", party = {
+      { "YAMASK", 27, ability = "MUMMY", nature = "BOLD", spread = "bulk", item = "ORAN_BERRY", moves = { "HEX", "WILL_O_WISP", "DISABLE", "PROTECT" } },
+      { "TYRUNT", 28, ability = "STRONG_JAW", nature = "ADAMANT", item = "ORAN_BERRY", moves = { "BITE", "ROCK_TOMB", "STOMP", "DRAGON_TAIL" } },
+    } },
+    BRANDEN = { partner = "DES_GIL", party = {
+      { "FARFETCHD", 28, ability = "SUPER_LUCK", nature = "JOLLY", item = "LEEK", moves = { "AERIAL_ACE", "SLASH", "FURY_CUTTER", "KNOCK_OFF" } },
+      { "LEAFEON", 27, ability = "LEAF_GUARD", nature = "JOLLY", item = "MIRACLE_SEED", moves = { "RAZOR_LEAF", "QUICK_ATTACK", "BITE", "SYNTHESIS" } },
+    } },
+    -- Trick House 3 (after the Heat Badge): tag battles at 27-28
+    JUSTIN = { partner = "TH3_MO", party = {
+      { "KECLEON", 28, ability = "PROTEAN", nature = "ADAMANT", item = "ORAN_BERRY", moves = { "SHADOW_SNEAK", "FEINT_ATTACK", "ANCIENT_POWER", "FURY_SWIPES" } },
+      { "SLOWPOKE", 27, ability = "REGENERATOR", nature = "RELAXED", spread = "bulk", item = "ORAN_BERRY", moves = { "CONFUSION", "WATER_PULSE", "YAWN", "DISABLE" } },
+      { "SANDSLASH_ALOLAN", 27, ability = "SNOW_CLOAK", nature = "ADAMANT", item = "NEVER_MELT_ICE", moves = { "ICE_SHARD", "METAL_CLAW", "RAPID_SPIN", "DEFENSE_CURL" } },
+    } },
+    MARTHA = { partner = "TH3_BO", party = {
+      { "MEOWSTIC_FEMALE", 28, ability = "COMPETITIVE", nature = "MODEST", spread = "spa", item = "TWISTED_SPOON", moves = { "PSYBEAM", "FAKE_OUT", "DISARMING_VOICE", "LIGHT_SCREEN" } },
+      { "SKIDDO", 27, ability = "SAP_SIPPER", nature = "ADAMANT", item = "MIRACLE_SEED", moves = { "RAZOR_LEAF", "BULLDOZE", "LEECH_SEED", "GROWTH" } },
+      { "CLEFAIRY", 27, ability = "FRIEND_GUARD", nature = "BOLD", spread = "bulk", item = "ORAN_BERRY", moves = { "FOLLOW_ME", "DISARMING_VOICE", "ENCORE", "SING" } },
+    } },
+    ALAN = { partner = "TH3_AL", party = {
+      { "CUBONE", 28, ability = "ROCK_HEAD", nature = "ADAMANT", item = "THICK_CLUB", moves = { "BONE_CLUB", "HEADBUTT", "FALSE_SWIPE", "FOCUS_ENERGY" } },
+      { "PROBOPASS", 28, ability = "STURDY", nature = "IMPISH", spread = "bulk", item = "ORAN_BERRY", moves = { "ROCK_TOMB", "THUNDER_WAVE", "BLOCK", "SPARK" } },
+      { "ARON", 27, ability = "STURDY", nature = "IMPISH", spread = "tank", item = "ORAN_BERRY", moves = { "METAL_CLAW", "ROCK_TOMB", "HEADBUTT", "PROTECT" } },
+    } },
+    -- Petalburg Gym: trainers fight alone with three
+    RANDALL = { tier = "gym", party = {
+      { "SWELLOW", 29, ability = "GUTS", nature = "JOLLY", item = "FLAME_ORB", moves = { "FACADE", "AERIAL_ACE", "QUICK_ATTACK", "PROTECT" } },
+      { "LOPUNNY", 28, ability = "LIMBER", nature = "JOLLY", item = "ORAN_BERRY", moves = { "CIRCLE_THROW", "QUICK_ATTACK", "BABY_DOLL_EYES", "BOUNCE" } },
+      { "DEERLING", 28, ability = "SAP_SIPPER", nature = "JOLLY", item = "ORAN_BERRY", moves = { "TAKE_DOWN", "DOUBLE_KICK", "LEECH_SEED", "CAMOUFLAGE" } },
+    } },
+    PARKER = { tier = "gym", party = {
+      { "SPINDA", 28, ability = "CONTRARY", nature = "JOLLY", item = "ORAN_BERRY", moves = { "FAKE_OUT", "PSYBEAM", "DIZZY_PUNCH", "HYPNOSIS" } },
+      { "STANTLER", 29, ability = "INTIMIDATE", nature = "ADAMANT", item = "ORAN_BERRY", moves = { "STOMP", "TAKE_DOWN", "HYPNOSIS", "CONFUSE_RAY" } },
+      { "GIRAFARIG", 28, ability = "SAP_SIPPER", nature = "MODEST", spread = "spa", item = "TWISTED_SPOON", moves = { "PSYBEAM", "STOMP", "AGILITY", "BATON_PASS" } },
+    } },
+    GEORGE = { tier = "gym", party = {
+      { "CHANSEY", 29, ability = "NATURAL_CURE", nature = "BOLD", spread = "bulk", item = "EVIOLITE", moves = { "SOFT_BOILED", "HELPING_HAND", "CHARM", "SING" } },
+      { "DUNSPARCE", 28, ability = "SERENE_GRACE", nature = "ADAMANT", spread = "tank", item = "ORAN_BERRY", moves = { "ANCIENT_POWER", "BODY_SLAM", "ROLLOUT", "YAWN" } },
+      { "PORYGON", 28, ability = "TRACE", nature = "MODEST", spread = "spa", item = "EVIOLITE", moves = { "SIGNAL_BEAM", "PSYBEAM", "RECOVER", "THUNDER_WAVE" } },
+    } },
+    BERKE = { tier = "gym", party = {
+      { "LICKITUNG", 28, ability = "OWN_TEMPO", nature = "ADAMANT", spread = "tank", item = "ORAN_BERRY", moves = { "ROLLOUT", "KNOCK_OFF", "STOMP", "DEFENSE_CURL" } },
+      { "MUNCHLAX", 29, ability = "THICK_FAT", nature = "ADAMANT", spread = "tank", item = "ORAN_BERRY", moves = { "BODY_SLAM", "BITE", "CHIP_AWAY", "RECYCLE" } },
+      { "TEDDIURSA", 28, ability = "QUICK_FEET", nature = "ADAMANT", item = "SILK_SCARF", moves = { "COVET", "FEINT_ATTACK", "FURY_SWIPES", "FAKE_TEARS" } },
+    } },
+    MARY = { tier = "gym", party = {
+      { "RUFFLET", 28, ability = "HUSTLE", nature = "JOLLY", item = "SHARP_BEAK", moves = { "AERIAL_ACE", "FURY_ATTACK", "HONE_CLAWS", "TAILWIND" } },
+      { "RATICATE_ALOLAN", 28, ability = "HUSTLE", nature = "ADAMANT", item = "ORAN_BERRY", moves = { "HYPER_FANG", "BITE", "QUICK_ATTACK", "FOCUS_ENERGY" } },
+      { "DRAMPA", 29, ability = "BERSERK", nature = "MODEST", spread = "spa", item = "ORAN_BERRY", moves = { "DRAGON_BREATH", "ECHOED_VOICE", "GLARE", "TWISTER" } },
+    } },
+    ALEXIA = { tier = "gym", party = {
+      { "MUNCHLAX", 28, ability = "THICK_FAT", nature = "ADAMANT", spread = "tank", item = "ORAN_BERRY", moves = { "BODY_SLAM", "BITE", "CHIP_AWAY", "RECYCLE" } },
+      { "FURFROU", 28, ability = "FUR_COAT", nature = "JOLLY", item = "SILK_SCARF", moves = { "HEADBUTT", "BITE", "BABY_DOLL_EYES", "SAND_ATTACK" } },
+      { "MILTANK", 29, ability = "THICK_FAT", nature = "IMPISH", spread = "bulk", item = "ORAN_BERRY", moves = { "STOMP", "ROLLOUT", "MILK_DRINK", "DEFENSE_CURL" } },
+    } },
+    JODY = { tier = "gym", party = {
+      { "ZANGOOSE", 29, ability = "TOXIC_BOOST", nature = "JOLLY", item = "TOXIC_ORB", moves = { "SLASH", "QUICK_ATTACK", "FURY_CUTTER", "HONE_CLAWS" } },
+      { "BOUFFALANT", 28, ability = "SAP_SIPPER", nature = "ADAMANT", item = "ORAN_BERRY", moves = { "HEADBUTT", "REVENGE", "PURSUIT", "FOCUS_ENERGY" } },
+      { "PORYGON", 28, ability = "TRACE", nature = "MODEST", spread = "spa", item = "EVIOLITE", moves = { "SIGNAL_BEAM", "PSYBEAM", "RECOVER", "THUNDER_WAVE" } },
+    } },
+    -- Norman: six, alone (2-vs-1); Vigoroth is the ace at the cap
+    NORMAN_1 = { tier = "leader", party = {
+      { "KANGASKHAN", 30, ability = "SCRAPPY", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "FAKE_OUT", "DOUBLE_HIT", "SUCKER_PUNCH", "PROTECT" } },
+      { "LINOONE", 29, ability = "QUICK_FEET", nature = "ADAMANT", item = "SILK_SCARF", moves = { "EXTREME_SPEED", "HEADBUTT", "COVET", "PROTECT" } },
+      { "LOUDRED", 29, ability = "SCRAPPY", nature = "MODEST", spread = "spa", item = "ORAN_BERRY", moves = { "HYPER_VOICE", "BITE", "STOMP", "SUPERSONIC" } },
+      { "SWELLOW", 30, ability = "GUTS", nature = "JOLLY", item = "FLAME_ORB", moves = { "FACADE", "AERIAL_ACE", "QUICK_ATTACK", "PROTECT" } },
+      { "TAUROS", 30, ability = "INTIMIDATE", nature = "ADAMANT", item = "ORAN_BERRY", moves = { "ROCK_SLIDE", "ZEN_HEADBUTT", "HORN_ATTACK", "SCARY_FACE" } },
+      { "VIGOROTH", 31, ability = "VITAL_SPIRIT", nature = "ADAMANT", item = "EVIOLITE", moves = { "SLASH", "FEINT_ATTACK", "SLACK_OFF", "BULK_UP" } },
+    } },
   },
 
   partners = {
@@ -1289,6 +1421,83 @@ return {
     JP_GUS = { like = "ETHAN_1", name = "WALT", defeat = "Cold camp tonight.", party = {
       { "TORKOAL", 25, ability = "WHITE_SMOKE", nature = "RELAXED", spread = "tank", item = "ORAN_BERRY", moves = { "FLAME_WHEEL", "SMOKESCREEN", "CURSE", "PROTECT" } },
       { "SPINDA", 25, ability = "OWN_TEMPO", nature = "ADAMANT", item = "ORAN_BERRY", moves = { "FEINT_ATTACK", "DIZZY_PUNCH", "PSYBEAM", "HYPNOSIS" } },
+    } },
+    -- Chapter 5: Lavaridge to Norman (draft 1, 2026-10-27; cap 31): partners ----------------------------------------
+    R111N_ROY = { like = "TRAVIS", name = "ROY", defeat = "Dusty boots, dusty loss.", party = {
+      { "SANDSHREW", 22, ability = "SAND_RUSH", nature = "JOLLY", item = "SOFT_SAND", moves = { "RAPID_SPIN", "FURY_CUTTER", "SAND_TOMB", "DEFENSE_CURL" } },
+      { "SWABLU", 22, ability = "NATURAL_CURE", nature = "CALM", spread = "spdef", item = "ORAN_BERRY", moves = { "DISARMING_VOICE", "PECK", "SING", "MIST" } },
+    } },
+    R111N_ADA = { like = "IRENE", name = "ADA", defeat = "Oh, my picnic!", party = {
+      { "CHERUBI", 22, ability = "CHLOROPHYLL", nature = "MODEST", spread = "spa", item = "ORAN_BERRY", moves = { "MAGICAL_LEAF", "HELPING_HAND", "LEECH_SEED", "MORNING_SUN" } },
+      { "PICHU", 22, ability = "STATIC", nature = "TIMID", spread = "spa", item = "ORAN_BERRY", moves = { "NUZZLE", "THUNDER_SHOCK", "SWEET_KISS", "CHARM" } },
+    } },
+    R111N_ZED = { like = "WILTON_1", name = "ZED", defeat = "Cool under pressure, still lost.", party = {
+      { "DUSKULL", 22, ability = "LEVITATE", nature = "BOLD", spread = "bulk", item = "ORAN_BERRY", moves = { "NIGHT_SHADE", "WILL_O_WISP", "CONFUSE_RAY", "DISABLE" } },
+      { "AXEW", 23, ability = "MOLD_BREAKER", nature = "ADAMANT", item = "ORAN_BERRY", moves = { "DRAGON_RAGE", "BITE", "ASSURANCE", "TAUNT" } },
+    } },
+    R111N_MAY = { like = "BROOKE_1", name = "MAYA", defeat = "We were so in sync, too.", party = {
+      { "STARYU", 22, ability = "NATURAL_CURE", nature = "TIMID", spread = "spa", item = "ORAN_BERRY", moves = { "BUBBLE_BEAM", "SWIFT", "RECOVER", "THUNDER_WAVE" } },
+      { "SKIPLOOM", 22, ability = "INFILTRATOR", nature = "TIMID", spread = "spa", item = "ORAN_BERRY", moves = { "BULLET_SEED", "STUN_SPORE", "LEECH_SEED", "FAIRY_WIND" } },
+    } },
+    R111N_KEN = { like = "DAISUKE", name = "KENJI", defeat = "Osu! Respect.", party = {
+      { "MACHOP", 22, ability = "NO_GUARD", nature = "ADAMANT", item = "BLACK_BELT", moves = { "KARATE_CHOP", "LOW_SWEEP", "REVENGE", "ROCK_TOMB" } },
+      { "MEDITITE", 22, ability = "PURE_POWER", nature = "JOLLY", item = "ORAN_BERRY", moves = { "FAKE_OUT", "FORCE_PALM", "CONFUSION", "DETECT" } },
+    } },
+    TH2_OLI = { like = "PAUL", name = "OLI", defeat = "Lost in here AND lost the battle.", party = {
+      { "HORSEA", 24, ability = "SNIPER", nature = "MODEST", spread = "spa", item = "SCOPE_LENS", moves = { "BUBBLE_BEAM", "TWISTER", "SMOKESCREEN", "FOCUS_ENERGY" } },
+      { "PIKACHU", 24, ability = "STATIC", nature = "JOLLY", item = "LIGHT_BALL", moves = { "SPARK", "NUZZLE", "FEINT", "QUICK_ATTACK" } },
+    } },
+    TH2_ABI = { like = "TED", name = "ABI", defeat = "The Trick Master would laugh at us.", party = {
+      { "SPOINK", 24, ability = "THICK_FAT", nature = "MODEST", spread = "spa", item = "TWISTED_SPOON", moves = { "PSYBEAM", "CONFUSE_RAY", "MAGIC_COAT", "POWER_GEM" } },
+      { "LEDIAN", 25, ability = "EARLY_BIRD", nature = "JOLLY", item = "ORAN_BERRY", moves = { "MACH_PUNCH", "SILVER_WIND", "REFLECT", "LIGHT_SCREEN" } },
+    } },
+    TH2_ZAC = { like = "GEORGIA", name = "ZAC", defeat = "We got tricked by you!", party = {
+      { "VOLBEAT", 24, ability = "PRANKSTER", nature = "IMPISH", spread = "bulk", item = "ORAN_BERRY", moves = { "STRUGGLE_BUG", "TAIL_GLOW", "CONFUSE_RAY", "MOONLIGHT" } },
+      { "ILLUMISE", 24, ability = "PRANKSTER", nature = "BOLD", spread = "bulk", item = "ORAN_BERRY", moves = { "STRUGGLE_BUG", "CHARM", "MOONLIGHT", "PLAY_NICE" } },
+    } },
+    DES_RAE = { like = "DUSTY_1", name = "RAE", defeat = "The ruins keep their secrets.", party = {
+      { "BALTOY", 27, ability = "LEVITATE", nature = "BOLD", spread = "bulk", item = "ORAN_BERRY", moves = { "PSYBEAM", "MUD_SLAP", "ROCK_TOMB", "REFLECT" } },
+      { "HIPPOPOTAS", 27, ability = "SAND_STREAM", nature = "IMPISH", spread = "tank", item = "SOFT_SAND", moves = { "BULLDOZE", "BITE", "YAWN", "SAND_TOMB" } },
+    } },
+    DES_HAL = { like = "DREW", name = "HAL", defeat = "Buried in sand!", party = {
+      { "TRAPINCH", 28, ability = "ARENA_TRAP", nature = "ADAMANT", item = "SOFT_SAND", moves = { "BULLDOZE", "BITE", "SAND_TOMB", "FEINT_ATTACK" } },
+      { "HIPPOPOTAS", 27, ability = "SAND_STREAM", nature = "IMPISH", spread = "tank", item = "ORAN_BERRY", moves = { "BULLDOZE", "BITE", "YAWN", "SAND_TOMB" } },
+    } },
+    DES_IKE = { like = "BEAU", name = "IKE", defeat = "Sandblasted.", party = {
+      { "DRILBUR", 27, ability = "SAND_RUSH", nature = "JOLLY", item = "SOFT_SAND", moves = { "METAL_CLAW", "BULLDOZE", "RAPID_SPIN", "HONE_CLAWS" } },
+      { "SHELLOS", 28, ability = "STORM_DRAIN", nature = "BOLD", spread = "bulk", item = "ORAN_BERRY", moves = { "MUD_BOMB", "WATER_PULSE", "RECOVER", "HIDDEN_POWER" } },
+    } },
+    DES_FLO = { like = "HEIDI", name = "FLO", defeat = "Goggles fogged up, sorry!", party = {
+      { "MARACTUS", 28, ability = "WATER_ABSORB", nature = "MODEST", spread = "spa", item = "MIRACLE_SEED", moves = { "GIGA_DRAIN", "PIN_MISSILE", "SYNTHESIS", "SWEET_SCENT" } },
+      { "SANDILE", 27, ability = "INTIMIDATE", nature = "ADAMANT", item = "SOFT_SAND", moves = { "BULLDOZE", "BITE", "SAND_TOMB", "TORMENT" } },
+    } },
+    DES_LEA = { like = "BECKY", name = "LEA", defeat = "Too hot, too cold, too strong.", party = {
+      { "SKIPLOOM", 27, ability = "INFILTRATOR", nature = "TIMID", spread = "spa", item = "ORAN_BERRY", moves = { "BULLET_SEED", "STUN_SPORE", "LEECH_SEED", "FAIRY_WIND" } },
+      { "CACNEA", 28, ability = "SAND_VEIL", nature = "MODEST", spread = "spa", item = "MIRACLE_SEED", moves = { "NEEDLE_ARM", "PIN_MISSILE", "LEECH_SEED", "SAND_ATTACK" } },
+    } },
+    DES_NIA = { like = "CELIA", name = "NIA", defeat = "The desert dried out our hopes.", party = {
+      { "SANDSHREW", 27, ability = "SAND_RUSH", nature = "JOLLY", item = "SOFT_SAND", moves = { "RAPID_SPIN", "FURY_CUTTER", "SAND_TOMB", "DEFENSE_CURL" } },
+      { "HIPPOPOTAS", 27, ability = "SAND_STREAM", nature = "IMPISH", spread = "tank", item = "ORAN_BERRY", moves = { "BULLDOZE", "BITE", "YAWN", "SAND_TOMB" } },
+    } },
+    DES_OTT = { like = "BRYAN", name = "OTTO", defeat = "Unearthed and defeated.", party = {
+      { "ANORITH", 28, ability = "BATTLE_ARMOR", nature = "ADAMANT", item = "HARD_STONE", moves = { "ANCIENT_POWER", "FURY_CUTTER", "METAL_CLAW", "PROTECT" } },
+      { "LILEEP", 27, ability = "STORM_DRAIN", nature = "CALM", spread = "spdef", item = "ORAN_BERRY", moves = { "ANCIENT_POWER", "MEGA_DRAIN", "CONFUSE_RAY", "INGRAIN" } },
+    } },
+    DES_GIL = { like = "BRANDEN", name = "GILL", defeat = "Lost in the dunes.", party = {
+      { "SANDILE", 28, ability = "INTIMIDATE", nature = "ADAMANT", item = "SOFT_SAND", moves = { "BULLDOZE", "BITE", "SAND_TOMB", "TORMENT" } },
+      { "SANDSLASH", 27, ability = "SAND_RUSH", nature = "ADAMANT", item = "ORAN_BERRY", moves = { "BULLDOZE", "CRUSH_CLAW", "RAPID_SPIN", "ROLLOUT" } },
+    } },
+    TH3_MO = { like = "JUSTIN", name = "MO", defeat = "I can see the exit from here!", party = {
+      { "NUMEL", 27, ability = "SIMPLE", nature = "MODEST", spread = "spa", item = "CHARCOAL", moves = { "FLAME_BURST", "EMBER", "AMNESIA", "MAGNITUDE" } },
+      { "SWABLU", 27, ability = "NATURAL_CURE", nature = "CALM", spread = "spdef", item = "ORAN_BERRY", moves = { "DISARMING_VOICE", "PECK", "SING", "MIST" } },
+    } },
+    TH3_BO = { like = "MARTHA", name = "BOE", defeat = "Third time is not a charm.", party = {
+      { "GLAMEOW", 27, ability = "LIMBER", nature = "JOLLY", item = "ORAN_BERRY", moves = { "FAKE_OUT", "FURY_SWIPES", "FEINT_ATTACK", "CHARM" } },
+      { "SPOINK", 28, ability = "THICK_FAT", nature = "MODEST", spread = "spa", item = "TWISTED_SPOON", moves = { "PSYBEAM", "CONFUSE_RAY", "MAGIC_COAT", "POWER_GEM" } },
+    } },
+    TH3_AL = { like = "ALAN", name = "AL", defeat = "Hard as rock, soft as sand.", party = {
+      { "GRAVELER", 28, ability = "STURDY", nature = "ADAMANT", item = "HARD_STONE", moves = { "ROCK_TOMB", "BULLDOZE", "ROLLOUT", "DEFENSE_CURL" } },
+      { "MACHOKE", 27, ability = "GUTS", nature = "ADAMANT", item = "FLAME_ORB", moves = { "KARATE_CHOP", "REVENGE", "ROCK_TOMB", "BULK_UP" } },
     } },
   },
 }

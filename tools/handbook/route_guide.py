@@ -63,8 +63,9 @@ CHAPTERS = [
   ]),
   ('Mauville to Flannery', ['TABITHA_MT_CHIMNEY', 'MAXIE_MT_CHIMNEY', 'FLANNERY_1'],
    'North through Fallarbor, then up Mt. Chimney after Team Magma.', [
-    ('Route 111 (north)', ['ROUTE111'], 'Rock Smash opens the north. The desert needs Go-Goggles (later).',
-     ['GABBY_AND_TY_1']),
+    ('Route 111 (north)', ['ROUTE111'], 'North of the desert, on the way to Route 113. The desert itself needs Go-Goggles (later).',
+     ['GABBY_AND_TY_1', 'TRAVIS', 'IRENE', 'WILTON_1', 'BROOKE_1', 'DAISUKE']),
+    ('Trick House 2', ['ROUTE110_TRICK_HOUSE_PUZZLE2'], 'Opens after the Dynamo Badge.'),
     ('Route 112', ['ROUTE112'], 'The cable car is blocked until after Route 114.', ['LARRY', 'CAROL', 'BRICE', 'TRENT_1', 'BRYANT', 'SHAYLA']),
     ('Fiery Path', ['FIERY_PATH'], ''),
     ('Route 113', ['ROUTE113', 'ROUTE113_*'], 'Ash grass: collect ash for the Glass Workshop.'),
@@ -80,7 +81,7 @@ CHAPTERS = [
   ('Lavaridge to Norman', ['NORMAN_1'],
    'Go-Goggles open the desert. Then home to face your father.', [
     ('Route 111 (desert)', ['ROUTE111', 'DESERT_UNDERPASS', 'MIRAGE_TOWER*'], 'Sandstorm all the way. Pick a fossil at Mirage Tower.'),
-    ('Trick Houses 2 and 3', ['ROUTE110_TRICK_HOUSE_PUZZLE2', 'ROUTE110_TRICK_HOUSE_PUZZLE3'], 'Need Rock Smash and Strength.'),
+    ('Trick House 3', ['ROUTE110_TRICK_HOUSE_PUZZLE3'], 'Opens after the Heat Badge.'),
     ('New Mauville', ['NEW_MAUVILLE*'], 'Optional: the generator under Route 110 (Surf).'),
     ('Petalburg Gym', ['PETALBURG_CITY_GYM'], 'Rooms by stat theme; trainers fight alone with three.'),
   ]),
