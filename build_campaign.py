@@ -25,7 +25,7 @@ CAMPAIGN = HERE / "campaign"
 
 MOD_ID = "g3_campaign"
 TITLE = "Emerald Doubles Soul Link"
-VERSION = "0.37.0"
+VERSION = "0.38.0"
 CART_ID = "emerald_doubles_soullink"
 COOP_ID, COOP_VERSION = "g3_coop", "0.8.6"
 # GitHub repos the launcher checks for updates and the release cart downloads from

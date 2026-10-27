@@ -6,55 +6,33 @@
 <body>
 <header class="top"><div class="top-inner">
  <a class="brand" href="#guide"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 2 29 11 24 29H8L3 11Z" fill="#14a073"/><path d="M16 2 22 11 16 29 10 11Z" fill="#46d39f"/><path d="M3 11h26L16 2Z" fill="#7ce8bf"/><path d="M10 11 16 29 8 29 3 11Z" fill="#0d7a57"/></svg><div><b>Emerald Field Guide</b><span>Doubles · Soul Link · <span id="version"></span></span></div></a>
- <div class="top-tools"><span class="sync-chip" id="sync-chip"></span><button class="button small primary" id="sync-load" title="Load guide-sync.bin from your game">Load game</button><span class="save-state" id="save-state">Saved on this browser</span><button class="button small" id="theme-toggle" title="Switch light / dark">◐ Theme</button><button class="button small" id="about-open">About</button></div>
- <nav class="tabs" aria-label="Guide sections">
-  <button data-tab="guide" class="active">Route guide</button>
-  <button data-tab="trainers">Trainers</button>
-  <button data-tab="wild">Wild Pokémon</button>
-  <button data-tab="items">Items</button>
-  <button data-tab="calculator">Damage calc</button>
-  <button data-tab="route">Our plan <b id="route-count">0</b></button>
- </nav>
+ <label class="search global-search"><input id="search" type="search" placeholder="Search trainers, places, Pokémon, items…" aria-label="Search the guide" autocomplete="off"></label>
+ <div class="top-tools"><span class="sync-chip" id="sync-chip"></span><button class="button small primary" id="sync-load" title="Load guide-sync.bin from your game">Load game</button><button class="button small" id="calc-open" title="Open the damage calculator">Calculator</button><button class="button small" id="theme-toggle" title="Switch light / dark">◐</button><button class="button small" id="about-open">About</button></div>
 </div></header>
 <main>
  <section id="guide" class="page active" aria-label="Route guide">
   <div class="guide">
-   <aside><nav class="chapters" id="chapters" aria-label="Chapters"></nav>
+   <aside class="guide-side"><nav class="chapters" id="chapters" aria-label="Chapters"></nav>
     <div class="panel sync-panel" id="sync-panel"></div>
+    <div class="panel roster-panel" id="roster-panel"></div>
     <div class="panel rival-picker"><div class="tiny-label">Rival battles show</div>
      <div>Your starter</div><div class="segmented" id="rival-starter"></div>
      <div style="margin-top:8px">Your rival</div><div class="segmented" id="rival-gender"></div>
      <p class="footnote">In co-op the rival’s team follows the host’s starter.</p></div>
+    <div class="panel notes-panel"><div class="tiny-label">Your notes</div><p class="footnote" id="save-state">Saved on this browser</p><div class="toolbar tight"><button class="button small" id="export-notes">Export ↓</button><button class="button small" id="import-notes">Import ↑</button></div><p class="footnote">Notes, planned encounters and both teams. Send the export with this file to your partner.</p></div>
    </aside>
    <div id="chapter"></div>
+   <aside id="battle" class="battle-panel" aria-label="Battle plan" hidden></aside>
   </div>
  </section>
 
- <section id="trainers" class="page" aria-labelledby="trainers-title">
-  <div class="page-head"><div><div class="kicker">Every fight in the campaign</div><h1 id="trainers-title">Trainer teams</h1><p>Teams, held items, abilities and the tag partner who joins each route trainer. Spoilers ahead.</p></div></div>
-  <div class="toolbar"><label class="search"><input id="trainer-search" type="search" placeholder="Trainer, place or Pokémon…" aria-label="Search trainer teams"></label>
-   <label class="field inline">Show<select id="trainer-filter"><option value="all">All trainers</option><option value="boss">Bosses & story fights</option><option value="authored">Hand-picked teams</option></select></label>
-   <label class="field inline">Chapter<select id="trainer-chapter"><option value="">Any</option></select></label></div>
-  <p class="count" id="trainer-count"></p><div id="trainer-results" class="grid"></div><button id="trainer-more" class="button more">Show more trainers</button>
- </section>
-
- <section id="wild" class="page" aria-labelledby="wild-title">
-  <div class="page-head"><div><div class="kicker">Make your encounter count</div><h1 id="wild-title">Wild Pokémon</h1><p>Encounter tables by area and method. Search an area or a Pokémon you want to link.</p></div></div>
-  <div class="notice">Your starter counts as Littleroot’s encounter. Birch’s rescue and Wally’s borrowed Zigzagoon don’t use one.</div>
-  <div class="toolbar"><label class="search"><input id="wild-search" type="search" placeholder="Area or Pokémon…" aria-label="Search wild encounters"></label><label class="field inline">Method<select id="wild-method"><option value="">Every method</option></select></label></div>
-  <p class="count" id="wild-count"></p><div id="wild-results" class="wild-group"></div><button id="wild-more" class="button more">Show more areas</button>
-  <p class="footnote">Percentages are base slot weights, before Repel, lead abilities, story gates, outbreaks, roamers or Feebas tiles. They are not per-step odds.</p>
- </section>
-
- <section id="items" class="page" aria-labelledby="items-title">
-  <div class="page-head"><div><div class="kicker">Pack for the road ahead</div><h1 id="items-title">Items</h1><p>Item balls, hidden items, gifts and shop stock for this build.</p></div></div>
-  <div class="toolbar"><label class="search"><input id="item-search" type="search" placeholder="Item, effect or place…" aria-label="Search item locations"></label><label class="field inline">Badges<select id="badges"></select></label><label class="field inline">Source<select id="item-kind"></select></label></div>
-  <p class="count" id="item-count"></p><div id="item-results" class="grid"></div><button id="item-more" class="button more">Show more items</button>
-  <p class="footnote">Coordinates are map tiles (x, y). Shops show stock at the selected badge count.</p>
+ <section id="results" class="page" aria-label="Search results">
+  <div class="page-head"><div><div class="kicker">Search</div><h1 id="results-title">Results</h1><p id="results-note"></p></div><button class="button" id="search-clear">← Back to the route guide</button></div>
+  <div id="results-body"></div>
  </section>
 
  <section id="calculator" class="page" aria-labelledby="calculator-title">
-  <div class="page-head"><div><div class="kicker">Before you commit</div><h1 id="calculator-title">Damage calculator</h1><p>This campaign’s stats, moves and damage rules, one hit at a time. Load any trainer’s Pokémon from its card.</p></div><button class="button" id="swap-sides">Swap sides ⇄</button></div>
+  <div class="page-head"><div><div class="kicker">Before you commit</div><h1 id="calculator-title">Damage calculator</h1><p>This campaign’s stats, moves and damage rules, one hit at a time. Load any trainer’s Pokémon from the battle plan, or your own from the team panel.</p></div><div class="toolbar tight"><button class="button" id="calc-back">← Route guide</button><button class="button" id="swap-sides">Swap sides ⇄</button></div></div>
   <div class="battle-grid"><article class="panel combatant" id="attacker-card"></article><article class="panel combatant enemy" id="defender-card"></article></div>
   <div class="calc-bottom"><div><article class="panel"><div class="panel-head"><h2>Attack</h2><span class="muted">All supported moves</span></div><label class="field">Move<input id="move-input" list="move-list" autocomplete="off"></label><div id="move-quick" class="chips"></div><div id="move-facts"></div></article>
    <article class="panel"><div class="panel-head"><h2>Field</h2><button class="text-button" id="reset-field">Reset</button></div><div class="form-grid three">
@@ -65,16 +43,9 @@
    <article class="panel result-panel" id="result" aria-live="polite"></article></div>
   <p class="footnote">Direct-hit estimates. Ability triggers, ally effects, accuracy and full turns aren’t simulated; each result lists its assumptions.</p>
  </section>
-
- <section id="route" class="page" aria-labelledby="route-title">
-  <div class="page-head"><div><div class="kicker">Your run, your notes</div><h1 id="route-title">Our plan</h1><p>Your own list of stops with both players’ planned encounters. Share it with your partner as a plan file.</p></div><div class="toolbar" style="margin:0"><button class="button" id="import-plan">Import ↑</button><button class="button" id="export-route">Export ↓</button></div></div>
-  <div class="route-layout"><div><div class="panel route-toolbar"><label class="field">Plan name<input id="plan-name" maxlength="120" placeholder="Our Hoenn run"></label><div class="progress-line"><span id="plan-progress"></span><button class="text-button" id="clear-completed">Remove completed</button></div><div class="progress-track"><div id="plan-bar"></div></div></div><div id="route-stops"></div></div>
-  <aside class="route-side"><article class="panel"><div class="tiny-label">Add a stop</div><label class="field">Location<input id="route-map" list="map-list" placeholder="Route or town…"></label><button class="button primary full" id="add-stop">Add to plan +</button><div class="divider"></div><div class="tiny-label">From the route guide</div><label class="field">Chapter<select id="plan-chapter"></select></label><button class="button full" id="add-chapter">Add chapter’s stops</button></article>
-  <article class="panel"><h2>Plan the pair</h2><p class="footnote">Record each player’s encounter per stop, add reminders, and tick stops off. Plans live in this browser; export before moving to another device.</p></article></aside></div>
- </section>
 </main>
 <footer>Emerald Doubles Soul Link · stock Gen1Recomp 0.3.73 · an offline companion, everything is inside this file. <button class="text-button" id="about-footer">About &amp; limits</button></footer>
-<datalist id="species-list"></datalist><datalist id="move-list"></datalist><datalist id="item-list"></datalist><datalist id="map-list"></datalist>
+<datalist id="species-list"></datalist><datalist id="move-list"></datalist><datalist id="item-list"></datalist>
 <input type="file" id="import-file" accept=".json,application/json" hidden><input type="file" id="sync-file" accept=".bin,.json" hidden>
 <div id="toast" role="status"></div>
 <dialog id="about"><div class="panel-head"><h2>About this guide</h2><button class="button small" id="about-close">Close</button></div><div id="about-content"></div></dialog>
