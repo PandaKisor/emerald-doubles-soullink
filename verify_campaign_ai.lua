@@ -11,6 +11,9 @@ local AI=assert(Moves._campaignField.ai,'AI module installed')
 local items=F.ids.items
 require('src.import.gba.trainer_extract').run(F.rom,require('src.core.game3.dataset').cache(),{game='emerald'})
 local Trainers=require('src.core.game3.scripting.trainers')
+-- trainer item effects come from the ROM's item table
+require('src.import.gba.items_extract').run(F.rom,require('src.core.game3.dataset').cache(),{game='emerald'})
+do local ID=require('src.core.game3.items_data'); ID._pack,ID._byId,ID._byName=nil,nil,nil end
 local C=require('src.core.game3.constants').of('emerald')
 local TRAINER=assert(C.trainers.byName.TRAINER_ROXANNE_1)
 local abilityIds={}
@@ -197,4 +200,52 @@ print=print0
 T.check(#errors==0,'no AI errors in whole battles ('..#errors..')')
 T.check((AI.picks or 0)>=8,'the campaign AI made the foes\' picks ('..tostring(AI.picks)..')')
 for _,e in ipairs(errors) do print('   '..e) end
+-- smarter targeting (0.39.0)
+check('focus fire on the foe that hurts',{{'MEW',level=50,moves={'SPLASH'}},{'MEW',level=50,moves={'SHADOW_BALL'}}},{{'MEW',level=50,moves={'TACKLE'}},{'MEW',level=50,moves={'TACKLE'}}},
+  function(a) return a.target==2 end)
+check('a Raichu that cannot touch it may switch to Pidgeot: Stone Edge, not Drill Run',
+  {{'RAICHU',level=30,moves={'THUNDERBOLT'}},{'SNORLAX',level=60,moves={'SPLASH'}},{'PIDGEOT',level=30,moves={'GUST'}}},
+  {{'GOLEM',level=60,moves={'DRILL_RUN','STONE_EDGE'}},{'SANDSLASH',level=60,moves={'SPLASH'}}},
+  function(a) return a.move=='Stone Edge' and a.target==0 end)
+check('no hedge while the Raichu can hurt it: Drill Run',
+  {{'RAICHU',level=30,moves={'SURF'}},{'SNORLAX',level=60,moves={'SPLASH'}},{'PIDGEOT',level=30,moves={'GUST'}}},
+  {{'GOLEM',level=60,moves={'DRILL_RUN','STONE_EDGE'}},{'SANDSLASH',level=60,moves={'SPLASH'}}},
+  function(a) return a.move=='Drill Run' and a.target==0 end)
+-- trainer items: Gen 3 picks one, the campaign spends it only when it pays (0.39.0)
+local function bag(list) return function(st) st.trainerItems={}; for i,sym in ipairs(list) do st.trainerItems[i]=items[sym] end; st._aiHistory=nil end end
+local strong={{'MEW',level=70,moves={'SHADOW_BALL'}},{'MEW',level=70,moves={'SHADOW_BALL'}}}
+local weak={{'MAGIKARP',level=5,moves={'SPLASH'}},{'MAGIKARP',level=5,moves={'SPLASH'}}}
+checkAct('a heal that saves it from a KO is used',strong,{{'MEW',level=50,hp=0.3,moves={'TACKLE'}},{'MEW',level=50,moves={'TACKLE'}}},
+  function(s) return s[1] and s[1].kind=='item' end,bag({'ITEM_FULL_RESTORE'}),{1})
+checkAct('no Potion while nothing threatens it',weak,{{'MEW',level=50,hp=0.55,moves={'TACKLE'}},{'MEW',level=50,moves={'TACKLE'}}},
+  function(s) return s[1] and s[1].kind=='move' end,bag({'ITEM_POTION'}),{1})
+checkAct('no Potion on a Pokémon that drops anyway',strong,{{'MEW',level=50,hp=0.15,moves={'TACKLE'}},{'MEW',level=50,moves={'TACKLE'}}},
+  function(s) return s[1] and s[1].kind=='move' end,bag({'ITEM_POTION'}),{1})
+checkAct('a sleeping Pokémon is woken when it is safe',weak,{{'MEW',level=50,status='SLP',moves={'TACKLE'}},{'MEW',level=50,moves={'TACKLE'}}},
+  function(s) return s[1] and s[1].kind=='item' end,bag({'ITEM_FULL_HEAL'}),{1})
+checkAct('no X item while it can be knocked out',strong,{{'MEW',level=50,moves={'TACKLE'}},{'MEW',level=50,moves={'TACKLE'}}},
+  function(s) return s[1] and s[1].kind=='move' end,bag({'ITEM_X_ATTACK'}),{1})
+do -- a declined item stays in the bag for later
+  local kept
+  F.reseed(0x6161)
+  pcall(F.battle,{playerParty=mons(weak),foe=trainer({{'MEW',level=50,hp=0.55,moves={'TACKLE'}},{'MEW',level=50,moves={'TACKLE'}}}),double=true,trainerId=TRAINER,onStarted=function(st)
+    bag({'ITEM_POTION'})(st); Ai.chooseAction(st,1,{}); kept=st._aiHistory and st._aiHistory.items[1]; st.over=true end})
+  Battle.reset()
+  T.eq(kept,items.ITEM_POTION,'a declined item stays in the bag')
+end
+do -- a whole battle: the trainer really uses the Full Restore and it heals
+  local BI=require('src.core.game3.battle.items')
+  local use=BI.enemyUse
+  local used,before,after
+  BI.enemyUse=function(st,ad,act,...)
+    local b=State.battler(st,act.battler or 1); before=ad:hp(b); used=act.item
+    local r=use(st,ad,act,...); after=ad:hp(b); return r
+  end
+  F.reseed(0x7171)
+  pcall(F.battle,{playerParty=mons(strong),foe=trainer({{'MEW',level=50,hp=0.3,moves={'TACKLE'}},{'MEW',level=50,moves={'TACKLE'}}}),double=true,trainerId=TRAINER,
+    onStarted=bag({'ITEM_FULL_RESTORE'})})
+  Battle.reset(); BI.enemyUse=use
+  T.eq(used,items.ITEM_FULL_RESTORE,'the trainer uses its Full Restore in battle')
+  T.check(before and after and after>before,'and the Pokémon is healed ('..tostring(before)..' -> '..tostring(after)..')')
+end
 T.finish('campaign trainer AI')

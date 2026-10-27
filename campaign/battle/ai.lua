@@ -17,7 +17,13 @@
 --     matches up best; replacements after a faint are picked the same way.
 --     Linked co-op battles keep replacements but make no voluntary switches.
 --   * AI partners on the player's side (Steven's multi battle) use it too
--- Item use stays with the native AI. Wild Pokémon keep Gen 3's random moves.
+--   * trainer items (the trainer's ROM bag): a heal is spent when a foe could
+--     knock the Pokémon out this turn and the heal lets it live through that
+--     hit, or when it is nearly fainted and safe (not at Gen 3's fixed "below
+--     a quarter"); cures and X items are Gen 3's picks, declined on a Pokémon
+--     that drops this turn; burns are cured for physical attackers, poison
+--     while there's HP worth saving, X items on a safe turn only
+-- Wild Pokémon keep Gen 3's random moves.
 -- Every choice draws only from the battle's AI RNG and walks tables in fixed
 -- order, so linked co-op games pick the same action.
 return function(mod, U, F)
@@ -196,6 +202,28 @@ return function(mod, U, F)
   end
 
   -- damaging moves --------------------------------------------------------------------
+  -- how dangerous a target is to the AI's side this turn: the largest share of
+  -- an AI-side Pokémon's HP it can take, and whether it knocks one out first
+  local function danger(ad, st, target, plan)
+    plan.danger = plan.danger or {}
+    local tid = State.idOf(target)
+    local c = plan.danger[tid]
+    if c then return c[1], c[2] end
+    local worst, koFirst = 0, false
+    for _, mine in ipairs(U.foes(ad, target)) do
+      for _, m in ipairs(usableMoves(ad, target)) do
+        if damaging(m.rec) and tonumber(m.rec.target) ~= TARGET.USER then
+          local d = estimate(ad, st, target, mine, m.rec, false) * accuracy(ad, target, mine, m.rec)
+          local share = d / math.max(1, hpOf(ad, mine))
+          if share > worst then worst = share end
+          if d >= hpOf(ad, mine) and movesFirst(ad, st, target, m.rec, mine) then koFirst = true end
+        end
+      end
+    end
+    plan.danger[tid] = { worst, koFirst }
+    return worst, koFirst
+  end
+  AI.danger = danger
   local SELF_KO = { EXPLOSION = true, MEMENTO = true }
   local function hitScore(ad, st, user, target, rec, spread, plan)
     local d, why = estimate(ad, st, user, target, rec, spread)
@@ -227,6 +255,12 @@ return function(mod, U, F)
         if planned > 0 then score = score + 10 end
         local pr = AB() and AB().priority(ad, user, rec) or 0
         if pr > 0 and not movesFirst(ad, st, user, { priority = 0, numId = rec.numId }, target) then score = score + 20 end
+      end
+      -- focus the foe that hurts the team most, most of all one that would
+      -- knock out an AI Pokémon before it moves
+      if score > 0 then
+        local share, first = danger(ad, st, target, plan)
+        score = score + math.min(1, share) * 15 + (first and 12 or 0)
       end
     end
     return score, d * acc
@@ -733,6 +767,7 @@ return function(mod, U, F)
     return lo
   end
 
+  local hedge -- set after the switching helpers (below)
   function AI.choose(st, id, opts)
     local ad = require("src.core.game3.battle")._adapter
     local user = State.battler(st, id)
@@ -768,6 +803,10 @@ return function(mod, U, F)
       if not bestScore or o.final > bestScore then best, bestScore = o, o.final end
     end
     if not best then return nil end
+    if hedge then
+      local okH, alt = pcall(hedge, ad, st, user, options, best)
+      if okH and alt then best = alt end
+    end
     -- record the plan for the partner's turn
     for tid, d in pairs(best.expect or {}) do plan.damage[tid] = (plan.damage[tid] or 0) + d end
     local rec = best.m.rec
@@ -823,6 +862,38 @@ return function(mod, U, F)
     if b.expTrapped or b.escapePrevention or (b.expTrapTurns or 0) > 0 or b.expIngrain then return true end
     local ok, holder = pcall(require("src.core.game3.battle.abilities").escapeBlocker, ad, b)
     return ok and holder ~= nil
+  end
+  -- a player Pokémon in a matchup it is losing may switch out: don't spend
+  -- the turn on a move its bench is immune to when another move does nearly
+  -- as well and still lands on that bench Pokémon
+  hedge = function(ad, st, user, options, best)
+    local rec = best.m.rec
+    local target = best.tid and State.battler(st, best.tid)
+    if not (damaging(rec) and target and target.side ~= user.side and alive(ad, target)) then return nil end
+    if (tonumber(rec.target) or 0) ~= TARGET.SELECTED or trapped(ad, target) then return nil end
+    local share = danger(ad, st, target, plans(st))
+    local hit = (best.expect and best.expect[best.tid]) or 0
+    if share >= 0.3 or hit < hpOf(ad, target) * 0.5 then return nil end
+    local ok, cands = pcall(Engine.switchCandidates, st, st.double and best.tid or target.side)
+    if not ok then return nil end
+    local immune = {}
+    for _, slot in ipairs(cands or {}) do
+      local view = standIn(st, target.side, slot, best.tid)
+      if view and estimate(ad, st, user, view, rec, false) <= 0 then immune[#immune + 1] = view end
+    end
+    if #immune == 0 then return nil end
+    local pick
+    for _, o in ipairs(options) do
+      if o ~= best and o.m.move ~= best.m.move and damaging(o.m.rec) and o.score >= best.score * 0.7
+          and (not pick or o.score > pick.score) then
+        local lands = true
+        for _, view in ipairs(immune) do
+          if estimate(ad, st, user, view, o.m.rec, false) <= 0 then lands = false break end
+        end
+        if lands then pick = o end
+      end
+    end
+    return pick
   end
   -- the best party member to send in at position id (nil: none)
   local function bestReplacement(ad, st, id)
@@ -887,6 +958,100 @@ return function(mod, U, F)
       if ok and pick then return pick end
     end
     return mostSuitable(st, ad, side, ...)
+  end
+
+  -- trainer items ---------------------------------------------------------------------
+  local AiItems = require("src.core.game3.battle.ai_items")
+  local KIND = AiItems.TYPE
+  local shouldUseItem = AiItems.shouldUseItem
+  -- Inclement's item rows (full/inventory.lua answers ItemsData.info) carry no
+  -- Gen 3 effect bytes, so on the campaign the ROM's effect table was never
+  -- reached and trainers never used their bag. Healing, cure and X items keep
+  -- their vanilla ids: read their effect from the ROM's own item table.
+  local effect = AiItems.effect
+  AiItems.effect = function(item)
+    local e = effect(item)
+    if e or not F.active() then return e end
+    local ItemsData = require("src.core.game3.items_data")
+    local native = ItemsData._inclementInventory and ItemsData._inclementInventory.originals.info
+    if not native then return nil end
+    local current = ItemsData.info
+    ItemsData.info = native
+    local ok, out = pcall(effect, item)
+    ItemsData.info = current
+    return ok and out or nil
+  end
+  -- HP the item would restore (Full Restore and HEAL_HP_FULL: everything)
+  local function healAmount(ad, b, item, kind)
+    local maxHp = ad:maxHp(b)
+    if kind == KIND.FULL_RESTORE then return maxHp end
+    local e = AiItems.effect(item)
+    local p = e and AiItems.hpParam(e) or 0
+    if p == AiItems.HEAL_HP_FULL then return maxHp end
+    if p == AiItems.HEAL_HP_HALF then return math.floor(maxHp / 2) end
+    if p == AiItems.HEAL_HP_LVL_UP then return 0 end
+    return p
+  end
+  -- a heal is worth it when it lets the Pokémon live through the hit that
+  -- would knock it out this turn, or when it is nearly fainted and safe
+  local function healWorth(ad, st, b, item, kind)
+    local hp, maxHp = hpOf(ad, b), math.max(1, ad:maxHp(b))
+    if hp >= maxHp then return false end
+    local after = math.min(maxHp, hp + healAmount(ad, b, item, kind))
+    local worst, ko = threat(ad, st, b, nil)
+    if ko then return after > worst end
+    return hp / maxHp < 0.2 and after - hp >= maxHp * 0.25
+  end
+  -- the other items Gen 3's AI picks: never on a Pokémon that drops this turn
+  function AI.itemWorth(ad, st, id, use)
+    local b = State.battler(st, id)
+    if not (ad and b and alive(ad, b)) then return true end
+    local kind, item = use.aiItemType, use.item
+    if kind == KIND.FULL_RESTORE or kind == KIND.HEAL_HP then return healWorth(ad, st, b, item, kind) end
+    local hp, maxHp = hpOf(ad, b), math.max(1, ad:maxHp(b))
+    local worst, ko = threat(ad, st, b, nil)
+    if ko then return false end
+    if kind == KIND.CURE_CONDITION then
+      local s = AiItems.statusName(b)
+      if s == "SLP" or s == "FRZ" or s == "PAR" then return true end
+      if s == "BRN" then return physicalAttacker(b) or hp / maxHp > 0.5 end
+      if s == "TOX" then return hp / maxHp > 0.35 end
+      if s == "PSN" then return hp / maxHp > 0.5 end
+      return (tonumber(b.confusionTurns) or 0) > 0
+    end
+    if kind == KIND.X_STAT or kind == KIND.GUARD_SPECS then return hp / maxHp > 0.5 and worst < hp * 0.6 end
+    return true
+  end
+  local function pick(st, id, ...)
+    local ad = require("src.core.game3.battle")._adapter
+    local b = State.battler(st, id)
+    if not (ad and b and alive(ad, b)) then return shouldUseItem(st, id, ...) end
+    local bag = AiItems.history(st).items
+    -- heals: the campaign's own rule, whatever Gen 3's HP threshold says
+    for i = 1, 4 do
+      local item = bag[i] or 0
+      local e = item ~= 0 and AiItems.effect(item) or nil
+      local kind = e and AiItems.itemType(item, e)
+      if (kind == KIND.FULL_RESTORE or kind == KIND.HEAL_HP) and healWorth(ad, st, b, item, kind) then
+        bag[i] = 0
+        st.aiItemType, st.aiItemFlags = st.aiItemType or {}, st.aiItemFlags or {}
+        st.aiItemType[id], st.aiItemFlags[id] = kind, 0
+        return { item = item, aiItemType = kind, aiItemFlags = 0 }
+      end
+    end
+    -- cures and X items: Gen 3 picks, the campaign may decline. Gen 3 takes
+    -- the item out of the bag as it picks it: put it back when declined
+    local before = { bag[1], bag[2], bag[3], bag[4] }
+    local use = shouldUseItem(st, id, ...)
+    if use and AI.itemWorth(ad, st, id, use) then return use end
+    for i = 1, 4 do bag[i] = before[i] end
+    return nil
+  end
+  AiItems.shouldUseItem = function(st, id, ...)
+    if not campaignSeat(st, id) then return shouldUseItem(st, id, ...) end
+    local ok, use = pcall(pick, st, id, ...)
+    if not ok then print("[g3_campaign/ai] item: " .. tostring(use)) return nil end
+    return use
   end
 
   local choose = Ai.chooseAction
