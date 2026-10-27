@@ -26,8 +26,9 @@ SLACK = 3  # a trainer mon may know a level-up move a few levels early
 
 PRE = {}  # species id -> its pre-evolution's id
 for k, v in D['species'].items():
-    for e in v['evolutions']:
-        PRE.setdefault(str(e['target']), k)
+    for e in v['evolutions'] + v.get('itemEvolutions', []):
+        if isinstance(e, dict) and 'target' in e:
+            PRE.setdefault(str(e['target']), k)
 
 
 def egg_moves(sp):
@@ -39,7 +40,10 @@ def egg_moves(sp):
 
 
 def legal(sp, level):
-    lvl = {m for l, m in sp["learnset"] if l <= level + SLACK}
+    lvl, key = {m for l, m in sp["learnset"] if l <= level + SLACK}, str(sp['id'])
+    while key in PRE:  # moves a pre-evolution learns by this level carry over
+        key = PRE[key]
+        lvl |= {m for l, m in D['species'][key]['learnset'] if l <= level + SLACK}
     other = egg_moves(sp) | {D['items'][str(i)].get('machineMove') for i in sp['machines']
                                    if str(i) in D['items']} | {D['tutorMoves'][str(t)] for t in sp['tutors']
                                                                 if str(t) in D['tutorMoves']}
@@ -84,6 +88,10 @@ def check():
         if not sp:
             print('unknown species', name); bad += 1; continue
         lvl, other = legal(sp, level)
+        ab = re.search(r'ability = "([A-Z_]+)"', m.group(0))
+        abil = {D['abilities'][str(a)]['symbol'][8:] for a in sp['abilities'] if a}
+        if ab and ab.group(1) not in abil:
+            print(f'{name} {level}: ability {ab.group(1)} not one of {sorted(abil)}'); bad += 1
         for mv in re.findall(r'"([A-Z0-9_]+)"', m.group(3)):
             if MSYM.get(mv) not in lvl | other:
                 print(f'{name} {level}: {mv} not learnable'); bad += 1

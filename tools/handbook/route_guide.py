@@ -70,7 +70,7 @@ CHAPTERS = [
     ('Route 113', ['ROUTE113', 'ROUTE113_*'], 'Ash grass: collect ash for the Glass Workshop.'),
     ('Fallarbor Town', ['FALLARBOR_TOWN*'], ''),
     ('Route 114', ['ROUTE114', 'ROUTE114_*'], ''),
-    ('Meteor Falls', ['METEOR_FALLS*'], 'Team Magma takes the meteorite. The inner caves need Surf and Waterfall.'),
+    ('Meteor Falls', ['METEOR_FALLS*'], 'Team Magma takes the meteorite. The inner caves need Surf and Waterfall (their trainers are listed with Victory Road).'),
     ('Route 115', ['ROUTE115'], 'The south half; the north beach needs Surf.', ['NOB_1', 'HECTOR', 'MARLENE', 'CYNDY_1']),
     ('Mt. Chimney', ['MT_CHIMNEY'], 'Ride the cable car up. Magma grunts, Tabitha (25) and Maxie (26) fight alone.'),
     ('Jagged Pass', ['JAGGED_PASS'], 'Down to Lavaridge.', ['ERIC', 'AUTUMN', 'JULIO', 'DIANA_1', 'ETHAN_1']),
@@ -129,6 +129,8 @@ CHAPTERS = [
   ('Victory Road and the League', ['WALLY_VR_1', 'SIDNEY', 'PHOEBE', 'GLACIA', 'DRAKE', 'WALLACE'],
    'Waterfall up to Ever Grande. Wally (48), then the Elite Four in a row.', [
     ('Ever Grande City', ['EVER_GRANDE_CITY', 'EVER_GRANDE_CITY_POKEMON*'], ''),
+    ('Meteor Falls (inner)', ['METEOR_FALLS_1F_2R', 'METEOR_FALLS_B1F_2R'], 'Needs Waterfall: the trainers deep inside.',
+     ['NICOLAS_1', 'JOHN_AND_JAY_1']),
     ('Victory Road', ['VICTORY_ROAD*'], 'Wally waits at the exit (alone, 48).'),
     ('Elite Four', ['EVER_GRANDE_CITY_SIDNEYS_ROOM', 'EVER_GRANDE_CITY_PHOEBES_ROOM', 'EVER_GRANDE_CITY_GLACIAS_ROOM', 'EVER_GRANDE_CITY_DRAKES_ROOM'],
      'Sidney 50, Phoebe 52, Glacia 54, Drake 56. No healing between rooms except your items.'),
