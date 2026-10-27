@@ -126,11 +126,11 @@ CHAPTERS = [
     ('Sootopolis City', ['SOOTOPOLIS_CITY', 'SOOTOPOLIS_CITY_MART', 'SOOTOPOLIS_CITY_HOUSE*', 'SOOTOPOLIS_CITY_LOTAD*', 'CAVE_OF_ORIGIN*'], 'Find Wallace at the Cave of Origin.'),
     ('Sky Pillar', ['SKY_PILLAR*'], 'Wake Rayquaza to end the weather.'),
     ('Routes 129 to 134', ['ROUTE129', 'ROUTE130', 'ROUTE131', 'ROUTE132', 'ROUTE133', 'ROUTE134', 'PACIFIDLOG_TOWN*'], 'Optional sea routes past Pacifidlog.'),
-    ('Trick House 7', ['ROUTE110_TRICK_HOUSE_PUZZLE7'], ''),
     ('Sootopolis Gym', ['SOOTOPOLIS_CITY_GYM*'], 'Ice floor puzzles; trainers fight alone with three.'),
   ]),
   ('Victory Road and the League', ['WALLY_VR_1', 'SIDNEY', 'PHOEBE', 'GLACIA', 'DRAKE', 'WALLACE'],
    'Waterfall up to Ever Grande. Wally (48), then the Elite Four in a row.', [
+    ('Trick House 7', ['ROUTE110_TRICK_HOUSE_PUZZLE7'], 'Opens after the Rain Badge.'),
     ('Ever Grande City', ['EVER_GRANDE_CITY', 'EVER_GRANDE_CITY_POKEMON*'], ''),
     ('Meteor Falls (inner)', ['METEOR_FALLS_1F_2R', 'METEOR_FALLS_B1F_2R'], 'Needs Waterfall: the trainers deep inside.',
      ['NICOLAS_1', 'JOHN_AND_JAY_1']),
