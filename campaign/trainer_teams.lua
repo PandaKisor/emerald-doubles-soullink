@@ -2646,6 +2646,75 @@ return {
       { "WAILORD", 57, ability = "WATER_VEIL", nature = "MODEST", spread = "stank", item = "SITRUS_BERRY", moves = { "WATER_SPOUT", "ICE_BEAM", "AMNESIA", "PROTECT" } },
       { "MILOTIC", 58, ability = "MARVEL_SCALE", nature = "BOLD", spread = "bulk", item = "SITRUS_BERRY", moves = { "SCALD", "ICE_BEAM", "RECOVER", "HYPNOSIS" } },
     } },
+    -- Post-game and stragglers: Rusturf Mike, Jagged Pass grunt, S.S. Tidal, Trick House 8 (draft 1, 2026-10-27) ----
+    -- Rusturf Tunnel, Verdanturf side: a tag battle at 21
+    MIKE_2 = { partner = "RT_GUS", party = {
+      { "GRAVELER", 21, ability = "STURDY", nature = "ADAMANT", item = "HARD_STONE", moves = { "ROCK_TOMB", "BULLDOZE", "ROLLOUT", "DEFENSE_CURL" } },
+      { "MACHOP", 21, ability = "NO_GUARD", nature = "ADAMANT", item = "BLACK_BELT", moves = { "KARATE_CHOP", "LOW_SWEEP", "REVENGE", "ROCK_TOMB" } },
+    } },
+    -- Jagged Pass: the grunt at the Magma Hideout entrance fights alone (35)
+    GRUNT_JAGGED_PASS = { tier = "grunt", party = {
+      { "MIGHTYENA", 35, ability = "INTIMIDATE", nature = "ADAMANT", item = "BLACK_GLASSES", moves = { "CRUNCH", "ICE_FANG", "THUNDER_FANG", "ROAR" } },
+      { "TURTONATOR", 35, ability = "SHELL_ARMOR", nature = "MODEST", spread = "spa", item = "ORAN_BERRY", moves = { "FLAMETHROWER", "DRAGON_PULSE", "PROTECT", "INCINERATE" } },
+      { "CAMERUPT", 34, ability = "SOLID_ROCK", nature = "MODEST", spread = "spa", item = "CHARCOAL", moves = { "LAVA_PLUME", "EARTH_POWER", "ROCK_SLIDE", "YAWN" } },
+    } },
+    -- Post-game, S.S. Tidal: tag battles at 58-60
+    NAOMI = { partner = "SS_ELA", party = {
+      { "TSAREENA", 59, ability = "QUEENLY_MAJESTY", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "TROP_KICK", "HIGH_JUMP_KICK", "KNOCK_OFF", "RAPID_SPIN" } },
+      { "MAWILE", 59, ability = "INTIMIDATE", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "IRON_HEAD", "PLAY_ROUGH", "SUCKER_PUNCH", "PROTECT" } },
+      { "SALAZZLE", 59, ability = "CORROSION", nature = "TIMID", spread = "spa", item = "SITRUS_BERRY", moves = { "FLAMETHROWER", "SLUDGE_BOMB", "FAKE_OUT", "PROTECT" } },
+    } },
+    GARRET = { partner = "SS_REX", party = {
+      { "PORYGON2", 60, ability = "TRACE", nature = "MODEST", spread = "spa", item = "EVIOLITE", moves = { "TRI_ATTACK", "ICE_BEAM", "THUNDERBOLT", "TRICK_ROOM" } },
+      { "PERSIAN", 59, ability = "TECHNICIAN", nature = "JOLLY", item = "SITRUS_BERRY", moves = { "FAKE_OUT", "FOUL_PLAY", "U_TURN", "TAUNT" } },
+      { "STARMIE", 59, ability = "NATURAL_CURE", nature = "TIMID", spread = "spa", item = "MYSTIC_WATER", moves = { "SURF", "PSYCHIC", "RECOVER", "THUNDER_WAVE" } },
+    } },
+    MICAH = { partner = "SS_MAX", party = {
+      { "ARCANINE", 60, ability = "INTIMIDATE", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "FLARE_BLITZ", "EXTREME_SPEED", "CRUNCH", "PROTECT" } },
+      { "KANGASKHAN", 59, ability = "SCRAPPY", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "FAKE_OUT", "DOUBLE_HIT", "SUCKER_PUNCH", "PROTECT" } },
+    } },
+    THOMAS = { partner = "SS_HAL", party = {
+      { "SLOWKING", 59, ability = "REGENERATOR", nature = "CALM", spread = "spdef", item = "SITRUS_BERRY", moves = { "SURF", "PSYCHIC", "SLACK_OFF", "TRICK_ROOM" } },
+      { "CONKELDURR", 60, ability = "GUTS", nature = "ADAMANT", item = "FLAME_ORB", moves = { "MACH_PUNCH", "HAMMER_ARM", "ROCK_SLIDE", "KNOCK_OFF" } },
+      { "MAGNEZONE", 59, ability = "STURDY", nature = "MODEST", spread = "spa", item = "SITRUS_BERRY", moves = { "DISCHARGE", "FLASH_CANNON", "THUNDER_WAVE", "PROTECT" } },
+    } },
+    COLTON = { party = {
+      { "CLEFABLE", 59, ability = "MAGIC_GUARD", nature = "BOLD", spread = "bulk", item = "SITRUS_BERRY", moves = { "DAZZLING_GLEAM", "FOLLOW_ME", "HELPING_HAND", "PROTECT" } },
+      { "PLUSLE", 59, ability = "PLUS", nature = "TIMID", spread = "spa", item = "SITRUS_BERRY", moves = { "DISCHARGE", "NUZZLE", "HELPING_HAND", "ENCORE" } },
+      { "MINUN", 59, ability = "MINUS", nature = "TIMID", spread = "spa", item = "SITRUS_BERRY", moves = { "DISCHARGE", "NUZZLE", "HELPING_HAND", "THUNDER_WAVE" } },
+      { "AZUMARILL", 60, ability = "HUGE_POWER", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "AQUA_JET", "PLAY_ROUGH", "KNOCK_OFF", "HELPING_HAND" } },
+    } },
+    PHILLIP = { partner = "SS_BEN", party = {
+      { "MACHAMP", 60, ability = "NO_GUARD", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "DYNAMIC_PUNCH", "KNOCK_OFF", "ROCK_SLIDE", "WIDE_GUARD" } },
+      { "WAILORD", 59, ability = "WATER_VEIL", nature = "MODEST", spread = "stank", item = "SITRUS_BERRY", moves = { "WATER_SPOUT", "ICE_BEAM", "AMNESIA", "PROTECT" } },
+    } },
+    LEONARD = { partner = "SS_WES", party = {
+      { "GYARADOS", 60, ability = "MOXIE", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "WATERFALL", "ICE_FANG", "DRAGON_DANCE", "PROTECT" } },
+      { "HARIYAMA", 59, ability = "THICK_FAT", nature = "ADAMANT", spread = "tank", item = "SITRUS_BERRY", moves = { "FAKE_OUT", "CLOSE_COMBAT", "KNOCK_OFF", "WIDE_GUARD" } },
+    } },
+    LEA_AND_JED = { party = {
+      { "MILTANK", 60, ability = "THICK_FAT", nature = "IMPISH", spread = "bulk", item = "SITRUS_BERRY", moves = { "BODY_SLAM", "MILK_DRINK", "HELPING_HAND", "PROTECT" } },
+      { "TAUROS", 60, ability = "INTIMIDATE", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "ROCK_SLIDE", "ZEN_HEADBUTT", "EARTHQUAKE", "PROTECT" } },
+    } },
+    -- Post-game, Trick House 8: three cooltrainers alone with four (62-63)
+    VINCENT = { tier = "gym", party = {
+      { "SABLEYE", 62, ability = "PRANKSTER", nature = "IMPISH", spread = "bulk", item = "SITRUS_BERRY", moves = { "FAKE_OUT", "WILL_O_WISP", "KNOCK_OFF", "RECOVER" } },
+      { "MIENSHAO", 63, ability = "REGENERATOR", nature = "JOLLY", item = "SITRUS_BERRY", moves = { "FAKE_OUT", "CLOSE_COMBAT", "U_TURN", "DETECT" } },
+      { "GLISCOR", 62, ability = "POISON_HEAL", nature = "IMPISH", spread = "bulk", item = "TOXIC_ORB", moves = { "EARTHQUAKE", "ACROBATICS", "KNOCK_OFF", "PROTECT" } },
+      { "DARMANITAN", 63, ability = "SHEER_FORCE", nature = "ADAMANT", item = "CHARCOAL", moves = { "FLARE_BLITZ", "ROCK_SLIDE", "U_TURN", "SUPERPOWER" } },
+    } },
+    LEROY = { tier = "gym", party = {
+      { "TYRANITAR", 63, ability = "SAND_STREAM", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "ROCK_SLIDE", "CRUNCH", "EARTHQUAKE", "PROTECT" } },
+      { "EXCADRILL", 62, ability = "SAND_RUSH", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "IRON_HEAD", "EARTHQUAKE", "ROCK_SLIDE", "PROTECT" } },
+      { "METAGROSS", 63, ability = "CLEAR_BODY", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "METEOR_MASH", "ZEN_HEADBUTT", "BULLET_PUNCH", "PROTECT" } },
+      { "GARCHOMP", 62, ability = "ROUGH_SKIN", nature = "JOLLY", item = "SITRUS_BERRY", moves = { "EARTHQUAKE", "DRAGON_CLAW", "ROCK_SLIDE", "PROTECT" } },
+    } },
+    KEIRA = { tier = "gym", party = {
+      { "TOGEKISS", 62, ability = "SERENE_GRACE", nature = "TIMID", spread = "spa", item = "SITRUS_BERRY", moves = { "AIR_SLASH", "DAZZLING_GLEAM", "FOLLOW_ME", "TAILWIND" } },
+      { "HYDREIGON", 63, ability = "LEVITATE", nature = "MODEST", spread = "spa", item = "SITRUS_BERRY", moves = { "DARK_PULSE", "DRAGON_PULSE", "FLAMETHROWER", "PROTECT" } },
+      { "ROTOM", 62, ability = "LEVITATE", nature = "TIMID", spread = "spa", item = "SITRUS_BERRY", moves = { "THUNDERBOLT", "HEX", "WILL_O_WISP", "PROTECT" } },
+      { "MILOTIC", 63, ability = "MARVEL_SCALE", nature = "BOLD", spread = "bulk", item = "SITRUS_BERRY", moves = { "SCALD", "ICE_BEAM", "RECOVER", "HYPNOSIS" } },
+    } },
   },
 
   partners = {
@@ -3982,6 +4051,35 @@ return {
     VR_A16 = { like = "KATELYNN", name = "ADA", defeat = "The road to the League ends here for us.", party = {
       { "DEWGONG", 47, ability = "FUR_COAT", nature = "CALM", spread = "spdef", item = "ORAN_BERRY", moves = { "ICE_BEAM", "FAKE_OUT", "ENCORE", "SURF" } },
       { "LAPRAS", 46, ability = "WATER_ABSORB", nature = "MODEST", spread = "stank", item = "ORAN_BERRY", moves = { "ICE_BEAM", "SURF", "CONFUSE_RAY", "SING" } },
+    } },
+    -- Post-game and stragglers: Rusturf Mike, Jagged Pass grunt, S.S. Tidal, Trick House 8 (draft 1, 2026-10-27): partners ----------------------------------------
+    RT_GUS = { like = "MIKE_2", name = "GUSTAV", defeat = "The tunnel is ours no more.", party = {
+      { "NOSEPASS", 21, ability = "STURDY", nature = "IMPISH", spread = "bulk", item = "ORAN_BERRY", moves = { "ROCK_TOMB", "THUNDER_WAVE", "BLOCK", "SPARK" } },
+      { "WHISMUR", 21, ability = "SOUNDPROOF", nature = "MODEST", spread = "stank", item = "ORAN_BERRY", moves = { "ECHOED_VOICE", "DISARMING_VOICE", "HOWL", "SCREECH" } },
+    } },
+    SS_ELA = { like = "NAOMI", name = "ELAINE", defeat = "How rude, on a cruise no less.", party = {
+      { "FLORGES", 59, ability = "FLOWER_VEIL", nature = "CALM", spread = "spdef", item = "SITRUS_BERRY", moves = { "MOONBLAST", "PSYCHIC", "WISH", "PROTECT" } },
+      { "MILOTIC", 58, ability = "MARVEL_SCALE", nature = "BOLD", spread = "bulk", item = "SITRUS_BERRY", moves = { "SCALD", "ICE_BEAM", "RECOVER", "HYPNOSIS" } },
+    } },
+    SS_REX = { like = "GARRET", name = "REX", defeat = "Daddy owns this ship, you know.", party = {
+      { "LAPRAS", 59, ability = "WATER_ABSORB", nature = "MODEST", spread = "stank", item = "ORAN_BERRY", moves = { "ICE_BEAM", "SURF", "CONFUSE_RAY", "SING" } },
+      { "NINETALES", 58, ability = "DROUGHT", nature = "TIMID", spread = "spa", item = "SITRUS_BERRY", moves = { "FLAMETHROWER", "EXTRASENSORY", "WILL_O_WISP", "PROTECT" } },
+    } },
+    SS_MAX = { like = "MICAH", name = "MAXWELL", defeat = "A gentleman accepts defeat.", party = {
+      { "SLOWKING", 59, ability = "REGENERATOR", nature = "CALM", spread = "spdef", item = "SITRUS_BERRY", moves = { "SURF", "PSYCHIC", "SLACK_OFF", "TRICK_ROOM" } },
+      { "NOCTOWL", 58, ability = "TINTED_LENS", nature = "MODEST", spread = "spa", item = "SITRUS_BERRY", moves = { "AIR_SLASH", "EXTRASENSORY", "HYPNOSIS", "REFLECT" } },
+    } },
+    SS_HAL = { like = "THOMAS", name = "HALE", defeat = "Most unexpected.", party = {
+      { "STARMIE", 59, ability = "NATURAL_CURE", nature = "TIMID", spread = "spa", item = "MYSTIC_WATER", moves = { "SURF", "PSYCHIC", "RECOVER", "THUNDER_WAVE" } },
+      { "SNORLAX", 58, ability = "THICK_FAT", nature = "ADAMANT", spread = "tank", item = "SITRUS_BERRY", moves = { "BODY_SLAM", "CRUNCH", "HIGH_HORSEPOWER", "PROTECT" } },
+    } },
+    SS_BEN = { like = "PHILLIP", name = "BENN", defeat = "Shipshape, but beaten.", party = {
+      { "PELIPPER", 59, ability = "DRIZZLE", nature = "MODEST", spread = "spa", item = "DAMP_ROCK", moves = { "HURRICANE", "SURF", "TAILWIND", "PROTECT" } },
+      { "CRAWDAUNT", 58, ability = "ADAPTABILITY", nature = "ADAMANT", item = "ORAN_BERRY", moves = { "RAZOR_SHELL", "KNOCK_OFF", "AQUA_JET", "PROTECT" } },
+    } },
+    SS_WES = { like = "LEONARD", name = "WESLEY", defeat = "Back to swabbing the deck.", party = {
+      { "KINGDRA", 59, ability = "SWIFT_SWIM", nature = "MODEST", spread = "spa", item = "MYSTIC_WATER", moves = { "SURF", "DRAGON_PULSE", "ICE_BEAM", "PROTECT" } },
+      { "TENTACRUEL", 58, ability = "CLEAR_BODY", nature = "TIMID", spread = "spa", item = "ORAN_BERRY", moves = { "SURF", "SLUDGE_BOMB", "TOXIC_SPIKES", "ACID_SPRAY" } },
     } },
   },
 }

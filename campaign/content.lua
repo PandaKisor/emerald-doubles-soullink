@@ -33,10 +33,13 @@ return function(mod, active)
   for id in pairs(routeMoves.supported) do battleMoves[id] = true end
   for id in pairs(moves.supported) do battleMoves[id] = true end
   local gate = source("campaign/moves_gate.lua")(data, battleMoves)
-  -- hand-authored teams over the generated draft (tools/gen_trainer_teams.lua)
-  local teams, drafted = source("campaign/trainer_teams.lua"), source("campaign/trainer_teams_gen.lua")
-  for _, key in ipairs({ "trainers", "partners" }) do
-    for name, t in pairs(drafted[key]) do if teams[key][name] == nil then teams[key][name] = t end end
+  -- hand-authored teams, then rematches made from them (tools/gen_rematch_teams.py),
+  -- then the generated draft (tools/gen_trainer_teams.lua) for anything left
+  local teams = source("campaign/trainer_teams.lua")
+  for _, layer in ipairs({ source("campaign/trainer_teams_rematch.lua"), source("campaign/trainer_teams_gen.lua") }) do
+    for _, key in ipairs({ "trainers", "partners" }) do
+      for name, t in pairs(layer[key]) do if teams[key][name] == nil then teams[key][name] = t end end
+    end
   end
   local trainers = source("campaign/trainers.lua")(mod, data, teams, active)
   local world = source("campaign/item_world.lua")(mod, data, source("campaign/item_sources.lua"), active)

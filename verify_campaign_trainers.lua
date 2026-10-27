@@ -12,9 +12,11 @@ require('src.import.gba.trainer_extract').run(F.rom,require('src.core.game3.data
 local Trainers=require('src.core.game3.scripting.trainers')
 local C=require('src.core.game3.constants').of('emerald')
 local teams=assert(loadfile('../porting/native/campaign/trainer_teams.lua'))()
-local drafted=assert(loadfile('../porting/native/campaign/trainer_teams_gen.lua'))()
-for _,key in ipairs({'trainers','partners'}) do
-  for name,t in pairs(drafted[key]) do if teams[key][name]==nil then teams[key][name]=t end end
+for _,file in ipairs({'trainer_teams_rematch.lua','trainer_teams_gen.lua'}) do
+  local layer=assert(loadfile('../porting/native/campaign/'..file))()
+  for _,key in ipairs({'trainers','partners'}) do
+    for name,t in pairs(layer[key]) do if teams[key][name]==nil then teams[key][name]=t end end
+  end
 end
 local campaign=F.campaign
 local supported=campaign.battleMoves
@@ -64,6 +66,16 @@ T.eq(foe.party[2].nature,3,'Lillipup is Adamant')
 T.eq(foe.party[1].ivs.atk,20,'route IVs 20')
 T.eq(foe.party[1].item,F.ids.items.ITEM_ORAN_BERRY,'held items reach the battle')
 T.eq(foe.party[1].evs.atk,84,'route EVs on Attack')
+-- rematches come from the hand-picked first fights, evolved and leveled per tier
+do
+  local c2=Trainers.get(C.trainers.byName.TRAINER_CALVIN_2)
+  T.eq(F.P.name(c2.party[1].species),'Mightyena','Calvin 2 leads with an evolved Poochyena')
+  T.eq(c2.party[1].level,33,'at the second tier (33)')
+  local r5=Trainers.get(C.trainers.byName.TRAINER_ROXANNE_5)
+  local top=0 for _,m in ipairs(r5.party) do top=math.max(top,m.level) end
+  T.eq(top,72,"Roxanne's fifth rematch tops out at 72")
+  T.eq(F.P.name(Trainers.get(C.trainers.byName.TRAINER_KEIRA).party[2].species),'Hydreigon','post-game Trick House 8 is hand-picked')
+end
 local roxanne=C.trainers.byName.TRAINER_ROXANNE_1
 local best=0
 for _,m in ipairs(Trainers.get(roxanne).party) do best=math.max(best,m.level) end

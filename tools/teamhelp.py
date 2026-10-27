@@ -80,7 +80,7 @@ def area(map_id):
 
 
 def check():
-    text = (HERE.parent / 'campaign/trainer_teams.lua').read_text()
+    text = (HERE.parent / 'campaign/trainer_teams.lua').read_text() + (HERE.parent / 'campaign/trainer_teams_rematch.lua').read_text()
     bad = 0
     for m in re.finditer(r'\{ "([A-Z0-9_]+)", (\d+),.*?moves = \{([^}]*)\}', text):
         name, level = m.group(1), int(m.group(2))
