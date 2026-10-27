@@ -73,6 +73,7 @@ return function(mod, active)
   local restoratives = source("full/restoratives.lua").install(data, source("full/restoratives/model.lua"), active)
   local candy = source("campaign/candy.lua")(mod, data, restoratives, active)
   local repel = source("campaign/repel.lua")(mod, active)
+  local heal = source("campaign/heal.lua")(mod, active)
   source("full/tutors.lua").install({ Pokemon = Pokemon,
     MoveLearn = require("src.core.game3.move_learn") }, data, active)
   source("full/inventory_ui.lua").install({ ItemsData = require("src.core.game3.items_data"),
@@ -89,5 +90,5 @@ return function(mod, active)
     Version = require("src.core.GameVersion"), SaveFileIO = require("src.import.SaveFileIO"),
     SaveConvert = require("src.save_convert.SaveConvert") }, data, active)
   return { content = data, save = Save, active = active, learnsets = gate, moves = moves, trainers = trainers, world = world,
-    battleMoves = battleMoves, candy = candy, repel = repel }
+    battleMoves = battleMoves, candy = candy, repel = repel, heal = heal }
 end

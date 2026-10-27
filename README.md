@@ -54,6 +54,40 @@ using items or running out of steps. Save the game to keep your choice.
 The starter counts as Littleroot Town's Soul Link encounter, including in
 existing run records, so it does not use Route 101's encounter.
 
+**START > HEAL TEAM** restores your entire party's HP, status and PP for free.
+With Soul Link hard rules on, dead or disallowed Pokémon remain excluded.
+Birch's rescue battle and Norman's borrowed Zigzagoon/Wally's catching tutorial
+do not consume encounters. Recognizable old tutorial records are excluded from
+the run view too; real wild encounters and real faint history remain intact.
+
+## Offline field guide
+
+`emerald-field-guide-0.26.0.html` is a self-contained companion: open it in a
+modern browser and send the same file to your partner. It includes a direct-hit
+damage calculator, searchable trainer teams (including doubles partners), wild
+encounter tables, item sources and badge-dependent shops. Trainer Pokémon can
+be loaded directly into either calculator slot.
+
+The route planner offers an early-game path and a Hoenn story itinerary, plus
+custom stops, return visits, reordering, completion tracking, notes and planned
+encounters for both players. Routes save in the browser. Use Export/Import to
+share the route itself or move it to another browser; copying the HTML alone
+does not copy browser storage. Calculations and reference coverage have explicit
+limits in the guide's About panel.
+
+Rebuild after building the campaign (from this repository):
+
+```sh
+python3 tools/handbook/export.py
+python3 tools/handbook/build.py
+```
+
+Generate native calculation references from the stock engine directory with
+`luajit ../porting/native/tools/handbook/damage_reference.lua`, then run
+`node tools/handbook/verify.js` here. `python3 tools/handbook/browser_smoke.py`
+exercises the local HTML in an isolated Firefox profile and writes its report
+and desktop/mobile screenshots under `generated/handbook/browser/`.
+
 ## What's in this repo
 
 The campaign mod's source: `build_campaign.py` (builds the mod, the release

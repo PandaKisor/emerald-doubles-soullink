@@ -1,6 +1,6 @@
 -- Run from Gen3Mod/gen1recomp-0.3.73 with luajit.
 local F = assert(loadfile('../porting/native/campaign_fixture.lua'))()
-local T, C, R = F.T, F.campaign.candy, F.campaign.repel
+local T, C, R, H = F.T, F.campaign.candy, F.campaign.repel, F.campaign.heal
 local Bag = require('src.core.game3.bag')
 local Use = require('src.core.game3.item_use')
 local Runtime = require('src.core.game3.runtime')
@@ -95,12 +95,13 @@ local function entries()
   return MR.call('ui.start_menu.items', function(_, list) return list end, Runtime._game,
     {{id='bag',label='BAG'}, {id='save',label='SAVE'}, {id='exit',label='EXIT'}})
 end
-local candyEntry, repelEntry
+local candyEntry, repelEntry, healEntry
 for _, e in ipairs(entries()) do
   if e.id == 'g3_campaign_candy' then candyEntry = e end
   if e.id == 'g3_campaign_repel' then repelEntry = e end
+  if e.id == 'g3_campaign_heal' then healEntry = e end
 end
-T.check(candyEntry and repelEntry, 'both options appear in START')
+T.check(candyEntry and repelEntry and healEntry, 'all three options appear in START')
 repelEntry.onSelect(Runtime._game, s)
 T.eq(repelEntry.label, 'REPEL: ON', 'toggle label updates immediately')
 local PartyMenu = require('src.ui.game3.party_menu')
@@ -110,10 +111,56 @@ candyEntry.onSelect(Runtime._game, s)
 T.check(opened and opened.item == C.id and opened.mode == 'use' and opened.bag == s.bag,
   'START opens the real party item flow with the real bag')
 PartyMenu.show = show
+
+-- Heal every slot with the actual nurse implementation, including PP Ups.
+s.party = {}
+for i = 1, 6 do
+  local m = F.mon('TREECKO', 10, {'POUND', 'ABSORB'}, {ppBonusesPacked = 3})
+  m.hp, m.status, m.sleep, m.pp[1], m.pp[2] = i == 6 and 0 or 1, 8, 3, 0, 0
+  s.party[i] = m
+end
+local Message = require('src.ui.game3.message')
+local messageShow, message = Message.show
+Message.show = function(text) message = text end
+healEntry.onSelect(Runtime._game, s)
+Message.show = messageShow
+T.check(message and message:find('fully healed', 1, true), 'menu confirms healing')
+for i, m in ipairs(s.party) do
+  T.eq(m.hp, m.maxHp, 'healing restores HP in slot ' .. i)
+  T.eq(m.status, nil, 'healing clears status in slot ' .. i)
+  T.eq(m.sleep, nil, 'healing clears sleep in slot ' .. i)
+  T.eq(m.pp[1], math.floor(F.P.movePp(m.moves[1]) * 8 / 5), 'PP Ups retained in slot ' .. i)
+  T.eq(m.pp[2], F.P.movePp(m.moves[2]), 'second move PP restored in slot ' .. i)
+end
+local SL = dofile('../coop/g3_coop/lib/soullink.lua')
+local Tracker = dofile('../coop/g3_coop/lib/tracker.lua')
+local rules = {on=true,hard=true}
+local tr = Tracker.new({SL=SL,session=function() return s end,options=function() return rules end,
+  read=function() return nil,'not_found' end,write=function() return true end,
+  newId=function() return 'heal' end,toast=function() end,speciesName=tostring,
+  isEgg=function() return false end})
+tr:ensure()
+tr:_append({k='catch',a=16,s=s.party[1].species,u=SL.uid(s.party[1])})
+s.party[1].hp = 0 -- field faint not yet scanned
+s.party[2].hp = 1
+Runtime._game.mods.exports.g3_coop.tracker = function() return tr end
+local healed, skipped = H.heal(Runtime._game, s)
+T.eq(healed, 5, 'hard rules heal the five eligible team members')
+T.eq(skipped, 1, 'hard rules skip the dead member')
+T.eq(s.party[1].hp, 0, 'field faint is recorded before healing')
+T.check(tr:view().dead[SL.uid(s.party[1])], 'healing preserves Soul Link faint history')
+T.eq(s.party[2].hp, s.party[2].maxHp, 'remaining team heals under hard rules')
+rules.on = false
+T.eq(H.heal(Runtime._game, s), 6, 'Soul Link off heals all six, including fainted members')
+local healedSave = Schema.fromSaveTable(Schema.toSaveTable(s))
+T.eq(healedSave.party[1].hp, s.party[1].maxHp, 'healed HP survives save round trip')
+T.eq(healedSave.party[1].pp[1], s.party[1].pp[1], 'healed PP survives save round trip')
 SD.setCart(nil)
 T.check(not R.enabled(s), 'repel is scoped to the campaign cart')
 T.check(not C.grant(s), 'candy grant is scoped to the campaign cart')
+T.eq(H.heal(Runtime._game, s), 0, 'healing is scoped to the campaign cart')
 for _, e in ipairs(entries()) do
-  T.check(e.id ~= 'g3_campaign_candy' and e.id ~= 'g3_campaign_repel', 'no campaign shortcuts on vanilla')
+  T.check(e.id ~= 'g3_campaign_candy' and e.id ~= 'g3_campaign_repel' and e.id ~= 'g3_campaign_heal',
+    'no campaign shortcuts on vanilla')
 end
-T.finish('campaign reusable candy and repel')
+T.finish('campaign reusable candy, repel and team healing')

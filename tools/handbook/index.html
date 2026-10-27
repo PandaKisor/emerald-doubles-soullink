@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light"><title>Field Guide · Emerald Doubles Soul Link</title>
+<style>/* STYLES */</style></head>
+<body>
+<aside class="sidebar">
+ <a class="brand" href="#calculator"><span class="brand-mark" aria-hidden="true">◈</span><span>FIELD GUIDE<small>EMERALD · SOUL LINK</small></span></a>
+ <div class="edition">CAMPAIGN <span id="version"></span><span class="online-dot"></span> OFFLINE READY</div>
+ <nav aria-label="Guide sections">
+  <button data-tab="calculator" class="active"><span>01</span> Fight calculator</button>
+  <button data-tab="trainers"><span>02</span> Trainer teams</button>
+  <button data-tab="wild"><span>03</span> Wild encounters</button>
+  <button data-tab="items"><span>04</span> Item finder</button>
+  <button data-tab="route"><span>05</span> Route planner <b id="route-count">0</b></button>
+ </nav>
+ <div class="sidebar-foot"><div class="tiny-label">YOUR RUN, YOUR NOTES</div><p>Plan together. Send this file to your partner, then share your route as a plan file.</p><button class="text-button" id="about-open">About this build ↗</button></div>
+</aside>
+<main>
+ <header class="topbar"><span>HOENN FIELD DESK <i>/</i> <span id="section-name">Fight calculator</span></span><div><span class="saved" id="save-state">Saved on this browser</span><button class="button small" id="export-all">Export plan ↓</button></div></header>
+ <section id="calculator" class="page active" aria-labelledby="calculator-title">
+  <div class="page-heading"><div><p class="eyebrow">PREPARE BEFORE YOU COMMIT</p><h1 id="calculator-title">Plan the next fight.</h1><p class="subhead">Your campaign’s stats, moves, and damage rules. One matchup at a time.</p></div><button class="button" id="swap-sides">Swap sides ⇄</button></div>
+  <div class="notice compact">Direct-hit estimates. Ability triggers, ally effects, accuracy rolls, and full turns are not simulated. Check the assumptions below each result.</div>
+  <div class="battle-grid"><article class="panel combatant" id="attacker-card"></article><article class="panel combatant" id="defender-card"></article></div>
+  <div class="calc-bottom"><div><article class="panel move-panel"><div class="panel-heading"><h2>Choose an attack</h2><span class="muted">All supported moves</span></div><label class="field">Move<input id="move-input" list="move-list" autocomplete="off"></label><div id="move-quick" class="chips"></div><div id="move-facts"></div></article>
+   <article class="panel conditions"><div class="panel-heading"><h2>Battle conditions</h2><button class="text-button" id="reset-field">Reset</button></div><div class="form-grid three">
+   <label class="field">Weather<select id="weather"><option value="">Clear</option><option value="RAIN">Rain</option><option value="SUN">Sun</option><option value="SAND">Sandstorm</option><option value="HAIL">Hail</option></select></label>
+   <label class="field">Terrain<select id="terrain"><option value="">None</option><option value="ELECTRIC">Electric</option><option value="GRASSY">Grassy</option><option value="PSYCHIC">Psychic</option><option value="MISTY">Misty</option></select></label>
+   <label class="field">Base power override<input id="power" type="number" min="1" max="999" placeholder="Automatic"></label></div>
+   <div class="checks"><label><input id="doubles" type="checkbox" checked> Doubles</label><label><input id="spread" type="checkbox"> Multiple targets hit</label><label><input id="crit" type="checkbox"> Critical hit</label><label><input id="helpingHand" type="checkbox"> Helping Hand</label><label><input id="permanentWeather" type="checkbox"> Permanent weather</label><label><input id="trickRoom" type="checkbox"> Trick Room</label></div></article></div>
+   <article class="panel result-panel" id="result" aria-live="polite"></article></div>
+ </section>
+ <section id="trainers" class="page" aria-labelledby="trainers-title"><div class="page-heading"><div><p class="eyebrow">KNOW WHAT’S WAITING</p><h1 id="trainers-title">Trainer teams.</h1><p class="subhead">Campaign teams, held items, moves, and the partners joining them in doubles.</p></div></div>
+  <div class="search-bar"><label class="search"><span aria-hidden="true">⌕</span><input id="trainer-search" type="search" placeholder="Search trainer, location, or Pokémon…" aria-label="Search trainer teams"></label><label class="field inline">Show<select id="trainer-filter"><option value="all">All trainers</option><option value="boss">Leaders & major fights</option><option value="authored">Campaign teams</option></select></label></div><p class="result-count" id="trainer-count"></p><div id="trainer-results" class="reference-grid"></div><button id="trainer-more" class="button more">Show more trainers</button>
+ </section>
+ <section id="wild" class="page" aria-labelledby="wild-title"><div class="page-heading"><div><p class="eyebrow">MAKE YOUR ENCOUNTER COUNT</p><h1 id="wild-title">Find your next link.</h1><p class="subhead">Search by Pokémon or area. Compare the encounter tables before choosing your route.</p></div></div>
+  <div class="notice">The starter counts in Littleroot. Birch’s rescue and Norman/Wally’s borrowed Zigzagoon tutorial do not use an encounter. Each player’s regular first encounter still follows their run’s rules.</div>
+  <div class="search-bar"><label class="search"><span aria-hidden="true">⌕</span><input id="wild-search" type="search" placeholder="Search area or Pokémon…" aria-label="Search wild encounters"></label><label class="field inline">Method<select id="wild-method"><option value="">Every method</option></select></label></div><p class="result-count" id="wild-count"></p><div id="wild-results" class="reference-grid"></div><button id="wild-more" class="button more">Show more encounters</button>
+  <p class="footnote">Percentages are base slot weights, before Repel, lead abilities, story gates, outbreaks, roamers, or Feebas tile rules. They are not per-step odds.</p>
+ </section>
+ <section id="items" class="page" aria-labelledby="items-title"><div class="page-heading"><div><p class="eyebrow">PACK FOR THE ROAD AHEAD</p><h1 id="items-title">Item finder.</h1><p class="subhead">Field pickups, hidden items, gifts, and shops from this campaign build.</p></div></div>
+  <div class="search-bar"><label class="search"><span aria-hidden="true">⌕</span><input id="item-search" type="search" placeholder="Search item, effect, or location…" aria-label="Search item locations"></label><label class="field inline">Badges<select id="badges"></select></label><label class="field inline">Sources<select id="item-kind"><option value="">Every source</option><option>Item ball</option><option>Hidden item</option><option>Gift / script</option><option>Shop</option><option>Menu</option></select></label></div><p class="result-count" id="item-count"></p><div id="item-results" class="reference-grid"></div><button id="item-more" class="button more">Show more items</button>
+  <p class="footnote">Coordinates are map tiles (x, y). Story access, quantities, variable gifts, berries, Pickup, wild held items, and minigame rewards are not exhaustively indexed. Shop results use the exact selected badge count.</p>
+ </section>
+ <section id="route" class="page" aria-labelledby="route-title"><div class="page-heading"><div><p class="eyebrow">A LITTLE PLANNING GOES A LONG WAY</p><h1 id="route-title">Your route, together.</h1><p class="subhead">Build a shared itinerary. Plan both encounters and keep the next fight in view.</p></div><div class="button-row"><button class="button" id="import-plan">Import plan ↑</button><button class="button" id="export-route">Export plan ↓</button></div></div>
+  <div class="route-layout"><div><div class="panel route-toolbar"><label class="field">Plan name<input id="plan-name" maxlength="120" placeholder="Our Hoenn run"></label><div class="progress-line"><span id="plan-progress"></span><button class="text-button" id="clear-completed">Remove completed</button></div><div class="progress-track"><div id="plan-bar"></div></div></div><div id="route-stops"></div></div>
+  <aside class="route-side"><article class="panel"><p class="eyebrow">ADD A STOP</p><label class="field">Location<input id="route-map" list="map-list" placeholder="Type a route or town…"></label><button class="button primary full" id="add-stop">Add to route +</button><div class="divider"></div><p class="tiny-label">START WITH A SUGGESTED PATH</p><button class="button full" id="starter-route">Littleroot → Roxanne</button><button class="button full" id="story-route">Hoenn story overview</button><p class="footnote">Suggested stops are planning aids, not a step-by-step story walkthrough. Revisit towns when story events require it.</p></article><article class="panel"><h2>Plan the pair</h2><p>Record each player’s chosen encounter at a stop. You can mark a stop as complete, move it up or down, and add item or trainer reminders.</p><p class="footnote">Plans are independent of your game save. Export before moving this HTML file to another browser or device.</p></article></aside></div>
+ </section>
+ <footer>EMERALD DOUBLES SOUL LINK <span>·</span> Stock Gen1Recomp 0.3.73 <span>·</span> An offline companion to your campaign. <span>·</span> <button class="text-button" id="about-footer">About & calculation limits</button></footer>
+</main>
+<datalist id="species-list"></datalist><datalist id="move-list"></datalist><datalist id="item-list"></datalist><datalist id="map-list"></datalist>
+<input type="file" id="import-file" accept=".json,application/json" hidden>
+<div id="toast" role="status"></div>
+<dialog id="about"><div class="panel-heading"><h2>About this field guide</h2><button class="button small" id="about-close">Close</button></div><div id="about-content"></div></dialog>
+<script id="guide-data" type="application/json">/* DATA */</script>
+<script>/* CALCULATOR */</script><script>/* APP */</script>
+</body></html>
