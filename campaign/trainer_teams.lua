@@ -278,6 +278,338 @@ return {
       { "HAWLUCHA", 18, ability = "UNBURDEN", nature = "JOLLY", item = "SITRUS_BERRY", moves = { "AERIAL_ACE", "LOW_SWEEP", "FEATHER_DANCE", "DETECT" } },
       { "MAKUHITA", 19, ability = "GUTS", nature = "ADAMANT", spread = "tank", item = "FLAME_ORB", moves = { "FAKE_OUT", "FORCE_PALM", "KNOCK_OFF", "ROCK_SLIDE" } },
     } },
+    -- Chapter 3: Dewford to Wattson (draft 1, 2026-10-27; caps 20, 21, 24) -----------
+    -- Route 109 beach: tag battles at 16-17 ------------------------------------------
+    HUEY = { partner = "R109_WES", party = {
+      { "WINGULL", 17, ability = "KEEN_EYE", nature = "TIMID", spread = "spa", item = "ORAN_BERRY", moves = { "BUBBLE_BEAM", "AIR_CUTTER", "SUPERSONIC", "PROTECT" } },
+      { "TIMBURR", 16, ability = "GUTS", nature = "ADAMANT", item = "ORAN_BERRY", moves = { "ROCK_THROW", "MACH_PUNCH", "LOW_KICK", "BULK_UP" } },
+    } },
+    EDMOND = { partner = "R109_PIP", party = {
+      { "SLOWPOKE", 17, ability = "REGENERATOR", nature = "RELAXED", spread = "bulk", item = "ORAN_BERRY", moves = { "CONFUSION", "WATER_GUN", "YAWN", "DISABLE" } },
+      { "STARAVIA", 17, ability = "INTIMIDATE", nature = "JOLLY", item = "SHARP_BEAK", moves = { "AERIAL_ACE", "QUICK_ATTACK", "TAILWIND", "REVENGE" } },
+    } },
+    HAILEY = { partner = "R109_DOT", party = {
+      { "SPHEAL", 16, ability = "THICK_FAT", nature = "IMPISH", spread = "tank", item = "ORAN_BERRY", moves = { "ICE_BALL", "DEFENSE_CURL", "WATER_GUN", "ENCORE" } },
+      { "BIBAREL", 16, ability = "SIMPLE", nature = "ADAMANT", item = "ORAN_BERRY", moves = { "HEADBUTT", "AQUA_JET", "DEFENSE_CURL", "ROLLOUT" } },
+    } },
+    RICKY_1 = { partner = "R109_BO", party = {
+      { "ZIGZAGOON", 17, ability = "QUICK_FEET", nature = "JOLLY", item = "SILK_SCARF", moves = { "HEADBUTT", "COVET", "PIN_MISSILE", "SAND_ATTACK" } },
+      { "MAREANIE", 16, ability = "MERCILESS", nature = "CAREFUL", spread = "spdef", item = "ORAN_BERRY", moves = { "BITE", "POISON_STING", "TOXIC_SPIKES", "WIDE_GUARD" } },
+    } },
+    LOLA_1 = { partner = "R109_KIM", party = {
+      { "WAILMER", 17, ability = "OBLIVIOUS", nature = "MODEST", spread = "stank", item = "ORAN_BERRY", moves = { "BUBBLE_BEAM", "WHIRLPOOL", "ROLLOUT", "ASTONISH" } },
+      { "CHINCHOU", 16, ability = "VOLT_ABSORB", nature = "MODEST", spread = "spa", item = "ORAN_BERRY", moves = { "ELECTRO_BALL", "BUBBLE", "THUNDER_WAVE", "CONFUSE_RAY" } },
+    } },
+    CHANDLER = { partner = "R109_ZED", party = {
+      { "PANPOUR", 17, ability = "GLUTTONY", nature = "MODEST", spread = "spa", item = "ORAN_BERRY", moves = { "SCALD", "BITE", "TAUNT", "PLAY_NICE" } },
+      { "CORPHISH", 16, ability = "ADAPTABILITY", nature = "ADAMANT", item = "MYSTIC_WATER", moves = { "BUBBLE_BEAM", "KNOCK_OFF", "VISE_GRIP", "TAUNT" } },
+    } },
+
+    -- the Seashore House: three in a row, each alone with three ---------------------------
+    SIMON = { party = {
+      { "SEEL", 17, ability = "HYDRATION", nature = "BOLD", spread = "bulk", item = "ORAN_BERRY", moves = { "FAKE_OUT", "ICY_WIND", "HEADBUTT", "ENCORE" } },
+      { "CROCONAW", 18, ability = "SHEER_FORCE", nature = "ADAMANT", item = "MYSTIC_WATER", moves = { "BITE", "ICE_FANG", "WATER_GUN", "SCARY_FACE" } },
+      { "HERDIER", 17, ability = "INTIMIDATE", nature = "ADAMANT", item = "ORAN_BERRY", moves = { "BITE", "TAKE_DOWN", "HELPING_HAND", "WORK_UP" } },
+    } },
+    JOHANNA = { party = {
+      { "GOLDEEN", 17, ability = "LIGHTNING_ROD", nature = "ADAMANT", item = "ORAN_BERRY", moves = { "HORN_ATTACK", "BUBBLE_BEAM", "SUPERSONIC", "AGILITY" } },
+      { "BRUXISH", 17, ability = "DAZZLING", nature = "ADAMANT", item = "ORAN_BERRY", moves = { "BITE", "AQUA_JET", "CONFUSION", "DISABLE" } },
+      { "ALOMOMOLA", 17, ability = "REGENERATOR", nature = "BOLD", spread = "bulk", item = "ORAN_BERRY", moves = { "AQUA_JET", "HELPING_HAND", "HEAL_PULSE", "PROTECT" } },
+    } },
+    DWAYNE = { party = {
+      { "MAKUHITA", 18, ability = "THICK_FAT", nature = "ADAMANT", spread = "tank", item = "ORAN_BERRY", moves = { "FAKE_OUT", "FORCE_PALM", "KNOCK_OFF", "ARM_THRUST" } },
+      { "TENTACOOL", 17, ability = "CLEAR_BODY", nature = "TIMID", spread = "spa", item = "ORAN_BERRY", moves = { "BUBBLE_BEAM", "ACID", "TOXIC_SPIKES", "SUPERSONIC" } },
+      { "CORPHISH", 17, ability = "HYPER_CUTTER", nature = "ADAMANT", item = "ORAN_BERRY", moves = { "BUBBLE_BEAM", "KNOCK_OFF", "DOUBLE_HIT", "PROTECT" } },
+    } },
+
+    -- Oceanic Museum: two grunts in a row, each alone ------------------------------------
+    GRUNT_MUSEUM_1 = { tier = "grunt", party = {
+      { "CARVANHA", 18, ability = "SPEED_BOOST", nature = "ADAMANT", item = "ORAN_BERRY", moves = { "BITE", "AQUA_JET", "ASSURANCE", "PROTECT" } },
+      { "BASCULIN", 17, ability = "ADAPTABILITY", nature = "JOLLY", item = "MYSTIC_WATER", moves = { "AQUA_JET", "BITE", "CHIP_AWAY", "TAIL_WHIP" } },
+      { "ZUBAT", 17, ability = "INNER_FOCUS", nature = "JOLLY", item = "ORAN_BERRY", moves = { "AIR_CUTTER", "BITE", "CONFUSE_RAY", "SUPERSONIC" } },
+    } },
+    GRUNT_MUSEUM_2 = { tier = "grunt", party = {
+      { "GRIMER_ALOLAN", 18, ability = "POISON_TOUCH", nature = "ADAMANT", spread = "tank", item = "ORAN_BERRY", moves = { "POISON_FANG", "BITE", "DISABLE", "HARDEN" } },
+      { "SKRELP", 17, ability = "ADAPTABILITY", nature = "MODEST", spread = "spa", item = "MYSTIC_WATER", moves = { "WATER_GUN", "ACID", "FEINT_ATTACK", "SMOKESCREEN" } },
+      { "POOCHYENA", 17, ability = "QUICK_FEET", nature = "JOLLY", item = "BLACK_GLASSES", moves = { "BITE", "HOWL", "SAND_ATTACK", "TACKLE" } },
+    } },
+
+    -- Route 110: tag battles at 17-18 ------------------------------------------------------
+    ISABEL_1 = { partner = "R110_ANN", party = {
+      { "PLUSLE", 17, ability = "PLUS", nature = "TIMID", spread = "spa", item = "ORAN_BERRY", moves = { "SPARK", "NUZZLE", "HELPING_HAND", "ENCORE" } },
+      { "PACHIRISU", 17, ability = "VOLT_ABSORB", nature = "IMPISH", spread = "bulk", item = "ORAN_BERRY", moves = { "NUZZLE", "SPARK", "SUPER_FANG", "ENDURE" } },
+    } },
+    KALEB = { partner = "R110_GIL", party = {
+      { "MINUN", 17, ability = "MINUS", nature = "TIMID", spread = "spa", item = "ORAN_BERRY", moves = { "SPARK", "NUZZLE", "HELPING_HAND", "THUNDER_WAVE" } },
+      { "EMOLGA", 17, ability = "MOTOR_DRIVE", nature = "JOLLY", item = "ORAN_BERRY", moves = { "SPARK", "AIR_CUTTER", "NUZZLE", "QUICK_ATTACK" } },
+    } },
+    TIMMY = { partner = "R110_OTTO", party = {
+      { "FERROSEED", 17, ability = "IRON_BARBS", nature = "RELAXED", spread = "tank", item = "ORAN_BERRY", moves = { "MIRROR_SHOT", "PIN_MISSILE", "LEECH_SEED", "PROTECT" } },
+      { "ELECTRIKE", 17, ability = "LIGHTNING_ROD", nature = "TIMID", spread = "spa", item = "ORAN_BERRY", moves = { "SPARK", "THUNDER_FANG", "QUICK_ATTACK", "HOWL" } },
+    } },
+    EDWIN_1 = { partner = "R110_MOE", party = {
+      { "LOMBRE", 18, ability = "SWIFT_SWIM", nature = "MODEST", spread = "spa", item = "ORAN_BERRY", moves = { "FAKE_OUT", "MEGA_DRAIN", "BUBBLE", "KNOCK_OFF" } },
+      { "NUZLEAF", 18, ability = "CHLOROPHYLL", nature = "ADAMANT", item = "ORAN_BERRY", moves = { "RAZOR_LEAF", "AIR_CUTTER", "GROWTH", "TORMENT" } },
+    } },
+    JOSEPH = { partner = "R110_BRAD", party = {
+      { "LUXIO", 18, ability = "INTIMIDATE", nature = "ADAMANT", item = "MAGNET", moves = { "SPARK", "BITE", "DOUBLE_KICK", "LEER" } },
+      { "VOLTORB", 18, ability = "AFTERMATH", nature = "TIMID", spread = "spa", item = "ORAN_BERRY", moves = { "SPARK", "CHARGE_BEAM", "EERIE_IMPULSE", "SCREECH" } },
+    } },
+    EDWARD = { partner = "R110_VIC", party = {
+      { "KADABRA", 18, ability = "INNER_FOCUS", nature = "TIMID", spread = "spa", item = "TWISTED_SPOON", moves = { "PSYBEAM", "SHOCK_WAVE", "DISABLE", "REFLECT" } },
+      { "SOLOSIS", 17, ability = "MAGIC_GUARD", nature = "MODEST", spread = "spa", item = "ORAN_BERRY", moves = { "PSYBEAM", "RECOVER", "CHARM", "PROTECT" } },
+    } },
+    ALYSSA = { partner = "R110_LIZ", party = {
+      { "MAGNEMITE", 18, ability = "STURDY", nature = "MODEST", spread = "spa", item = "MAGNET", moves = { "SPARK", "MAGNET_BOMB", "THUNDER_WAVE", "SUPERSONIC" } },
+      { "TRANQUILL", 18, ability = "SUPER_LUCK", nature = "JOLLY", item = "SCOPE_LENS", moves = { "AIR_CUTTER", "QUICK_ATTACK", "GUST", "ROOST" } },
+    } },
+    DALE = { partner = "R110_HAL", party = {
+      { "WAILMER", 18, ability = "OBLIVIOUS", nature = "MODEST", spread = "stank", item = "ORAN_BERRY", moves = { "BUBBLE_BEAM", "WHIRLPOOL", "ROLLOUT", "ASTONISH" } },
+      { "ALOMOMOLA", 17, ability = "REGENERATOR", nature = "BOLD", spread = "bulk", item = "ORAN_BERRY", moves = { "AQUA_JET", "HELPING_HAND", "HEAL_PULSE", "PROTECT" } },
+    } },
+
+    -- Rival, Route 110: five, alone; the starter is the ace at 20 ---------------------------
+    BRENDAN_ROUTE_110_MUDKIP = { tier = "gym", party = {
+      { "SWELLOW", 19, ability = "GUTS", nature = "JOLLY", item = "SHARP_BEAK", moves = { "AERIAL_ACE", "QUICK_ATTACK", "ROOST", "TAILWIND" } },
+      { "DEWPIDER", 18, ability = "WATER_BUBBLE", nature = "ADAMANT", item = "ORAN_BERRY", moves = { "BUBBLE_BEAM", "BUG_BITE", "BITE", "SPIDER_WEB" } },
+      { "GROWLITHE", 19, ability = "INTIMIDATE", nature = "ADAMANT", item = "CHARCOAL", moves = { "FLAME_WHEEL", "BITE", "HELPING_HAND", "REVERSAL" } },
+      { "MAGNEMITE", 18, ability = "STURDY", nature = "MODEST", spread = "spa", item = "MAGNET", moves = { "SPARK", "MAGNET_BOMB", "THUNDER_WAVE", "LIGHT_SCREEN" } },
+      { "GROVYLE", 20, ability = "OVERGROW", nature = "JOLLY", item = "SITRUS_BERRY", moves = { "MEGA_DRAIN", "DRAGON_BREATH", "FURY_CUTTER", "QUICK_ATTACK" } },
+    } },
+    BRENDAN_ROUTE_110_TORCHIC = { tier = "gym", party = {
+      { "SWELLOW", 19, ability = "GUTS", nature = "JOLLY", item = "SHARP_BEAK", moves = { "AERIAL_ACE", "QUICK_ATTACK", "ROOST", "TAILWIND" } },
+      { "GROWLITHE", 19, ability = "INTIMIDATE", nature = "ADAMANT", item = "CHARCOAL", moves = { "FLAME_WHEEL", "BITE", "HELPING_HAND", "REVERSAL" } },
+      { "SHROOMISH", 18, ability = "POISON_HEAL", nature = "IMPISH", spread = "bulk", item = "TOXIC_ORB", moves = { "BULLET_SEED", "STUN_SPORE", "LEECH_SEED", "HEADBUTT" } },
+      { "MAGNEMITE", 18, ability = "STURDY", nature = "MODEST", spread = "spa", item = "MAGNET", moves = { "SPARK", "MAGNET_BOMB", "THUNDER_WAVE", "LIGHT_SCREEN" } },
+      { "MARSHTOMP", 20, ability = "TORRENT", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "MUD_SHOT", "WATER_GUN", "ROCK_TOMB", "PROTECT" } },
+    } },
+    BRENDAN_ROUTE_110_TREECKO = { tier = "gym", party = {
+      { "SWELLOW", 19, ability = "GUTS", nature = "JOLLY", item = "SHARP_BEAK", moves = { "AERIAL_ACE", "QUICK_ATTACK", "ROOST", "TAILWIND" } },
+      { "DEWPIDER", 18, ability = "WATER_BUBBLE", nature = "ADAMANT", item = "ORAN_BERRY", moves = { "BUBBLE_BEAM", "BUG_BITE", "BITE", "SPIDER_WEB" } },
+      { "SHROOMISH", 18, ability = "POISON_HEAL", nature = "IMPISH", spread = "bulk", item = "TOXIC_ORB", moves = { "BULLET_SEED", "STUN_SPORE", "LEECH_SEED", "HEADBUTT" } },
+      { "MAGNEMITE", 18, ability = "STURDY", nature = "MODEST", spread = "spa", item = "MAGNET", moves = { "SPARK", "MAGNET_BOMB", "THUNDER_WAVE", "LIGHT_SCREEN" } },
+      { "COMBUSKEN", 20, ability = "BLAZE", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "DOUBLE_KICK", "FLAME_CHARGE", "ROCK_TOMB", "PECK" } },
+    } },
+    MAY_ROUTE_110_MUDKIP = { tier = "gym", party = {
+      { "SWELLOW", 19, ability = "GUTS", nature = "JOLLY", item = "SHARP_BEAK", moves = { "AERIAL_ACE", "QUICK_ATTACK", "ROOST", "TAILWIND" } },
+      { "STARYU", 18, ability = "NATURAL_CURE", nature = "TIMID", spread = "spa", item = "MYSTIC_WATER", moves = { "BUBBLE_BEAM", "SWIFT", "RECOVER", "THUNDER_WAVE" } },
+      { "PONYTA", 18, ability = "FLAME_BODY", nature = "JOLLY", item = "CHARCOAL", moves = { "FLAME_WHEEL", "STOMP", "DOUBLE_KICK", "FLAME_CHARGE" } },
+      { "AZUMARILL", 18, ability = "HUGE_POWER", nature = "ADAMANT", item = "ORAN_BERRY", moves = { "AQUA_JET", "ROLLOUT", "HELPING_HAND", "DEFENSE_CURL" } },
+      { "GROVYLE", 20, ability = "OVERGROW", nature = "JOLLY", item = "SITRUS_BERRY", moves = { "MEGA_DRAIN", "DRAGON_BREATH", "FURY_CUTTER", "QUICK_ATTACK" } },
+    } },
+    MAY_ROUTE_110_TORCHIC = { tier = "gym", party = {
+      { "SWELLOW", 19, ability = "GUTS", nature = "JOLLY", item = "SHARP_BEAK", moves = { "AERIAL_ACE", "QUICK_ATTACK", "ROOST", "TAILWIND" } },
+      { "STEENEE", 18, ability = "SWEET_VEIL", nature = "ADAMANT", item = "MIRACLE_SEED", moves = { "RAZOR_LEAF", "DOUBLE_SLAP", "PLAY_NICE", "RAPID_SPIN" } },
+      { "PONYTA", 18, ability = "FLAME_BODY", nature = "JOLLY", item = "CHARCOAL", moves = { "FLAME_WHEEL", "STOMP", "DOUBLE_KICK", "FLAME_CHARGE" } },
+      { "AZUMARILL", 18, ability = "HUGE_POWER", nature = "ADAMANT", item = "ORAN_BERRY", moves = { "AQUA_JET", "ROLLOUT", "HELPING_HAND", "DEFENSE_CURL" } },
+      { "MARSHTOMP", 20, ability = "TORRENT", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "MUD_SHOT", "WATER_GUN", "ROCK_TOMB", "PROTECT" } },
+    } },
+    MAY_ROUTE_110_TREECKO = { tier = "gym", party = {
+      { "SWELLOW", 19, ability = "GUTS", nature = "JOLLY", item = "SHARP_BEAK", moves = { "AERIAL_ACE", "QUICK_ATTACK", "ROOST", "TAILWIND" } },
+      { "STARYU", 18, ability = "NATURAL_CURE", nature = "TIMID", spread = "spa", item = "MYSTIC_WATER", moves = { "BUBBLE_BEAM", "SWIFT", "RECOVER", "THUNDER_WAVE" } },
+      { "STEENEE", 18, ability = "SWEET_VEIL", nature = "ADAMANT", item = "MIRACLE_SEED", moves = { "RAZOR_LEAF", "DOUBLE_SLAP", "PLAY_NICE", "RAPID_SPIN" } },
+      { "AZUMARILL", 18, ability = "HUGE_POWER", nature = "ADAMANT", item = "ORAN_BERRY", moves = { "AQUA_JET", "ROLLOUT", "HELPING_HAND", "DEFENSE_CURL" } },
+      { "COMBUSKEN", 20, ability = "BLAZE", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "DOUBLE_KICK", "FLAME_CHARGE", "ROCK_TOMB", "PECK" } },
+    } },
+
+    -- Trick House 1: tag battles at 18 ---------------------------------------------------
+    SALLY = { partner = "TH1_MIA", party = {
+      { "ODDISH", 18, ability = "CHLOROPHYLL", nature = "MODEST", spread = "spa", item = "ORAN_BERRY", moves = { "MEGA_DRAIN", "ACID", "SLEEP_POWDER", "STUN_SPORE" } },
+      { "TORRACAT", 18, ability = "INTIMIDATE", nature = "ADAMANT", item = "CHARCOAL", moves = { "FIRE_FANG", "DOUBLE_KICK", "LICK", "ROAR" } },
+    } },
+    ROBIN = { partner = "TH1_ZOE", party = {
+      { "FLETCHINDER", 18, ability = "FLAME_BODY", nature = "JOLLY", item = "SHARP_BEAK", moves = { "FLAME_CHARGE", "PECK", "QUICK_ATTACK", "TAILWIND" } },
+      { "BRIONNE", 18, ability = "LIQUID_VOICE", nature = "MODEST", spread = "spa", item = "MYSTIC_WATER", moves = { "DISARMING_VOICE", "ICY_WIND", "AQUA_JET", "ENCORE" } },
+    } },
+    EDDIE = { partner = "TH1_KIP", party = {
+      { "DUCKLETT", 18, ability = "BIG_PECKS", nature = "MODEST", spread = "spa", item = "ORAN_BERRY", moves = { "BUBBLE_BEAM", "AIR_CUTTER", "FEATHER_DANCE", "DEFOG" } },
+      { "DARTRIX", 18, ability = "LONG_REACH", nature = "ADAMANT", item = "MIRACLE_SEED", moves = { "RAZOR_LEAF", "OMINOUS_WIND", "PECK", "FORESIGHT" } },
+    } },
+
+    -- Route 103 east: tag battles at 18-19 --------------------------------------------------
+    DAISY = { partner = "R103_FAY", party = {
+      { "CHERUBI", 18, ability = "CHLOROPHYLL", nature = "MODEST", spread = "spa", item = "ORAN_BERRY", moves = { "MAGICAL_LEAF", "HELPING_HAND", "LEECH_SEED", "MORNING_SUN" } },
+      { "ROSELIA", 19, ability = "NATURAL_CURE", nature = "MODEST", spread = "spa", item = "MIRACLE_SEED", moves = { "MEGA_DRAIN", "MAGICAL_LEAF", "STUN_SPORE", "LEECH_SEED" } },
+    } },
+    -- the twins are a double on their own
+    AMY_AND_LIV_1 = { party = {
+      { "JIGGLYPUFF", 18, ability = "FRIEND_GUARD", nature = "MODEST", spread = "stank", item = "ORAN_BERRY", moves = { "DISARMING_VOICE", "SING", "ROLLOUT", "DEFENSE_CURL" } },
+      { "CLEFAIRY", 18, ability = "FRIEND_GUARD", nature = "BOLD", spread = "bulk", item = "ORAN_BERRY", moves = { "FOLLOW_ME", "DISARMING_VOICE", "ENCORE", "SING" } },
+      { "PLUSLE", 18, ability = "PLUS", nature = "TIMID", spread = "spa", item = "ORAN_BERRY", moves = { "SPARK", "NUZZLE", "HELPING_HAND", "ENCORE" } },
+      { "MINUN", 18, ability = "MINUS", nature = "TIMID", spread = "spa", item = "ORAN_BERRY", moves = { "SPARK", "NUZZLE", "HELPING_HAND", "THUNDER_WAVE" } },
+    } },
+    MIGUEL_1 = { partner = "R103_GUY", party = {
+      { "SKITTY", 19, ability = "WONDER_SKIN", nature = "JOLLY", item = "SILK_SCARF", moves = { "FAKE_OUT", "DISARMING_VOICE", "SING", "HELPING_HAND" } },
+      { "MEOWTH", 19, ability = "TECHNICIAN", nature = "JOLLY", item = "ORAN_BERRY", moves = { "FURY_SWIPES", "BITE", "FEINT_ATTACK", "TAUNT" } },
+    } },
+    ANDREW = { partner = "R103_FINN", party = {
+      { "BARBOACH", 19, ability = "OBLIVIOUS", nature = "MODEST", spread = "stank", item = "ORAN_BERRY", moves = { "MUD_BOMB", "WATER_GUN", "AMNESIA", "PROTECT" } },
+      { "HORSEA", 18, ability = "SNIPER", nature = "MODEST", spread = "spa", item = "SCOPE_LENS", moves = { "BUBBLE_BEAM", "TWISTER", "SMOKESCREEN", "LEER" } },
+      { "QWILFISH", 18, ability = "INTIMIDATE", nature = "ADAMANT", item = "POISON_BARB", moves = { "FELL_STINGER", "WATER_GUN", "TOXIC_SPIKES", "HARDEN" } },
+    } },
+    MARCOS = { partner = "R103_JAX", party = {
+      { "ELEKID", 19, ability = "STATIC", nature = "JOLLY", item = "MAGNET", moves = { "SHOCK_WAVE", "LOW_KICK", "QUICK_ATTACK", "THUNDER_WAVE" } },
+      { "KRICKETUNE", 19, ability = "TECHNICIAN", nature = "ADAMANT", item = "SILVER_POWDER", moves = { "FURY_CUTTER", "MEGA_DRAIN", "SING", "TAUNT" } },
+    } },
+    RHETT = { partner = "R103_DUKE", party = {
+      { "SAWK", 19, ability = "STURDY", nature = "ADAMANT", item = "BLACK_BELT", moves = { "LOW_SWEEP", "KARATE_CHOP", "ROCK_TOMB", "COUNTER" } },
+      { "MAKUHITA", 19, ability = "THICK_FAT", nature = "ADAMANT", spread = "tank", item = "ORAN_BERRY", moves = { "FAKE_OUT", "FORCE_PALM", "KNOCK_OFF", "VITAL_THROW" } },
+    } },
+
+    -- Wally at Mauville's gym door: four, alone; Kirlia is the ace at 21 -----------------------
+    WALLY_MAUVILLE = { tier = "gym", party = {
+      { "ROSELIA", 20, ability = "NATURAL_CURE", nature = "MODEST", spread = "spa", item = "MIRACLE_SEED", moves = { "GIGA_DRAIN", "MAGICAL_LEAF", "STUN_SPORE", "LEECH_SEED" } },
+      { "FLETCHINDER", 20, ability = "FLAME_BODY", nature = "JOLLY", item = "CHARCOAL", moves = { "FLAME_CHARGE", "ACROBATICS", "QUICK_ATTACK", "TAILWIND" } },
+      { "AZUMARILL", 20, ability = "HUGE_POWER", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "AQUA_JET", "AQUA_TAIL", "KNOCK_OFF", "HELPING_HAND" } },
+      { "KIRLIA", 21, ability = "TRACE", nature = "MODEST", spread = "spa", item = "TWISTED_SPOON", moves = { "DRAINING_KISS", "PSYBEAM", "DISARMING_VOICE", "HYPNOSIS" } },
+    } },
+
+    -- Cycling Road: tag battles at 20-21 -------------------------------------------------------
+    JACLYN = { partner = "CR_NOVA", party = {
+      { "SOLOSIS", 20, ability = "MAGIC_GUARD", nature = "MODEST", spread = "spa", item = "ORAN_BERRY", moves = { "PSYBEAM", "RECOVER", "CHARM", "PROTECT" } },
+      { "KADABRA", 21, ability = "INNER_FOCUS", nature = "TIMID", spread = "spa", item = "TWISTED_SPOON", moves = { "PSYBEAM", "SHOCK_WAVE", "DISABLE", "REFLECT" } },
+    } },
+    JACOB = { partner = "CR_TOD", party = {
+      { "GROWLITHE", 21, ability = "INTIMIDATE", nature = "ADAMANT", item = "CHARCOAL", moves = { "FLAME_WHEEL", "BITE", "HELPING_HAND", "ROAR" } },
+      { "ROCKRUFF", 21, ability = "VITAL_SPIRIT", nature = "JOLLY", item = "HARD_STONE", moves = { "ROCK_TOMB", "BITE", "ROCK_THROW", "SAND_ATTACK" } },
+    } },
+    ANTHONY = { partner = "CR_WIN", party = {
+      { "MAGNEMITE", 20, ability = "STURDY", nature = "MODEST", spread = "spa", item = "MAGNET", moves = { "SPARK", "MAGNET_BOMB", "THUNDER_WAVE", "LIGHT_SCREEN" } },
+      { "CHARJABUG", 20, ability = "BATTERY", nature = "RELAXED", spread = "tank", item = "ORAN_BERRY", moves = { "SPARK", "BUG_BITE", "BITE", "STRING_SHOT" } },
+    } },
+    BENJAMIN_1 = { partner = "CR_ACE", party = {
+      { "PIKACHU", 21, ability = "LIGHTNING_ROD", nature = "JOLLY", item = "LIGHT_BALL", moves = { "SPARK", "NUZZLE", "FEINT", "QUICK_ATTACK" } },
+      { "GEODUDE_ALOLAN", 20, ability = "GALVANIZE", nature = "ADAMANT", item = "ORAN_BERRY", moves = { "ROCK_THROW", "SPARK", "SMACK_DOWN", "ROCK_POLISH" } },
+    } },
+    ABIGAIL_1 = { partner = "CR_ADA", party = {
+      { "EMOLGA", 20, ability = "MOTOR_DRIVE", nature = "TIMID", spread = "spa", item = "ORAN_BERRY", moves = { "SHOCK_WAVE", "AIR_CUTTER", "NUZZLE", "QUICK_ATTACK" } },
+      { "TOGEDEMARU", 20, ability = "LIGHTNING_ROD", nature = "JOLLY", item = "ORAN_BERRY", moves = { "SPARK", "NUZZLE", "ROLLOUT", "DEFENSE_CURL" } },
+    } },
+    JASMINE = { partner = "CR_SKY", party = {
+      { "STARAVIA", 20, ability = "INTIMIDATE", nature = "JOLLY", item = "SHARP_BEAK", moves = { "AERIAL_ACE", "QUICK_ATTACK", "TAILWIND", "REVENGE" } },
+      { "KLINK", 20, ability = "CLEAR_BODY", nature = "ADAMANT", item = "ORAN_BERRY", moves = { "VISE_GRIP", "CHARGE_BEAM", "METAL_SOUND", "AUTOTOMIZE" } },
+    } },
+
+    -- Route 117: tag battles at 20-21; the breeders and the twins fight alone ------------------
+    DEREK = { partner = "R117_KAI", party = {
+      { "MOTHIM", 21, ability = "TINTED_LENS", nature = "MODEST", spread = "spa", item = "SILVER_POWDER", moves = { "SILVER_WIND", "CONFUSION", "QUIVER_DANCE", "PROTECT" } },
+      { "JOLTIK", 20, ability = "COMPOUND_EYES", nature = "TIMID", spread = "spa", item = "ORAN_BERRY", moves = { "ELECTROWEB", "BUG_BITE", "THUNDER_WAVE", "SPIDER_WEB" } },
+    } },
+    ANNA_AND_MEG_1 = { party = {
+      { "MINCCINO", 21, ability = "SKILL_LINK", nature = "JOLLY", item = "SILK_SCARF", moves = { "DOUBLE_SLAP", "SWIFT", "HELPING_HAND", "ENCORE" } },
+      { "TIMBURR", 21, ability = "GUTS", nature = "ADAMANT", item = "ORAN_BERRY", moves = { "ROCK_THROW", "MACH_PUNCH", "LOW_KICK", "BULK_UP" } },
+      { "SKITTY", 20, ability = "WONDER_SKIN", nature = "JOLLY", item = "ORAN_BERRY", moves = { "FAKE_OUT", "DISARMING_VOICE", "SING", "HELPING_HAND" } },
+      { "MACHOP", 20, ability = "NO_GUARD", nature = "ADAMANT", item = "BLACK_BELT", moves = { "KARATE_CHOP", "LOW_SWEEP", "REVENGE", "ROCK_TOMB" } },
+    } },
+    DYLAN_1 = { partner = "R117_LEE", party = {
+      { "YANMA", 21, ability = "SPEED_BOOST", nature = "MODEST", spread = "spa", item = "ORAN_BERRY", moves = { "AIR_CUTTER", "SILVER_WIND", "DETECT", "SUPERSONIC" } },
+      { "DODUO", 20, ability = "EARLY_BIRD", nature = "JOLLY", item = "SHARP_BEAK", moves = { "PLUCK", "DOUBLE_HIT", "QUICK_ATTACK", "AGILITY" } },
+    } },
+    MARIA_1 = { partner = "R117_MAE", party = {
+      { "TRANQUILL", 20, ability = "SUPER_LUCK", nature = "JOLLY", item = "SCOPE_LENS", moves = { "AIR_CUTTER", "QUICK_ATTACK", "DETECT", "TAILWIND" } },
+      { "HAWLUCHA", 21, ability = "UNBURDEN", nature = "JOLLY", item = "ORAN_BERRY", moves = { "AERIAL_ACE", "LOW_SWEEP", "FEATHER_DANCE", "DETECT" } },
+    } },
+    ISAAC_1 = { party = {
+      { "EEVEE", 19, ability = "ADAPTABILITY", nature = "JOLLY", item = "SILK_SCARF", moves = { "QUICK_ATTACK", "COVET", "HELPING_HAND", "BABY_DOLL_EYES" } },
+      { "BONSLY", 19, ability = "STURDY", nature = "IMPISH", spread = "bulk", item = "ORAN_BERRY", moves = { "ROCK_THROW", "LOW_KICK", "FAKE_TEARS", "FLAIL" } },
+      { "DEINO", 19, ability = "HUSTLE", nature = "ADAMANT", item = "ORAN_BERRY", moves = { "DRAGON_BREATH", "BITE", "HEADBUTT", "FOCUS_ENERGY" } },
+      { "LITWICK", 19, ability = "FLASH_FIRE", nature = "MODEST", spread = "spa", item = "ORAN_BERRY", moves = { "EMBER", "ASTONISH", "MINIMIZE", "CONFUSE_RAY" } },
+    } },
+    LYDIA_1 = { party = {
+      { "ELEKID", 19, ability = "STATIC", nature = "JOLLY", item = "ORAN_BERRY", moves = { "SHOCK_WAVE", "LOW_KICK", "QUICK_ATTACK", "THUNDER_WAVE" } },
+      { "MAGBY", 19, ability = "FLAME_BODY", nature = "MODEST", spread = "spa", item = "ORAN_BERRY", moves = { "EMBER", "SMOG", "FEINT_ATTACK", "SMOKESCREEN" } },
+      { "SMOOCHUM", 19, ability = "OBLIVIOUS", nature = "MODEST", spread = "spa", item = "ORAN_BERRY", moves = { "POWDER_SNOW", "HEART_STAMP", "SWEET_KISS", "SING" } },
+      { "DRATINI", 19, ability = "SHED_SKIN", nature = "ADAMANT", item = "ORAN_BERRY", moves = { "DRAGON_TAIL", "TWISTER", "THUNDER_WAVE", "AGILITY" } },
+    } },
+    MELINA = { partner = "R117_ROX", party = {
+      { "PONYTA", 21, ability = "FLASH_FIRE", nature = "JOLLY", item = "CHARCOAL", moves = { "FLAME_WHEEL", "STOMP", "FLAME_CHARGE", "DOUBLE_KICK" } },
+      { "SNEASEL", 21, ability = "INNER_FOCUS", nature = "JOLLY", item = "ORAN_BERRY", moves = { "FEINT_ATTACK", "ICY_WIND", "QUICK_ATTACK", "TAUNT" } },
+    } },
+    BRANDI = { partner = "R117_IVY", party = {
+      { "ESPURR", 21, ability = "INFILTRATOR", nature = "TIMID", spread = "spa", item = "ORAN_BERRY", moves = { "FAKE_OUT", "PSYBEAM", "DISARMING_VOICE", "LIGHT_SCREEN" } },
+      { "MUNNA", 21, ability = "TELEPATHY", nature = "BOLD", spread = "bulk", item = "ORAN_BERRY", moves = { "PSYBEAM", "HYPNOSIS", "MOONLIGHT", "DEFENSE_CURL" } },
+    } },
+    AISHA = { partner = "R117_JO", party = {
+      { "LUCARIO", 21, ability = "INNER_FOCUS", nature = "ADAMANT", item = "BLACK_BELT", moves = { "POWER_UP_PUNCH", "BULLET_PUNCH", "METAL_CLAW", "DETECT" } },
+      { "MEDITITE", 20, ability = "PURE_POWER", nature = "JOLLY", item = "ORAN_BERRY", moves = { "FAKE_OUT", "FORCE_PALM", "CONFUSION", "DETECT" } },
+    } },
+
+    -- Route 111 south: tag battles at 21 ----------------------------------------------------------
+    TYRON = { partner = "R111_ABE", party = {
+      { "SANDSHREW", 21, ability = "SAND_RUSH", nature = "JOLLY", item = "SOFT_SAND", moves = { "RAPID_SPIN", "FURY_CUTTER", "SAND_TOMB", "DEFENSE_CURL" } },
+      { "SCYTHER", 21, ability = "TECHNICIAN", nature = "JOLLY", item = "ORAN_BERRY", moves = { "WING_ATTACK", "FALSE_SWIPE", "QUICK_ATTACK", "FOCUS_ENERGY" } },
+    } },
+    CELINA = { partner = "R111_NIA", party = {
+      { "BELLSPROUT", 21, ability = "CHLOROPHYLL", nature = "MODEST", spread = "spa", item = "ORAN_BERRY", moves = { "VINE_WHIP", "ACID", "SLEEP_POWDER", "WRAP" } },
+      { "SKIPLOOM", 21, ability = "INFILTRATOR", nature = "TIMID", spread = "spa", item = "ORAN_BERRY", moves = { "BULLET_SEED", "STUN_SPORE", "LEECH_SEED", "FAIRY_WIND" } },
+    } },
+    BIANCA = { partner = "R111_PIA", party = {
+      { "PUMPKABOO", 21, ability = "INSOMNIA", nature = "IMPISH", spread = "bulk", item = "ORAN_BERRY", moves = { "RAZOR_LEAF", "ASTONISH", "LEECH_SEED", "CONFUSE_RAY" } },
+      { "RATICATE", 21, ability = "GUTS", nature = "JOLLY", item = "SILK_SCARF", moves = { "HYPER_FANG", "QUICK_ATTACK", "BITE", "FOCUS_ENERGY" } },
+    } },
+    HAYDEN = { partner = "R111_CY", party = {
+      { "NUMEL", 21, ability = "SIMPLE", nature = "MODEST", spread = "spa", item = "CHARCOAL", moves = { "FLAME_BURST", "EMBER", "AMNESIA", "MAGNITUDE" } },
+      { "PONYTA", 21, ability = "FLASH_FIRE", nature = "JOLLY", item = "ORAN_BERRY", moves = { "FLAME_WHEEL", "STOMP", "FLAME_CHARGE", "DOUBLE_KICK" } },
+    } },
+
+    -- the Winstrates: four in a row, each alone with three -------------------------------------
+    VICTOR = { tier = "gym", party = {
+      { "STARAVIA", 21, ability = "INTIMIDATE", nature = "JOLLY", item = "SHARP_BEAK", moves = { "AERIAL_ACE", "QUICK_ATTACK", "TAILWIND", "REVENGE" } },
+      { "GUMSHOOS", 21, ability = "STRONG_JAW", nature = "ADAMANT", item = "ORAN_BERRY", moves = { "BITE", "FIRE_FANG", "ICE_FANG", "SAND_ATTACK" } },
+      { "LINOONE", 21, ability = "QUICK_FEET", nature = "JOLLY", item = "SILK_SCARF", moves = { "HEADBUTT", "COVET", "PIN_MISSILE", "HONE_CLAWS" } },
+    } },
+    VICTORIA = { tier = "gym", party = {
+      { "WHIMSICOTT", 21, ability = "PRANKSTER", nature = "TIMID", spread = "spa", item = "ORAN_BERRY", moves = { "TAILWIND", "MEGA_DRAIN", "FAIRY_WIND", "STUN_SPORE" } },
+      { "ROSELIA", 21, ability = "NATURAL_CURE", nature = "MODEST", spread = "spa", item = "MIRACLE_SEED", moves = { "GIGA_DRAIN", "MAGICAL_LEAF", "STUN_SPORE", "LEECH_SEED" } },
+      { "CLEFAIRY", 21, ability = "FRIEND_GUARD", nature = "BOLD", spread = "bulk", item = "ORAN_BERRY", moves = { "FOLLOW_ME", "DISARMING_VOICE", "ENCORE", "SING" } },
+    } },
+    VIVI = { tier = "gym", party = {
+      { "BUIZEL", 21, ability = "SWIFT_SWIM", nature = "JOLLY", item = "MYSTIC_WATER", moves = { "BUBBLE_BEAM", "QUICK_ATTACK", "SWIFT", "PURSUIT" } },
+      { "SALANDIT", 21, ability = "CORROSION", nature = "TIMID", spread = "spa", item = "CHARCOAL", moves = { "FLAME_BURST", "SMOG", "DRAGON_RAGE", "SWEET_SCENT" } },
+      { "SKIDDO", 21, ability = "SAP_SIPPER", nature = "ADAMANT", item = "MIRACLE_SEED", moves = { "RAZOR_LEAF", "BULLDOZE", "LEECH_SEED", "GROWTH" } },
+    } },
+    VICKY = { tier = "gym", party = {
+      { "HERACROSS", 22, ability = "GUTS", nature = "ADAMANT", item = "FLAME_ORB", moves = { "HORN_ATTACK", "ARM_THRUST", "NIGHT_SLASH", "COUNTER" } },
+      { "MEOWTH", 21, ability = "TECHNICIAN", nature = "JOLLY", item = "ORAN_BERRY", moves = { "FAKE_OUT", "FURY_SWIPES", "BITE", "TAUNT" } },
+      { "WHIMSICOTT", 21, ability = "PRANKSTER", nature = "TIMID", spread = "spa", item = "ORAN_BERRY", moves = { "TAILWIND", "MEGA_DRAIN", "FAIRY_WIND", "COTTON_SPORE" } },
+    } },
+
+    -- Mauville Gym: trainers fight alone with three ----------------------------------------------
+    KIRK = { tier = "gym", party = {
+      { "VOLTORB", 22, ability = "AFTERMATH", nature = "TIMID", spread = "spa", item = "MAGNET", moves = { "SPARK", "CHARGE_BEAM", "EERIE_IMPULSE", "SCREECH" } },
+      { "BLITZLE", 21, ability = "MOTOR_DRIVE", nature = "JOLLY", item = "ORAN_BERRY", moves = { "SHOCK_WAVE", "FLAME_CHARGE", "QUICK_ATTACK", "THUNDER_WAVE" } },
+      { "ELECTRIKE", 22, ability = "LIGHTNING_ROD", nature = "TIMID", spread = "spa", item = "ORAN_BERRY", moves = { "SPARK", "THUNDER_FANG", "QUICK_ATTACK", "HOWL" } },
+    } },
+    SHAWN = { tier = "gym", party = {
+      { "HELIOPTILE", 22, ability = "DRY_SKIN", nature = "TIMID", spread = "spa", item = "ORAN_BERRY", moves = { "THUNDER_SHOCK", "QUICK_ATTACK", "MUD_SLAP", "CHARGE" } },
+      { "PIKACHU", 21, ability = "LIGHTNING_ROD", nature = "JOLLY", item = "LIGHT_BALL", moves = { "SPARK", "NUZZLE", "FEINT", "QUICK_ATTACK" } },
+      { "LUXIO", 22, ability = "INTIMIDATE", nature = "ADAMANT", item = "MAGNET", moves = { "SPARK", "BITE", "DOUBLE_KICK", "LEER" } },
+    } },
+    BEN = { tier = "gym", party = {
+      { "STUNFISK", 22, ability = "STATIC", nature = "MODEST", spread = "stank", item = "ORAN_BERRY", moves = { "MUD_BOMB", "THUNDER_SHOCK", "MUD_SHOT", "SUCKER_PUNCH" } },
+      { "TOGEDEMARU", 22, ability = "LIGHTNING_ROD", nature = "JOLLY", item = "ORAN_BERRY", moves = { "SPARK", "NUZZLE", "ROLLOUT", "DEFENSE_CURL" } },
+      { "CHARJABUG", 21, ability = "BATTERY", nature = "RELAXED", spread = "tank", item = "ORAN_BERRY", moves = { "SPARK", "BUG_BITE", "BITE", "STRING_SHOT" } },
+    } },
+    VIVIAN = { tier = "gym", party = {
+      { "ELEKID", 22, ability = "VITAL_SPIRIT", nature = "JOLLY", item = "MAGNET", moves = { "SHOCK_WAVE", "LOW_KICK", "QUICK_ATTACK", "THUNDER_WAVE" } },
+      { "MACHOP", 21, ability = "NO_GUARD", nature = "ADAMANT", item = "BLACK_BELT", moves = { "KARATE_CHOP", "LOW_SWEEP", "REVENGE", "ROCK_TOMB" } },
+      { "PACHIRISU", 21, ability = "VOLT_ABSORB", nature = "IMPISH", spread = "bulk", item = "ORAN_BERRY", moves = { "NUZZLE", "SPARK", "SUPER_FANG", "ENDURE" } },
+    } },
+    ANGELO = { tier = "gym", party = {
+      { "ILLUMISE", 22, ability = "PRANKSTER", nature = "BOLD", spread = "bulk", item = "ORAN_BERRY", moves = { "STRUGGLE_BUG", "CHARM", "MOONLIGHT", "PLAY_NICE" } },
+      { "VOLBEAT", 22, ability = "PRANKSTER", nature = "IMPISH", spread = "bulk", item = "ORAN_BERRY", moves = { "STRUGGLE_BUG", "TAIL_GLOW", "CONFUSE_RAY", "MOONLIGHT" } },
+      { "JOLTIK", 21, ability = "COMPOUND_EYES", nature = "TIMID", spread = "spa", item = "ORAN_BERRY", moves = { "ELECTROWEB", "BUG_BITE", "THUNDER_WAVE", "SPIDER_WEB" } },
+    } },
+
+    -- Wattson: six, alone (2-vs-1); Raichu is the ace at the cap ---------------------------------
+    WATTSON_1 = { tier = "leader", party = {
+      { "MAGNEMITE", 22, ability = "STURDY", nature = "MODEST", spread = "spa", item = "MAGNET", moves = { "SPARK", "MAGNET_BOMB", "THUNDER_WAVE", "LIGHT_SCREEN" } },
+      { "JOLTIK", 22, ability = "COMPOUND_EYES", nature = "TIMID", spread = "spa", item = "FOCUS_SASH", moves = { "ELECTROWEB", "BUG_BITE", "THUNDER_WAVE", "ABSORB" } },
+      { "CHINCHOU", 22, ability = "VOLT_ABSORB", nature = "MODEST", spread = "stank", item = "SITRUS_BERRY", moves = { "WATER_PULSE", "SPARK", "CONFUSE_RAY", "THUNDER_WAVE" } },
+      { "ROTOM", 23, ability = "LEVITATE", nature = "TIMID", spread = "spa", item = "SITRUS_BERRY", moves = { "SHOCK_WAVE", "HEX", "CONFUSE_RAY", "THUNDER_WAVE" } },
+      { "TOGEDEMARU", 23, ability = "LIGHTNING_ROD", nature = "JOLLY", item = "SITRUS_BERRY", moves = { "SPARK", "NUZZLE", "U_TURN", "DEFENSE_CURL" } },
+      { "RAICHU", 24, ability = "LIGHTNING_ROD", nature = "TIMID", spread = "spa", item = "MAGNET", moves = { "DISCHARGE", "NUZZLE", "FEINT", "NASTY_PLOT" } },
+    } },
   },
 
   partners = {
@@ -377,6 +709,159 @@ return {
     R106_ROY = { like = "ELLIOT_1", name = "ROY", defeat = "Nothing's biting today, huh.", party = {
       { "CHATOT", 16, ability = "BIG_PECKS", nature = "TIMID", spread = "spa", item = "ORAN_BERRY", moves = { "AIR_CUTTER", "TAUNT", "TAILWIND", "SING" } },
       { "INKAY", 16, ability = "CONTRARY", nature = "ADAMANT", item = "ORAN_BERRY", moves = { "FOUL_PLAY", "PECK", "TOPSY_TURVY", "HYPNOSIS" } },
+    } },
+    -- Chapter 3 partners -------------------------------------------------------------------
+    R109_WES = { like = "HUEY", name = "WES", defeat = "Shiver me timbers!", party = {
+      { "SEEL", 16, ability = "HYDRATION", nature = "BOLD", spread = "bulk", item = "ORAN_BERRY", moves = { "FAKE_OUT", "ICY_WIND", "HEADBUTT", "ENCORE" } },
+      { "CORPHISH", 17, ability = "ADAPTABILITY", nature = "ADAMANT", item = "MYSTIC_WATER", moves = { "BUBBLE_BEAM", "KNOCK_OFF", "VISE_GRIP", "TAUNT" } },
+    } },
+    R109_PIP = { like = "EDMOND", name = "PIP", defeat = "Swabbed the deck with us, you did.", party = {
+      { "CUBCHOO", 17, ability = "SLUSH_RUSH", nature = "ADAMANT", item = "NEVER_MELT_ICE", moves = { "ICY_WIND", "FROST_BREATH", "FURY_SWIPES", "PLAY_NICE" } },
+      { "PANPOUR", 16, ability = "GLUTTONY", nature = "MODEST", spread = "spa", item = "ORAN_BERRY", moves = { "SCALD", "BITE", "TAUNT", "WATER_SPORT" } },
+    } },
+    R109_DOT = { like = "HAILEY", name = "DOT", defeat = "My floatie popped...", party = {
+      { "MARILL", 16, ability = "HUGE_POWER", nature = "ADAMANT", item = "ORAN_BERRY", moves = { "AQUA_JET", "ROLLOUT", "DEFENSE_CURL", "HELPING_HAND" } },
+      { "BUIZEL", 16, ability = "SWIFT_SWIM", nature = "JOLLY", item = "ORAN_BERRY", moves = { "BUBBLE_BEAM", "QUICK_ATTACK", "SWIFT", "PURSUIT" } },
+    } },
+    R109_BO = { like = "RICKY_1", name = "BO", defeat = "Aww, sand in my shoes AND I lost.", party = {
+      { "TYMPOLE", 16, ability = "HYDRATION", nature = "MODEST", spread = "spa", item = "ORAN_BERRY", moves = { "BUBBLE", "MUD_SHOT", "ECHOED_VOICE", "SUPERSONIC" } },
+      { "GOLDEEN", 16, ability = "LIGHTNING_ROD", nature = "ADAMANT", item = "ORAN_BERRY", moves = { "HORN_ATTACK", "BUBBLE_BEAM", "SUPERSONIC", "AGILITY" } },
+    } },
+    R109_KIM = { like = "LOLA_1", name = "KIM", defeat = "Let's go build sandcastles instead.", party = {
+      { "HORSEA", 16, ability = "SWIFT_SWIM", nature = "MODEST", spread = "spa", item = "ORAN_BERRY", moves = { "WATER_GUN", "TWISTER", "SMOKESCREEN", "BUBBLE" } },
+      { "JIGGLYPUFF", 16, ability = "FRIEND_GUARD", nature = "MODEST", spread = "stank", item = "ORAN_BERRY", moves = { "DISARMING_VOICE", "SING", "ROLLOUT", "DEFENSE_CURL" } },
+    } },
+    R109_ZED = { like = "CHANDLER", name = "ZED", defeat = "The tide went out on us.", party = {
+      { "TENTACOOL", 16, ability = "CLEAR_BODY", nature = "TIMID", spread = "spa", item = "ORAN_BERRY", moves = { "BUBBLE_BEAM", "ACID", "TOXIC_SPIKES", "SUPERSONIC" } },
+      { "MAREANIE", 17, ability = "REGENERATOR", nature = "CAREFUL", spread = "spdef", item = "ORAN_BERRY", moves = { "BITE", "POISON_STING", "WIDE_GUARD", "TOXIC_SPIKES" } },
+    } },
+    R110_ANN = { like = "ISABEL_1", name = "ANN", defeat = "Our babies did their best!", party = {
+      { "CLEFAIRY", 17, ability = "FRIEND_GUARD", nature = "BOLD", spread = "bulk", item = "ORAN_BERRY", moves = { "FOLLOW_ME", "DISARMING_VOICE", "ENCORE", "SING" } },
+      { "MEOWTH", 17, ability = "TECHNICIAN", nature = "JOLLY", item = "ORAN_BERRY", moves = { "FAKE_OUT", "FURY_SWIPES", "BITE", "TAUNT" } },
+    } },
+    R110_GIL = { like = "KALEB", name = "GIL", defeat = "Zapped right back at us!", party = {
+      { "PIKACHU", 17, ability = "LIGHTNING_ROD", nature = "JOLLY", item = "LIGHT_BALL", moves = { "SPARK", "NUZZLE", "FEINT", "QUICK_ATTACK" } },
+      { "HERDIER", 17, ability = "INTIMIDATE", nature = "ADAMANT", item = "ORAN_BERRY", moves = { "BITE", "TAKE_DOWN", "HELPING_HAND", "WORK_UP" } },
+    } },
+    R110_OTTO = { like = "TIMMY", name = "OTTO", defeat = "I'll bike faster next time!", party = {
+      { "DODUO", 17, ability = "EARLY_BIRD", nature = "JOLLY", item = "SHARP_BEAK", moves = { "PLUCK", "PURSUIT", "QUICK_ATTACK", "AGILITY" } },
+      { "ZUBAT", 17, ability = "INNER_FOCUS", nature = "JOLLY", item = "ORAN_BERRY", moves = { "AIR_CUTTER", "BITE", "CONFUSE_RAY", "SUPERSONIC" } },
+    } },
+    R110_MOE = { like = "EDWIN_1", name = "MOE", defeat = "A rare loss for my collection.", party = {
+      { "KLINK", 17, ability = "CLEAR_BODY", nature = "ADAMANT", item = "ORAN_BERRY", moves = { "VISE_GRIP", "CHARGE_BEAM", "METAL_SOUND", "AUTOTOMIZE" } },
+      { "ODDISH", 18, ability = "CHLOROPHYLL", nature = "MODEST", spread = "spa", item = "ORAN_BERRY", moves = { "MEGA_DRAIN", "ACID", "SLEEP_POWDER", "STUN_SPORE" } },
+    } },
+    R110_BRAD = { like = "JOSEPH", name = "BRAD", defeat = "Feedback! Total feedback!", party = {
+      { "WHISMUR", 18, ability = "SOUNDPROOF", nature = "MODEST", spread = "stank", item = "ORAN_BERRY", moves = { "ECHOED_VOICE", "DISARMING_VOICE", "HOWL", "SCREECH" } },
+      { "JIGGLYPUFF", 17, ability = "FRIEND_GUARD", nature = "MODEST", spread = "stank", item = "ORAN_BERRY", moves = { "DISARMING_VOICE", "SING", "ROLLOUT", "DEFENSE_CURL" } },
+    } },
+    R110_VIC = { like = "EDWARD", name = "VIC", defeat = "I foresaw this. Sort of.", party = {
+      { "ESPURR", 17, ability = "INFILTRATOR", nature = "TIMID", spread = "spa", item = "ORAN_BERRY", moves = { "FAKE_OUT", "PSYBEAM", "CONFUSION", "LIGHT_SCREEN" } },
+      { "MUNNA", 17, ability = "TELEPATHY", nature = "BOLD", spread = "bulk", item = "ORAN_BERRY", moves = { "PSYBEAM", "HYPNOSIS", "MOONLIGHT", "DEFENSE_CURL" } },
+    } },
+    R110_LIZ = { like = "ALYSSA", name = "LIZ", defeat = "You out-paced us both!", party = {
+      { "PONYTA", 18, ability = "FLASH_FIRE", nature = "JOLLY", item = "CHARCOAL", moves = { "FLAME_WHEEL", "STOMP", "FLAME_CHARGE", "TAIL_WHIP" } },
+      { "ELEKID", 17, ability = "STATIC", nature = "JOLLY", item = "ORAN_BERRY", moves = { "SHOCK_WAVE", "LOW_KICK", "QUICK_ATTACK", "THUNDER_WAVE" } },
+    } },
+    R110_HAL = { like = "DALE", name = "HAL", defeat = "Reeled in by kids again.", party = {
+      { "TENTACOOL", 17, ability = "CLEAR_BODY", nature = "TIMID", spread = "spa", item = "ORAN_BERRY", moves = { "BUBBLE_BEAM", "ACID", "TOXIC_SPIKES", "SUPERSONIC" } },
+      { "BINACLE", 18, ability = "TOUGH_CLAWS", nature = "ADAMANT", item = "HARD_STONE", moves = { "ROCK_TOMB", "FURY_SWIPES", "WATER_GUN", "SHADOW_CLAW" } },
+    } },
+    TH1_MIA = { like = "SALLY", name = "MIA", defeat = "This house is too tricky!", party = {
+      { "CHERUBI", 18, ability = "CHLOROPHYLL", nature = "MODEST", spread = "spa", item = "ORAN_BERRY", moves = { "MAGICAL_LEAF", "HELPING_HAND", "LEECH_SEED", "MORNING_SUN" } },
+      { "SKITTY", 18, ability = "WONDER_SKIN", nature = "JOLLY", item = "ORAN_BERRY", moves = { "FAKE_OUT", "DISARMING_VOICE", "SING", "HELPING_HAND" } },
+    } },
+    TH1_ZOE = { like = "ROBIN", name = "ZOE", defeat = "Tricked us right back!", party = {
+      { "MEOWTH", 18, ability = "TECHNICIAN", nature = "JOLLY", item = "ORAN_BERRY", moves = { "FAKE_OUT", "FURY_SWIPES", "BITE", "TAUNT" } },
+      { "WINGULL", 18, ability = "KEEN_EYE", nature = "TIMID", spread = "spa", item = "ORAN_BERRY", moves = { "BUBBLE_BEAM", "AIR_CUTTER", "SUPERSONIC", "PROTECT" } },
+    } },
+    TH1_KIP = { like = "EDDIE", name = "KIP", defeat = "Which way is the exit?", party = {
+      { "ZIGZAGOON", 18, ability = "QUICK_FEET", nature = "JOLLY", item = "SILK_SCARF", moves = { "HEADBUTT", "COVET", "PIN_MISSILE", "SAND_ATTACK" } },
+      { "LUXIO", 18, ability = "INTIMIDATE", nature = "ADAMANT", item = "ORAN_BERRY", moves = { "SPARK", "BITE", "DOUBLE_KICK", "LEER" } },
+    } },
+    R103_FAY = { like = "DAISY", name = "FAY", defeat = "What a lovely, lovely loss.", party = {
+      { "ODDISH", 18, ability = "CHLOROPHYLL", nature = "MODEST", spread = "spa", item = "ORAN_BERRY", moves = { "MEGA_DRAIN", "ACID", "SLEEP_POWDER", "STUN_SPORE" } },
+      { "STEENEE", 18, ability = "SWEET_VEIL", nature = "ADAMANT", item = "MIRACLE_SEED", moves = { "RAZOR_LEAF", "DOUBLE_SLAP", "PLAY_NICE", "RAPID_SPIN" } },
+    } },
+    R103_GUY = { like = "MIGUEL_1", name = "GUY", defeat = "My precious Pokémon!", party = {
+      { "HERDIER", 18, ability = "INTIMIDATE", nature = "ADAMANT", item = "ORAN_BERRY", moves = { "BITE", "TAKE_DOWN", "HELPING_HAND", "WORK_UP" } },
+      { "PIKACHU", 18, ability = "STATIC", nature = "JOLLY", item = "LIGHT_BALL", moves = { "SPARK", "NUZZLE", "FEINT", "QUICK_ATTACK" } },
+    } },
+    R103_FINN = { like = "ANDREW", name = "FINN", defeat = "That one got away from me.", party = {
+      { "TENTACOOL", 18, ability = "CLEAR_BODY", nature = "TIMID", spread = "spa", item = "ORAN_BERRY", moves = { "BUBBLE_BEAM", "ACID", "TOXIC_SPIKES", "SUPERSONIC" } },
+      { "GOLDEEN", 18, ability = "LIGHTNING_ROD", nature = "ADAMANT", item = "ORAN_BERRY", moves = { "HORN_ATTACK", "BUBBLE_BEAM", "SUPERSONIC", "AGILITY" } },
+    } },
+    R103_JAX = { like = "MARCOS", name = "JAX", defeat = "Our set got cut short!", party = {
+      { "WHISMUR", 19, ability = "SOUNDPROOF", nature = "MODEST", spread = "stank", item = "ORAN_BERRY", moves = { "ECHOED_VOICE", "DISARMING_VOICE", "HOWL", "SCREECH" } },
+      { "VOLTORB", 19, ability = "AFTERMATH", nature = "TIMID", spread = "spa", item = "ORAN_BERRY", moves = { "SPARK", "CHARGE_BEAM", "EERIE_IMPULSE", "SCREECH" } },
+    } },
+    R103_DUKE = { like = "RHETT", name = "DUKE", defeat = "Hrrah! I yield!", party = {
+      { "MACHOP", 19, ability = "NO_GUARD", nature = "ADAMANT", item = "BLACK_BELT", moves = { "KARATE_CHOP", "LOW_SWEEP", "REVENGE", "ROCK_TOMB" } },
+      { "TIMBURR", 18, ability = "GUTS", nature = "ADAMANT", item = "ORAN_BERRY", moves = { "ROCK_THROW", "MACH_PUNCH", "LOW_KICK", "BULK_UP" } },
+    } },
+    CR_NOVA = { like = "JACLYN", name = "NOVA", defeat = "I didn't see that coming...", party = {
+      { "ESPURR", 20, ability = "INFILTRATOR", nature = "TIMID", spread = "spa", item = "ORAN_BERRY", moves = { "FAKE_OUT", "PSYBEAM", "DISARMING_VOICE", "LIGHT_SCREEN" } },
+      { "MUNNA", 20, ability = "TELEPATHY", nature = "BOLD", spread = "bulk", item = "ORAN_BERRY", moves = { "PSYBEAM", "HYPNOSIS", "MOONLIGHT", "DEFENSE_CURL" } },
+    } },
+    CR_TOD = { like = "JACOB", name = "TOD", defeat = "Out-pedaled AND out-battled.", party = {
+      { "DODUO", 20, ability = "EARLY_BIRD", nature = "JOLLY", item = "SHARP_BEAK", moves = { "PLUCK", "DOUBLE_HIT", "QUICK_ATTACK", "AGILITY" } },
+      { "PONYTA", 20, ability = "FLASH_FIRE", nature = "JOLLY", item = "CHARCOAL", moves = { "FLAME_WHEEL", "STOMP", "FLAME_CHARGE", "DOUBLE_KICK" } },
+    } },
+    CR_WIN = { like = "ANTHONY", name = "WIN", defeat = "We blew a fuse!", party = {
+      { "HELIOPTILE", 20, ability = "DRY_SKIN", nature = "TIMID", spread = "spa", item = "ORAN_BERRY", moves = { "THUNDER_SHOCK", "QUICK_ATTACK", "MUD_SLAP", "CHARGE" } },
+      { "PACHIRISU", 20, ability = "VOLT_ABSORB", nature = "IMPISH", spread = "bulk", item = "ORAN_BERRY", moves = { "NUZZLE", "SPARK", "SUPER_FANG", "ENDURE" } },
+    } },
+    CR_ACE = { like = "BENJAMIN_1", name = "ACE", defeat = "Can't win 'em all on the road.", party = {
+      { "FLAAFFY", 20, ability = "STATIC", nature = "MODEST", spread = "spa", item = "MAGNET", moves = { "THUNDER_SHOCK", "COTTON_SPORE", "THUNDER_WAVE", "TAKE_DOWN" } },
+      { "TRANQUILL", 20, ability = "SUPER_LUCK", nature = "JOLLY", item = "SCOPE_LENS", moves = { "AIR_CUTTER", "QUICK_ATTACK", "DETECT", "ROOST" } },
+    } },
+    CR_ADA = { like = "ABIGAIL_1", name = "ADA", defeat = "That was electrifying. For you.", party = {
+      { "MINUN", 20, ability = "MINUS", nature = "TIMID", spread = "spa", item = "ORAN_BERRY", moves = { "SPARK", "NUZZLE", "HELPING_HAND", "THUNDER_WAVE" } },
+      { "PLUSLE", 20, ability = "PLUS", nature = "TIMID", spread = "spa", item = "ORAN_BERRY", moves = { "SPARK", "NUZZLE", "HELPING_HAND", "ENCORE" } },
+    } },
+    CR_SKY = { like = "JASMINE", name = "SKY", defeat = "Wind's against us today.", party = {
+      { "HELIOPTILE", 20, ability = "DRY_SKIN", nature = "TIMID", spread = "spa", item = "ORAN_BERRY", moves = { "THUNDER_SHOCK", "QUICK_ATTACK", "MUD_SLAP", "CHARGE" } },
+      { "DUCKLETT", 20, ability = "BIG_PECKS", nature = "MODEST", spread = "spa", item = "ORAN_BERRY", moves = { "BUBBLE_BEAM", "AIR_CUTTER", "FEATHER_DANCE", "DEFOG" } },
+    } },
+    R117_KAI = { like = "DEREK", name = "TOBY", defeat = "My bugs... squashed.", party = {
+      { "SCYTHER", 20, ability = "TECHNICIAN", nature = "JOLLY", item = "ORAN_BERRY", moves = { "WING_ATTACK", "FALSE_SWIPE", "QUICK_ATTACK", "FOCUS_ENERGY" } },
+      { "KRICKETUNE", 20, ability = "TECHNICIAN", nature = "ADAMANT", item = "SILVER_POWDER", moves = { "FURY_CUTTER", "MEGA_DRAIN", "SING", "TAUNT" } },
+    } },
+    R117_LEE = { like = "DYLAN_1", name = "LEE", defeat = "Lap time: too slow.", party = {
+      { "TRANQUILL", 20, ability = "SUPER_LUCK", nature = "JOLLY", item = "SCOPE_LENS", moves = { "AIR_CUTTER", "QUICK_ATTACK", "DETECT", "TAILWIND" } },
+      { "PONYTA", 21, ability = "FLASH_FIRE", nature = "JOLLY", item = "CHARCOAL", moves = { "FLAME_WHEEL", "STOMP", "FLAME_CHARGE", "DOUBLE_KICK" } },
+    } },
+    R117_MAE = { like = "MARIA_1", name = "MAE", defeat = "We'll train harder for the next race.", party = {
+      { "YANMA", 20, ability = "SPEED_BOOST", nature = "MODEST", spread = "spa", item = "ORAN_BERRY", moves = { "AIR_CUTTER", "SILVER_WIND", "DETECT", "SUPERSONIC" } },
+      { "MEDITITE", 20, ability = "PURE_POWER", nature = "JOLLY", item = "ORAN_BERRY", moves = { "FAKE_OUT", "FORCE_PALM", "CONFUSION", "DETECT" } },
+    } },
+    R117_ROX = { like = "MELINA", name = "ROX", defeat = "Hit the wall at the last mile.", party = {
+      { "LUXIO", 21, ability = "INTIMIDATE", nature = "ADAMANT", item = "MAGNET", moves = { "SPARK", "BITE", "DOUBLE_KICK", "LEER" } },
+      { "STARAVIA", 20, ability = "INTIMIDATE", nature = "JOLLY", item = "SHARP_BEAK", moves = { "AERIAL_ACE", "QUICK_ATTACK", "TAILWIND", "REVENGE" } },
+    } },
+    R117_IVY = { like = "BRANDI", name = "IVY", defeat = "The future was cloudy today.", party = {
+      { "KADABRA", 20, ability = "INNER_FOCUS", nature = "TIMID", spread = "spa", item = "TWISTED_SPOON", moves = { "PSYBEAM", "SHOCK_WAVE", "DISABLE", "REFLECT" } },
+      { "SOLOSIS", 20, ability = "MAGIC_GUARD", nature = "MODEST", spread = "spa", item = "ORAN_BERRY", moves = { "PSYBEAM", "RECOVER", "CHARM", "PROTECT" } },
+    } },
+    R117_JO = { like = "AISHA", name = "JO", defeat = "You hit harder than we do!", party = {
+      { "TIMBURR", 21, ability = "GUTS", nature = "ADAMANT", item = "FLAME_ORB", moves = { "ROCK_THROW", "MACH_PUNCH", "LOW_KICK", "BULK_UP" } },
+      { "MAKUHITA", 20, ability = "THICK_FAT", nature = "ADAMANT", spread = "tank", item = "ORAN_BERRY", moves = { "FAKE_OUT", "FORCE_PALM", "KNOCK_OFF", "VITAL_THROW" } },
+    } },
+    R111_ABE = { like = "TYRON", name = "ABE", defeat = "Our campfire's out.", party = {
+      { "GROWLITHE", 21, ability = "INTIMIDATE", nature = "ADAMANT", item = "CHARCOAL", moves = { "FLAME_WHEEL", "BITE", "HELPING_HAND", "ROAR" } },
+      { "NINCADA", 21, ability = "COMPOUND_EYES", nature = "ADAMANT", item = "SOFT_SAND", moves = { "MUD_SLAP", "FURY_SWIPES", "BUG_BITE", "SAND_ATTACK" } },
+    } },
+    R111_NIA = { like = "CELINA", name = "NIA", defeat = "Such a sweet scent of defeat.", party = {
+      { "CHERUBI", 21, ability = "CHLOROPHYLL", nature = "MODEST", spread = "spa", item = "ORAN_BERRY", moves = { "MAGICAL_LEAF", "HELPING_HAND", "LEECH_SEED", "MORNING_SUN" } },
+      { "STEENEE", 21, ability = "SWEET_VEIL", nature = "ADAMANT", item = "MIRACLE_SEED", moves = { "RAZOR_LEAF", "DOUBLE_SLAP", "PLAY_NICE", "RAPID_SPIN" } },
+    } },
+    R111_PIA = { like = "BIANCA", name = "PIA", defeat = "Picnic's ruined!", party = {
+      { "SKITTY", 21, ability = "WONDER_SKIN", nature = "JOLLY", item = "ORAN_BERRY", moves = { "FAKE_OUT", "DISARMING_VOICE", "SING", "HELPING_HAND" } },
+      { "TEDDIURSA", 21, ability = "QUICK_FEET", nature = "ADAMANT", item = "SILK_SCARF", moves = { "COVET", "FEINT_ATTACK", "FURY_SWIPES", "FAKE_TEARS" } },
+    } },
+    R111_CY = { like = "HAYDEN", name = "CY", defeat = "Burnt out, just like that.", party = {
+      { "SALANDIT", 21, ability = "CORROSION", nature = "TIMID", spread = "spa", item = "CHARCOAL", moves = { "FLAME_BURST", "SMOG", "DRAGON_RAGE", "SWEET_SCENT" } },
+      { "HOUNDOUR", 21, ability = "FLASH_FIRE", nature = "TIMID", spread = "spa", item = "ORAN_BERRY", moves = { "EMBER", "BITE", "SMOG", "HOWL" } },
     } },
   },
 }

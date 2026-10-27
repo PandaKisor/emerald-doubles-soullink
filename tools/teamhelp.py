@@ -24,9 +24,23 @@ WEAK = {'BIDE', 'SPLASH', 'MIMIC', 'DOUBLE_TEAM', 'ATTRACT', 'SWAGGER', 'FRUSTRA
 SLACK = 3  # a trainer mon may know a level-up move a few levels early
 
 
+PRE = {}  # species id -> its pre-evolution's id
+for k, v in D['species'].items():
+    for e in v['evolutions']:
+        PRE.setdefault(str(e['target']), k)
+
+
+def egg_moves(sp):
+    moves, key = set(sp['eggMoves']), str(sp['id'])
+    while key in PRE:
+        key = PRE[key]
+        moves |= set(D['species'][key]['eggMoves'])
+    return moves
+
+
 def legal(sp, level):
     lvl = {m for l, m in sp["learnset"] if l <= level + SLACK}
-    other = set(sp['eggMoves']) | {D['items'][str(i)].get('machineMove') for i in sp['machines']
+    other = egg_moves(sp) | {D['items'][str(i)].get('machineMove') for i in sp['machines']
                                    if str(i) in D['items']} | {D['tutorMoves'][str(t)] for t in sp['tutors']
                                                                 if str(t) in D['tutorMoves']}
     return lvl, {m for m in other if m}
