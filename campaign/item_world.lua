@@ -106,6 +106,38 @@ return function(mod, data, sources, active)
   for sym, price in pairs(sources.prices or {}) do
     if id(sym) then priceOf[id(sym)] = price end
   end
+  -- berries in town marts (user, 2026-10-27): a badge tier adds to the ones
+  -- before it; Lilycove's department store sells the type-resist berries.
+  -- Their 20-money ROM price would make them throwaways, so marts charge these
+  local BERRY_TIERS = {
+    [0] = { CHERI = 100, CHESTO = 100, PECHA = 100, RAWST = 100, ASPEAR = 100, ORAN = 100 },
+    [2] = { SITRUS = 300, PERSIM = 200, LEPPA = 300 },
+    [4] = { LUM = 500 },
+  }
+  local RESIST = { "OCCA", "PASSHO", "WACAN", "RINDO", "YACHE", "CHOPLE", "KEBIA", "SHUCA", "COBA", "PAYAPA",
+    "TANGA", "CHARTI", "KASIB", "HABAN", "COLBUR", "BABIRI", "CHILAN", "ROSELI" }
+  local RESIST_SHOP = "LilycoveCity_DepartmentStore_2F_EventScript_ClerkLeft"
+  local berryPrice = {}
+  for _, tier in pairs(BERRY_TIERS) do
+    for b, price in pairs(tier) do if id("ITEM_" .. b .. "_BERRY") then berryPrice[id("ITEM_" .. b .. "_BERRY")] = price end end
+  end
+  for _, b in ipairs(RESIST) do if id("ITEM_" .. b .. "_BERRY") then berryPrice[id("ITEM_" .. b .. "_BERRY")] = 1000 end end
+  -- mart: its campaign/item_sources.lua entry (nil for a mart it doesn't list)
+  function W.berries(badges, mart)
+    local out = {}
+    if mart and mart.label == RESIST_SHOP then
+      for _, b in ipairs(RESIST) do out[#out + 1] = id("ITEM_" .. b .. "_BERRY") end
+      return out
+    end
+    if not (mart and mart.kind == "general") then return out end
+    for tier = 0, badges do
+      local names = {}
+      for b in pairs(BERRY_TIERS[tier] or {}) do names[#names + 1] = b end
+      table.sort(names)
+      for _, b in ipairs(names) do out[#out + 1] = id("ITEM_" .. b .. "_BERRY") end
+    end
+    return out
+  end
   local priced
   local function wrapPrices()
     if ItemsData.info == priced then return end
@@ -113,6 +145,7 @@ return function(mod, data, sources, active)
     priced = function(item, ...)
       local info = info0(item, ...)
       if active() and info and (tonumber(info.price) or 0) == 0 and priceOf[info.id] then info.price = priceOf[info.id] end
+      if active() and info and berryPrice[info.id] then info.price = berryPrice[info.id] end
       return info
     end
     ItemsData.info = priced
@@ -146,8 +179,10 @@ return function(mod, data, sources, active)
       local tier = sources.tiers[math.min(#sources.tiers, W.badges() + 1)] or {}
       for _, x in ipairs(tier) do add(x) end
       for _, x in ipairs(m.extra or {}) do add(x) end
+      for _, x in ipairs(W.berries(W.badges(), m)) do add(x) end
     else
       for _, x in ipairs(m.items or {}) do add(x) end
+      for _, x in ipairs(W.berries(W.badges(), m)) do add(x) end
       if #out == 0 then return list, entry end
     end
     return out, entry

@@ -10,7 +10,7 @@ cart loads beside this mod. Inclement's rebuilt world (full/maps, full/world)
 is deliberately not shipped.
 
   python3 build_campaign.py            # generated/campaign/mods/g3_campaign
-  python3 build_campaign.py --release  # + Gen3Mod/<zip>, cart, sha256 files
+  python3 build_campaign.py --release  # + Gen3Mod/<zip>, cart, field guide HTML, sha256 files
 """
 import base64, hashlib, json, re, shutil, subprocess, sys, zipfile
 from pathlib import Path
@@ -25,7 +25,7 @@ CAMPAIGN = HERE / "campaign"
 
 MOD_ID = "g3_campaign"
 TITLE = "Emerald Doubles Soul Link"
-VERSION = "0.26.0"
+VERSION = "0.27.0"
 CART_ID = "emerald_doubles_soullink"
 COOP_ID, COOP_VERSION = "g3_coop", "0.8.5"
 # GitHub repos the launcher checks for updates and the release cart downloads from
@@ -744,6 +744,18 @@ def pack_coop():
     return zpath
 
 
+def field_guide():
+    """The offline field guide for this version (tools/handbook): export the
+    built campaign's facts, embed them in one HTML file, then check the
+    calculator against the runtime's rolls and the data's references."""
+    tools = HERE / "tools/handbook"
+    subprocess.run([sys.executable, str(tools / "export.py")], check=True, stdout=subprocess.DEVNULL)
+    subprocess.run(["luajit", str(tools / "damage_reference.lua")], cwd=native.STOCK, check=True, stdout=subprocess.DEVNULL)
+    subprocess.run([sys.executable, str(tools / "build.py")], check=True)
+    subprocess.run(["node", str(tools / "verify.js")], check=True)
+    return GEN3 / f"emerald-field-guide-{VERSION}.html"
+
+
 def release():
     coop = pack_coop()
     zpath = GEN3 / f"{MOD_ID}-{VERSION}.zip"
@@ -755,6 +767,8 @@ def release():
     sha = lambda p: hashlib.sha256(p.read_bytes()).hexdigest()
     cpath = GEN3 / f"{CART_ID}.g1rcart"
     cpath.write_text(cart_text({MOD_ID: sha(zpath), COOP_ID: sha(coop)}))
+    guide = field_guide()
+    print(guide)
     for p in (coop, zpath, cpath):
         (p.parent / (p.name + ".sha256")).write_text(f"{hashlib.sha256(p.read_bytes()).hexdigest()}  {p.name}\n")
         print(p)

@@ -62,31 +62,31 @@ the run view too; real wild encounters and real faint history remain intact.
 
 ## Offline field guide
 
-`emerald-field-guide-0.26.0.html` is a self-contained companion: open it in a
-modern browser and send the same file to your partner. It includes a direct-hit
-damage calculator, searchable trainer teams (including doubles partners), wild
-encounter tables, item sources and badge-dependent shops. Trainer Pokémon can
-be loaded directly into either calculator slot.
+`emerald-field-guide-<version>.html` (attached to each GitHub release) is a
+self-contained companion: open it in any modern browser and send the same file
+to your partner. It has:
 
-The route planner offers an early-game path and a Hoenn story itinerary, plus
-custom stops, return visits, reordering, completion tracking, notes and planned
-encounters for both players. Routes save in the browser. Use Export/Import to
-share the route itself or move it to another browser; copying the HTML alone
-does not copy browser storage. Calculations and reference coverage have explicit
-limits in the guide's About panel.
+- **Route guide:** vanilla Emerald's story in nine chapters, one per level cap.
+  Each stop lists its trainers (with tag partners and Pokémon icons), wild
+  tables and items; rival cards follow your starter. Tick stops off as you go.
+- **Trainers, wild Pokémon and items:** searchable, with badge-dependent shop stock.
+- **Damage calculator:** load any trainer's Pokémon into either slot.
+- **Our plan:** your own stops with both players' planned encounters; export and
+  import a plan file to share it.
 
-Rebuild after building the campaign (from this repository):
+`python3 build_campaign.py --release` rebuilds and verifies the guide with every
+release. By hand, after building the campaign:
 
 ```sh
 python3 tools/handbook/export.py
+(cd ../../gen1recomp-0.3.73 && luajit ../porting/native/tools/handbook/damage_reference.lua)
 python3 tools/handbook/build.py
+node tools/handbook/verify.js
+python3 tools/handbook/browser_smoke.py   # Firefox, screenshots in generated/handbook/browser/
 ```
 
-Generate native calculation references from the stock engine directory with
-`luajit ../porting/native/tools/handbook/damage_reference.lua`, then run
-`node tools/handbook/verify.js` here. `python3 tools/handbook/browser_smoke.py`
-exercises the local HTML in an isolated Firefox profile and writes its report
-and desktop/mobile screenshots under `generated/handbook/browser/`.
+The route guide's chapters live in `tools/handbook/route_guide.py`; the icons
+come from Inclement's party icons (`tools/handbook/icons.py`).
 
 ## What's in this repo
 

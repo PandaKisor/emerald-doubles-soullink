@@ -14,7 +14,8 @@ GEN3=NATIVE.parents[1]
 OUT=NATIVE/'generated/handbook/browser'
 OUT.mkdir(parents=True,exist_ok=True)
 meta=json.loads((NATIVE/'generated/handbook/data.json').read_text())['meta']
-source=GEN3/f'emerald-field-guide-{meta["campaignVersion"]}.html'
+import sys
+source=Path(sys.argv[1]) if len(sys.argv)>1 else GEN3/f'emerald-field-guide-{meta["campaignVersion"]}.html'
 report=[]
 ready=threading.Event()
 class Report(http.server.BaseHTTPRequestHandler):
@@ -43,8 +44,8 @@ with (OUT/'firefox.log').open('w') as log:
     (OUT/'report.json').write_text(json.dumps(report[-1],indent=2))
     print(json.dumps(report[-1],indent=2),flush=True)
     if not report[-1].get('ok'):raise SystemExit(1)
-    for view,size in [('calculator','1440,1200'),('route','1440,1100'),('wild','390,900'),('route','390,1100'),('calculator','390,1100')]:
-        dest=OUT/f'{view}-{size.split(",")[0]}.png'
-        subprocess.run(command+['--screenshot',str(dest),'--window-size',size,page.as_uri()+'?preview='+view],stdout=log,stderr=log,env=env,check=True,timeout=40)
+    for view,size,extra in [('guide','1440,1400','&chapter=0&open=3'),('guide','1440,1400','&chapter=1&open=5'),('trainers','1440,1200',''),('calculator','1440,1200',''),('wild','1440,1000',''),('route','1440,1100',''),('guide','390,1400','&chapter=0&open=4'),('calculator','390,1100','')]:
+        dest=OUT/f'{view}{extra.replace("&","-").replace("=","")}-{size.split(",")[0]}.png'
+        subprocess.run(command+['--screenshot',str(dest),'--window-size',size,page.as_uri()+'?preview='+view+extra],stdout=log,stderr=log,env=env,check=True,timeout=40)
         print(dest,flush=True)
 server.shutdown()

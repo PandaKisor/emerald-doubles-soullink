@@ -3,7 +3,7 @@
 
 Run after build_campaign.py. The fixture reads the owner's local Emerald ROM and
 vanilla script cache; only gameplay facts are written. The output has no ROM,
-scripts, artwork, player data, or network dependency. See schema.md beside this file.
+scripts, player data, or network dependency. See schema.md beside this file.
 """
 from __future__ import annotations
 
@@ -14,6 +14,9 @@ import json
 from pathlib import Path
 import re
 import subprocess
+
+import icons
+import route_guide
 
 HERE = Path(__file__).resolve().parent
 NATIVE = HERE.parent.parent
@@ -164,10 +167,11 @@ def normalize(raw, manifest, coop):
         kind = campaign.get("kind", "vanilla")
         stocks = []
         for badge in range(9):
+            berries = (entry.get("berries") or [[]] * 9)[badge]
             if kind == "general":
-                items = entry["vanillaItems"] + tiers[min(badge,len(tiers)-1)] + [symbol_item(s) for s in campaign.get("extra",[])]
+                items = entry["vanillaItems"] + tiers[min(badge,len(tiers)-1)] + [symbol_item(s) for s in campaign.get("extra",[])] + berries
             elif kind == "fixed" and campaign.get("items"):
-                items = [symbol_item(s) for s in campaign["items"]]
+                items = [symbol_item(s) for s in campaign["items"]] + berries
             else:
                 items = entry["vanillaItems"]
             stocks.append(list(dict.fromkeys(i for i in items if i)))
@@ -184,11 +188,22 @@ def normalize(raw, manifest, coop):
     sources.append({"item":item_ids["ITEM_RARE_CANDY"],"kind":"Menu service","mapName":"Anywhere outside battle","note":"START → RARE CANDY supplies one reusable candy; current level cap applies."})
     data["sources"] = sorted(sources,key=lambda x:(x["mapName"],x["kind"],x["item"],x.get("x",-1),x.get("y",-1),x.get("label","")))
     data["shops"] = sorted(shops,key=lambda x:(x["mapName"],x["label"]))
+    # hand-picked teams (campaign/trainer_teams.lua) vs generated ones; a
+    # phantom tag partner follows the trainer it fights beside
+    hand_text = (NATIVE / "campaign/trainer_teams.lua").read_text()
+    hand = set(re.findall(r"^    ([A-Z0-9_]+) = \{", hand_text.split("\n  partners = {")[0], re.M))
+    for t in data["trainers"]:
+        t["handpicked"] = t["symbol"].removeprefix("TRAINER_") in hand
+    for t in data["trainers"]:
+        if t.get("partnerOf"):
+            t["handpicked"] = trainer_index[t["partnerOf"]]["handpicked"]
+    data["routeGuide"] = route_guide.build(data)
+    data["icons"] = icons.build({k: sp["symbol"] for k, sp in data["species"].items() if not sp["excluded"] and int(k) > 0})
     kinds = collections.Counter(s["kind"] for s in sources)
     counts = {k:len(data[k]) for k in ("species","moves","items","abilities","trainers","wild","sources","shops")}
     counts.update(phantomPartners=sum(t["phantom"] for t in data["trainers"]),authoredTrainers=sum(t["authored"] and not t["phantom"] for t in data["trainers"]),wildMaps=len(raw["wild"]),itemBalls=kinds["Item ball"],hiddenItems=kinds["Hidden item"],gifts=kinds["Gift"],excludedForms=sum(s["excluded"] for s in data["species"].values()))
     data["meta"] = {
-        "schema":1,"campaignVersion":manifest["version"],"coopVersion":coop["version"],"engineVersion":"0.3.73","counts":counts,
+        "schema":2,"campaignVersion":manifest["version"],"coopVersion":coop["version"],"engineVersion":"0.3.73","counts":counts,
         "provenance":"Resolved built campaign through stock campaign_fixture.lua; native trainer/encounter extraction and vanilla script facts with campaign item substitutions.",
         "limitations":[
             "Species metadata includes forms that are not obtainable. Mega and Primal forms are marked excluded; Mega Evolution and Z-Moves are not part of this campaign.",
@@ -199,6 +214,7 @@ def normalize(raw, manifest, coop):
             "Items from variables, scripted specialty services, trades, Pickup, held wild items, berry plants, repeatable minigame rewards, and dynamically generated gifts are not exhaustively indexed.",
             "Shop badge lists describe actual stock at each badge count; some lower-tier items leave the tier list later. Item descriptions are source text and may omit campaign-specific behavior.",
             "Weights come from the runtime Pokédex reader, which uses national-species weights for some alternate forms. Stored unused/placeholder trainer entries remain listed; entries without resolved maps are not a claim of accessible battles.",
+            "The route guide follows vanilla Emerald's story order; optional areas and backtracking can be done in other orders.",
         ],
     }
     return data

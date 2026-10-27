@@ -110,8 +110,13 @@ for id, row in pairs(F.data.moves) do
     out.moves[tostring(id)]=rec
   end
 end
+-- the price a mart charges: the campaign's mart price wrapper (berries, gifts)
+F.campaign.world.wrapPrices()
+local ItemsData=require('src.core.game3.items_data')
 for id, row in pairs(F.data.items) do
   out.items[tostring(id)] = pick(row, {'symbol','name','description','pocket','price','machine','machineNumber','machineMove','berryNumber','sourceFields'})
+  local info=ItemsData.info(id)
+  if info and tonumber(info.price) then out.items[tostring(id)].price=info.price end
 end
 
 F.campaign.trainers.resolve()
@@ -205,8 +210,10 @@ for key,ops in pairs(scripts) do
         if not mr then for _,v in pairs(martPack.marts or {}) do if v.key==mk then mr=v end end end
         if mr and mr.kind~='decorations' then
           local places=scriptMaps(key)
+          local berries={}
+          for b=0,8 do berries[b+1]=W.berries(b,W.sources.marts[mk]) end
           out.shops[#out.shops+1]={key=mk,label=labelOf[key] or key,map=places[1],maps=places,vanillaItems=mr.items,
-            campaign=W.sources.marts[mk]}
+            campaign=W.sources.marts[mk],berries=berries}
         end
       end
     end

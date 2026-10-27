@@ -1,4 +1,4 @@
-# Handbook data schema 1
+# Handbook data schema 2
 
 `python3 tools/handbook/export.py` runs from any working directory after the
 campaign build. It uses Python's standard library, LuaJIT, the stock campaign
@@ -27,6 +27,8 @@ campaign/co-op manifests in `meta`, rather than a hand-maintained version consta
 | `sources` | Array of `{item,kind,map?,mapName,x?,y?,localId?,label?,maps?,minBadges?,badges?,note}`. Kinds include `Item ball`, `Hidden item`, `Gift`, `Poké Mart`, `Specialty shop`, `Menu service`. Ball/hidden coordinates are native map tiles, not screen pixels. Script `label` is a search/audit clue and may name the original item replaced by the campaign. `maps` optionally identifies shared script callers. |
 | `shops` | Array of `{map?,mapName,label,kind,stockByBadges:[9 arrays of item IDs]}`. Array index 0 corresponds to zero badges; index 8 to eight badges. General stock merges native stock, current badge tier, and town extras with duplicates removed. Specialty shops use the actual campaign replacement list. |
 | `maps[id]` | Native map ID dictionary with `{id,name,group,num}`. Display labels retain interior/floor detail. |
+| `routeGuide` | Array of chapters `{title,intro,cap,bosses:[trainer IDs],steps:[{title,note,primary,maps:[map IDs],trainers:[trainer IDs]}]}` in vanilla story order, one per level cap (`tools/handbook/route_guide.py`). Every first-fight trainer appears in exactly one step; rematches are left out. |
+| `icons` | `{sheet,cell,columns,index:{species ID: cell}}`: one PNG sheet (data URI) of each species' first party-icon frame in its icon palette, from the donor's graphics (`icons.py`). |
 | `tutorMoves[index]` | Move ID for a tutor index. |
 | `nectarForms[item ID]` | Species ID for the corresponding nectar form. |
 

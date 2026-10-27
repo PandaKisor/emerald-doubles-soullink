@@ -86,10 +86,12 @@ for _,x in ipairs(list or {}) do has[x]=true end
 T.check(has[4] and has[13],'vanilla stock stays (Poké Ball, Potion)')
 T.check(has[items.ITEM_RAZOR_CLAW] and has[items.ITEM_DRAGON_SCALE],'Fortree sells its evolution items')
 T.check(has[items.ITEM_CHOICE_SCARF],'items given by NPCs vanilla lacks are sold in their town')
+T.check(has[items.ITEM_ORAN_BERRY] and not has[items.ITEM_LUM_BERRY],'town marts sell starting berries (Lum comes at 4 badges)')
 local n0=#list
 local badges=W.badges
 W.badges=function() return 5 end
 T.check(#Marts.itemsFor(fortreeKey)>n0,'more badges, more stock')
+do local h={} for _,x in ipairs(Marts.itemsFor(fortreeKey)) do h[x]=true end T.check(h[items.ITEM_LUM_BERRY] and h[items.ITEM_SITRUS_BERRY],'Lum and Sitrus at 5 badges') end
 W.badges=badges
 -- every evolution item has a source (generator audit, rerun here)
 local Pokemon=require('src.core.game3.pokemon')

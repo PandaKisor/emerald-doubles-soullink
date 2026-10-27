@@ -155,12 +155,57 @@ T.eq(H.heal(Runtime._game, s), 6, 'Soul Link off heals all six, including fainte
 local healedSave = Schema.fromSaveTable(Schema.toSaveTable(s))
 T.eq(healedSave.party[1].hp, s.party[1].maxHp, 'healed HP survives save round trip')
 T.eq(healedSave.party[1].pp[1], s.party[1].pp[1], 'healed PP survives save round trip')
+-- START > RELEARN MOVE / IV CHECK, the starter kit, berries in marts (0.27.0)
+local PT, K, W = F.campaign.partyTools, F.campaign.starterKit, F.campaign.world
+local relearnEntry, ivEntry
+for _, e in ipairs(entries()) do
+  if e.id == 'g3_campaign_relearn' then relearnEntry = e end
+  if e.id == 'g3_campaign_ivs' then ivEntry = e end
+end
+T.check(relearnEntry and relearnEntry.label == 'RELEARN MOVE', 'START menu offers RELEARN MOVE')
+T.check(ivEntry and ivEntry.label == 'IV CHECK', 'START menu offers IV CHECK')
+local ivMon = F.mon('TREECKO', 20, {'POUND'})
+ivMon.ivs = { hp = 31, atk = 0, def = 12, spa = 30, spd = 7, spe = 25 }
+ivMon.evs = { hp = 4, atk = 0, def = 0, spa = 252, spd = 0, spe = 252 }
+ivMon.personality = 13 -- Jolly: +Spe -SpA
+local rows, nature, hpType = PT.ivRows(ivMon)
+T.eq(#rows, 6, 'IV CHECK shows six stats')
+T.eq(rows[1].iv, 31, 'HP IV'); T.eq(rows[4].iv, 30, 'Sp. Atk IV'); T.eq(rows[6].ev, 252, 'Speed EV')
+T.eq(nature, 'JOLLY', 'nature name')
+T.eq(rows[6].mark, '+', 'Jolly raises Speed'); T.eq(rows[4].mark, '-', 'Jolly lowers Sp. Atk')
+T.eq(rows[2].mark, '', 'unaffected stats are unmarked')
+ivMon.personality = 0
+local _, _, _ = PT.ivRows(ivMon)
+T.check(select(1, PT.ivRows(ivMon))[1].mark == '', 'neutral natures mark nothing')
+T.check(type(hpType) == 'string' and #hpType > 0, 'Hidden Power type is named')
+local ks = F.session()
+local oran, potionId = F.ids.items.ITEM_ORAN_BERRY, F.ids.items.ITEM_POTION
+T.check(K.grant(ks), 'starter kit granted once')
+T.eq(Bag.get(ks.bag, oran), 2, 'two Oran Berries'); T.eq(Bag.get(ks.bag, potionId), 1, 'one Potion')
+T.check(not K.grant(ks), 'starter kit is not granted twice')
+T.eq(Bag.get(ks.bag, oran), 2, 'still two Oran Berries')
+T.check(Schema.fromSaveTable(Schema.toSaveTable(ks)).modData.g3_campaign.starterKit, 'starter kit flag survives a save')
+local gm, lily = { kind = 'general' }, nil
+for _, m in pairs(W.sources.marts) do if m.label == 'LilycoveCity_DepartmentStore_2F_EventScript_ClerkLeft' then lily = m end end
+T.check(lily ~= nil, 'Lilycove 2F left clerk is a campaign mart')
+T.eq(#W.berries(8, { kind = 'fixed' }), 0, 'other specialty shops sell no extra berries')
+local has = function(list, sym) for _, x in ipairs(list) do if x == F.ids.items[sym] then return true end end return false end
+T.check(has(W.berries(0, gm), 'ITEM_ORAN_BERRY') and not has(W.berries(0, gm), 'ITEM_SITRUS_BERRY'), 'Oran from the start, Sitrus not yet')
+T.check(has(W.berries(2, gm), 'ITEM_SITRUS_BERRY') and not has(W.berries(2, gm), 'ITEM_LUM_BERRY'), 'Sitrus at two badges')
+T.check(has(W.berries(8, gm), 'ITEM_LUM_BERRY') and has(W.berries(8, gm), 'ITEM_ORAN_BERRY'), 'tiers add up')
+T.check(has(W.berries(0, lily), 'ITEM_OCCA_BERRY'), 'Lilycove sells resist berries')
+W.wrapPrices()
+local ItemsData = require('src.core.game3.items_data')
+T.eq(ItemsData.info(oran).price, 100, 'marts charge 100 for an Oran Berry')
+T.eq(ItemsData.info(F.ids.items.ITEM_LUM_BERRY).price, 500, 'and 500 for a Lum Berry')
 SD.setCart(nil)
 T.check(not R.enabled(s), 'repel is scoped to the campaign cart')
 T.check(not C.grant(s), 'candy grant is scoped to the campaign cart')
+T.check(not K.grant(F.session()), 'starter kit is scoped to the campaign cart')
 T.eq(H.heal(Runtime._game, s), 0, 'healing is scoped to the campaign cart')
 for _, e in ipairs(entries()) do
-  T.check(e.id ~= 'g3_campaign_candy' and e.id ~= 'g3_campaign_repel' and e.id ~= 'g3_campaign_heal',
+  T.check(e.id ~= 'g3_campaign_candy' and e.id ~= 'g3_campaign_repel' and e.id ~= 'g3_campaign_heal'
+    and e.id ~= 'g3_campaign_relearn' and e.id ~= 'g3_campaign_ivs',
     'no campaign shortcuts on vanilla')
 end
-T.finish('campaign reusable candy, repel and team healing')
+T.finish('campaign reusable candy, repel, team healing, relearner, IV check, starter kit and berries')
