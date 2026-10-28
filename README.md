@@ -2,8 +2,8 @@
 
 A custom cart for [Gen1Recomp](https://github.com/bryanthaboi/gen1recomp) 0.3.73:
 vanilla Pokémon Emerald where every battle is a double (wild ones too), played
-in two-player co-op with Soul Link and level caps, plus Inclement Emerald's
-Pokémon, moves, abilities and items.
+in two-player co-op with Soul Link and level caps, plus hundreds of new
+Pokémon (Gen 4 to 7), moves, abilities and items.
 
 Based on the Pokemon Gen 1 Recompilation Project by BOIS CLUB GAMES, LLC
 (https://github.com/bryanthaboi/gen1recomp).
@@ -86,7 +86,7 @@ python3 tools/handbook/browser_smoke.py   # Firefox, screenshots in generated/ha
 ```
 
 The route guide's chapters live in `tools/handbook/route_guide.py`; the icons
-come from Inclement's party icons (`tools/handbook/icons.py`).
+come from the donor hack's party icons (`tools/handbook/icons.py`).
 
 ## What's in this repo
 
@@ -96,9 +96,20 @@ zips and the cart), `campaign/` (content, battle effects, trainer teams, AI),
 headless `verify_*.lua` suites.
 
 Building needs inputs that aren't in this repo: the stock 0.3.73 engine tree,
-the Inclement Emerald port's generated data and the pokeemerald-1.13 source.
+the expanded port's generated data (linked under `porting/inputs/`) and the
+donor hack's pokeemerald-1.13 source.
 No ROM or ROM data is included; the game reads its maps and story from your
 own ROM.
+
+## Credits
+
+- Campaign, co-op and Soul Link by Aeryk Kisor.
+- Some species, moves, trainer and item data and the Pokémon icons are adapted from
+  [Inclement Emerald](https://www.pokecommunity.com/threads/pok%C3%A9mon-inclement-emerald-a-decomp-difficulty-hack-version-1-13.457039/)
+  by Buffel Saft and contributors (the "donor hack" in this repo's sources).
+- Gen1Recomp by BOIS CLUB GAMES, LLC.
+- Pokémon © Nintendo / Creatures / GAME FREAK. This project is unofficial and not
+  affiliated with them.
 
 ## License
 

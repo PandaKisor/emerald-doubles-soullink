@@ -16,7 +16,7 @@ from PIL import Image
 HERE = os.path.dirname(os.path.abspath(__file__))
 GEN3 = os.path.normpath(os.path.join(HERE, "../../.."))
 DONOR = os.path.join(GEN3, "pokeemerald-1.13")
-CACHE_TAGS = os.path.join(GEN3, "porting/full_port/generated/playtest/userdata/love/inclement-playtest/emerald"
+CACHE_TAGS = os.path.join(GEN3, "porting/inputs/playtest-pack"
                           "/data/generated/gba/pokemon/battle_anims")
 
 

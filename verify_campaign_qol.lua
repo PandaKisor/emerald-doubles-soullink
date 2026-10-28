@@ -47,18 +47,18 @@ local EvoScene = require('src.ui.game3.evolution_scene')
 local startEvo = EvoScene.start
 EvoScene.start = function(_, target, opts) evolved = target; opts.onDone() end
 cap = 15
-Use.inclementPartyItem(menu, mon, function() end)
+Use.expandedPartyItem(menu, mon, function() end)
 T.eq(mon.level, 15, 'party controller also stops at the co-op cap')
 T.eq(Bag.get(s.bag, C.id), 1, 'refused UI use keeps the candy')
 while #pending > 0 do table.remove(pending, 1)() end
 menu.open, cap = true, nil
-T.check(Use.inclementPartyItem(menu, mon, function() end), 'party controller handles candy')
+T.check(Use.expandedPartyItem(menu, mon, function() end), 'party controller handles candy')
 T.eq(Bag.get(s.bag, C.id), 1, 'UI use keeps even the last candy')
 while #pending > 0 do table.remove(pending, 1)() end
 T.eq(evolved, F.species('GROVYLE'), 'normal evolution prompt is reached')
 T.eq(menu.mode, 'use', 'party picker stays open for another use')
 Audio.playFanfare, EvoScene.start = fanfare, startEvo
-local learned = Use._inclementRestoratives.candyMoves(mon)
+local learned = Use._expandedRestoratives.candyMoves(mon)
 T.eq(#learned, 0, 'level-up moves have been learned by the controller')
 
 local potion = F.ids.items.ITEM_POTION
@@ -243,8 +243,8 @@ T.eq(back and back.party[1][1], F.species('TREECKO'), 'the file decodes')
 -- the field guide's browser smoke test loads this exact file
 do local f = io.open('../porting/native/generated/handbook/guide-sync-sample.json', 'wb') if f then f:write(body) f:close() end end
 -- Pokédex footprints for the new species (0.38.1)
-T.check(F.campaign.footprints and F.campaign.footprints.count() > 300, 'new species have Inclement footprints')
--- Devon 3F: Mr. Stone's renamed gift gives Inclement's Scope Lens (0.38.1)
+T.check(F.campaign.footprints and F.campaign.footprints.count() > 300, 'new species have footprints')
+-- Devon 3F: Mr. Stone's renamed gift gives the donor's Scope Lens (0.38.1)
 local devon = W.sources.gifts['g3:08212595']
 T.eq(devon and devon[tostring(F.ids.items.ITEM_EXP_SHARE)], 'ITEM_SCOPE_LENS', 'Mr. Stone gives a Scope Lens')
 SD.setCart(nil)

@@ -1,7 +1,7 @@
--- Inclement's wild encounter tables on the vanilla Emerald maps. The ROM's
--- tables load as usual; each map Inclement defines then has its land, water,
+-- The donor's wild encounter tables on the vanilla Emerald maps. The ROM's
+-- tables load as usual; each map the donor defines then has its land, water,
 -- rock smash and fishing tables replaced under every key the engine looks up
--- ("ROUTE101", "EM_ROUTE101" and "group:num"). Levels are Inclement's fixed
+-- ("ROUTE101", "EM_ROUTE101" and "group:num"). Levels are the donor's fixed
 -- ranges; nothing scales with either player's party.
 return function(Encounters, data, maps, active)
   local species = data.identity.namespaces.species

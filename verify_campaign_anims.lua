@@ -1,4 +1,4 @@
--- Inclement's own move animations (campaign/move_anims.lua, made by
+-- The donor's own move animations (campaign/move_anims.lua, made by
 -- tools/anim_convert.py), headless on stock 0.3.73 through the built mod:
 -- the ROM's animation pack is extracted, Anim.scriptForMove hands battle the
 -- converted script for those moves (and the stand-in for the rest), and every

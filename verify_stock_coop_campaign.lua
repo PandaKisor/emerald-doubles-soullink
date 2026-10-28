@@ -1,7 +1,7 @@
 local F=assert(loadfile('../porting/native/stock_coop_link_fixture.lua'))()
 local T,H=F.T,F.H
 local base='../porting/full_port/'
-local exports=F.f.loader.exports.inclement_battle_test
+local exports=F.f.loader.exports.expanded_port
 T.eq(exports.coopStoryTrainer(265),true,'native Roxanne is mandatory')
 T.eq(exports.coopStoryTrainer(520),true,'native rival is mandatory')
 T.eq(exports.coopStoryTrainer(10),true,'Petalburg Woods story grunt is mandatory')
@@ -148,7 +148,7 @@ vm.scripts.unknown={{op='specialvar',0x800d,1},{op='compare_var_to_value',0x800d
 T.eq(Gate.trainers(vm,'unknown')[1],265,'unknown native branch is inspected without executing it')
 
 -- Inspect actual extracted Emerald event roots, not only synthetic bytecode.
-local dir=base..'generated/playtest/userdata/love/inclement-playtest/emerald/data/generated/gba/scripts/'
+local dir='../porting/inputs/playtest-pack/data/generated/gba/scripts/'
 local scripts=assert(loadfile(dir..'scripts.lua'))()
 local labels=assert(loadfile(dir..'labels.lua'))()
 local native=Vm.new({scripts=scripts})

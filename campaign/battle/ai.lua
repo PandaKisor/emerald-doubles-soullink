@@ -1,6 +1,6 @@
 -- Trainer AI for the campaign's doubles: picks each foe's move and target by
 -- scoring every usable move against every target with the real damage
--- formula (Inclement types, items and abilities included), instead of Gen 3's
+-- formula (expanded types, items and abilities included), instead of Gen 3's
 -- ROM scripts, which know neither the expanded moves nor doubles.
 --   * damage: share of the target's HP, KOs first, accuracy, priority when
 --     it matters; spread moves count every foe hit and pay for hitting the
@@ -964,7 +964,7 @@ return function(mod, U, F)
   local AiItems = require("src.core.game3.battle.ai_items")
   local KIND = AiItems.TYPE
   local shouldUseItem = AiItems.shouldUseItem
-  -- Inclement's item rows (full/inventory.lua answers ItemsData.info) carry no
+  -- the donor's item rows (full/inventory.lua answers ItemsData.info) carry no
   -- Gen 3 effect bytes, so on the campaign the ROM's effect table was never
   -- reached and trainers never used their bag. Healing, cure and X items keep
   -- their vanilla ids: read their effect from the ROM's own item table.
@@ -973,7 +973,7 @@ return function(mod, U, F)
     local e = effect(item)
     if e or not F.active() then return e end
     local ItemsData = require("src.core.game3.items_data")
-    local native = ItemsData._inclementInventory and ItemsData._inclementInventory.originals.info
+    local native = ItemsData._expandedInventory and ItemsData._expandedInventory.originals.info
     if not native then return nil end
     local current = ItemsData.info
     ItemsData.info = native

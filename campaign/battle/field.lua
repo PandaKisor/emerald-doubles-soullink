@@ -6,7 +6,7 @@
 --                      Tailwind, Lucky Chant, Aurora Veil, per-battler timers
 --   turn order         Tailwind and Trick Room (mod hook battle.turn_order)
 --   hooks              protection, type effectiveness and power, read by the
---                      patched Inclement library (hit/damage/accuracy)
+--                      patched port library (hit/damage/accuracy)
 return function(mod, U, active)
   local State = require("src.core.game3.battle.state")
   local Engine = require("src.core.game3.battle.engine")
@@ -505,7 +505,7 @@ return function(mod, U, active)
     return byName[tonumber(gender) == 1 and "TRAINER_PIC_MAY" or "TRAINER_PIC_BRENDAN"]
   end
 
-  -- the link wire format carries Inclement's content (patched Protocol)
+  -- the link wire format carries the donor's content (patched Protocol)
   local Protocol = require("src.link.Protocol")
   local function maxId(t, filter)
     local m = 0
@@ -624,7 +624,7 @@ return function(mod, U, active)
 
   -- Low Kick and Grass Knot: weight as the campaign counts it (Heavy and
   -- Light Metal, Autotomize, forms)
-  -- (the Inclement damage rules keep their own copy of the formula table)
+  -- (the expanded damage rules keep their own copy of the formula table)
   local Damage = require("src.core.game3.battle.damage")
   local function weighed(tbl)
     if not tbl or tbl._campaignLowKick then return end
@@ -642,7 +642,7 @@ return function(mod, U, active)
     end
   end
   weighed(Damage)
-  weighed(Damage._inclementBattleTest and Damage._inclementBattleTest.implementation)
+  weighed(Damage._expandedBattleTest and Damage._expandedBattleTest.implementation)
 
   -- forced switching -------------------------------------------------------
   -- U-turn, Volt Switch, Flip Turn, Parting Shot: the Baton Pass switch

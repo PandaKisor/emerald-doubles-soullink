@@ -1,10 +1,10 @@
--- Abilities in battle with Inclement's data (pokeemerald-1.13 battle_util.c,
+-- Abilities in battle with the donor's data (pokeemerald-1.13 battle_util.c,
 -- battle_main.c and battle_script_commands.c, Gen 7/8 configuration).
---   * Gen 3 abilities keep their native handlers; where Inclement changed
+--   * Gen 3 abilities keep their native handlers; where the donor changed
 --     one (pinch abilities, Rough Skin, Intimidate, Flash Fire under the
---     Inclement damage rules), the change is made here.
+--     the expanded damage rules), the change is made here.
 --   * The new abilities run through the hooks field.lua and the patched
---     Inclement library expose (power, stats, stages, final damage,
+--     port library expose (power, stats, stages, final damage,
 --     effectiveness, accuracy, protection, move type, turn order, after a
 --     hit, after a faint), plus wrappers on the live battle modules: the
 --     adapter's ability and status checks, stat changes, switch-in and
@@ -462,7 +462,7 @@ return function(mod, U, F)
     elseif k == "SOLAR_POWER" and not isPhysical and weatherFor(ad, attacker) == "SUN" then spa = mul(spa, 1.5)
     elseif k == "DEFEATIST" and hp(ad, attacker) <= math.floor(maxHp(ad, attacker) / 2) then both(0.5)
     elseif PINCH[k] and moveType == PINCH[k] then
-      -- Inclement: 1.2x outside a pinch; the native formula adds 1.5x in one
+      -- donor: 1.2x outside a pinch; the native formula adds 1.5x in one
       -- (Vengeance is new and gets both here)
       local pinch = hp(ad, attacker) <= math.floor(maxHp(ad, attacker) / 3)
       if k == "VENGEANCE" then used(pinch and 1.5 or 1.2)
@@ -471,7 +471,7 @@ return function(mod, U, F)
     elseif k == "STAKEOUT" and ad and defender.campaignEnteredTurn == ad._st.turn and (ad._st.turn or 0) > 0 then used(2)
     elseif k == "WHITEOUT" and moveType == T.ICE and w == "HAIL" then used(1.5)
     end
-    -- Flash Fire's boost (the Inclement rules skip the native one)
+    -- Flash Fire's boost (the expanded rules skip the native one)
     if attacker.expFlashFire and moveType == T.FIRE then used(1.5) end
     if ad then
       local p = partnerOf(ad, attacker)
@@ -849,7 +849,7 @@ return function(mod, U, F)
     return result
   end
 
-  -- Intimidate, with Inclement's (Gen 8) blockers and the abilities it sets off
+  -- Intimidate, with the donor's (Gen 8) blockers and the abilities it sets off
   local INTIMIDATE_PROOF = { INNER_FOCUS = true, OBLIVIOUS = true, OWN_TEMPO = true, SCRAPPY = true }
   local runIntimidate = Abilities.runIntimidate
   Abilities.runIntimidate = function(ad, ...)
@@ -1574,7 +1574,7 @@ return function(mod, U, F)
       local species = type(mon) == "table" and tonumber(mon.species)
       if species and species ~= 0 and not (mon.isEgg or mon.egg)
         and (tonumber(mon.item) or 0) == 0 and (tonumber(mon.heldItem) or 0) == 0 then
-        local ability = (Pokemon.inclementAbilityForMon and Pokemon.inclementAbilityForMon(mon, species))
+        local ability = (Pokemon.expandedAbilityForMon and Pokemon.expandedAbilityForMon(mon, species))
           or tonumber(mon.abilityId) or tonumber(mon.ability)
         local band = math.min(9, math.floor(((tonumber(mon.level) or 1) - 1) / 10))
         if ability == ID.HONEY_GATHER and (band + 1) * 5 > random() % 100 then

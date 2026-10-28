@@ -3,7 +3,7 @@
 -- Each wrapper reads the port's bridge at call time, so it is inert until
 -- the port installs it, exactly like the overlay edit it replaces.
 --
--- Not reproduced here: inclement_guard calls in Game3/SaveData (they guard
+-- Not reproduced here: expanded_guard calls in Game3/SaveData (they guard
 -- the separate engine copy; the cart's sealed mod list does that job on
 -- stock), conf.lua's identity, and egg_hatch's personality argument.
 
@@ -18,7 +18,7 @@ local function datasetBridge()
   local CacheFs = require("src.import.CacheFs")
   local Version = require("src.core.GameVersion")
   local function owned(path)
-    local port = Dataset._inclementMaps
+    local port = Dataset._expandedMaps
     if not port then return nil end
     local prefix = Version.cachePrefix()
     if type(path) ~= "string" or path:sub(1, #prefix) ~= prefix then return nil end
@@ -39,7 +39,7 @@ local function datasetBridge()
   local cache = Dataset.cache()
   local spec = cache.assetWorkerSpec
   cache.assetWorkerSpec = function(self, root, kind, key, ...)
-    local port = Dataset._inclementMaps
+    local port = Dataset._expandedMaps
     local rel = root .. "/" .. tostring(key) .. (kind == "pair" and "/mids.idx" or ".meta")
     if port and port.owns(rel) then return nil end
     return spec(self, root, kind, key, ...)
@@ -50,12 +50,12 @@ end
 local function pokemonHooks()
   local Pokemon = require("src.core.game3.pokemon")
   function Pokemon.natureOf(mon)
-    local port = Pokemon._inclementNatures
+    local port = Pokemon._expandedNatures
     if port and port.active() then return port.read(mon) end
     return Pokemon.natureId(mon and mon.personality)
   end
   function Pokemon.canForgetMove(moveId)
-    local port = Pokemon._inclementLearning
+    local port = Pokemon._expandedLearning
     return (port and port.active()) or not Pokemon.isHmMove(moveId)
   end
   -- applyStats calls Pokemon.calcStats without a nature; the overlay passes
@@ -74,7 +74,7 @@ local function pokemonHooks()
   end
   local replaceMove = Pokemon.replaceMove
   Pokemon.replaceMove = function(mon, slot, newMoveId)
-    local port = Pokemon._inclementLearning
+    local port = Pokemon._expandedLearning
     if not (port and port.active()) then return replaceMove(mon, slot, newMoveId) end
     local s, id = tonumber(slot), tonumber(newMoveId)
     if not mon or not s or s < 1 or s > 4 or not id then return nil end

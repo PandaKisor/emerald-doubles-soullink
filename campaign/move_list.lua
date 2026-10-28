@@ -1,4 +1,4 @@
--- Expanded Inclement moves with battle support, by source symbol (without
+-- Expanded moves with battle support, by source symbol (without
 -- MOVE_). Each runs a native Gen 3 effect that matches the donor move:
 --   anim    the Gen 3 move whose animation it plays
 --   effect  a native effect replacing the donor's (same behaviour, Gen 3 name)

@@ -1,4 +1,4 @@
--- Sprite callbacks and tasks Inclement's animations need that vanilla's
+-- Sprite callbacks and tasks the donor's animations need that vanilla's
 -- engine doesn't have, ported from pokeemerald-1.13's C onto the engine's g4
 -- animation helpers (anim_port/g4_pret.lua). tools/anim_convert.py points a
 -- converted script at these names; vanilla's own callbacks stay as they are.

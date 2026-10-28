@@ -14,7 +14,10 @@ GEN3 = HERE.parents[1]
 FULL = GEN3 / "porting/full_port/generated"
 OVERLAY = FULL / "engine-overlay"
 STOCK = GEN3 / "gen1recomp-0.3.73"
-MOD = "inclement_battle_test"
+# the donor port's development mod and playtest data pack (Gen3Mod/porting/inputs)
+INPUTS = GEN3 / "porting/inputs"
+DEV_MOD = INPUTS / "dev-mod"
+MOD = "expanded_port"
 OUT = HERE / "generated/probe/mods" / MOD
 
 # Battle and link modules (the co-op team-battle path), the party and bag
@@ -346,6 +349,60 @@ PRELUDE = '''return function(mod)
 '''
 
 
+# The donor port's name, spelled out so the scrub can find it, and its own
+# mod/cart IDs, which become the probe's (the campaign keeps only the
+# names in its manifest's conflicts list, so the old mods can't load beside it).
+DONOR = "Inclement"
+DONOR_IDS = {DONOR.lower() + "_battle_test": MOD, DONOR.lower() + "_emerald": "expanded_cart"}
+WORD = re.compile(r"[A-Za-z0-9_]*" + DONOR + r"[A-Za-z0-9_]*", re.I)
+
+
+def scrub_text(text, title):
+    """The donor's name out of copied sources: its IDs become the probe's,
+    user-facing names the campaign's title, prose the donor's, identifiers
+    `expanded` (case kept)."""
+    for old, new in DONOR_IDS.items():
+        text = text.replace(old, new)
+    text = text.replace(f"the {DONOR} Emerald cartridge", f"the {title} cart")
+    text = text.replace(f"{DONOR} Emerald could not start", f"{title} could not start")
+    text = text.replace(f"{DONOR} Emerald's", "the donor's").replace(f"{DONOR} Emerald", "the donor hack")
+    text = re.sub(rf"\b{DONOR}'s\b", "the donor's", text)
+
+    def word(m):
+        w = m.group(0)
+        return w.replace(DONOR, "Expanded").replace(DONOR.lower(), "expanded").replace(DONOR.upper(), "EXPANDED")
+    return WORD.sub(word, text)
+
+
+def scrub(root, title, keep=()):
+    """scrub_text over every text file under `root` (files named after the
+    donor renamed too), checking first that no renamed identifier lands on
+    one that already exists. `keep` lists relative paths left as they are."""
+    texts = {}
+    for f in sorted(p for p in root.rglob("*") if p.is_file()):
+        if f.relative_to(root).as_posix() in keep:
+            continue
+        try:
+            texts[f] = f.read_bytes().decode("utf-8")
+        except UnicodeDecodeError:
+            continue
+    words = {w for t in texts.values() for w in WORD.findall(t)}
+    # (only in the donor's files: ours already use the new names)
+    present = {w for t in texts.values() if WORD.search(t)
+               for w in re.findall(r"[A-Za-z0-9_]*[Ee]xpanded[A-Za-z0-9_]*", t)}
+    clash = sorted(w for w in words if w.lower() != DONOR.lower() and scrub_text(w, title) in present)
+    assert not clash, f"renamed identifiers already exist: {clash}"
+    for f, text in texts.items():
+        new = scrub_text(text, title)
+        if new != text:
+            f.write_text(new)
+    for f in sorted((p for p in root.rglob("*") if DONOR.lower() in p.name.lower()), reverse=True):
+        f.rename(f.with_name(scrub_text(f.name, title)))
+    left = [f for f in root.rglob("*") if f.is_file() and f.relative_to(root).as_posix() not in keep
+            and DONOR.lower() in f.read_bytes().decode("utf-8", "replace").lower()]
+    assert not left, left
+
+
 def module_name(path):
     name = path[:-4].replace("/", ".")
     return name[:-5] if name.endswith(".init") else name
@@ -384,7 +441,7 @@ def main():
     picked = pick_modules("--all" in sys.argv)
     if OUT.exists():
         shutil.rmtree(OUT)
-    shutil.copytree(FULL / "development/mods" / MOD, OUT)
+    shutil.copytree(DEV_MOD, OUT)
     main_lua = (OUT / "main.lua").read_text()
     head = "return function(mod)\n"
     assert main_lua.startswith(head)
@@ -397,44 +454,18 @@ def main():
     if "network" not in manifest.setdefault("permissions", []):
         manifest["permissions"].append("network")  # patched link modules require src.link.Wire
     (OUT / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
-    listing = sorted(f.relative_to(OUT.parent.parent).as_posix() for f in OUT.rglob("*") if f.is_file())
-    (OUT.parent.parent / "files.txt").write_text("\n".join(listing) + "\n")
+    # the development cart and the shared test fixture, under the probe's IDs
+    root = OUT.parent.parent
+    shutil.rmtree(root / "carts", ignore_errors=True)
+    (root / "carts").mkdir()
+    for cart in (FULL / "development/carts").glob("*.g1rcart"):
+        shutil.copy(cart, root / "carts" / cart.name)
+    shutil.copy(GEN3 / "porting/full_port/inventory_fixture.lua", root / "inventory_fixture.lua")
+    scrub(root, "Expanded Port", keep={"files.txt"})
+    listing = sorted(f.relative_to(root).as_posix() for d in (OUT, root / "carts") for f in d.rglob("*") if f.is_file())
+    (root / "files.txt").write_text("\n".join(listing) + "\n")
     print(f"{len(picked)} modules -> {OUT}")
-
-
-VERSION = "0.7.0-native.1"
-COOP_VERSION = "0.8.0-dev.9"
-CART_SRC = FULL / "engine-dev25-candidate/carts/inclement_emerald.g1rcart"
-
-
-def release():
-    """Importable files for the real game: the mod zip and the cart."""
-    import hashlib, zipfile
-    manifest = json.loads((OUT / "manifest.json").read_text())
-    manifest["version"] = VERSION
-    manifest["description"] = ("Inclement Emerald campaign for stock Gen1Recomp 0.3.73 "
-                               "(native build): every battle is a double.")
-    (OUT / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
-    zpath = GEN3 / f"inclement-emerald-native-{VERSION}.zip"
-    with zipfile.ZipFile(zpath, "w", zipfile.ZIP_DEFLATED) as z:
-        for f in sorted(p for p in OUT.rglob("*") if p.is_file()):
-            info = zipfile.ZipInfo(f.relative_to(OUT).as_posix(), (1980, 1, 1, 0, 0, 0))
-            info.compress_type = zipfile.ZIP_DEFLATED
-            z.writestr(info, f.read_bytes())
-    cart = CART_SRC.read_text()
-    for old, new in (('["version"]="0.6.0-dev.25"', f'["version"]="{VERSION}"'),
-                     ('["title"]="Inclement Emerald (Development)"', '["title"]="Inclement Emerald (Native)"')):
-        assert cart.count(old) >= 1, old
-        cart = cart.replace(old, new)
-    assert f'["version"]="{COOP_VERSION}"' in cart
-    cpath = GEN3 / "inclement_emerald.g1rcart"
-    cpath.write_text(cart)
-    for p in (zpath, cpath):
-        (p.parent / (p.name + ".sha256")).write_text(f"{hashlib.sha256(p.read_bytes()).hexdigest()}  {p.name}\n")
-        print(p)
 
 
 if __name__ == "__main__":
     main()
-    if "--release" in sys.argv:
-        release()

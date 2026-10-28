@@ -1,10 +1,10 @@
--- Held items in battle with Inclement's data (pokeemerald-1.13 items.h,
+-- Held items in battle with the donor's data (pokeemerald-1.13 items.h,
 -- battle_util.c, Gen 7 configuration).
 --   * Items whose donor hold effect exists in Gen 3 run the native handler
 --     with the donor's parameter (HeldItems.effectOf): Leftovers, the type
 --     boosts at 20%, Quick Claw, pinch berries...
 --   * The rest are handled here, through the hooks field.lua and the patched
---     Inclement library expose: stats and damage, speed order, accuracy,
+--     port library expose: stats and damage, speed order, accuracy,
 --     after-hit triggers for attacker and target, end of turn, switch-ins
 --     and field durations.
 -- Mega Stones and Z-Crystals stay inert: Mega Evolution and Z-Moves are
@@ -103,10 +103,10 @@ return function(mod, U, F)
     local sp = b.species or P.speciesOf(b.mon)
     local evo = P.evolutions and P.evolutions(sp)
     if type(evo) == "table" and #evo > 0 then return true end
-    -- Inclement's level and item evolutions (full/level_evolution.lua, evolution_items.lua)
-    local level = require("src.core.game3.evolution")._inclementLevelEvolution
+    -- the donor's level and item evolutions (full/level_evolution.lua, evolution_items.lua)
+    local level = require("src.core.game3.evolution")._expandedLevelEvolution
     if level and level.model and level.model.rules and #(level.model.rules[sp] or {}) > 0 then return true end
-    local items = require("src.core.game3.item_use")._inclementEvolutionItems
+    local items = require("src.core.game3.item_use")._expandedEvolutionItems
     local rules = items and items.model and (items.model.rules or items.model.evolutions)
     return type(rules) == "table" and type(rules[sp]) == "table" and next(rules[sp]) ~= nil
   end
@@ -137,7 +137,7 @@ return function(mod, U, F)
       local ok = species(attacker, o[1]) or (name == "SOUL_DEW" and species(attacker, "LATIOS"))
       if ok and (moveType == o[2] or moveType == o[3]) then mul = 1.2 end
     elseif name == "METRONOME" then
-      mul = 1 + 0.2 * math.min(5, attacker.inclementSameMoveTurns or 0)
+      mul = 1 + 0.2 * math.min(5, attacker.expandedSameMoveTurns or 0)
     elseif name == "GEMS" and typeOf(secondary) == moveType and (tonumber(move.power) or 0) > 1 then
       attacker.campaignGemUsed = U.item(attacker)
       mul = 1.3

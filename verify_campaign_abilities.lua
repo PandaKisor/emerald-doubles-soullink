@@ -99,14 +99,14 @@ compare('Fluffy halves contact','FLUFFY','defender','TACKLE',0.5)
 compare('Fluffy doubles Fire','FLUFFY','defender','FLAMETHROWER',2)
 compare('Ice Scales: special damage (donor: stat and final)','ICE_SCALES','defender','PSYCHIC',0.25)
 compare('Prism Armor softens super-effective','PRISM_ARMOR','defender','SHADOW_BALL',0.75)
-compare('Blaze outside a pinch: x1.2 (Inclement)','BLAZE','attacker','FLAMETHROWER',1.2)
+compare('Blaze outside a pinch: x1.2 (donor rules)','BLAZE','attacker','FLAMETHROWER',1.2)
 compare('Vengeance boosts Ghost moves','VENGEANCE','attacker','SHADOW_BALL',1.2)
 compare('Solar Power without sun does nothing','SOLAR_POWER','attacker','PSYCHIC',1)
 if wanted('Flash Fire') then
   local a,d=battler('MEW',50,'player'),battler('MEW',50,'enemy')
   local base=dmg(a,d,'FLAMETHROWER')
   a.expFlashFire=true
-  T.check(math.abs(dmg(a,d,'FLAMETHROWER')/base-1.5)<0.08,'Flash Fire boost applies under the Inclement rules')
+  T.check(math.abs(dmg(a,d,'FLAMETHROWER')/base-1.5)<0.08,'Flash Fire boost applies under the expanded rules')
 end
 compare('Unaware ignores the attacker\'s boosts','UNAWARE','defender','TACKLE',0.5,
   {setup=function(a) a.stages.attack=2 end})
@@ -230,7 +230,7 @@ scenario('Corrosion poisons Steel types',{{ability='CORROSION',moves={'TOXIC'}},
 
 -- when hit
 scenario('Iron Barbs',{{'MEW',moves={'TACKLE'}},{'MEW',moves={'TACKLE'}}},{{ability='IRON_BARBS'},{ability='IRON_BARBS'}},'Iron Barbs')
-scenario('Rough Skin (1/8, Inclement)',{{'MEW',moves={'TACKLE'}},{'MEW',moves={'TACKLE'}}},{{ability='ROUGH_SKIN'},{ability='ROUGH_SKIN'}},'Rough Skin')
+scenario('Rough Skin (1/8, donor rules)',{{'MEW',moves={'TACKLE'}},{'MEW',moves={'TACKLE'}}},{{ability='ROUGH_SKIN'},{ability='ROUGH_SKIN'}},'Rough Skin')
 scenario('Long Reach makes no contact',{{ability='LONG_REACH',moves={'TACKLE'}},{ability='LONG_REACH',moves={'TACKLE'}}},{{ability='ROUGH_SKIN'},{ability='ROUGH_SKIN'}},nil,{absent='Rough Skin'})
 scenario('Justified',{{'MEW',moves={'BITE'}},{'MEW',moves={'BITE'}}},{{ability='JUSTIFIED',level=60},{ability='JUSTIFIED',level=60}},'Justified raised its Attack')
 scenario('Rattled on Bug moves',{{'MEW',moves={'BUG_BITE'}},{'MEW',moves={'BUG_BITE'}}},{{ability='RATTLED',level=60},{ability='RATTLED',level=60}},'Rattled raised its Speed')
@@ -395,7 +395,7 @@ if wanted('Honey Gather') then
   local Prize=require('src.core.game3.battle.prize')
   local sp,slot=holder('HONEY_GATHER')
   -- (the fixture sets abilityNum after the mon is built; the game refreshes)
-  local refresh=F.P._inclementAbilities.refresh
+  local refresh=F.P._expandedAbilities.refresh
   local m=refresh(F.mon(sp,100,{'TACKLE'},{abilityNum=slot}))
   m.item,m.heldItem=0,0
   Prize.pickup({m},function() return 0 end,{})

@@ -2,7 +2,7 @@
 -- native status-effect dispatch once the attack string and PP are done:
 -- ctx is the native effect context (adapter, user, target), M the move
 -- context. `target` remaps a donor target the native picker lacks (ALLY,
--- ALL_BATTLERS) onto one it has. Numbers follow Inclement 1.13 (Gen 7).
+-- ALL_BATTLERS) onto one it has. Numbers follow the donor (1.13) (Gen 7).
 return function(U, F)
   local State = require("src.core.game3.battle.state")
   local Secondary = require("src.core.game3.battle.effects.secondary")

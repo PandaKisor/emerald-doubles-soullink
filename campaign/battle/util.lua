@@ -131,7 +131,7 @@ return function(data)
     return { immune = eff == 0, super = eff > 1, notVery = eff > 0 and eff < 1 }
   end
 
-  -- held items and berries (Inclement item data)
+  -- held items and berries (expanded item data)
   function U.item(b) return tonumber(b.item or (b.mon and (b.mon.item or b.mon.heldItem))) or 0 end
   function U.itemRow(id) return data.items[tonumber(id) or 0] end
   function U.isBerry(id)

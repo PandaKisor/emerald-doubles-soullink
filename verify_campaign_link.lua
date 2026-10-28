@@ -1,5 +1,5 @@
 -- Co-op link content on the campaign: versus battles keep real levels and
--- show the partner as Brendan/May; Inclement species, moves, abilities,
+-- show the partner as Brendan/May; Expanded species, moves, abilities,
 -- natures, items and balls cross the link wire format intact.
 -- Run from Gen3Mod/gen1recomp-0.3.73 with luajit.
 local F=assert(loadfile('../porting/native/campaign_fixture.lua'))()
@@ -11,7 +11,7 @@ T.eq(LB.unpackOpts().forceLevel,nil,'versus battles keep real levels')
 local zorua=F.mon('ZORUA',12,{'DARK_PULSE','U_TURN','NASTY_PLOT','PURSUIT'},{abilityNum=2,nature=3,item=F.ids.items.ITEM_OCCA_BERRY,pokeball=F.ids.items.ITEM_DREAM_BALL})
 local torchic=F.mon('TORCHIC',9,{'EMBER','FLAME_CHARGE'})
 local back,why=LB.unpackParty(LB.packParty({zorua,torchic}))
-T.check(back~=nil,'an Inclement party crosses the link '..tostring(why))
+T.check(back~=nil,'an Expanded party crosses the link '..tostring(why))
 if back then
   T.eq(back[1].species,zorua.species,'new species kept')
   T.eq(back[1].level,12,'level 12 kept');T.eq(back[2].level,9,'level 9 kept')
@@ -19,8 +19,8 @@ if back then
   T.eq(P.moveIdAt(back[2],2),F.move('FLAME_CHARGE'),'and the starter\'s new move')
   T.eq(back[1].abilityNum,2,'hidden ability slot kept')
   T.eq(P.natureOf(back[1]),3,'minted nature kept')
-  T.eq(tonumber(back[1].item or back[1].heldItem),F.ids.items.ITEM_OCCA_BERRY,'Inclement held item kept')
-  T.eq(tonumber(back[1].pokeball),F.ids.items.ITEM_DREAM_BALL,'Inclement ball kept')
+  T.eq(tonumber(back[1].item or back[1].heldItem),F.ids.items.ITEM_OCCA_BERRY,'Expanded held item kept')
+  T.eq(tonumber(back[1].pokeball),F.ids.items.ITEM_DREAM_BALL,'Expanded ball kept')
 end
 -- authored trainer teams (tag partners included) cross the link as built
 require('src.import.gba.trainer_extract').run(F.rom,require('src.core.game3.dataset').cache(),{game='emerald'})

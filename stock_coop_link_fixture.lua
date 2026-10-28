@@ -13,15 +13,16 @@ local files={}
 for path in pairs(assert(Json.decode(read(base..'generated/development-hashes.json')))) do files[path]=read(base..'generated/development/'..path) end
 -- the native probe of the campaign mod replaces the development one
 local probeRoot='../porting/native/generated/probe/'
-for path in pairs(files) do if path:match('^mods/inclement_battle_test/') then files[path]=nil end end
+-- (and its cart: both come from the probe build, under the probe's IDs)
+for path in pairs(files) do if path:match('^carts/') or path:match('^mods/') and not path:match('^mods/g3_coop/') then files[path]=nil end end
 for path in read(probeRoot..'files.txt'):gmatch('[^\n]+') do files[path]=read(probeRoot..path) end
 local fs=T.sdk.memfs(files);love.filesystem=fs
-local fixture=assert(loadfile(base..'inventory_fixture.lua'))()
+local fixture=assert(loadfile(probeRoot..'inventory_fixture.lua'))()
 local f=fixture('..',read,fs)
 -- test plumbing only (as in newPair below): this file's own require() sees
 -- the probe's co-op-only modules
-for name,m in pairs(assert(f.loader.exports.inclement_battle_test.nativeModules,'native probe did not install')) do package.loaded[name]=m end
-local nativeText=assert(loadfile(base..'generated/playtest/userdata/love/inclement-playtest/emerald/data/generated/gba/scripts/text.lua'))()
+for name,m in pairs(assert(f.loader.exports.expanded_port.nativeModules,'native probe did not install')) do package.loaded[name]=m end
+local nativeText=assert(loadfile('../porting/inputs/playtest-pack/data/generated/gba/scripts/text.lua'))()
 H.bundle={text=nativeText,textTables={}}
 local cache=require('src.core.game3.dataset').cache()
 require('src.import.gba.pokemon_extract').runPart(f.rom,cache,{part='data'})
@@ -78,7 +79,7 @@ local function newPair(opts)
       worlds[seat].fixture=fixture('..',read,fs)
       -- test plumbing only: lets this file's own require() see the probe's
       -- co-op-only modules (the engine never asks for them by name)
-      local probe=worlds[seat].fixture.loader.exports.inclement_battle_test
+      local probe=worlds[seat].fixture.loader.exports.expanded_port
       assert(probe and probe.nativeModules,'native probe did not install')
       for name,m in pairs(probe.nativeModules) do package.loaded[name]=m end
       require('src.core.GameVersion').set('emerald')

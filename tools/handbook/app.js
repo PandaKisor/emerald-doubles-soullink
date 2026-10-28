@@ -694,13 +694,13 @@
   // about -------------------------------------------------------------------------------
   const hand = trainers.filter(t => t.handpicked).length;
   $('about-content').innerHTML = `<p><strong>Campaign ${esc(D.meta.campaignVersion)} · Co-op ${esc(D.meta.coopVersion)}</strong><br>Made for stock Gen1Recomp ${esc(D.meta.engineVersion)}. Works offline; everything is inside this file.</p>
-    <p><strong>Route guide.</strong> Vanilla Emerald’s story in order, one chapter per level cap. Each stop lists its trainers (with tag partners and rematches), wild tables, items, shops at your badge count, and your own notes. ${hand} of ${trainers.length} trainers have hand-picked teams; the rest are generated from Inclement Emerald’s and marked “Generated”.</p>
+    <p><strong>Route guide.</strong> Vanilla Emerald’s story in order, one chapter per level cap. Each stop lists its trainers (with tag partners and rematches), wild tables, items, shops at your badge count, and your own notes. ${hand} of ${trainers.length} trainers have hand-picked teams; the rest are generated from the donor hack’s and marked “Generated”.</p>
     <p><strong>Battle plans.</strong> “Battle plan ⚔” on a trainer opens a side panel against your teams: each side’s best move with damage and KO odds, spread damage (and what hits your own ally), and the speed order with Tailwind, Trick Room and paralysis. Every cell opens in the calculator.</p>
     <p><strong>Your game.</strong> START › GUIDE SYNC (or saving) writes guide-sync.bin; Load game reads it to fill both teams, tick off beaten trainers and found items, show Soul Link pairs, and hide chapters past your badges.</p>
     <p><strong>Calculator.</strong> Direct damage for one attacker and defender, with IVs, EVs, natures, stages, current HP, status, supported abilities and items, weather, terrain, screens, spread damage and crits. Entry triggers such as Intimidate go in as stages. It is not a full battle simulator.</p>
     <p><strong>Notes</strong> are stored in this browser. Use Export / Import to share or back up.</p>
     <p><strong>Data coverage and limits</strong></p><ul>${D.meta.limitations.map(x => `<li>${esc(x)}</li>`).join('')}</ul>
-    <p class="footnote">Pokémon © Nintendo / Creatures / GAME FREAK. Campaign by Aeryk Kisor; Inclement Emerald content and icons by Buffel Saft and contributors; Gen1Recomp by BOIS CLUB GAMES. No ROM or save data is included.</p>`;
+    <p class="footnote">Pokémon © Nintendo / Creatures / GAME FREAK. Campaign by Aeryk Kisor; some species, moves, trainer and item data and the Pokémon icons adapted from Inclement Emerald by Buffel Saft and contributors; Gen1Recomp by BOIS CLUB GAMES. No ROM or save data is included.</p>`;
   $('about-footer').onclick = $('about-open').onclick = () => $('about').showModal(); $('about-close').onclick = () => $('about').close();
   document.querySelector('.brand').onclick = e => { e.preventDefault(); $('search').value = ''; show('guide'); };
 

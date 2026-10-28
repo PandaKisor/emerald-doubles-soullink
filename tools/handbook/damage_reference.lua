@@ -92,7 +92,7 @@ local specs = {
 }
 
 local out = {
-  schemaVersion=1, campaignVersion='0.26.0', engineVersion='0.3.73', damageRules='inclement',
+  schemaVersion=1, campaignVersion='0.26.0', engineVersion='0.3.73', damageRules='expanded',
   provenance='campaign_fixture.lua; live stock engine Damage.calc with the built campaign and native Adapter.new',
   command='cd Gen3Mod/gen1recomp-0.3.73 && luajit ../porting/native/tools/handbook/damage_reference.lua',
   notes={
@@ -111,7 +111,7 @@ for _,spec in ipairs(specs) do
   local attacker,aInput,aStats,aBase=battler(spec[4],'player',0,spec[3])
   local defender,dInput,dStats,dBase=battler(spec[5],'enemy',1,spec[3])
   local st={playerSide={},enemySide={},battlers={[0]=attacker,[1]=defender},turn=1,
-    damageRules='inclement',double=true,weather=field.weather~='NONE' and field.weather or nil}
+    damageRules='expanded',double=true,weather=field.weather~='NONE' and field.weather or nil}
   st.player,st.enemy=attacker,defender
   st.battlers[2]=battler(nil,'player',2,'TACKLE')
   st.battlers[3]=battler(nil,'enemy',3,'TACKLE')
@@ -120,12 +120,12 @@ for _,spec in ipairs(specs) do
   attacker.expHelpingHand=field.helpingHand
   local id=F.move(spec[3])
   local move=Moves.get(id)
-  assert(move.damageRules=='inclement', 'Move is missing the campaign damage rules')
+  assert(move.damageRules=='expanded', 'Move is missing the campaign damage rules')
   local rolls,info={},nil
   for roll=85,100 do
     local value
     value,info=Damage.calc(attacker,defender,move,{
-      adapter=ad,st=st,damageRules='inclement',forceRoll=roll,forceCrit=field.crit,
+      adapter=ad,st=st,damageRules='expanded',forceRoll=roll,forceCrit=field.crit,
       rng=function(lo) return lo or 0 end,
       weatherKind=st.weather,permanentWeather=field.permanentWeather,
       reflect=field.reflect,lightScreen=field.lightScreen,doubleScreens=field.doubleScreens,

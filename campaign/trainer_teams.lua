@@ -1,6 +1,6 @@
 -- Trainer teams, Route 103 rival to Roxanne and the Rustboro rival (draft 1,
 -- 2026-10-23), read by
--- campaign/trainers.lua. Built for doubles from Inclement Emerald's teams for
+-- campaign/trainers.lua. Built for doubles from the donor's teams for
 -- the same trainers (pokeemerald-1.13 trainer_parties.h) and the species on
 -- these routes, with fixed levels: route trainers climb toward the cap, boss
 -- aces sit on it (Roxanne: Nosepass 15).

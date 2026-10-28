@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
 """Build the user's campaign mod: vanilla Emerald (maps and story from the
 player's ROM) with doubles, co-op battles and shared story progress on stock
-Gen1Recomp 0.3.73, plus Inclement's additions: stats/types/Fairy (0.5.1),
+Gen1Recomp 0.3.73, plus the expanded content: stats/types/Fairy (0.5.1),
 expanded species, art, abilities, items, learning, evolutions and wild
 encounters (campaign/content.lua).
 
 Soul Link, level caps and the co-op session come from g3_coop, which the
-cart loads beside this mod. Inclement's rebuilt world (full/maps, full/world)
-is deliberately not shipped.
+cart loads beside this mod. The donor port's rebuilt world (full/maps,
+full/world) is deliberately not shipped. Every copied source is scrubbed of
+the donor's name (build_probe.scrub).
 
   python3 build_campaign.py            # generated/campaign/mods/g3_campaign
   python3 build_campaign.py --release  # + Gen3Mod/<zip>, cart, field guide HTML, sha256 files
@@ -19,22 +20,22 @@ import build_probe as native
 
 HERE = native.HERE
 GEN3 = native.GEN3
-DEV = native.FULL / "development/mods/inclement_battle_test"
+DEV = native.DEV_MOD
 DONOR = GEN3 / "pokeemerald-1.13"
 CAMPAIGN = HERE / "campaign"
 
 MOD_ID = "g3_campaign"
 TITLE = "Emerald Doubles Soul Link"
-VERSION = "0.40.0"
+VERSION = "0.41.0"
 CART_ID = "emerald_doubles_soullink"
-COOP_ID, COOP_VERSION = "g3_coop", "0.8.6"
+COOP_ID, COOP_VERSION = "g3_coop", "0.8.7"
 # GitHub repos the launcher checks for updates and the release cart downloads from
 REPO, COOP_REPO = "PandaKisor/emerald-doubles-soullink", "PandaKisor/g3-coop"
 COOP_SRC = GEN3 / "coop/g3_coop"
 OUT = HERE / "generated/campaign/mods" / MOD_ID
 
 MAIN = f'''-- {TITLE}: vanilla Emerald with every battle a double, co-op team
--- battles and shared story progress, and Inclement Emerald's additions.
+-- battles and shared story progress, and the expanded content.
 -- Soul Link and level caps live in g3_coop, which the cart loads beside it.
 return function(mod)
   local function source(path)
@@ -56,9 +57,9 @@ return function(mod)
   mod.exports.nativeModules = Swap.installAll(files)
   source("native/shims.lua").install()
 
-  -- Inclement Emerald stats, types, move data and Fairy (port 0.5.1), then
-  -- its species, art, abilities, items, learning and wild encounters.
-  source("inclement.lua")(mod)
+  -- Expanded stats, types, move data and Fairy (port 0.5.1), then the
+  -- species, art, abilities, items, learning and wild encounters.
+  source("expanded.lua")(mod)
   mod.exports.campaign = source("campaign/content.lua")(mod, active)
 
   -- Every trainer and field wild battle is a double.
@@ -68,7 +69,7 @@ return function(mod)
   -- level-cap list (rival, gyms, bosses) applies on this cart.
   mod.exports.coopVanillaStory = true
 
-  -- Shared story progress for g3_coop (no Inclement-only trainers here).
+  -- Shared story progress for g3_coop (no port-only trainers here).
   source("coop_campaign.lua").install(mod, {{ bundle = {{ playtest = {{ trainers = {{}} }} }} }}, active)
   source("coop_progress.lua")(mod, active)
 end
@@ -85,17 +86,18 @@ MANIFEST = {
     "category": "GAMEPLAY",
     "priority": 100,
     "permissions": ["engine_internals", "network"],
-    "conflicts": ["inclement_battle_test", "inclement_battle_core", "inclement_stats_proof"],
+    # the donor port's own mods, which can't load beside this one
+    "conflicts": [f"{native.DONOR.lower()}_{m}" for m in ("battle_test", "battle_core", "stats_proof")],
     "description": "Vanilla Emerald where every battle is a double, with co-op, Soul Link and level caps "
-                   "(with Gen 3 Co-op) and Inclement Emerald's Pokémon, items and wild encounters.",
+                   "(with Gen 3 Co-op), plus hundreds of new Pokémon, moves, abilities and items.",
     "github": REPO,
 }
 
 
-def inclement_layer():
+def expanded_layer():
     """0.5.1's legacy.lua under this mod's event name, without the dev lab."""
     text = (DEV / "legacy.lua").read_text()
-    old_event = '"mod.inclement_battle_test.active"'
+    old_event = f'"mod.{native.DONOR.lower()}_battle_test.active"'
     assert text.count(old_event) == 1
     text = text.replace(old_event, f'"mod.{MOD_ID}.active"')
     lab = ('  local lab = source("lib/lab.lua")(source("lib/fixture.lua"), source("lib/emerald_reference.lua"))\n'
@@ -105,7 +107,7 @@ def inclement_layer():
     return text.replace(lab, "")
 
 
-# Inclement content layers that work on the vanilla world. Its maps, map
+# The donor port's content layers that work on the vanilla world. Its maps, map
 # animations, scripts/world, centers, shops, gifts and playtest are left out.
 FULL_FILES = ("pokemon_data.lua", "species_art.lua", "abilities.lua", "natures.lua", "inventory.lua",
               "learning.lua", "ability_items.lua", "field_items.lua", "evolution_items.lua", "medicine.lua",
@@ -113,7 +115,7 @@ FULL_FILES = ("pokemon_data.lua", "species_art.lua", "abilities.lua", "natures.l
               "save.lua")
 FULL_DIRS = ("data", "species-art", "field-items", "evolution-items", "medicine", "restoratives", "inventory-ui")
 SAVE_PATCHES = (
-    ('local Save = { CART_ID = "inclement_emerald", MOD_ID = "inclement_battle_test", SCHEMA = 1 }',
+    ('local Save = { CART_ID = "expanded_cart", MOD_ID = "expanded_port", SCHEMA = 1 }',
      f'local Save = {{ CART_ID = "{CART_ID}", MOD_ID = "{MOD_ID}", SCHEMA = 1 }}'),
     # saves from before the expanded content (0.1.0) hold only vanilla IDs:
     # they load in the cart and gain the identity stamp on their next save
@@ -123,10 +125,9 @@ SAVE_PATCHES = (
      "      if bridge.enabled() then bridge.stamp(session, bridge.data) end\n"),
     ("      if bridge.api.marked(value) then bridge.stamp(session, bridge.data) end\n",
      "      if bridge.enabled() then bridge.stamp(session, bridge.data) end\n"),
-    ("the Inclement Emerald cartridge", f"the {TITLE} cart"),
 )
 # Hooks for the expanded moves (campaign/moves.lua, campaign/battle/*.lua) in
-# the mod's copies of the Inclement 0.5.1 battle library and the patched
+# the mod's copies of the port's 0.5.1 battle library and the patched
 # engine. Every hook reads a campaign* field on the move record or the
 # Moves._campaignField bridge, so vanilla moves run unchanged.
 CF = 'local CampaignField = require("src.core.game3.battle.moves")._campaignField\n'
@@ -389,13 +390,13 @@ LIB_PATCHES = (
 # The link wire format (stock src/link/Protocol.lua) checks Gen 3's limits:
 # 411 species, 354 moves, 374 items, 12 balls, two ability slots and a
 # nature fixed by personality. The campaign installs a patched copy (native
-# swap) that reads Inclement's limits from Protocol.campaign (field.lua), so
+# swap) that reads the expanded limits from Protocol.campaign (field.lua), so
 # co-op battles and trades carry the expanded content intact.
 PROTOCOL_SRC = GEN3 / "gen1recomp-0.3.73/src/link/Protocol.lua"
 PROTOCOL_PATCHES = (
     ("local Protocol = {}\n",
      "local Protocol = {}\n\n"
-     "-- campaign: Inclement's species, moves, items and balls cross the link\n"
+     "-- campaign: the expanded species, moves, items and balls cross the link\n"
      "-- when Protocol.campaign is set and active (g3_campaign field.lua)\n"
      "local function limit(kind, default)\n"
      "  local C = Protocol.campaign\n"
@@ -465,7 +466,7 @@ def lua(value):
 
 
 def wild_maps():
-    """Inclement's map encounter tables (src/data/wild_encounters.json), keyed
+    """The donor's map encounter tables (src/data/wild_encounters.json), keyed
     by the vanilla map name without MAP_. Honey encounters have no vanilla
     mechanic and are left out."""
     wild = json.loads((DONOR / "src/data/wild_encounters.json").read_text())
@@ -488,12 +489,12 @@ def wild_maps():
         else:
             rows.append({"map": name, **areas})
     body = ",\n".join("  " + lua(r) for r in rows)
-    return ("-- Generated by build_campaign.py from Inclement Emerald's wild_encounters.json.\n"
+    return ("-- Generated by build_campaign.py from the donor's wild_encounters.json.\n"
             "return {\n" + body + "\n}\n"), len(rows)
 
 
 def dex_entries():
-    """Inclement's Pokédex entries for species past the original 386, keyed by
+    """The donor's Pokédex entries for species past the original 386, keyed by
     national number (src/data/pokemon/pokedex_entries.h and pokedex_text.h)."""
     import re
     root = DONOR / "src/data/pokemon"
@@ -516,13 +517,13 @@ def dex_entries():
                            "pokemonOffset": int(f["pokemonOffset"]), "trainerScale": int(f["trainerScale"]),
                            "trainerOffset": int(f["trainerOffset"])}))
     body = "\n".join(f"  [{nat}] = {lua(row)}," for nat, row in rows)
-    return ("-- Generated by build_campaign.py from Inclement Emerald's Pokédex entries.\n"
+    return ("-- Generated by build_campaign.py from the donor's Pokédex entries.\n"
             "return {\n" + body + "\n}\n"), len(rows)
 
 
 def footprints():
     """Pokédex footprints for the species the ROM has none for (ids 413+),
-    from Inclement's graphics/pokemon/*/footprint.png (16x16, 1 bit), matched
+    from the donor's graphics/pokemon/*/footprint.png (16x16, 1 bit), matched
     by species name through the donor's footprint table. Returns
     campaign/footprint_data.lua: id -> 64 hex digits, one bit per pixel."""
     import re
@@ -542,12 +543,12 @@ def footprints():
         bits = "".join("1" if img.getpixel((x, y)) < 128 else "0" for y in range(16) for x in range(16))
         rows[sid] = "%064x" % int(bits, 2)
     body = "".join(f'[{sid}]="{rows[sid]}",\n' for sid in sorted(rows))
-    return "-- Generated by build_campaign.py from Inclement's footprint.png files.\nreturn {\n" + body + "}\n", len(rows)
+    return "-- Generated by build_campaign.py from the donor's footprint.png files.\nreturn {\n" + body + "}\n", len(rows)
 
 
 def cries():
     """Cries for the species the ROM has none for (ids 413+ here), from
-    Inclement's sound/direct_sound_samples/cries. The donor's gCryTable is
+    the donor's sound/direct_sound_samples/cries. Its gCryTable is
     indexed by its own species number, so species are matched by name.
     Returns the index (campaign/cries.lua) and the s8 PCM blob (cries.bin)."""
     import re, struct
@@ -600,7 +601,7 @@ def cries():
         species[sid] = by_file[stem]
     rows = "\n".join(f"    {lua(s)}," for s in samples)
     ids = "\n".join(f"    [{sid}] = {i}," for sid, i in sorted(species.items()))
-    text = ("-- Generated by build_campaign.py from Inclement Emerald's cries.\n"
+    text = ("-- Generated by build_campaign.py from the donor's cries.\n"
             "-- samples: s8 PCM in cries.bin; species: campaign species id -> sample.\n"
             "return {\n  samples = {\n" + rows + "\n  },\n  species = {\n" + ids + "\n  },\n}\n")
     return text, bytes(blob), len(species), missing
@@ -657,7 +658,7 @@ def natural_gift():
     rows = re.findall(r"\[ITEM_TO_BERRY\((ITEM_\w+)\)\]\s*=\s*\{TYPE_(\w+),\s*(\d+)\}", body)
     assert len(rows) > 60, len(rows)
     lines = "\n".join(f'  {sym} = {{ "{t}", {p} }},' for sym, t, p in rows)
-    return "-- Generated by build_campaign.py from Inclement Emerald's gNaturalGiftTable.\nreturn {\n" + lines + "\n}\n"
+    return "-- Generated by build_campaign.py from the donor's gNaturalGiftTable.\nreturn {\n" + lines + "\n}\n"
 
 
 def build():
@@ -666,18 +667,20 @@ def build():
     OUT.mkdir(parents=True)
     (OUT / "main.lua").write_text(MAIN)
     (OUT / "manifest.json").write_text(json.dumps(MANIFEST, indent=2) + "\n")
-    (OUT / "inclement.lua").write_text(inclement_layer())
+    (OUT / "expanded.lua").write_text(expanded_layer())
     shutil.copytree(DEV / "lib", OUT / "lib",
                     ignore=shutil.ignore_patterns("lab.lua", "lab_screen.lua", "mechanics_lab.lua",
                                                   "fixture.lua", "emerald_reference.lua"))
     for name in ("coop_campaign.lua", "coop_progress.lua"):
         shutil.copy(DEV / "full" / name, OUT / name)
-    shutil.copy(DEV / "LICENSE.MD", OUT / "LICENSE-INCLEMENT.MD")
+    shutil.copy(HERE / "LICENSE.MD", OUT / "LICENSE.MD")
     (OUT / "full").mkdir()
     for name in FULL_FILES:
         shutil.copy(DEV / "full" / name, OUT / "full" / name)
     for name in FULL_DIRS:
         shutil.copytree(DEV / "full" / name, OUT / "full" / name)
+    # the patches below are written against the scrubbed sources
+    native.scrub(OUT, TITLE, keep={"manifest.json"})
     print(f"{strip_gimmicks(OUT / 'full')} Mega/Z items dropped")
     save =(OUT / "full/save.lua").read_text()
     for before, after in SAVE_PATCHES:
@@ -724,6 +727,8 @@ def build():
     carts = OUT.parent.parent / "carts"
     carts.mkdir(exist_ok=True)
     (carts / f"{CART_ID}.g1rcart").write_text(cart_text())
+    # the patched engine modules are the donor port's too
+    native.scrub(OUT / "native", TITLE)
     print(f"{MOD_ID} {VERSION} -> {OUT}")
 
 
@@ -746,7 +751,7 @@ def cart_text(hashes=None):
     return ('return {\n["format"]="g1rcart",\n["formatVersion"]=1,\n' + label + '["cart"]={\n'
             f'["id"]="{CART_ID}",\n["title"]="{TITLE}",\n["version"]="{VERSION}",\n'
             '["author"]="Aeryk Kisor",\n'
-            '["summary"]="Vanilla Emerald with Inclement Pokémon, every battle a double, co-op with Soul Link and level caps.",\n'
+            '["summary"]="Vanilla Emerald with hundreds of new Pokémon, every battle a double, co-op with Soul Link and level caps.",\n'
             '["base"]="emerald",\n["engine"]=">=0.3.73",\n["shell"]="#26734D",\n["seal"]="open",\n'
             f'["mods"]={{\n[1]={{\n{pin(MOD_ID, VERSION, REPO)}\n}},\n'
             f'[2]={{\n{pin(COOP_ID, COOP_VERSION, COOP_REPO)},\n'

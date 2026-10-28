@@ -1,4 +1,4 @@
--- Inclement's items on the vanilla world (campaign/item_world.lua +
+-- The donor's items on the vanilla world (campaign/item_world.lua +
 -- item_sources.lua), headless on stock 0.3.73 through the built mod: gift,
 -- item ball and hidden item substitutions, the script hook that applies
 -- them, and badge-tier mart stock. Run from Gen3Mod/gen1recomp-0.3.73.
@@ -46,7 +46,7 @@ do
   T.eq(Flags.getVar(store,vm.ctx,0x8000),v,'other std scripts are left alone')
 end
 -- vanilla scripts get vanilla's pocket numbers (the find-item script had no
--- case for Inclement's POKé BALLS pocket 6, so a Friend Ball stayed put)
+-- case for the donor's POKé BALLS pocket 6, so a Friend Ball stayed put)
 do
   local store=Flags.newStore()
   local sctx={specialVars={},stringVars={}}
@@ -73,7 +73,7 @@ do
   T.eq(pocketCase('ITEM_ORAN_BERRY'),4,'a berry is in the BERRIES case')
   T.eq(pocketCase('ITEM_MACH_BIKE'),5,'a key item is in the KEY ITEMS case')
 end
--- marts: vanilla stock + Inclement's badge tier + the town's own stock
+-- marts: vanilla stock + the donor's badge tier + the town's own stock
 local Marts=require('src.core.game3.marts')
 local fortreeKey
 for k,m in pairs(S.marts) do if m.label=='FortreeCity_Mart_EventScript_Clerk' then fortreeKey=k end end
@@ -105,18 +105,18 @@ for _,sym in ipairs({'ITEM_DUSK_STONE','ITEM_SHINY_STONE','ITEM_DAWN_STONE','ITE
     'ITEM_WHIPPED_DREAM','ITEM_SACHET'}) do
   T.check(sources[sym],sym..' can be obtained')
 end
--- gym TM gifts Inclement renamed (GiveAerialAce -> GiveRoost) give its TM
+-- gym TM gifts the donor renamed (GiveAerialAce -> GiveRoost) give its TM
 for _,sym in ipairs({'ITEM_TM51_ROOST','ITEM_TM72_VOLT_SWITCH','ITEM_TM55_SCALD'}) do
   local key,v=giftKey(sym)
   T.check(key~=nil,sym..' replaces the gym leader\'s vanilla TM')
   if key then T.eq(W.substitute('ANY',0,v,0,key),items[sym],sym..' through the gym script') end
 end
--- a leftover vanilla ball takes the nearest Inclement one on its map
+-- a leftover vanilla ball takes the nearest donor one on its map
 local r111=S.balls.EM_ROUTE111 or {}
 local rockSlide=false
 for _,sym in pairs(r111) do if sym=='ITEM_TM63_ROCK_SLIDE' then rockSlide=true end end
 T.check(rockSlide,'Route 111: the HP Up ball a tile off gives TM63 Rock Slide')
--- items Inclement places on tiles vanilla doesn't use are sold nearby
+-- items the donor places on tiles vanilla doesn't use are sold nearby
 local function martOf(label) for k,m in pairs(S.marts) do if m.label==label then return k,m end end end
 local _,lava=martOf('LavaridgeTown_Mart_EventScript_Clerk')
 local sold={}
@@ -126,7 +126,7 @@ local _,slate=martOf('SlateportCity_Mart_EventScript_Clerk')
 sold={}
 for _,sym in ipairs(slate and slate.extra or {}) do sold[sym]=true end
 T.check(sold.ITEM_EVIOLITE,'Dewford has no mart: its NPC items are sold in Slateport')
--- a TM Inclement gives away (price 0) isn't free in a mart
+-- a TM the donor gives away (price 0) isn't free in a mart
 local ItemsData=require('src.core.game3.items_data')
 T.eq(ItemsData.info(items.ITEM_TM58_ENDURE).price,3000,'a gifted TM costs 3000 in a mart')
 T.check((ItemsData.info(items.ITEM_POTION).price or 0)>0,'other prices stay')

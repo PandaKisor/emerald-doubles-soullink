@@ -28,7 +28,7 @@ local loader=Loader.new({fs=fs,generation=3})
 loader:load(native)
 assert(#loader.errors==0,table.concat(loader.errors,'\n'))
 local campaign=assert(loader.exports.g3_campaign.campaign,'campaign content did not load')
-local nativeText=assert(loadfile('../porting/full_port/generated/playtest/userdata/love/inclement-playtest/emerald/data/generated/gba/scripts/text.lua'))()
+local nativeText=assert(loadfile('../porting/inputs/playtest-pack/data/generated/gba/scripts/text.lua'))()
 require('src.core.game3.scripting.space').ensureBundle=function() return {text=nativeText,textTables={}} end
 local cache=require('src.core.game3.dataset').cache()
 require('src.import.gba.pokemon_extract').runPart(rom,cache,{part='data'})

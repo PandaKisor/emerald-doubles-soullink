@@ -1,4 +1,4 @@
--- Inclement learnsets, egg moves, machines and tutors teach only moves the
+-- Expanded learnsets, egg moves, machines and tutors teach only moves the
 -- battle engine can run: the shared Gen 3 moves plus the expanded moves that
 -- already have battle support. Everything else stays out until its effect is
 -- ported, so no Pokémon can bring an unusable move into a battle.

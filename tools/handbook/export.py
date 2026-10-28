@@ -23,7 +23,7 @@ NATIVE = HERE.parent.parent
 PROJECT = NATIVE.parent.parent
 ENGINE = PROJECT / "gen1recomp-0.3.73"
 BUILT = NATIVE / "generated/campaign/mods"
-DEFAULT_SCRIPTS = PROJECT / "porting/full_port/generated/playtest/userdata/love/inclement-playtest/emerald/data/generated/gba/scripts"
+DEFAULT_SCRIPTS = PROJECT / "porting/inputs/playtest-pack/data/generated/gba/scripts"
 TYPES = ["Normal", "Fighting", "Flying", "Poison", "Ground", "Rock", "Bug", "Ghost", "Steel", "???", "Fire", "Water", "Grass", "Electric", "Psychic", "Ice", "Dragon", "Dark", "Fairy"]
 STATS = ["atk", "def", "spe", "spa", "spd"]
 

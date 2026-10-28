@@ -1,6 +1,6 @@
 -- The campaign's Pokédex (campaign/dex.lua + the patched dex screen) and its
 -- hand-off to g3_coop's level caps, headless on stock 0.3.73 through the
--- built mod: Inclement's species join the HOENN dex past 202 and the
+-- built mod: the donor's species join the HOENN dex past 202 and the
 -- NATIONAL dex past 386, the sort orders take them in, the screen's list
 -- builds past 386 rows, and g3_coop is told the story is vanilla (its own
 -- cap list applies). Run from Gen3Mod/gen1recomp-0.3.73 with luajit.

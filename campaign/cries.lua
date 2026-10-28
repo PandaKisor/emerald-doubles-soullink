@@ -1,4 +1,4 @@
--- Cries for the species past the ROM's 411 (Inclement's samples, built by
+-- Cries for the species past the ROM's 411 (the donor's samples, built by
 -- build_campaign.py into cries.bin + campaign/cry_index.lua). They are added to
 -- the ROM's sound pack as extra samples and cries, so the engine's cry modes,
 -- pitch and caching treat them like the native ones.

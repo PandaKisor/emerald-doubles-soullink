@@ -1,4 +1,4 @@
--- The donor sprite templates Inclement's animations use (campaign/move_anims.lua
+-- The donor sprite templates the donor's animations use (campaign/move_anims.lua
 -- "templates", g1 format) added beside vanilla's. The engine's callbacks come
 -- from four ports, each with its own template table and format, and the
 -- callback decides which one a sprite reads, so each template goes into all

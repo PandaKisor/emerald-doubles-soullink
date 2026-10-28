@@ -12,7 +12,7 @@ local current
 Runtime.getSession=function() return current and current.s end
 local item=F.f.data.identity.namespaces.items.ITEM_TM39_ROCK_TOMB
 local gift=F.f.data.identity.namespaces.species.SPECIES_TREECKO
-local api=F.f.loader.exports.inclement_battle_test.coopProgress
+local api=F.f.loader.exports.expanded_port.coopProgress
 T.eq(api.API,1,'sealed cartridge exports versioned progression API')
 T.eq(api.build,P.BUILD,'engine and cartridge continuation versions match')
 local scripts={start={{op='setvar',0x4050,1},{op='trainerbattle',trainer=265,type=1,eventScript='reward'}, {op='end'}},
@@ -96,7 +96,7 @@ T.eq(P.resolve(guest.s,'pair:1:host','lose'),false,'conflicting result refused')
 
 -- Actual native save schema and serializer persist effects and receipts together.
 local Schema=require('src.core.game3.save_schema_firered')
-local bridge=F.f.SD._inclementFullSave
+local bridge=F.f.SD._expandedFullSave
 bridge.stamp(guest.s,bridge.data)
 local saved=Schema.toSaveTable(guest.s)
 local restored=Schema.fromSaveTable(assert(F.f.SD.decode(F.f.SD.encode(saved))))
@@ -266,7 +266,7 @@ T.eq(Objects._perm.OTHER_MAP[9].x,90,'unrelated personal object state preserved'
 Objects._perm,Objects._mapId=oldPerm,oldMap
 
 -- Real native gym continuation: inspect/capture and execute the extracted VM.
-local dir=base..'generated/playtest/userdata/love/inclement-playtest/emerald/data/generated/gba/scripts/'
+local dir='../porting/inputs/playtest-pack/data/generated/gba/scripts/'
 local native=assert(loadfile(dir..'scripts.lua'))()
 local labels=assert(loadfile(dir..'labels.lua'))()
 local text=assert(loadfile(dir..'text.lua'))()
@@ -738,7 +738,7 @@ local inspector=world('AUDIT',777,{})
 inspector.vm.scripts=native
 select(inspector)
 for key,rows in pairs(native) do for index,row in ipairs(rows) do
-  if row.op=='trainerbattle' and F.f.loader.exports.inclement_battle_test.coopStoryTrainer(row.trainer) then
+  if row.op=='trainerbattle' and F.f.loader.exports.expanded_port.coopStoryTrainer(row.trainer) then
     inspector.vm._scriptKey=key
     inspector.vm.ctx.pc={listKey=key,index=index+1}
     P.beginScript(inspector.vm)

@@ -1,6 +1,6 @@
--- Inclement Emerald's additions on vanilla Emerald: expanded species, art,
+-- The donor's additions on vanilla Emerald: expanded species, art,
 -- abilities, natures, items, learning, evolutions, wild encounters and the
--- expanded-content save identity. Inclement's rebuilt maps, scripts, shops
+-- expanded-content save identity. The donor's rebuilt maps, scripts, shops
 -- and centers are deliberately left out; the world is the player's ROM.
 return function(mod, active)
   local function source(path)

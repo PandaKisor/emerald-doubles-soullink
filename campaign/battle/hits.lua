@@ -1,6 +1,6 @@
 -- Expanded damaging moves (donor effects with no Gen 3 equivalent). Each
 -- spec runs on the native hit pipeline through hooks the campaign adds to
--- the Inclement library (campaign* fields on the move record):
+-- the port library (campaign* fields on the move record):
 --   base     native effect the hit runs as (default HIT)
 --   pre      M -> true when the move fails before hitting
 --   calc     M, target -> extra damage options (power, moveType, forceCrit,
@@ -9,7 +9,7 @@
 --   eff      attacker, defender, moveType, eff -> effectiveness
 --   after    M, after a landed hit (before the faint check)
 --   afterFaint M, after the target's faint check
--- Numbers follow Inclement 1.13 (pokeemerald-1.13 battle_util.c and
+-- Numbers follow the donor (1.13) (pokeemerald-1.13 battle_util.c and
 -- battle_script_commands.c, Gen 7 configuration).
 return function(U, F)
   local State = require("src.core.game3.battle.state")
@@ -165,7 +165,7 @@ return function(U, F)
     pre = function(M, failFn)
       local item = U.item(M.user)
       if item == 0 or (M.user.campaignEmbargo or 0) > 0 or (F.field(M.st).magicRoom or 0) > 0 then return fail(M, failFn) end
-      -- Inclement leaves Fling's power unprogrammed; the standard values
+      -- The donor leaves Fling's power unprogrammed; the standard values
       local row = U.itemRow(item)
       M.campaignFlung = item
       M.campaignFlingPower = U.isBerry(item) and 10 or (row and row.symbol == "ITEM_IRON_BALL" and 130) or 30
@@ -580,7 +580,7 @@ return function(U, F)
   S.REVELATION_DANCE = { calc = function(M) local t1 = U.types(M.user); return { moveType = t1 } end }
   -- Grassy Glide's priority in Grassy Terrain is read by the turn-order hook
   S.GRASSY_GLIDE = { grassyGlide = true }
-  -- Inclement leaves these as "not done yet"; the campaign gives them their
+  -- The donor leaves these as "not done yet"; the campaign gives them their
   -- core behaviour: Beak Blast burns attackers that touch the heating user
   -- before it moves (field.lua), Shell Trap fires only after a physical hit
   S.BEAK_BLAST = { beakBlast = true }

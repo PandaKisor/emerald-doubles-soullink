@@ -1,13 +1,13 @@
--- Inclement's items on the vanilla world (campaign/item_sources.lua, made by
+-- The donor's items on the vanilla world (campaign/item_sources.lua, made by
 -- tools/gen_item_sources.py):
---   * item balls and hidden items on the same tile as Inclement's give
---     Inclement's item (Mega Stones, Z-Crystals and Bottle Caps excluded)
---   * scripted gifts give Inclement's item where its version of the same
+--   * item balls and hidden items on the same tile as the donor's give
+--     the donor's item (Mega Stones, Z-Crystals and Bottle Caps excluded)
+--   * scripted gifts give the donor's item where its version of the same
 --     script (same label) does (Oldale's mart guide: Focus Sash, Victoria: Life Orb, ...)
---   * town marts sell vanilla's stock plus Inclement's badge-tier stock and
---     the town's own Inclement stock (evolution items, battle items, special
---     balls, and items Inclement gives through NPCs vanilla doesn't have);
---     specialty shops sell Inclement's list for them; an item Inclement
+--   * town marts sell vanilla's stock plus the donor's badge-tier stock and
+--     the town's own donor stock (evolution items, battle items, special
+--     balls, and items the donor gives through NPCs vanilla doesn't have);
+--     specialty shops sell the donor's list for them; an item the donor
 --     gives for free (price 0) costs what sources.prices says
 return function(mod, data, sources, active)
   local Flags = require("src.core.game3.scripting.flags")
@@ -17,7 +17,7 @@ return function(mod, data, sources, active)
   local function id(sym) return items[sym] end
   local function mapId() return Map.current end
 
-  -- the item a vanilla script hands out on `map` becomes Inclement's: an item
+  -- the item a vanilla script hands out on `map` becomes the donor's: an item
   -- ball (find item, std 1) by the ball's local id, a gift (obtain item,
   -- std 0) by the script giving it and the vanilla item
   function W.substitute(map, std, item, talked, script)
@@ -39,8 +39,8 @@ return function(mod, data, sources, active)
   end
   -- Vanilla scripts number the pockets as vanilla's bag does (1 ITEMS,
   -- 2 POKé BALLS, 3 TMs & HMs, 4 BERRIES, 5 KEY ITEMS), but the campaign bag
-  -- has Inclement's seven, so checkitemtype answers in vanilla's numbers:
-  -- a Friend Ball (Inclement's pocket 6) had no case, and the find-item
+  -- has the donor's seven, so checkitemtype answers in vanilla's numbers:
+  -- a Friend Ball (the donor's pocket 6) had no case, and the find-item
   -- script stopped with the ball still on the ground. MEDICINE and BATTLE
   -- ITEMS have no vanilla pocket: they take the ITEMS case, and the pocket
   -- name the script buffers next is rewritten.
@@ -99,7 +99,7 @@ return function(mod, data, sources, active)
   end
 
   -- marts
-  -- a mart item Inclement prices at 0 (a gift there) costs sources.prices
+  -- a mart item the donor prices at 0 (a gift there) costs sources.prices
   -- (full/inventory.lua replaces ItemsData.info after this runs, so the
   -- wrapper goes on whatever is there when a mart opens)
   local priceOf = {}

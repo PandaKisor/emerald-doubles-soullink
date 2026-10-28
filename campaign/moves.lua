@@ -1,15 +1,15 @@
--- Expanded Inclement moves in battle. Battle reads a move through
+-- Expanded moves in battle. Battle reads a move through
 -- Moves.get; for an enabled move it gets the donor's numbers (power,
 -- accuracy, PP, priority, type, category, secondary chance) with the native
 -- Gen 3 effect that runs it, its target and contact/protect flags, and
--- Inclement's damage rules. Moves whose donor effect has no Gen 3
+-- The donor's damage rules. Moves whose donor effect has no Gen 3
 -- equivalent carry campaign hooks (campaign/battle/hits.lua and
--- statuses.lua) that the patched Inclement library calls. Moves left out
+-- statuses.lua) that the patched port library calls. Moves left out
 -- stay unknown to battle, and the learnset gate keeps them out of movesets.
 --
 --   list   campaign/move_list.lua: moves that run a native effect as is
 --   specs  symbol -> spec from campaign/battle (hits and statuses)
---   own    campaign/move_anims.lua: Inclement's own animations, where they
+--   own    campaign/move_anims.lua: the donor's own animations, where they
 --          convert (tools/anim_convert.py); the rest play list's stand-in
 return function(data, list, specs, active, own)
   local Moves = require("src.core.game3.battle.moves")
@@ -103,7 +103,7 @@ return function(data, list, specs, active, own)
   -- id -> battle record template, built once and checked at load
   local records, anims, scripts = {}, {}, {}
   local function add(symbol, entry, spec)
-    local id = assert(ids["MOVE_" .. symbol], "Unknown Inclement move " .. symbol)
+    local id = assert(ids["MOVE_" .. symbol], "Unknown Expanded move " .. symbol)
     local row = assert(data.moves[id], symbol)
     local effectName = (spec and spec.base) or entry.effect or row.sourceEffect:gsub("^EFFECT_", "")
     if spec and not spec.base then effectName = "HIT" end
@@ -121,7 +121,7 @@ return function(data, list, specs, active, own)
     out.target, out.flags, out.highCrit, out.drainPercent = target, flags, set.FLAG_HIGH_CRIT or false, drain
     out.alwaysHitMinimized = set.FLAG_DMG_MINIMIZE or nil
     out.campaignThaw = set.FLAG_THAW_USER or nil
-    out.damageRules = "inclement"
+    out.damageRules = "expanded"
     if spec then
       if spec.power then out.power = spec.power end
       hooks(out, symbol, spec)
@@ -171,7 +171,7 @@ return function(data, list, specs, active, own)
       local script = n and bridge.scripts[n]
       local base = scriptForMove(n and bridge.anims[n] or value, ...)
       if not script then return base end
-      -- Inclement's own animation (campaign/move_anims.lua); its subroutines
+      -- the donor's own animation (campaign/move_anims.lua); its subroutines
       -- join the ROM pack's labels once the pack has loaded
       local pack = Anim._pack
       if not (pack and pack.labels) then return base end

@@ -1,18 +1,18 @@
 #!/usr/bin/env python3
-"""Where the campaign's items come from on the vanilla world: Inclement's
+"""Where the campaign's items come from on the vanilla world: the donor's
 item placements, gifts and shop stock, matched onto vanilla Emerald's.
   balls / hidden  same map and tile as a vanilla item ball / hidden item; a
-                  vanilla one left over takes the nearest unpaired Inclement
+                  vanilla one left over takes the nearest unpaired donor
                   one on its map, up to 5 tiles away
   gifts           a vanilla script (same label) handing out a different item,
-                  or a gift Inclement renamed on the same map (GiveAerialAce ->
+                  or a gift the donor renamed on the same map (GiveAerialAce ->
                   GiveRoost, GiveExpShare -> GiveScopeLens)
-  marts           town marts sell Inclement's badge-tier stock plus the town's
-                  own Inclement stock; specialty shops take the Inclement list
+  marts           town marts sell the donor's badge-tier stock plus the town's
+                  own donor stock; specialty shops take the donor's list
                   on the same map that overlaps them most
-  orphans         items Inclement gives through NPCs vanilla doesn't have:
+  orphans         items the donor gives through NPCs vanilla doesn't have:
                   sold at that town's mart instead (the next town's, when it
-                  has none); items Inclement places on tiles vanilla doesn't
+                  has none); items the donor places on tiles vanilla doesn't
                   use, found nowhere else, go to the mart of the first town
                   with one reached once that area is (PLACED_AREA_TOWN)
 Writes campaign/item_sources.lua. Usage: gen_item_sources.py <vanilla.json>"""
@@ -25,7 +25,7 @@ vanilla = json.load(open(sys.argv[1]))
 # item ids and pockets from the port's generated item data (the donor's
 # constants are expressions)
 import subprocess
-DATA = os.path.join(HERE, '../../full_port/generated/development/mods/inclement_battle_test/full/data/')
+DATA = os.path.join(HERE, '../../inputs/dev-mod/full/data/')
 dump = subprocess.run(['luajit', '-', DATA], input='''
 local D=arg[1]
 local man=dofile(D.."manifest.lua") local out={}
@@ -101,7 +101,7 @@ def label_map(label):
     for d, mp in dir_map.items():
         if label.startswith(d + '_') and (best is None or len(d) > len(best[0])): best = (d, mp)
     return best
-# a gym TM gift Inclement renamed: the one unmatched Inclement TM gift on the
+# a gym TM gift the donor renamed: the one unmatched donor TM gift on the
 # same map, with the same trailing number (GiveAerialAce2 -> GiveRoost2)
 GIVE = re.compile(r'^(\w+_EventScript_Give)\w*?(\d*)$')
 vanilla_labels = set(g['label'] for g in vanilla['gifts'])
@@ -113,7 +113,7 @@ for g in vanilla['gifts']:
     cands = [l for l, its in gift_labels.items() if l not in vanilla_labels and len(its) == 1 and is_tm(its[0])
              and GIVE.match(l) and GIVE.match(l).group(1) == m.group(1) and GIVE.match(l).group(2) == m.group(2)]
     if len(cands) == 1: renamed[g['label']] = cands[0]
-# any other single-item gift Inclement renamed on the same map, when only one
+# any other single-item gift the donor renamed on the same map, when only one
 # renamed candidate exists there (Devon 3F: GiveExpShare -> GiveScopeLens)
 taken = set(renamed.values())
 for g in vanilla['gifts']:
@@ -135,7 +135,7 @@ for g in vanilla['gifts']:
             gift_count += 1
 # towns without a general mart: their items go to the next town's
 NO_MART = {'DewfordTown': 'SlateportCity', 'LilycoveCity': 'MossdeepCity', 'PacifidlogTown': 'SootopolisCity'}
-# orphan gifts: Inclement labels with no vanilla script
+# orphan gifts: donor labels with no vanilla script
 orphans = {}
 vanilla_labels_all = set(x['label'] for x in vanilla['gifts']) | set(x['label'] for x in vanilla['marts'])
 for label, items in gift_labels.items():
@@ -198,7 +198,7 @@ for vm in vanilla['marts']:
         if best:
             marts[vm['key']] = {'kind': 'fixed', 'items': [x for x in best if usable(x)], 'label': vm['label']}
 
-# placed orphans: Inclement items on tiles vanilla doesn't use, with no
+# placed orphans: donor items on tiles vanilla doesn't use, with no
 # source above, go to the mart of the first town with one that's reached
 # once their area is (Surf areas: Fortree; Dive: Sootopolis)
 PLACED_AREA_TOWN = [
@@ -250,16 +250,19 @@ def lua(v, ind=''):
     if isinstance(v, list): return '{ ' + ', '.join(lua(x, ind) for x in v) + ' }'
     if isinstance(v, str): return json.dumps(v)
     return str(v)
-# a mart item Inclement prices at 0 (it was a gift there) would be free:
+# a mart item the donor prices at 0 (it was a gift there) would be free:
 # TMs cost 3000, anything else 2000
 prices = {}
 for lst in [m.get('extra') or m.get('items') or [] for m in marts.values()] + tiers:
     for x in lst:
         if ITEMS[x][2] == 0: prices[x] = 3000 if x.startswith('ITEM_TM') else 2000
 data = {'prices': prices, 'balls': balls, 'hidden': hidden, 'gifts': gifts, 'tiers': tiers, 'marts': marts}
-open(OUT, 'w').write('-- Generated by tools/gen_item_sources.py from Inclement Emerald\'s maps and\n'
+# the donor's script labels carry its name (build_probe.scrub_text)
+sys.path.insert(0, os.path.join(HERE, '..'))
+from build_probe import scrub_text
+open(OUT, 'w').write('-- Generated by tools/gen_item_sources.py from the donor\'s maps and\n'
                      '-- scripts and the vanilla ROM\'s (item balls, hidden items, gifts, marts).\n'
-                     'return ' + lua(data) + '\n')
+                     'return ' + scrub_text(lua(data), '') + '\n')
 print('balls: %d vanilla, %d matched by tile, %d changed' % (len(vanilla['balls']), bm, bc))
 print('hidden: %d vanilla, %d matched, %d changed' % (len(vanilla['hidden']), hm, hc))
 print('gifts changed: %d; orphan items moved to marts: %s' % (gift_count, {k: v for k, v in orphans.items()}))
@@ -267,7 +270,7 @@ print('gym TM gifts renamed: %s' % renamed)
 print('placed items moved to marts: %s' % placed)
 if unplaced: print('placed items with no source and no town:', unplaced)
 print('marts: %d general, %d specialty' % (sum(1 for m in marts.values() if m['kind'] == 'general'), sum(1 for m in marts.values() if m['kind'] == 'fixed')))
-print('mart prices set (Inclement has 0):', sorted(prices))
+print('mart prices set (the donor has 0):', sorted(prices))
 print('tier sizes', [len(t) for t in tiers])
 
 # audit: evolution items with no source on the campaign's world

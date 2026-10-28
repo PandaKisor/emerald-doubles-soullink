@@ -44,7 +44,7 @@ compare('Assault Vest softens special','ITEM_ASSAULT_VEST','defender','PSYCHIC',
 compare('Eviolite softens hits on an unevolved mon','ITEM_EVIOLITE','defender','TACKLE',nil,'BIDOOF',1/1.5)
 compare('Eviolite does nothing on a final form','ITEM_EVIOLITE','defender','TACKLE',nil,'MEW',1)
 compare('a plate boosts its type','ITEM_MIND_PLATE','attacker','PSYCHIC',nil,nil,1.2)
-compare('type items boost by 20% (Inclement)','ITEM_TWISTED_SPOON','attacker','PSYCHIC',nil,nil,1.2)
+compare('type items boost by 20% (donor rules)','ITEM_TWISTED_SPOON','attacker','PSYCHIC',nil,nil,1.2)
 compare('a resist berry halves a super-effective hit','ITEM_KASIB_BERRY','defender','SHADOW_BALL',nil,nil,0.5)
 compare('Light Ball doubles Pikachu\'s Attack','ITEM_LIGHT_BALL','attacker','TACKLE','PIKACHU',nil,1.93)
 local gemA,gemD=battler('MEW',50),battler('MEW',50)

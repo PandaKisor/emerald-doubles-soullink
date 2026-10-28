@@ -1,6 +1,6 @@
 -- Pokédex footprints for the new species (ids 413+): the ROM has none, so the
 -- dex screen's Kit.rgbaImage read of footprints/<id>.rgba finds nothing.
--- Inclement's prints (campaign/footprint_data.lua, one bit per pixel) are
+-- The donor's prints (campaign/footprint_data.lua, one bit per pixel) are
 -- drawn into the same black-on-clear 16x16 image the ROM ones decode to.
 return function(Kit, data, active)
   local cache = {}

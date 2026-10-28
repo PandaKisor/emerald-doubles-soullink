@@ -1,5 +1,5 @@
--- Pokédex entries for Inclement's species past the original 386. The ROM's
--- entry pack is keyed by species; Inclement's entries are keyed by national
+-- Pokédex entries for the donor's species past the original 386. The ROM's
+-- entry pack is keyed by species; the donor's entries are keyed by national
 -- number and added under the species each number resolves to. Battle reads
 -- the same entries for weights.
 --
