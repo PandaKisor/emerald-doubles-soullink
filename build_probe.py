@@ -349,6 +349,16 @@ return Coop
     # partner hasn't chosen (user, 2026-10-28). The asking game waits for the
     # partner's answer; the partner says yes only when it hasn't sent its own
     # action for that turn (else it has already played the turn with ours).
+    # The catch scene points st.enemy at the wild Pokemon it targets (D.ballShow),
+    # so slot 1 drew the other wild Pokemon's sprite and healthbox during the
+    # throw (user, 2026-10-28). Slot 1 is st.battlers[1], whatever st.enemy names.
+    ("src/core/game3/battle/ui.lua",
+     "  if id == 1 then return st.enemy end\n  return st.battlers and st.battlers[id]\n",
+     "  if id == 1 then return (st.battlers and st.battlers[1]) or st.enemy end\n  return st.battlers and st.battlers[id]\n"),
+    ("src/core/game3/battle/ui.lua",
+     "b = st and ((side == 0 and st.player) or (side == 1 and st.enemy) or (st.battlers and st.battlers[side]))",
+     "b = st and ((side == 0 and st.player) or (side == 1 and ((st.battlers and st.battlers[1]) or st.enemy))\n"
+     "      or (st.battlers and st.battlers[side]))"),
     # the link layer drops message types it has no schema for
     ("src/link/Wire.lua",
      "Wire.SCHEMAS = SCHEMAS\n",

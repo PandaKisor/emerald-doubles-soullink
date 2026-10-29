@@ -1320,11 +1320,20 @@ return function(mod, U, F)
   end
   local revealing = {}
   local Ui = require("src.core.game3.battle.ui")
-  local uiPush = Ui.push
-  Ui.push = function(text, ...)
+  -- the "wore off" line lets the real sprite show; animated battles print
+  -- through pushTimed (init.lua seq_push), headless ones through push
+  local function reveal(text)
     local b = revealing[text]
     if b then revealing[text] = nil; b.campaignIllusionShown = nil end
+  end
+  local uiPush, uiPushTimed = Ui.push, Ui.pushTimed
+  Ui.push = function(text, ...)
+    reveal(text)
     return uiPush(text, ...)
+  end
+  Ui.pushTimed = function(text, ...)
+    reveal(text)
+    return uiPushTimed(text, ...)
   end
   local displayName = State.displayName
   State.displayName = function(b, ...)

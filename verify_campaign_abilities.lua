@@ -318,6 +318,28 @@ scenario('Illusion takes a partymate\'s look and breaks on a hit',{{'MEW',level=
 scenario('Disguise stays broken after a switch',{{'MEW',moves={'BITE','U_TURN'},level=60},{'MEW',moves={'BITE'},level=60}},{{'MIMIKYU',slot=0,level=60},{'MIMIKYU',slot=0,level=60}},'disguise was busted',
   {check=function(list) local n=0 for _,t in ipairs(list) do if t:find('decoy',1,true) then n=n+1 end end return n<=2 end})
 scenario('Ripen doubles a stat berry',{{'MEW',level=12},{'MEW',level=12}},{{ability='RIPEN',level=40,item='ITEM_LIECHI_BERRY',hp=0.3},{ability='RIPEN',level=40,item='ITEM_LIECHI_BERRY',hp=0.3}},'Ripen raised its Attack')
+if wanted('illusion sprite') then
+  -- an animated battle prints the "wore off" line through pushTimed: the real
+  -- sprite comes back then (user, 2026-10-28: the disguise never left)
+  local Anim=require('src.core.game3.battle.anim')
+  local zorua,look=battler('ZORUA',30,'enemy'),battler('MIGHTYENA',30,'enemy')
+  zorua.campaignIllusion=look
+  st.battlers[1]=zorua
+  T.eq(Anim.shownBattler(1,zorua),look,'the disguise is on screen')
+  A.breakIllusion(ad,zorua)
+  T.eq(Anim.shownBattler(1,zorua),look,'it stays until the line plays')
+  Ui.pushTimed(State.displayName(zorua).."'s illusion wore off!",64)
+  T.eq(Anim.shownBattler(1,zorua),zorua,'then the real Zorua shows')
+  -- while a ball is thrown at the right-hand foe, slot 1 still draws its own
+  local right=battler('ZIGZAGOON',3,'enemy')
+  local Battle=require('src.core.game3.battle')
+  local keep=Battle._st
+  Battle._st={double=true,battlers={[1]=zorua,[3]=right},enemy=right,player=battler('MEW',30,'player')}
+  local _,_,pers=Ui.sidePicArgs(1,zorua.species)
+  T.eq(pers,zorua.mon.personality,'slot 1 draws its own Pokemon while the catch scene aims elsewhere')
+  Battle._st=keep
+  st.battlers[1]=nil
+end
 if wanted('weight moves') then
   -- (vanilla dex weights come from the ROM; the fixture has the new species')
   local a,d=battler('MEW',50,'player'),battler('TIMBURR',50,'enemy')
