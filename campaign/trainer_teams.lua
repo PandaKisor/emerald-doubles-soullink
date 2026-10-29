@@ -166,14 +166,15 @@ return {
       { "SHIELDON", 13, ability = "STURDY", nature = "IMPISH", spread = "bulk", item = "ORAN_BERRY", moves = { "PROTECT", "TAUNT", "METAL_SOUND", "TACKLE" } },
     } },
 
-    -- Roxanne: six, alone (2-vs-1), Sand Force Nosepass is the ace at the cap ---------------
+    -- Roxanne: six, alone (2-vs-1), sandstorm (0.41.0): Sand Stream lead, Sand Rush Drilbur,
+    -- Bulldoze beside immune partners; Sand Force Nosepass is the ace at the cap ------------
     ROXANNE_1 = { tier = "leader", party = {
-      { "NOSEPASS", 15, ability = "SAND_FORCE", nature = "IMPISH", spread = "bulk", item = "BERRY_JUICE", moves = { "SANDSTORM", "ROCK_TOMB", "BULLDOZE", "THUNDER_WAVE" } },
-      { "AMAURA", 13, ability = "REFRIGERATE", nature = "MODEST", spread = "spa", item = "CHOPLE_BERRY", moves = { "ECHOED_VOICE", "ROCK_TOMB", "THUNDER_WAVE", "ICY_WIND" } },
-      { "ARON", 13, ability = "STURDY", nature = "ADAMANT", item = "CHESTO_BERRY", moves = { "ROCK_TOMB", "METAL_CLAW", "PROTECT", "REST" } },
-      { "TYRUNT", 14, ability = "STRONG_JAW", nature = "ADAMANT", item = "RED_CARD", moves = { "BITE", "ROCK_TOMB", "STOMP", "STEALTH_ROCK" } },
-      { "ANORITH", 14, ability = "BATTLE_ARMOR", nature = "JOLLY", item = "WATER_GEM", moves = { "ROCK_TOMB", "WATER_GUN", "METAL_CLAW", "FURY_CUTTER" } },
-      { "LILEEP", 14, ability = "STORM_DRAIN", nature = "CALM", spread = "spdef", item = "ORAN_BERRY", moves = { "ROCK_TOMB", "MEGA_DRAIN", "CONFUSE_RAY", "INGRAIN" } },
+      { "HIPPOPOTAS", 14, ability = "SAND_STREAM", nature = "IMPISH", spread = "bulk", item = "SMOOTH_ROCK", moves = { "YAWN", "ROCK_TOMB", "BITE", "SAND_TOMB" } },
+      { "DRILBUR", 14, ability = "SAND_RUSH", nature = "JOLLY", item = "SOFT_SAND", moves = { "METAL_CLAW", "MUD_SLAP", "ROCK_TOMB", "FURY_SWIPES" } },
+      { "GLIGAR", 14, ability = "SAND_VEIL", nature = "ADAMANT", item = "SHARP_BEAK", moves = { "KNOCK_OFF", "WING_ATTACK", "QUICK_ATTACK", "PROTECT" } },
+      { "LUNATONE", 14, ability = "LEVITATE", nature = "MODEST", spread = "spa", item = "LUM_BERRY", moves = { "HYPNOSIS", "CONFUSION", "ROCK_THROW", "PROTECT" } },
+      { "RHYHORN", 14, ability = "LIGHTNING_ROD", nature = "ADAMANT", spread = "tank", item = "RINDO_BERRY", moves = { "BULLDOZE", "SMACK_DOWN", "HORN_ATTACK", "ROCK_TOMB" } },
+      { "NOSEPASS", 15, ability = "SAND_FORCE", nature = "IMPISH", spread = "bulk", item = "BERRY_JUICE", moves = { "ROCK_TOMB", "BULLDOZE", "SPARK", "THUNDER_WAVE" } },
     } },
     -- Chapter 2: Rustboro to Brawly (draft 1, 2026-10-27; cap 17 then 19) ------------
     -- Route 116, west: tag battles at 13-14 ------------------------------------------
