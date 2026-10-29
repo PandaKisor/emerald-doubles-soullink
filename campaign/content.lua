@@ -16,6 +16,8 @@ return function(mod, active)
   U.naturalGift = source("campaign/natural_gift.lua")
   local field = source("campaign/battle/field.lua")(mod, U, active)
   field.items = source("campaign/battle/items.lua")(mod, U, field)
+  -- the expanded balls (Quick, Dusk, Cherish ...) are throwable
+  field.balls = source("campaign/battle/balls.lua")(mod, U, active)
   field.abilities = source("campaign/battle/abilities.lua")(mod, U, field)
   field.ai = source("campaign/battle/ai.lua")(mod, U, field)
   local specs = { U = U, bySymbol = {} }
@@ -81,6 +83,8 @@ return function(mod, active)
   local partyTools = source("campaign/party_tools.lua")(mod, active)
   local starterKit = source("campaign/starter_kit.lua")(mod, data, active)
   local guideSync = source("campaign/guide_sync.lua")(mod, active)
+  -- after every tool: START > TOOLS gathers their entries
+  local startTools = source("campaign/start_tools.lua")(mod, active)
   source("full/tutors.lua").install({ Pokemon = Pokemon,
     MoveLearn = require("src.core.game3.move_learn") }, data, active)
   source("full/inventory_ui.lua").install({ ItemsData = require("src.core.game3.items_data"),
@@ -98,5 +102,5 @@ return function(mod, active)
     Version = require("src.core.GameVersion"), SaveFileIO = require("src.import.SaveFileIO"),
     SaveConvert = require("src.save_convert.SaveConvert") }, data, active)
   return { content = data, save = Save, active = active, learnsets = gate, moves = moves, trainers = trainers, world = world,
-    battleMoves = battleMoves, candy = candy, repel = repel, heal = heal, partyTools = partyTools, starterKit = starterKit, guideSync = guideSync, footprints = footprints, partnerNpcs = partnerNpcs }
+    battleMoves = battleMoves, candy = candy, repel = repel, heal = heal, partyTools = partyTools, starterKit = starterKit, guideSync = guideSync, startTools = startTools, footprints = footprints, partnerNpcs = partnerNpcs }
 end

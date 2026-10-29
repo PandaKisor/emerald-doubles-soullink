@@ -130,7 +130,16 @@ return function(mod, active)
     local okJ, text = pcall(Json.encode, snap)
     if not okJ then return false, text end
     local ok, err = mod.storage:writeBytes(game, G.KEY, text)
+    -- and one copy in a folder that never changes (user, 2026-10-28: the
+    -- playthrough folder is a long id that changes with every New Game)
+    pcall(function() mod.storage:writeBytes(G.fixedGame(), G.KEY, text) end)
     return ok, err
+  end
+
+  -- the storage scope of that fixed copy: mod_storage/emerald/field-guide/g3_campaign/
+  G.FIXED = "field-guide"
+  function G.fixedGame()
+    return { save = { version = "emerald", meta = { playthroughId = G.FIXED } } }
   end
 
   function G.path(game)
@@ -148,11 +157,8 @@ return function(mod, active)
     game = game or Runtime._game
     local ok = G.write(game, session)
     require("src.ui.game3.start_menu").close(true)
-    -- playthrough folders are long hex ids: name the first 8 characters
-    local okC, ctx = pcall(function() return mod.storage:context(game) end)
-    local id = okC and type(ctx) == "table" and tostring(ctx.playthroughId or "") or ""
-    require("src.ui.game3.message").show(ok and ("Field guide synced! The file is\nguide-sync.bin in mod_storage/\nemerald/" .. id:sub(1, 8)
-      .. ".../g3_campaign/") or "The guide sync could not be written.")
+    require("src.ui.game3.message").show(ok and ("Field guide synced! The file is\nguide-sync.bin in mod_storage/\nemerald/" .. G.FIXED
+      .. "/g3_campaign/") or "The guide sync could not be written.")
   end
 
   mod.hooks:wrap("ui.start_menu.items", function(next, game, items)

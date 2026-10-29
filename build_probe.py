@@ -429,6 +429,7 @@ return Coop
      "      return false\n"
      "    end\n"
      "    LB._retract = nil\n"
+     "    LB._retractDone = R.answer and true or false\n"
      "    if R.answer then\n"
      "      LB._sent[R.turn] = nil\n"
      "      Battle._linkAct, Battle._linkMulti = nil, nil\n"

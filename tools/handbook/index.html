@@ -52,8 +52,8 @@
 <dialog id="sync-help"><div class="panel-head"><h2>Load your game</h2><button class="button small" id="sync-help-close">Close</button></div>
  <p>In the game, open <b>START › GUIDE SYNC</b> (saving also syncs). The game writes <code>guide-sync.bin</code> into its data folder:</p>
  <ul class="paths"><li><b>Linux</b> <code>~/.local/share/pokemon-love2d/</code></li><li><b>Windows</b> <code>%APPDATA%\pokemon-love2d\</code></li><li><b>macOS</b> <code>~/Library/Application Support/pokemon-love2d/</code></li></ul>
- <p>Then <code>mod_storage › emerald › <i>your playthrough</i> › g3_campaign › guide-sync.bin</code>. The game names the first characters of the playthrough folder when you sync.</p>
- <p><b>Windows:</b> the folder is hidden, so paste this into the file window’s address bar and press Enter: <code id="sync-win-path">%APPDATA%\pokemon-love2d\mod_storage\emerald</code> <button class="button small" id="sync-copy-path">Copy</button></p>
+ <p>Then <code>mod_storage › emerald › field-guide › g3_campaign › guide-sync.bin</code>: the same folder for every save, so the file window finds it again next time.</p>
+ <p><b>Windows:</b> the folder is hidden, so paste this into the file window’s address bar and press Enter: <code id="sync-win-path">%APPDATA%\pokemon-love2d\mod_storage\emerald\field-guide\g3_campaign</code> <button class="button small" id="sync-copy-path">Copy</button></p>
  <p class="footnote">You can also drag <code>guide-sync.bin</code> onto this page. After the next save or sync, press <b>Reload</b> and pick it again. In co-op your partner’s party and box come along once you have played together.</p>
  <div class="toolbar"><button class="button primary" id="sync-pick">Choose guide-sync.bin…</button><button class="button" id="sync-forget">Forget loaded game</button></div></dialog>
 <script id="guide-data" type="application/json">/* DATA */</script>

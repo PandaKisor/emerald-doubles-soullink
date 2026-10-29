@@ -239,6 +239,8 @@ T.check(shared and #shared.party == 1, 'this player\'s party is shared with the 
 local body = love.filesystem.read(GS.path(gsGame))
 T.check(type(body) == 'string' and body:find('"emerald-guide-sync"', 1, true), 'guide-sync.bin holds the JSON at ' .. tostring(GS.path(gsGame)))
 local back = require('src.link.Json').decode(body)
+T.eq(love.filesystem.read('mod_storage/emerald/field-guide/g3_campaign/guide-sync.bin'), body,
+  'the same file lands in the fixed field-guide folder')
 T.eq(back and back.party[1][1], F.species('TREECKO'), 'the file decodes')
 -- the field guide's browser smoke test loads this exact file
 do local f = io.open('../porting/native/generated/handbook/guide-sync-sample.json', 'wb') if f then f:write(body) f:close() end end
@@ -258,4 +260,34 @@ for _, e in ipairs(entries()) do
     and e.id ~= 'g3_campaign_relearn' and e.id ~= 'g3_campaign_ivs' and e.id ~= 'g3_campaign_guide',
     'no campaign shortcuts on vanilla')
 end
+-- START > TOOLS (2026-10-28): the tools sit in one entry; A opens them, B goes back
+do
+  SD.setCart('emerald_doubles_soullink')
+  local StartMenu = require('src.ui.game3.start_menu')
+  StartMenu.cursor = 1
+  StartMenu.show({ session = s, game = Runtime._game })
+  local ids, toolsAt = {}, nil
+  for i, e in ipairs(StartMenu.ENTRIES) do ids[e.id] = true; if e.id == 'g3_campaign_tools' then toolsAt = i end end
+  T.check(toolsAt ~= nil, 'START has one TOOLS entry')
+  T.check(not ids.g3_campaign_candy and not ids.g3_campaign_repel and not ids.g3_campaign_heal and not ids.g3_campaign_guide,
+    'the tools are no longer on START itself')
+  local main = #StartMenu.ENTRIES
+  StartMenu.cursor = toolsAt
+  StartMenu.confirm()
+  local inner = {}
+  for i, e in ipairs(StartMenu.ENTRIES) do inner[i] = e.id end
+  T.eq(inner[1], 'g3_campaign_candy', 'TOOLS opens with RARE CANDY first')
+  T.check(table.concat(inner, ','):find('g3_campaign_guide', 1, true) ~= nil, 'GUIDE SYNC is in TOOLS')
+  StartMenu.cursor = 2
+  local before = StartMenu.ENTRIES[2].label
+  StartMenu.confirm()
+  T.check(StartMenu.ENTRIES[2].label ~= before and StartMenu.open, 'REPEL toggles inside TOOLS and the list stays open')
+  StartMenu.ENTRIES[2].onSelect(Runtime._game, s)
+  StartMenu.cancel()
+  T.eq(#StartMenu.ENTRIES, main, 'B goes back to START')
+  T.eq(StartMenu.cursor, toolsAt, 'with the cursor on TOOLS')
+  T.check(StartMenu.open, 'START stays open')
+  StartMenu.close(true)
+end
+
 T.finish('campaign reusable candy, repel, team healing, relearner, IV check, starter kit, berries and guide sync')
