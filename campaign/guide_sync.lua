@@ -63,8 +63,12 @@ return function(mod, active)
 
   local function flagSet(session)
     local seen, out = {}, {}
+    -- the live flag store, only when it was loaded for this session: after
+    -- a New Game it may still hold the previous game's flags
     local Space = package.loaded["src.core.game3.scripting.space"]
-    for _, src in ipairs({ session and session.flags or {}, Space and Space.store and Space.store.flags or {} }) do
+    local store = Space and Space.store
+    if store and Space._storeSession ~= session then store = nil end
+    for _, src in ipairs({ session and session.flags or {}, store and store.flags or {} }) do
       for id, v in pairs(src) do
         local n = tonumber(id)
         if v and n and not seen[n] then seen[n] = true; out[#out + 1] = n end

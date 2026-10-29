@@ -5,93 +5,93 @@
 return {
   trainers = {
     ABIGAIL_2 = { partner = "RM2_CR_ADA", party = {
-      { "EMOLGA", 33, ability = "MOTOR_DRIVE", nature = "TIMID", item = "SITRUS_BERRY", moves = { "SPARK", "AIR_CUTTER", "NUZZLE", "QUICK_ATTACK" } },
+      { "EMOLGA", 33, ability = "MOTOR_DRIVE", nature = "TIMID", moves = { "SPARK", "AIR_CUTTER", "NUZZLE", "QUICK_ATTACK" } },
       { "TOGEDEMARU", 33, ability = "LIGHTNING_ROD", nature = "JOLLY", item = "SITRUS_BERRY", moves = { "DISCHARGE", "NUZZLE", "ROLLOUT", "DEFENSE_CURL" } },
     } },
     ABIGAIL_3 = { partner = "RM3_CR_ADA", party = {
-      { "EMOLGA", 38, ability = "MOTOR_DRIVE", nature = "TIMID", item = "SITRUS_BERRY", moves = { "SPARK", "AIR_SLASH", "NUZZLE", "QUICK_ATTACK" } },
+      { "EMOLGA", 38, ability = "MOTOR_DRIVE", nature = "TIMID", moves = { "SPARK", "AIR_SLASH", "NUZZLE", "QUICK_ATTACK" } },
       { "TOGEDEMARU", 38, ability = "LIGHTNING_ROD", nature = "JOLLY", item = "SITRUS_BERRY", moves = { "DISCHARGE", "NUZZLE", "ROLLOUT", "DEFENSE_CURL" } },
     } },
     ABIGAIL_4 = { partner = "RM4_CR_ADA", party = {
-      { "EMOLGA", 43, ability = "MOTOR_DRIVE", nature = "TIMID", item = "SITRUS_BERRY", moves = { "VOLT_SWITCH", "AIR_SLASH", "NUZZLE", "QUICK_ATTACK" } },
+      { "EMOLGA", 43, ability = "MOTOR_DRIVE", nature = "TIMID", moves = { "VOLT_SWITCH", "AIR_SLASH", "NUZZLE", "QUICK_ATTACK" } },
       { "TOGEDEMARU", 43, ability = "LIGHTNING_ROD", nature = "JOLLY", item = "SITRUS_BERRY", moves = { "WILD_CHARGE", "NUZZLE", "ROLLOUT", "DEFENSE_CURL" } },
     } },
     ABIGAIL_5 = { partner = "RM5_CR_ADA", party = {
-      { "EMOLGA", 48, ability = "MOTOR_DRIVE", nature = "TIMID", item = "SITRUS_BERRY", moves = { "VOLT_SWITCH", "AIR_SLASH", "NUZZLE", "QUICK_ATTACK" } },
+      { "EMOLGA", 48, ability = "MOTOR_DRIVE", nature = "TIMID", moves = { "VOLT_SWITCH", "AIR_SLASH", "NUZZLE", "QUICK_ATTACK" } },
       { "TOGEDEMARU", 48, ability = "LIGHTNING_ROD", nature = "JOLLY", item = "SITRUS_BERRY", moves = { "WILD_CHARGE", "NUZZLE", "ROLLOUT", "DEFENSE_CURL" } },
     } },
     AMY_AND_LIV_2 = { party = {
-      { "JIGGLYPUFF", 33, ability = "FRIEND_GUARD", nature = "MODEST", item = "SITRUS_BERRY", moves = { "DISARMING_VOICE", "SING", "ROLLOUT", "DEFENSE_CURL" } },
-      { "CLEFAIRY", 33, ability = "FRIEND_GUARD", nature = "BOLD", item = "SITRUS_BERRY", moves = { "FOLLOW_ME", "DISARMING_VOICE", "ENCORE", "SING" } },
-      { "PLUSLE", 33, ability = "PLUS", nature = "TIMID", item = "SITRUS_BERRY", moves = { "DISCHARGE", "NUZZLE", "HELPING_HAND", "ENCORE" } },
+      { "JIGGLYPUFF", 33, ability = "FRIEND_GUARD", nature = "MODEST", moves = { "DISARMING_VOICE", "SING", "ROLLOUT", "DEFENSE_CURL" } },
+      { "CLEFAIRY", 33, ability = "FRIEND_GUARD", nature = "BOLD", moves = { "FOLLOW_ME", "DISARMING_VOICE", "ENCORE", "SING" } },
+      { "PLUSLE", 33, ability = "PLUS", nature = "TIMID", moves = { "DISCHARGE", "NUZZLE", "HELPING_HAND", "ENCORE" } },
       { "MINUN", 33, ability = "MINUS", nature = "TIMID", item = "SITRUS_BERRY", moves = { "DISCHARGE", "NUZZLE", "HELPING_HAND", "THUNDER_WAVE" } },
     } },
     AMY_AND_LIV_3 = { party = {
-      { "WIGGLYTUFF", 38, ability = "FRISK", nature = "MODEST", item = "SITRUS_BERRY", moves = { "DISARMING_VOICE", "SING", "ROLLOUT", "DEFENSE_CURL" } },
-      { "CLEFABLE", 38, ability = "UNAWARE", nature = "BOLD", item = "SITRUS_BERRY", moves = { "FOLLOW_ME", "DISARMING_VOICE", "ENCORE", "SING" } },
-      { "PLUSLE", 38, ability = "PLUS", nature = "TIMID", item = "SITRUS_BERRY", moves = { "DISCHARGE", "NUZZLE", "HELPING_HAND", "ENCORE" } },
+      { "WIGGLYTUFF", 38, ability = "FRISK", nature = "MODEST", moves = { "DISARMING_VOICE", "SING", "ROLLOUT", "DEFENSE_CURL" } },
+      { "CLEFABLE", 38, ability = "UNAWARE", nature = "BOLD", moves = { "FOLLOW_ME", "DISARMING_VOICE", "ENCORE", "SING" } },
+      { "PLUSLE", 38, ability = "PLUS", nature = "TIMID", moves = { "DISCHARGE", "NUZZLE", "HELPING_HAND", "ENCORE" } },
       { "MINUN", 38, ability = "MINUS", nature = "TIMID", item = "SITRUS_BERRY", moves = { "DISCHARGE", "NUZZLE", "HELPING_HAND", "THUNDER_WAVE" } },
     } },
     AMY_AND_LIV_4 = { party = {
-      { "WIGGLYTUFF", 43, ability = "FRISK", nature = "MODEST", item = "SITRUS_BERRY", moves = { "DISARMING_VOICE", "SING", "ROLLOUT", "DEFENSE_CURL" } },
-      { "CLEFABLE", 43, ability = "UNAWARE", nature = "BOLD", item = "SITRUS_BERRY", moves = { "FOLLOW_ME", "DISARMING_VOICE", "ENCORE", "SING" } },
-      { "PLUSLE", 43, ability = "PLUS", nature = "TIMID", item = "SITRUS_BERRY", moves = { "DISCHARGE", "NUZZLE", "HELPING_HAND", "ENCORE" } },
+      { "WIGGLYTUFF", 43, ability = "FRISK", nature = "MODEST", moves = { "DISARMING_VOICE", "SING", "ROLLOUT", "DEFENSE_CURL" } },
+      { "CLEFABLE", 43, ability = "UNAWARE", nature = "BOLD", moves = { "FOLLOW_ME", "DISARMING_VOICE", "ENCORE", "SING" } },
+      { "PLUSLE", 43, ability = "PLUS", nature = "TIMID", moves = { "DISCHARGE", "NUZZLE", "HELPING_HAND", "ENCORE" } },
       { "MINUN", 43, ability = "MINUS", nature = "TIMID", item = "SITRUS_BERRY", moves = { "DISCHARGE", "NUZZLE", "HELPING_HAND", "THUNDER_WAVE" } },
     } },
     AMY_AND_LIV_5 = { party = {
-      { "WIGGLYTUFF", 48, ability = "FRISK", nature = "MODEST", item = "SITRUS_BERRY", moves = { "DISARMING_VOICE", "SING", "ROLLOUT", "DEFENSE_CURL" } },
-      { "CLEFABLE", 48, ability = "UNAWARE", nature = "BOLD", item = "SITRUS_BERRY", moves = { "FOLLOW_ME", "DISARMING_VOICE", "ENCORE", "SING" } },
-      { "PLUSLE", 48, ability = "PLUS", nature = "TIMID", item = "SITRUS_BERRY", moves = { "DISCHARGE", "NUZZLE", "HELPING_HAND", "ENCORE" } },
+      { "WIGGLYTUFF", 48, ability = "FRISK", nature = "MODEST", moves = { "DISARMING_VOICE", "SING", "ROLLOUT", "DEFENSE_CURL" } },
+      { "CLEFABLE", 48, ability = "UNAWARE", nature = "BOLD", moves = { "FOLLOW_ME", "DISARMING_VOICE", "ENCORE", "SING" } },
+      { "PLUSLE", 48, ability = "PLUS", nature = "TIMID", moves = { "DISCHARGE", "NUZZLE", "HELPING_HAND", "ENCORE" } },
       { "MINUN", 48, ability = "MINUS", nature = "TIMID", item = "SITRUS_BERRY", moves = { "DISCHARGE", "NUZZLE", "HELPING_HAND", "THUNDER_WAVE" } },
     } },
     AMY_AND_LIV_6 = { party = {
-      { "WIGGLYTUFF", 50, ability = "FRISK", nature = "MODEST", item = "SITRUS_BERRY", moves = { "PLAY_ROUGH", "SING", "ROLLOUT", "DEFENSE_CURL" } },
-      { "CLEFABLE", 50, ability = "UNAWARE", nature = "BOLD", item = "SITRUS_BERRY", moves = { "FOLLOW_ME", "MOONBLAST", "ENCORE", "SING" } },
-      { "PLUSLE", 50, ability = "PLUS", nature = "TIMID", item = "SITRUS_BERRY", moves = { "DISCHARGE", "NUZZLE", "HELPING_HAND", "ENCORE" } },
+      { "WIGGLYTUFF", 50, ability = "FRISK", nature = "MODEST", moves = { "PLAY_ROUGH", "SING", "ROLLOUT", "DEFENSE_CURL" } },
+      { "CLEFABLE", 50, ability = "UNAWARE", nature = "BOLD", moves = { "FOLLOW_ME", "MOONBLAST", "ENCORE", "SING" } },
+      { "PLUSLE", 50, ability = "PLUS", nature = "TIMID", moves = { "DISCHARGE", "NUZZLE", "HELPING_HAND", "ENCORE" } },
       { "MINUN", 50, ability = "MINUS", nature = "TIMID", item = "SITRUS_BERRY", moves = { "DISCHARGE", "NUZZLE", "HELPING_HAND", "THUNDER_WAVE" } },
     } },
     ANDRES_2 = { partner = "RM2_SEA_OTT", party = {
       { "ARCHEN", 33, ability = "DEFEATIST", nature = "JOLLY", item = "SHARP_BEAK", moves = { "ANCIENT_POWER", "PLUCK", "QUICK_ATTACK", "ROCK_THROW" } },
-      { "AMAURA", 32, ability = "REFRIGERATE", nature = "MODEST", item = "SITRUS_BERRY", moves = { "AURORA_BEAM", "ANCIENT_POWER", "THUNDER_WAVE", "ICY_WIND" } },
+      { "AMAURA", 32, ability = "REFRIGERATE", nature = "MODEST", moves = { "AURORA_BEAM", "ANCIENT_POWER", "THUNDER_WAVE", "ICY_WIND" } },
       { "PROBOPASS", 32, ability = "STURDY", nature = "IMPISH", item = "SITRUS_BERRY", moves = { "ROCK_TOMB", "THUNDER_WAVE", "BLOCK", "DISCHARGE" } },
     } },
     ANDRES_3 = { partner = "RM3_SEA_OTT", party = {
       { "ARCHEOPS", 38, ability = "DEFEATIST", nature = "JOLLY", item = "SHARP_BEAK", moves = { "ANCIENT_POWER", "PLUCK", "QUICK_ATTACK", "ROCK_THROW" } },
-      { "AMAURA", 37, ability = "REFRIGERATE", nature = "MODEST", item = "SITRUS_BERRY", moves = { "AURORA_BEAM", "ANCIENT_POWER", "THUNDER_WAVE", "ICY_WIND" } },
+      { "AMAURA", 37, ability = "REFRIGERATE", nature = "MODEST", moves = { "AURORA_BEAM", "ANCIENT_POWER", "THUNDER_WAVE", "ICY_WIND" } },
       { "PROBOPASS", 37, ability = "STURDY", nature = "IMPISH", item = "SITRUS_BERRY", moves = { "ROCK_TOMB", "THUNDER_WAVE", "BLOCK", "DISCHARGE" } },
     } },
     ANDRES_4 = { partner = "RM4_SEA_OTT", party = {
       { "ARCHEOPS", 43, ability = "DEFEATIST", nature = "JOLLY", item = "SHARP_BEAK", moves = { "ANCIENT_POWER", "PLUCK", "QUICK_ATTACK", "ROCK_THROW" } },
-      { "AURORUS", 42, ability = "REFRIGERATE", nature = "MODEST", item = "SITRUS_BERRY", moves = { "FREEZE_DRY", "POWER_GEM", "THUNDER_WAVE", "ICY_WIND" } },
+      { "AURORUS", 42, ability = "REFRIGERATE", nature = "MODEST", moves = { "FREEZE_DRY", "POWER_GEM", "THUNDER_WAVE", "ICY_WIND" } },
       { "PROBOPASS", 42, ability = "STURDY", nature = "IMPISH", item = "SITRUS_BERRY", moves = { "ROCK_TOMB", "THUNDER_WAVE", "BLOCK", "DISCHARGE" } },
     } },
     ANDRES_5 = { partner = "RM5_SEA_OTT", party = {
       { "ARCHEOPS", 48, ability = "DEFEATIST", nature = "JOLLY", item = "SHARP_BEAK", moves = { "ROCK_SLIDE", "PLUCK", "QUICK_ATTACK", "ROCK_THROW" } },
-      { "AURORUS", 47, ability = "REFRIGERATE", nature = "MODEST", item = "SITRUS_BERRY", moves = { "FREEZE_DRY", "POWER_GEM", "THUNDER_WAVE", "ICY_WIND" } },
+      { "AURORUS", 47, ability = "REFRIGERATE", nature = "MODEST", moves = { "FREEZE_DRY", "POWER_GEM", "THUNDER_WAVE", "ICY_WIND" } },
       { "PROBOPASS", 47, ability = "STURDY", nature = "IMPISH", item = "SITRUS_BERRY", moves = { "ROCK_TOMB", "THUNDER_WAVE", "BLOCK", "DISCHARGE" } },
     } },
     ANNA_AND_MEG_2 = { party = {
       { "MINCCINO", 33, ability = "SKILL_LINK", nature = "JOLLY", item = "SILK_SCARF", moves = { "DOUBLE_SLAP", "SWIFT", "HELPING_HAND", "ENCORE" } },
       { "GURDURR", 33, ability = "GUTS", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "ROCK_SLIDE", "MACH_PUNCH", "LOW_KICK", "BULK_UP" } },
-      { "SKITTY", 32, ability = "WONDER_SKIN", nature = "JOLLY", item = "SITRUS_BERRY", moves = { "FAKE_OUT", "DISARMING_VOICE", "SING", "HELPING_HAND" } },
+      { "SKITTY", 32, ability = "WONDER_SKIN", nature = "JOLLY", moves = { "FAKE_OUT", "DISARMING_VOICE", "SING", "HELPING_HAND" } },
       { "MACHOKE", 32, ability = "NO_GUARD", nature = "ADAMANT", item = "BLACK_BELT", moves = { "WAKE_UP_SLAP", "LOW_SWEEP", "VITAL_THROW", "ROCK_TOMB" } },
     } },
     ANNA_AND_MEG_3 = { party = {
       { "CINCCINO", 38, ability = "SKILL_LINK", nature = "JOLLY", item = "SILK_SCARF", moves = { "DOUBLE_SLAP", "SWIFT", "HELPING_HAND", "ENCORE" } },
       { "CONKELDURR", 38, ability = "GUTS", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "ROCK_SLIDE", "MACH_PUNCH", "LOW_KICK", "BULK_UP" } },
-      { "DELCATTY", 37, ability = "WONDER_SKIN", nature = "JOLLY", item = "SITRUS_BERRY", moves = { "FAKE_OUT", "DISARMING_VOICE", "SING", "HELPING_HAND" } },
+      { "DELCATTY", 37, ability = "WONDER_SKIN", nature = "JOLLY", moves = { "FAKE_OUT", "DISARMING_VOICE", "SING", "HELPING_HAND" } },
       { "MACHAMP", 37, ability = "NO_GUARD", nature = "ADAMANT", item = "BLACK_BELT", moves = { "SUBMISSION", "LOW_SWEEP", "WAKE_UP_SLAP", "ROCK_TOMB" } },
     } },
     ANNA_AND_MEG_4 = { party = {
       { "CINCCINO", 43, ability = "SKILL_LINK", nature = "JOLLY", item = "SILK_SCARF", moves = { "DOUBLE_SLAP", "HYPER_VOICE", "HELPING_HAND", "ENCORE" } },
       { "CONKELDURR", 43, ability = "GUTS", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "STONE_EDGE", "MACH_PUNCH", "LOW_KICK", "BULK_UP" } },
-      { "DELCATTY", 42, ability = "WONDER_SKIN", nature = "JOLLY", item = "SITRUS_BERRY", moves = { "FAKE_OUT", "DISARMING_VOICE", "SING", "HELPING_HAND" } },
+      { "DELCATTY", 42, ability = "WONDER_SKIN", nature = "JOLLY", moves = { "FAKE_OUT", "DISARMING_VOICE", "SING", "HELPING_HAND" } },
       { "MACHAMP", 42, ability = "NO_GUARD", nature = "ADAMANT", item = "BLACK_BELT", moves = { "CROSS_CHOP", "LOW_SWEEP", "SUBMISSION", "ROCK_TOMB" } },
     } },
     ANNA_AND_MEG_5 = { party = {
       { "CINCCINO", 48, ability = "SKILL_LINK", nature = "JOLLY", item = "SILK_SCARF", moves = { "DOUBLE_SLAP", "HYPER_VOICE", "HELPING_HAND", "ENCORE" } },
       { "CONKELDURR", 48, ability = "GUTS", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "STONE_EDGE", "MACH_PUNCH", "LOW_KICK", "BULK_UP" } },
-      { "DELCATTY", 47, ability = "WONDER_SKIN", nature = "JOLLY", item = "SITRUS_BERRY", moves = { "FAKE_OUT", "DISARMING_VOICE", "SING", "HELPING_HAND" } },
+      { "DELCATTY", 47, ability = "WONDER_SKIN", nature = "JOLLY", moves = { "FAKE_OUT", "DISARMING_VOICE", "SING", "HELPING_HAND" } },
       { "MACHAMP", 47, ability = "NO_GUARD", nature = "ADAMANT", item = "BLACK_BELT", moves = { "CROSS_CHOP", "LOW_SWEEP", "SUBMISSION", "ROCK_TOMB" } },
     } },
     BENJAMIN_2 = { partner = "RM2_CR_ACE", party = {
@@ -195,24 +195,24 @@ return {
       { "STOUTLAND", 48, ability = "INTIMIDATE", nature = "ADAMANT", item = "SILK_SCARF", moves = { "RETALIATE", "CRUNCH", "HELPING_HAND", "PROTECT" } },
     } },
     CAMERON_2 = { partner = "RM2_R123_VIC", party = {
-      { "SOLROCK", 35, ability = "LEVITATE", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "ROCK_SLIDE", "ZEN_HEADBUTT", "ROCK_POLISH", "MORNING_SUN" } },
+      { "SOLROCK", 35, ability = "LEVITATE", nature = "ADAMANT", moves = { "ROCK_SLIDE", "ZEN_HEADBUTT", "ROCK_POLISH", "MORNING_SUN" } },
       { "EXEGGUTOR_ALOLAN", 35, ability = "FRISK", nature = "MODEST", item = "SITRUS_BERRY", moves = { "DRAGON_HAMMER", "SEED_BOMB", "HYPNOSIS", "TRICK_ROOM" } },
-      { "BRAIXEN", 34, ability = "BLAZE", nature = "TIMID", item = "SITRUS_BERRY", moves = { "FLAME_CHARGE", "PSYSHOCK", "PROTECT", "HOWL" } },
+      { "BRAIXEN", 34, ability = "BLAZE", nature = "TIMID", moves = { "FLAME_CHARGE", "PSYSHOCK", "PROTECT", "HOWL" } },
     } },
     CAMERON_3 = { partner = "RM3_R123_VIC", party = {
-      { "SOLROCK", 38, ability = "LEVITATE", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "ROCK_SLIDE", "ZEN_HEADBUTT", "ROCK_POLISH", "MORNING_SUN" } },
+      { "SOLROCK", 38, ability = "LEVITATE", nature = "ADAMANT", moves = { "ROCK_SLIDE", "ZEN_HEADBUTT", "ROCK_POLISH", "MORNING_SUN" } },
       { "EXEGGUTOR_ALOLAN", 38, ability = "FRISK", nature = "MODEST", item = "SITRUS_BERRY", moves = { "DRAGON_HAMMER", "SEED_BOMB", "HYPNOSIS", "TRICK_ROOM" } },
-      { "DELPHOX", 37, ability = "BLAZE", nature = "TIMID", item = "SITRUS_BERRY", moves = { "FLAME_CHARGE", "PSYSHOCK", "PROTECT", "HOWL" } },
+      { "DELPHOX", 37, ability = "BLAZE", nature = "TIMID", moves = { "FLAME_CHARGE", "PSYSHOCK", "PROTECT", "HOWL" } },
     } },
     CAMERON_4 = { partner = "RM4_R123_VIC", party = {
-      { "SOLROCK", 43, ability = "LEVITATE", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "ROCK_SLIDE", "ZEN_HEADBUTT", "ROCK_POLISH", "MORNING_SUN" } },
+      { "SOLROCK", 43, ability = "LEVITATE", nature = "ADAMANT", moves = { "ROCK_SLIDE", "ZEN_HEADBUTT", "ROCK_POLISH", "MORNING_SUN" } },
       { "EXEGGUTOR_ALOLAN", 43, ability = "FRISK", nature = "MODEST", item = "SITRUS_BERRY", moves = { "DRAGON_HAMMER", "SEED_BOMB", "HYPNOSIS", "TRICK_ROOM" } },
-      { "DELPHOX", 42, ability = "BLAZE", nature = "TIMID", item = "SITRUS_BERRY", moves = { "FLAME_CHARGE", "PSYCHIC", "PROTECT", "HOWL" } },
+      { "DELPHOX", 42, ability = "BLAZE", nature = "TIMID", moves = { "FLAME_CHARGE", "PSYCHIC", "PROTECT", "HOWL" } },
     } },
     CAMERON_5 = { partner = "RM5_R123_VIC", party = {
-      { "SOLROCK", 48, ability = "LEVITATE", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "ROCK_SLIDE", "ZEN_HEADBUTT", "ROCK_POLISH", "MORNING_SUN" } },
+      { "SOLROCK", 48, ability = "LEVITATE", nature = "ADAMANT", moves = { "ROCK_SLIDE", "ZEN_HEADBUTT", "ROCK_POLISH", "MORNING_SUN" } },
       { "EXEGGUTOR_ALOLAN", 48, ability = "FRISK", nature = "MODEST", item = "SITRUS_BERRY", moves = { "DRAGON_HAMMER", "SEED_BOMB", "HYPNOSIS", "TRICK_ROOM" } },
-      { "DELPHOX", 47, ability = "BLAZE", nature = "TIMID", item = "SITRUS_BERRY", moves = { "FLAME_CHARGE", "PSYCHIC", "PROTECT", "HOWL" } },
+      { "DELPHOX", 47, ability = "BLAZE", nature = "TIMID", moves = { "FLAME_CHARGE", "PSYCHIC", "PROTECT", "HOWL" } },
     } },
     CATHERINE_2 = { partner = "RM2_R119_WEN", party = {
       { "GLOOM", 32, ability = "CHLOROPHYLL", nature = "MODEST", item = "MIRACLE_SEED", moves = { "GIGA_DRAIN", "ACID", "SLEEP_POWDER", "STUN_SPORE" } },
@@ -307,19 +307,19 @@ return {
       { "BEWEAR", 47, ability = "FLUFFY", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "BRUTAL_SWING", "HAMMER_ARM", "BABY_DOLL_EYES", "PROTECT" } },
     } },
     DALTON_2 = { partner = "RM2_R118_REX", party = {
-      { "NOIBAT", 33, ability = "INFILTRATOR", nature = "TIMID", item = "SITRUS_BERRY", moves = { "WING_ATTACK", "BITE", "PROTECT", "TAILWIND" } },
+      { "NOIBAT", 33, ability = "INFILTRATOR", nature = "TIMID", moves = { "WING_ATTACK", "BITE", "PROTECT", "TAILWIND" } },
       { "LOUDRED", 33, ability = "SOUNDPROOF", nature = "MODEST", item = "SITRUS_BERRY", moves = { "STOMP", "BITE", "PROTECT", "SUPERSONIC" } },
     } },
     DALTON_3 = { partner = "RM3_R118_REX", party = {
-      { "NOIVERN", 38, ability = "INFILTRATOR", nature = "TIMID", item = "SITRUS_BERRY", moves = { "WING_ATTACK", "BITE", "PROTECT", "TAILWIND" } },
+      { "NOIVERN", 38, ability = "INFILTRATOR", nature = "TIMID", moves = { "WING_ATTACK", "BITE", "PROTECT", "TAILWIND" } },
       { "LOUDRED", 38, ability = "SOUNDPROOF", nature = "MODEST", item = "SITRUS_BERRY", moves = { "STOMP", "BITE", "PROTECT", "SUPERSONIC" } },
     } },
     DALTON_4 = { partner = "RM4_R118_REX", party = {
-      { "NOIVERN", 43, ability = "INFILTRATOR", nature = "TIMID", item = "SITRUS_BERRY", moves = { "WING_ATTACK", "BITE", "PROTECT", "TAILWIND" } },
+      { "NOIVERN", 43, ability = "INFILTRATOR", nature = "TIMID", moves = { "WING_ATTACK", "BITE", "PROTECT", "TAILWIND" } },
       { "EXPLOUD", 43, ability = "SOUNDPROOF", nature = "MODEST", item = "SITRUS_BERRY", moves = { "HYPER_VOICE", "CRUNCH", "PROTECT", "SUPERSONIC" } },
     } },
     DALTON_5 = { partner = "RM5_R118_REX", party = {
-      { "NOIVERN", 48, ability = "INFILTRATOR", nature = "TIMID", item = "SITRUS_BERRY", moves = { "WING_ATTACK", "BITE", "PROTECT", "TAILWIND" } },
+      { "NOIVERN", 48, ability = "INFILTRATOR", nature = "TIMID", moves = { "WING_ATTACK", "BITE", "PROTECT", "TAILWIND" } },
       { "EXPLOUD", 48, ability = "SOUNDPROOF", nature = "MODEST", item = "SITRUS_BERRY", moves = { "HYPER_VOICE", "CRUNCH", "PROTECT", "SUPERSONIC" } },
     } },
     DIANA_2 = { partner = "RM2_JP_BEL", party = {
@@ -341,22 +341,22 @@ return {
     DUSTY_2 = { partner = "RM2_DES_RAE", party = {
       { "GOLETT", 32, ability = "IRON_FIST", nature = "ADAMANT", item = "HARD_STONE", moves = { "SHADOW_PUNCH", "BULLDOZE", "DEFENSE_CURL", "ROLLOUT" } },
       { "SIGILYPH", 33, ability = "MAGIC_GUARD", nature = "TIMID", item = "SITRUS_BERRY", moves = { "PSYBEAM", "AIR_CUTTER", "TAILWIND", "REFLECT" } },
-      { "BASTIODON", 32, ability = "STURDY", nature = "IMPISH", item = "SITRUS_BERRY", moves = { "IRON_DEFENSE", "ANCIENT_POWER", "PROTECT", "TAUNT" } },
+      { "BASTIODON", 32, ability = "STURDY", nature = "IMPISH", moves = { "IRON_DEFENSE", "ANCIENT_POWER", "PROTECT", "TAUNT" } },
     } },
     DUSTY_3 = { partner = "RM3_DES_RAE", party = {
       { "GOLETT", 37, ability = "IRON_FIST", nature = "ADAMANT", item = "HARD_STONE", moves = { "SHADOW_PUNCH", "BULLDOZE", "DEFENSE_CURL", "ROLLOUT" } },
       { "SIGILYPH", 38, ability = "MAGIC_GUARD", nature = "TIMID", item = "SITRUS_BERRY", moves = { "PSYBEAM", "AIR_SLASH", "TAILWIND", "REFLECT" } },
-      { "BASTIODON", 37, ability = "STURDY", nature = "IMPISH", item = "SITRUS_BERRY", moves = { "IRON_DEFENSE", "ANCIENT_POWER", "PROTECT", "TAUNT" } },
+      { "BASTIODON", 37, ability = "STURDY", nature = "IMPISH", moves = { "IRON_DEFENSE", "ANCIENT_POWER", "PROTECT", "TAUNT" } },
     } },
     DUSTY_4 = { partner = "RM4_DES_RAE", party = {
       { "GOLETT", 42, ability = "IRON_FIST", nature = "ADAMANT", item = "HARD_STONE", moves = { "SHADOW_PUNCH", "BULLDOZE", "DEFENSE_CURL", "ROLLOUT" } },
       { "SIGILYPH", 43, ability = "MAGIC_GUARD", nature = "TIMID", item = "SITRUS_BERRY", moves = { "PSYCHIC", "AIR_SLASH", "TAILWIND", "REFLECT" } },
-      { "BASTIODON", 42, ability = "STURDY", nature = "IMPISH", item = "SITRUS_BERRY", moves = { "IRON_DEFENSE", "ANCIENT_POWER", "PROTECT", "TAUNT" } },
+      { "BASTIODON", 42, ability = "STURDY", nature = "IMPISH", moves = { "IRON_DEFENSE", "ANCIENT_POWER", "PROTECT", "TAUNT" } },
     } },
     DUSTY_5 = { partner = "RM5_DES_RAE", party = {
       { "GOLURK", 47, ability = "IRON_FIST", nature = "ADAMANT", item = "HARD_STONE", moves = { "SHADOW_PUNCH", "BULLDOZE", "DEFENSE_CURL", "ROLLOUT" } },
       { "SIGILYPH", 48, ability = "MAGIC_GUARD", nature = "TIMID", item = "SITRUS_BERRY", moves = { "PSYCHIC", "AIR_SLASH", "TAILWIND", "REFLECT" } },
-      { "BASTIODON", 47, ability = "STURDY", nature = "IMPISH", item = "SITRUS_BERRY", moves = { "IRON_DEFENSE", "ANCIENT_POWER", "PROTECT", "TAUNT" } },
+      { "BASTIODON", 47, ability = "STURDY", nature = "IMPISH", moves = { "IRON_DEFENSE", "ANCIENT_POWER", "PROTECT", "TAUNT" } },
     } },
     DYLAN_2 = { partner = "RM2_R117_LEE", party = {
       { "YANMA", 33, ability = "SPEED_BOOST", nature = "MODEST", item = "SITRUS_BERRY", moves = { "AIR_CUTTER", "U_TURN", "DETECT", "PROTECT" } },
@@ -375,19 +375,19 @@ return {
       { "DODRIO", 47, ability = "EARLY_BIRD", nature = "JOLLY", item = "SHARP_BEAK", moves = { "DRILL_PECK", "DOUBLE_HIT", "QUICK_ATTACK", "AGILITY" } },
     } },
     EDWIN_2 = { partner = "RM2_R110_MOE", party = {
-      { "LOMBRE", 33, ability = "SWIFT_SWIM", nature = "MODEST", item = "SITRUS_BERRY", moves = { "FAKE_OUT", "GIGA_DRAIN", "BUBBLE_BEAM", "KNOCK_OFF" } },
+      { "LOMBRE", 33, ability = "SWIFT_SWIM", nature = "MODEST", moves = { "FAKE_OUT", "GIGA_DRAIN", "BUBBLE_BEAM", "KNOCK_OFF" } },
       { "NUZLEAF", 33, ability = "CHLOROPHYLL", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "LEAF_BLADE", "AIR_CUTTER", "GROWTH", "TORMENT" } },
     } },
     EDWIN_3 = { partner = "RM3_R110_MOE", party = {
-      { "LUDICOLO", 38, ability = "SWIFT_SWIM", nature = "MODEST", item = "SITRUS_BERRY", moves = { "FAKE_OUT", "GIGA_DRAIN", "BUBBLE_BEAM", "KNOCK_OFF" } },
+      { "LUDICOLO", 38, ability = "SWIFT_SWIM", nature = "MODEST", moves = { "FAKE_OUT", "GIGA_DRAIN", "BUBBLE_BEAM", "KNOCK_OFF" } },
       { "SHIFTRY", 38, ability = "CHLOROPHYLL", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "LEAF_BLADE", "AIR_CUTTER", "GROWTH", "TORMENT" } },
     } },
     EDWIN_4 = { partner = "RM4_R110_MOE", party = {
-      { "LUDICOLO", 43, ability = "SWIFT_SWIM", nature = "MODEST", item = "SITRUS_BERRY", moves = { "FAKE_OUT", "ENERGY_BALL", "BUBBLE_BEAM", "KNOCK_OFF" } },
+      { "LUDICOLO", 43, ability = "SWIFT_SWIM", nature = "MODEST", moves = { "FAKE_OUT", "ENERGY_BALL", "BUBBLE_BEAM", "KNOCK_OFF" } },
       { "SHIFTRY", 43, ability = "CHLOROPHYLL", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "LEAF_BLADE", "AIR_CUTTER", "GROWTH", "TORMENT" } },
     } },
     EDWIN_5 = { partner = "RM5_R110_MOE", party = {
-      { "LUDICOLO", 48, ability = "SWIFT_SWIM", nature = "MODEST", item = "SITRUS_BERRY", moves = { "FAKE_OUT", "ENERGY_BALL", "BUBBLE_BEAM", "KNOCK_OFF" } },
+      { "LUDICOLO", 48, ability = "SWIFT_SWIM", nature = "MODEST", moves = { "FAKE_OUT", "ENERGY_BALL", "BUBBLE_BEAM", "KNOCK_OFF" } },
       { "SHIFTRY", 48, ability = "CHLOROPHYLL", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "LEAF_STORM", "AIR_CUTTER", "GROWTH", "TORMENT" } },
     } },
     ELLIOT_2 = { partner = "RM2_R106_ROY", party = {
@@ -409,22 +409,22 @@ return {
     ERNEST_2 = { partner = "RM2_R125_BEN", party = {
       { "CONKELDURR", 41, ability = "GUTS", nature = "ADAMANT", item = "FLAME_ORB", moves = { "MACH_PUNCH", "HAMMER_ARM", "ROCK_SLIDE", "KNOCK_OFF" } },
       { "GOLISOPOD", 41, ability = "EMERGENCY_EXIT", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "FIRST_IMPRESSION", "LIQUIDATION", "RAZOR_SHELL", "PROTECT" } },
-      { "KANGASKHAN", 40, ability = "SCRAPPY", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "FAKE_OUT", "DOUBLE_HIT", "SUCKER_PUNCH", "PROTECT" } },
+      { "KANGASKHAN", 40, ability = "SCRAPPY", nature = "ADAMANT", moves = { "FAKE_OUT", "DOUBLE_HIT", "SUCKER_PUNCH", "PROTECT" } },
     } },
     ERNEST_3 = { partner = "RM3_R125_BEN", party = {
       { "CONKELDURR", 43, ability = "GUTS", nature = "ADAMANT", item = "FLAME_ORB", moves = { "MACH_PUNCH", "HAMMER_ARM", "ROCK_SLIDE", "KNOCK_OFF" } },
       { "GOLISOPOD", 43, ability = "EMERGENCY_EXIT", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "FIRST_IMPRESSION", "LIQUIDATION", "RAZOR_SHELL", "PROTECT" } },
-      { "KANGASKHAN", 42, ability = "SCRAPPY", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "FAKE_OUT", "DOUBLE_HIT", "SUCKER_PUNCH", "PROTECT" } },
+      { "KANGASKHAN", 42, ability = "SCRAPPY", nature = "ADAMANT", moves = { "FAKE_OUT", "DOUBLE_HIT", "SUCKER_PUNCH", "PROTECT" } },
     } },
     ERNEST_4 = { partner = "RM4_R125_BEN", party = {
       { "CONKELDURR", 45, ability = "GUTS", nature = "ADAMANT", item = "FLAME_ORB", moves = { "MACH_PUNCH", "HAMMER_ARM", "ROCK_SLIDE", "KNOCK_OFF" } },
       { "GOLISOPOD", 45, ability = "EMERGENCY_EXIT", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "FIRST_IMPRESSION", "LIQUIDATION", "RAZOR_SHELL", "PROTECT" } },
-      { "KANGASKHAN", 44, ability = "SCRAPPY", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "FAKE_OUT", "DOUBLE_HIT", "SUCKER_PUNCH", "PROTECT" } },
+      { "KANGASKHAN", 44, ability = "SCRAPPY", nature = "ADAMANT", moves = { "FAKE_OUT", "DOUBLE_HIT", "SUCKER_PUNCH", "PROTECT" } },
     } },
     ERNEST_5 = { partner = "RM5_R125_BEN", party = {
       { "CONKELDURR", 48, ability = "GUTS", nature = "ADAMANT", item = "FLAME_ORB", moves = { "MACH_PUNCH", "HAMMER_ARM", "ROCK_SLIDE", "KNOCK_OFF" } },
       { "GOLISOPOD", 48, ability = "EMERGENCY_EXIT", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "FIRST_IMPRESSION", "LIQUIDATION", "RAZOR_SHELL", "PROTECT" } },
-      { "KANGASKHAN", 47, ability = "SCRAPPY", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "FAKE_OUT", "DOUBLE_HIT", "SUCKER_PUNCH", "PROTECT" } },
+      { "KANGASKHAN", 47, ability = "SCRAPPY", nature = "ADAMANT", moves = { "FAKE_OUT", "DOUBLE_HIT", "SUCKER_PUNCH", "PROTECT" } },
     } },
     ETHAN_2 = { partner = "RM2_JP_GUS", party = {
       { "RUFFLET", 32, ability = "HUSTLE", nature = "JOLLY", item = "SHARP_BEAK", moves = { "AERIAL_ACE", "SLASH", "HONE_CLAWS", "TAILWIND" } },
@@ -516,32 +516,32 @@ return {
     } },
     GABRIELLE_2 = { party = {
       { "BERGMITE", 35, ability = "STURDY", nature = "IMPISH", item = "NEVER_MELT_ICE", moves = { "AVALANCHE", "BITE", "ICE_FANG", "RAPID_SPIN" } },
-      { "MEGANIUM", 35, ability = "TRIAGE", nature = "BOLD", item = "SITRUS_BERRY", moves = { "PETAL_BLIZZARD", "REFLECT", "POISON_POWDER", "SYNTHESIS" } },
-      { "RAICHU_ALOLAN", 35, ability = "SURGE_SURFER", nature = "TIMID", item = "SITRUS_BERRY", moves = { "PSYCHIC", "THUNDERBOLT", "NUZZLE", "THUNDER_WAVE" } },
+      { "MEGANIUM", 35, ability = "TRIAGE", nature = "BOLD", moves = { "PETAL_BLIZZARD", "REFLECT", "POISON_POWDER", "SYNTHESIS" } },
+      { "RAICHU_ALOLAN", 35, ability = "SURGE_SURFER", nature = "TIMID", moves = { "PSYCHIC", "THUNDERBOLT", "NUZZLE", "THUNDER_WAVE" } },
       { "DONPHAN", 35, ability = "STURDY", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "BULLDOZE", "ROLLOUT", "KNOCK_OFF", "HORN_ATTACK" } },
     } },
     GABRIELLE_3 = { party = {
       { "AVALUGG", 38, ability = "STURDY", nature = "IMPISH", item = "NEVER_MELT_ICE", moves = { "AVALANCHE", "BITE", "ICE_FANG", "BODY_SLAM" } },
-      { "MEGANIUM", 38, ability = "TRIAGE", nature = "BOLD", item = "SITRUS_BERRY", moves = { "PETAL_BLIZZARD", "REFLECT", "POISON_POWDER", "SYNTHESIS" } },
-      { "RAICHU_ALOLAN", 38, ability = "SURGE_SURFER", nature = "TIMID", item = "SITRUS_BERRY", moves = { "PSYCHIC", "THUNDERBOLT", "NUZZLE", "THUNDER_WAVE" } },
+      { "MEGANIUM", 38, ability = "TRIAGE", nature = "BOLD", moves = { "PETAL_BLIZZARD", "REFLECT", "POISON_POWDER", "SYNTHESIS" } },
+      { "RAICHU_ALOLAN", 38, ability = "SURGE_SURFER", nature = "TIMID", moves = { "PSYCHIC", "THUNDERBOLT", "NUZZLE", "THUNDER_WAVE" } },
       { "DONPHAN", 38, ability = "STURDY", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "BULLDOZE", "ROLLOUT", "KNOCK_OFF", "HORN_ATTACK" } },
     } },
     GABRIELLE_4 = { party = {
       { "AVALUGG", 43, ability = "STURDY", nature = "IMPISH", item = "NEVER_MELT_ICE", moves = { "AVALANCHE", "BITE", "ICE_FANG", "BODY_SLAM" } },
-      { "MEGANIUM", 43, ability = "TRIAGE", nature = "BOLD", item = "SITRUS_BERRY", moves = { "PETAL_BLIZZARD", "REFLECT", "POISON_POWDER", "SYNTHESIS" } },
-      { "RAICHU_ALOLAN", 43, ability = "SURGE_SURFER", nature = "TIMID", item = "SITRUS_BERRY", moves = { "PSYCHIC", "THUNDERBOLT", "NUZZLE", "THUNDER_WAVE" } },
+      { "MEGANIUM", 43, ability = "TRIAGE", nature = "BOLD", moves = { "PETAL_BLIZZARD", "REFLECT", "POISON_POWDER", "SYNTHESIS" } },
+      { "RAICHU_ALOLAN", 43, ability = "SURGE_SURFER", nature = "TIMID", moves = { "PSYCHIC", "THUNDERBOLT", "NUZZLE", "THUNDER_WAVE" } },
       { "DONPHAN", 43, ability = "STURDY", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "BULLDOZE", "ROLLOUT", "KNOCK_OFF", "HORN_ATTACK" } },
     } },
     GABRIELLE_5 = { party = {
       { "AVALUGG", 48, ability = "STURDY", nature = "IMPISH", item = "NEVER_MELT_ICE", moves = { "ICICLE_CRASH", "CRUNCH", "ICE_FANG", "BODY_SLAM" } },
-      { "MEGANIUM", 48, ability = "TRIAGE", nature = "BOLD", item = "SITRUS_BERRY", moves = { "PETAL_BLIZZARD", "REFLECT", "POISON_POWDER", "SYNTHESIS" } },
-      { "RAICHU_ALOLAN", 48, ability = "SURGE_SURFER", nature = "TIMID", item = "SITRUS_BERRY", moves = { "PSYCHIC", "THUNDERBOLT", "NUZZLE", "THUNDER_WAVE" } },
+      { "MEGANIUM", 48, ability = "TRIAGE", nature = "BOLD", moves = { "PETAL_BLIZZARD", "REFLECT", "POISON_POWDER", "SYNTHESIS" } },
+      { "RAICHU_ALOLAN", 48, ability = "SURGE_SURFER", nature = "TIMID", moves = { "PSYCHIC", "THUNDERBOLT", "NUZZLE", "THUNDER_WAVE" } },
       { "DONPHAN", 48, ability = "STURDY", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "BULLDOZE", "ROLLOUT", "KNOCK_OFF", "HORN_ATTACK" } },
     } },
     GINA_AND_MIA_2 = { party = {
-      { "COTTONEE", 33, ability = "PRANKSTER", nature = "TIMID", item = "SITRUS_BERRY", moves = { "STUN_SPORE", "LEECH_SEED", "FAIRY_WIND", "GIGA_DRAIN" } },
+      { "COTTONEE", 33, ability = "PRANKSTER", nature = "TIMID", moves = { "STUN_SPORE", "LEECH_SEED", "FAIRY_WIND", "GIGA_DRAIN" } },
       { "PETILIL", 33, ability = "CHLOROPHYLL", nature = "MODEST", item = "MIRACLE_SEED", moves = { "SLEEP_POWDER", "GIGA_DRAIN", "FAIRY_WIND", "LEECH_SEED" } },
-      { "LOMBRE", 33, ability = "SWIFT_SWIM", nature = "MODEST", item = "SITRUS_BERRY", moves = { "GIGA_DRAIN", "BUBBLE_BEAM", "PROTECT", "ASTONISH" } },
+      { "LOMBRE", 33, ability = "SWIFT_SWIM", nature = "MODEST", moves = { "GIGA_DRAIN", "BUBBLE_BEAM", "PROTECT", "ASTONISH" } },
       { "NUZLEAF", 33, ability = "EARLY_BIRD", nature = "IMPISH", item = "SITRUS_BERRY", moves = { "ROLLOUT", "GROWTH", "LEAF_BLADE", "PROTECT" } },
     } },
     HALEY_2 = { partner = "RM2_R104_TARA", party = {
@@ -566,42 +566,42 @@ return {
     } },
     ISAAC_2 = { party = {
       { "EEVEE", 33, ability = "ADAPTABILITY", nature = "JOLLY", item = "SILK_SCARF", moves = { "QUICK_ATTACK", "COVET", "HELPING_HAND", "PROTECT" } },
-      { "BONSLY", 33, ability = "STURDY", nature = "IMPISH", item = "SITRUS_BERRY", moves = { "ROCK_SLIDE", "LOW_KICK", "FAKE_TEARS", "FLAIL" } },
-      { "DEINO", 33, ability = "HUSTLE", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "DRAGON_PULSE", "CRUNCH", "HEADBUTT", "FOCUS_ENERGY" } },
+      { "BONSLY", 33, ability = "STURDY", nature = "IMPISH", moves = { "ROCK_SLIDE", "LOW_KICK", "FAKE_TEARS", "FLAIL" } },
+      { "DEINO", 33, ability = "HUSTLE", nature = "ADAMANT", moves = { "DRAGON_PULSE", "CRUNCH", "HEADBUTT", "FOCUS_ENERGY" } },
       { "LAMPENT", 33, ability = "FLASH_FIRE", nature = "MODEST", item = "SITRUS_BERRY", moves = { "FLAME_BURST", "HEX", "PROTECT", "CONFUSE_RAY" } },
     } },
     ISAAC_3 = { party = {
       { "SYLVEON", 38, ability = "CUTE_CHARM", nature = "JOLLY", item = "SILK_SCARF", moves = { "QUICK_ATTACK", "COVET", "HELPING_HAND", "PROTECT" } },
-      { "SUDOWOODO", 38, ability = "STURDY", nature = "IMPISH", item = "SITRUS_BERRY", moves = { "ROCK_SLIDE", "LOW_KICK", "FAKE_TEARS", "FLAIL" } },
-      { "DEINO", 38, ability = "HUSTLE", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "DRAGON_PULSE", "CRUNCH", "HEADBUTT", "FOCUS_ENERGY" } },
+      { "SUDOWOODO", 38, ability = "STURDY", nature = "IMPISH", moves = { "ROCK_SLIDE", "LOW_KICK", "FAKE_TEARS", "FLAIL" } },
+      { "DEINO", 38, ability = "HUSTLE", nature = "ADAMANT", moves = { "DRAGON_PULSE", "CRUNCH", "HEADBUTT", "FOCUS_ENERGY" } },
       { "CHANDELURE", 38, ability = "FLASH_FIRE", nature = "MODEST", item = "SITRUS_BERRY", moves = { "FLAME_BURST", "SHADOW_BALL", "PROTECT", "CONFUSE_RAY" } },
     } },
     ISAAC_4 = { party = {
       { "SYLVEON", 43, ability = "CUTE_CHARM", nature = "JOLLY", item = "SILK_SCARF", moves = { "QUICK_ATTACK", "COVET", "HELPING_HAND", "PROTECT" } },
-      { "SUDOWOODO", 43, ability = "STURDY", nature = "IMPISH", item = "SITRUS_BERRY", moves = { "ROCK_SLIDE", "LOW_KICK", "FAKE_TEARS", "FLAIL" } },
-      { "ZWEILOUS", 43, ability = "HUSTLE", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "DRAGON_PULSE", "CRUNCH", "HEADBUTT", "FOCUS_ENERGY" } },
+      { "SUDOWOODO", 43, ability = "STURDY", nature = "IMPISH", moves = { "ROCK_SLIDE", "LOW_KICK", "FAKE_TEARS", "FLAIL" } },
+      { "ZWEILOUS", 43, ability = "HUSTLE", nature = "ADAMANT", moves = { "DRAGON_PULSE", "CRUNCH", "HEADBUTT", "FOCUS_ENERGY" } },
       { "CHANDELURE", 43, ability = "FLASH_FIRE", nature = "MODEST", item = "SITRUS_BERRY", moves = { "FLAME_BURST", "SHADOW_BALL", "PROTECT", "CONFUSE_RAY" } },
     } },
     ISAAC_5 = { party = {
       { "SYLVEON", 48, ability = "CUTE_CHARM", nature = "JOLLY", item = "SILK_SCARF", moves = { "QUICK_ATTACK", "COVET", "HELPING_HAND", "PROTECT" } },
-      { "SUDOWOODO", 48, ability = "STURDY", nature = "IMPISH", item = "SITRUS_BERRY", moves = { "STONE_EDGE", "LOW_KICK", "FAKE_TEARS", "FLAIL" } },
-      { "ZWEILOUS", 48, ability = "HUSTLE", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "DRAGON_PULSE", "CRUNCH", "HEADBUTT", "FOCUS_ENERGY" } },
+      { "SUDOWOODO", 48, ability = "STURDY", nature = "IMPISH", moves = { "STONE_EDGE", "LOW_KICK", "FAKE_TEARS", "FLAIL" } },
+      { "ZWEILOUS", 48, ability = "HUSTLE", nature = "ADAMANT", moves = { "DRAGON_PULSE", "CRUNCH", "HEADBUTT", "FOCUS_ENERGY" } },
       { "CHANDELURE", 48, ability = "FLASH_FIRE", nature = "MODEST", item = "SITRUS_BERRY", moves = { "FLAME_BURST", "SHADOW_BALL", "PROTECT", "CONFUSE_RAY" } },
     } },
     ISABEL_2 = { partner = "RM2_R110_ANN", party = {
-      { "PLUSLE", 33, ability = "PLUS", nature = "TIMID", item = "SITRUS_BERRY", moves = { "DISCHARGE", "NUZZLE", "HELPING_HAND", "ENCORE" } },
+      { "PLUSLE", 33, ability = "PLUS", nature = "TIMID", moves = { "DISCHARGE", "NUZZLE", "HELPING_HAND", "ENCORE" } },
       { "PACHIRISU", 33, ability = "VOLT_ABSORB", nature = "IMPISH", item = "SITRUS_BERRY", moves = { "NUZZLE", "SPARK", "SUPER_FANG", "ENDURE" } },
     } },
     ISABEL_3 = { partner = "RM3_R110_ANN", party = {
-      { "PLUSLE", 38, ability = "PLUS", nature = "TIMID", item = "SITRUS_BERRY", moves = { "DISCHARGE", "NUZZLE", "HELPING_HAND", "ENCORE" } },
+      { "PLUSLE", 38, ability = "PLUS", nature = "TIMID", moves = { "DISCHARGE", "NUZZLE", "HELPING_HAND", "ENCORE" } },
       { "PACHIRISU", 38, ability = "VOLT_ABSORB", nature = "IMPISH", item = "SITRUS_BERRY", moves = { "NUZZLE", "SPARK", "SUPER_FANG", "ENDURE" } },
     } },
     ISABEL_4 = { partner = "RM4_R110_ANN", party = {
-      { "PLUSLE", 43, ability = "PLUS", nature = "TIMID", item = "SITRUS_BERRY", moves = { "DISCHARGE", "NUZZLE", "HELPING_HAND", "ENCORE" } },
+      { "PLUSLE", 43, ability = "PLUS", nature = "TIMID", moves = { "DISCHARGE", "NUZZLE", "HELPING_HAND", "ENCORE" } },
       { "PACHIRISU", 43, ability = "VOLT_ABSORB", nature = "IMPISH", item = "SITRUS_BERRY", moves = { "NUZZLE", "DISCHARGE", "SUPER_FANG", "ENDURE" } },
     } },
     ISABEL_5 = { partner = "RM5_R110_ANN", party = {
-      { "PLUSLE", 48, ability = "PLUS", nature = "TIMID", item = "SITRUS_BERRY", moves = { "DISCHARGE", "NUZZLE", "HELPING_HAND", "ENCORE" } },
+      { "PLUSLE", 48, ability = "PLUS", nature = "TIMID", moves = { "DISCHARGE", "NUZZLE", "HELPING_HAND", "ENCORE" } },
       { "PACHIRISU", 48, ability = "VOLT_ABSORB", nature = "IMPISH", item = "SITRUS_BERRY", moves = { "NUZZLE", "DISCHARGE", "SUPER_FANG", "ENDURE" } },
     } },
     ISAIAH_2 = { partner = "RM2_R126_SKY", party = {
@@ -642,57 +642,57 @@ return {
     } },
     JACKSON_2 = { partner = "RM2_R119_RAN", party = {
       { "MANTINE", 33, ability = "WATER_ABSORB", nature = "CALM", item = "SITRUS_BERRY", moves = { "WATER_PULSE", "AIR_SLASH", "WIDE_GUARD", "TAILWIND" } },
-      { "ROTOM", 32, ability = "LEVITATE", nature = "TIMID", item = "SITRUS_BERRY", moves = { "SHOCK_WAVE", "HEX", "CONFUSE_RAY", "THUNDER_WAVE" } },
-      { "PARASECT", 32, ability = "DRY_SKIN", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "SPORE", "X_SCISSOR", "LEECH_LIFE", "PROTECT" } },
+      { "ROTOM", 32, ability = "LEVITATE", nature = "TIMID", moves = { "SHOCK_WAVE", "HEX", "CONFUSE_RAY", "THUNDER_WAVE" } },
+      { "PARASECT", 32, ability = "DRY_SKIN", nature = "ADAMANT", moves = { "SPORE", "X_SCISSOR", "LEECH_LIFE", "PROTECT" } },
     } },
     JACKSON_3 = { partner = "RM3_R119_RAN", party = {
       { "MANTINE", 38, ability = "WATER_ABSORB", nature = "CALM", item = "SITRUS_BERRY", moves = { "WATER_PULSE", "AIR_SLASH", "WIDE_GUARD", "TAILWIND" } },
-      { "ROTOM", 37, ability = "LEVITATE", nature = "TIMID", item = "SITRUS_BERRY", moves = { "SHOCK_WAVE", "HEX", "CONFUSE_RAY", "THUNDER_WAVE" } },
-      { "PARASECT", 37, ability = "DRY_SKIN", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "SPORE", "X_SCISSOR", "LEECH_LIFE", "PROTECT" } },
+      { "ROTOM", 37, ability = "LEVITATE", nature = "TIMID", moves = { "SHOCK_WAVE", "HEX", "CONFUSE_RAY", "THUNDER_WAVE" } },
+      { "PARASECT", 37, ability = "DRY_SKIN", nature = "ADAMANT", moves = { "SPORE", "X_SCISSOR", "LEECH_LIFE", "PROTECT" } },
     } },
     JACKSON_4 = { partner = "RM4_R119_RAN", party = {
       { "MANTINE", 43, ability = "WATER_ABSORB", nature = "CALM", item = "SITRUS_BERRY", moves = { "WATER_PULSE", "AIR_SLASH", "WIDE_GUARD", "TAILWIND" } },
-      { "ROTOM", 42, ability = "LEVITATE", nature = "TIMID", item = "SITRUS_BERRY", moves = { "SHOCK_WAVE", "HEX", "CONFUSE_RAY", "THUNDER_WAVE" } },
-      { "PARASECT", 42, ability = "DRY_SKIN", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "SPORE", "X_SCISSOR", "LEECH_LIFE", "PROTECT" } },
+      { "ROTOM", 42, ability = "LEVITATE", nature = "TIMID", moves = { "SHOCK_WAVE", "HEX", "CONFUSE_RAY", "THUNDER_WAVE" } },
+      { "PARASECT", 42, ability = "DRY_SKIN", nature = "ADAMANT", moves = { "SPORE", "X_SCISSOR", "LEECH_LIFE", "PROTECT" } },
     } },
     JACKSON_5 = { partner = "RM5_R119_RAN", party = {
       { "MANTINE", 48, ability = "WATER_ABSORB", nature = "CALM", item = "SITRUS_BERRY", moves = { "WATER_PULSE", "AIR_SLASH", "WIDE_GUARD", "TAILWIND" } },
-      { "ROTOM", 47, ability = "LEVITATE", nature = "TIMID", item = "SITRUS_BERRY", moves = { "SHOCK_WAVE", "HEX", "CONFUSE_RAY", "THUNDER_WAVE" } },
-      { "PARASECT", 47, ability = "DRY_SKIN", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "SPORE", "X_SCISSOR", "LEECH_LIFE", "PROTECT" } },
+      { "ROTOM", 47, ability = "LEVITATE", nature = "TIMID", moves = { "SHOCK_WAVE", "HEX", "CONFUSE_RAY", "THUNDER_WAVE" } },
+      { "PARASECT", 47, ability = "DRY_SKIN", nature = "ADAMANT", moves = { "SPORE", "X_SCISSOR", "LEECH_LIFE", "PROTECT" } },
     } },
     JAMES_2 = { partner = "RM2_PW_COLE", party = {
-      { "PARASECT", 33, ability = "EFFECT_SPORE", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "STUN_SPORE", "X_SCISSOR", "GIGA_DRAIN", "SLASH" } },
+      { "PARASECT", 33, ability = "EFFECT_SPORE", nature = "ADAMANT", moves = { "STUN_SPORE", "X_SCISSOR", "GIGA_DRAIN", "SLASH" } },
       { "BRELOOM", 33, ability = "EFFECT_SPORE", nature = "BOLD", item = "SITRUS_BERRY", moves = { "STUN_SPORE", "LEECH_SEED", "GIGA_DRAIN", "HEADBUTT" } },
     } },
     JAMES_3 = { partner = "RM3_PW_COLE", party = {
-      { "PARASECT", 38, ability = "EFFECT_SPORE", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "STUN_SPORE", "LEECH_LIFE", "GIGA_DRAIN", "SLASH" } },
+      { "PARASECT", 38, ability = "EFFECT_SPORE", nature = "ADAMANT", moves = { "STUN_SPORE", "LEECH_LIFE", "GIGA_DRAIN", "SLASH" } },
       { "BRELOOM", 38, ability = "EFFECT_SPORE", nature = "BOLD", item = "SITRUS_BERRY", moves = { "STUN_SPORE", "LEECH_SEED", "SEED_BOMB", "HEADBUTT" } },
     } },
     JAMES_4 = { partner = "RM4_PW_COLE", party = {
-      { "PARASECT", 43, ability = "EFFECT_SPORE", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "STUN_SPORE", "LEECH_LIFE", "GIGA_DRAIN", "SLASH" } },
+      { "PARASECT", 43, ability = "EFFECT_SPORE", nature = "ADAMANT", moves = { "STUN_SPORE", "LEECH_LIFE", "GIGA_DRAIN", "SLASH" } },
       { "BRELOOM", 43, ability = "EFFECT_SPORE", nature = "BOLD", item = "SITRUS_BERRY", moves = { "STUN_SPORE", "LEECH_SEED", "SEED_BOMB", "HEADBUTT" } },
     } },
     JAMES_5 = { partner = "RM5_PW_COLE", party = {
-      { "PARASECT", 48, ability = "EFFECT_SPORE", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "STUN_SPORE", "LEECH_LIFE", "GIGA_DRAIN", "SLASH" } },
+      { "PARASECT", 48, ability = "EFFECT_SPORE", nature = "ADAMANT", moves = { "STUN_SPORE", "LEECH_LIFE", "GIGA_DRAIN", "SLASH" } },
       { "BRELOOM", 48, ability = "EFFECT_SPORE", nature = "BOLD", item = "SITRUS_BERRY", moves = { "STUN_SPORE", "LEECH_SEED", "SEED_BOMB", "HEADBUTT" } },
     } },
     JEFFREY_2 = { partner = "RM2_R120_GUS", party = {
-      { "DURANT", 33, ability = "HUSTLE", nature = "JOLLY", item = "SITRUS_BERRY", moves = { "X_SCISSOR", "IRON_HEAD", "CRUNCH", "AGILITY" } },
+      { "DURANT", 33, ability = "HUSTLE", nature = "JOLLY", moves = { "X_SCISSOR", "IRON_HEAD", "CRUNCH", "AGILITY" } },
       { "VESPIQUEN", 34, ability = "PRESSURE", nature = "IMPISH", item = "SITRUS_BERRY", moves = { "POWER_GEM", "FELL_STINGER", "BUG_BUZZ", "AIR_SLASH" } },
       { "MASQUERAIN", 33, ability = "INTIMIDATE", nature = "MODEST", item = "SILVER_POWDER", moves = { "AIR_SLASH", "BUG_BUZZ", "STUN_SPORE", "TAILWIND" } },
     } },
     JEFFREY_3 = { partner = "RM3_R120_GUS", party = {
-      { "DURANT", 37, ability = "HUSTLE", nature = "JOLLY", item = "SITRUS_BERRY", moves = { "X_SCISSOR", "IRON_HEAD", "CRUNCH", "AGILITY" } },
+      { "DURANT", 37, ability = "HUSTLE", nature = "JOLLY", moves = { "X_SCISSOR", "IRON_HEAD", "CRUNCH", "AGILITY" } },
       { "VESPIQUEN", 38, ability = "PRESSURE", nature = "IMPISH", item = "SITRUS_BERRY", moves = { "POWER_GEM", "FELL_STINGER", "BUG_BUZZ", "AIR_SLASH" } },
       { "MASQUERAIN", 37, ability = "INTIMIDATE", nature = "MODEST", item = "SILVER_POWDER", moves = { "AIR_SLASH", "BUG_BUZZ", "STUN_SPORE", "TAILWIND" } },
     } },
     JEFFREY_4 = { partner = "RM4_R120_GUS", party = {
-      { "DURANT", 42, ability = "HUSTLE", nature = "JOLLY", item = "SITRUS_BERRY", moves = { "X_SCISSOR", "IRON_HEAD", "CRUNCH", "AGILITY" } },
+      { "DURANT", 42, ability = "HUSTLE", nature = "JOLLY", moves = { "X_SCISSOR", "IRON_HEAD", "CRUNCH", "AGILITY" } },
       { "VESPIQUEN", 43, ability = "PRESSURE", nature = "IMPISH", item = "SITRUS_BERRY", moves = { "POWER_GEM", "FELL_STINGER", "BUG_BUZZ", "AIR_SLASH" } },
       { "MASQUERAIN", 42, ability = "INTIMIDATE", nature = "MODEST", item = "SILVER_POWDER", moves = { "AIR_SLASH", "BUG_BUZZ", "STUN_SPORE", "TAILWIND" } },
     } },
     JEFFREY_5 = { partner = "RM5_R120_GUS", party = {
-      { "DURANT", 47, ability = "HUSTLE", nature = "JOLLY", item = "SITRUS_BERRY", moves = { "X_SCISSOR", "IRON_HEAD", "CRUNCH", "AGILITY" } },
+      { "DURANT", 47, ability = "HUSTLE", nature = "JOLLY", moves = { "X_SCISSOR", "IRON_HEAD", "CRUNCH", "AGILITY" } },
       { "VESPIQUEN", 48, ability = "PRESSURE", nature = "IMPISH", item = "SITRUS_BERRY", moves = { "POWER_GEM", "FELL_STINGER", "BUG_BUZZ", "AIR_SLASH" } },
       { "MASQUERAIN", 47, ability = "INTIMIDATE", nature = "MODEST", item = "SILVER_POWDER", moves = { "AIR_SLASH", "BUG_BUZZ", "STUN_SPORE", "TAILWIND" } },
     } },
@@ -753,26 +753,26 @@ return {
       { "KECLEON", 47, ability = "PROTEAN", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "SHADOW_SNEAK", "SUCKER_PUNCH", "ANCIENT_POWER", "FURY_SWIPES" } },
     } },
     JOHN_AND_JAY_2 = { party = {
-      { "HARIYAMA", 49, ability = "THICK_FAT", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "FAKE_OUT", "CLOSE_COMBAT", "KNOCK_OFF", "WIDE_GUARD" } },
-      { "MEDICHAM", 49, ability = "PURE_POWER", nature = "JOLLY", item = "SITRUS_BERRY", moves = { "FAKE_OUT", "ZEN_HEADBUTT", "DRAIN_PUNCH", "BULLET_PUNCH" } },
+      { "HARIYAMA", 49, ability = "THICK_FAT", nature = "ADAMANT", moves = { "FAKE_OUT", "CLOSE_COMBAT", "KNOCK_OFF", "WIDE_GUARD" } },
+      { "MEDICHAM", 49, ability = "PURE_POWER", nature = "JOLLY", moves = { "FAKE_OUT", "ZEN_HEADBUTT", "DRAIN_PUNCH", "BULLET_PUNCH" } },
       { "MACHAMP", 49, ability = "NO_GUARD", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "DYNAMIC_PUNCH", "KNOCK_OFF", "ROCK_SLIDE", "WIDE_GUARD" } },
       { "LUCARIO", 49, ability = "INNER_FOCUS", nature = "ADAMANT", item = "BLACK_BELT", moves = { "CLOSE_COMBAT", "BULLET_PUNCH", "CRUNCH", "DETECT" } },
     } },
     JOHN_AND_JAY_3 = { party = {
-      { "HARIYAMA", 51, ability = "THICK_FAT", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "FAKE_OUT", "CLOSE_COMBAT", "KNOCK_OFF", "WIDE_GUARD" } },
-      { "MEDICHAM", 51, ability = "PURE_POWER", nature = "JOLLY", item = "SITRUS_BERRY", moves = { "FAKE_OUT", "ZEN_HEADBUTT", "DRAIN_PUNCH", "BULLET_PUNCH" } },
+      { "HARIYAMA", 51, ability = "THICK_FAT", nature = "ADAMANT", moves = { "FAKE_OUT", "CLOSE_COMBAT", "KNOCK_OFF", "WIDE_GUARD" } },
+      { "MEDICHAM", 51, ability = "PURE_POWER", nature = "JOLLY", moves = { "FAKE_OUT", "ZEN_HEADBUTT", "DRAIN_PUNCH", "BULLET_PUNCH" } },
       { "MACHAMP", 51, ability = "NO_GUARD", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "DYNAMIC_PUNCH", "KNOCK_OFF", "ROCK_SLIDE", "WIDE_GUARD" } },
       { "LUCARIO", 51, ability = "INNER_FOCUS", nature = "ADAMANT", item = "BLACK_BELT", moves = { "CLOSE_COMBAT", "BULLET_PUNCH", "CRUNCH", "DETECT" } },
     } },
     JOHN_AND_JAY_4 = { party = {
-      { "HARIYAMA", 53, ability = "THICK_FAT", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "FAKE_OUT", "CLOSE_COMBAT", "KNOCK_OFF", "WIDE_GUARD" } },
-      { "MEDICHAM", 53, ability = "PURE_POWER", nature = "JOLLY", item = "SITRUS_BERRY", moves = { "FAKE_OUT", "ZEN_HEADBUTT", "DRAIN_PUNCH", "BULLET_PUNCH" } },
+      { "HARIYAMA", 53, ability = "THICK_FAT", nature = "ADAMANT", moves = { "FAKE_OUT", "CLOSE_COMBAT", "KNOCK_OFF", "WIDE_GUARD" } },
+      { "MEDICHAM", 53, ability = "PURE_POWER", nature = "JOLLY", moves = { "FAKE_OUT", "ZEN_HEADBUTT", "DRAIN_PUNCH", "BULLET_PUNCH" } },
       { "MACHAMP", 53, ability = "NO_GUARD", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "DYNAMIC_PUNCH", "KNOCK_OFF", "ROCK_SLIDE", "WIDE_GUARD" } },
       { "LUCARIO", 53, ability = "INNER_FOCUS", nature = "ADAMANT", item = "BLACK_BELT", moves = { "CLOSE_COMBAT", "BULLET_PUNCH", "CRUNCH", "DETECT" } },
     } },
     JOHN_AND_JAY_5 = { party = {
-      { "HARIYAMA", 55, ability = "THICK_FAT", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "FAKE_OUT", "CLOSE_COMBAT", "KNOCK_OFF", "WIDE_GUARD" } },
-      { "MEDICHAM", 55, ability = "PURE_POWER", nature = "JOLLY", item = "SITRUS_BERRY", moves = { "FAKE_OUT", "ZEN_HEADBUTT", "DRAIN_PUNCH", "BULLET_PUNCH" } },
+      { "HARIYAMA", 55, ability = "THICK_FAT", nature = "ADAMANT", moves = { "FAKE_OUT", "CLOSE_COMBAT", "KNOCK_OFF", "WIDE_GUARD" } },
+      { "MEDICHAM", 55, ability = "PURE_POWER", nature = "JOLLY", moves = { "FAKE_OUT", "ZEN_HEADBUTT", "DRAIN_PUNCH", "BULLET_PUNCH" } },
       { "MACHAMP", 55, ability = "NO_GUARD", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "DYNAMIC_PUNCH", "KNOCK_OFF", "ROCK_SLIDE", "WIDE_GUARD" } },
       { "LUCARIO", 55, ability = "INNER_FOCUS", nature = "ADAMANT", item = "BLACK_BELT", moves = { "CLOSE_COMBAT", "BULLET_PUNCH", "CRUNCH", "DETECT" } },
     } },
@@ -841,36 +841,36 @@ return {
       { "ZEBSTRIKA", 49, ability = "LIGHTNING_ROD", nature = "JOLLY", item = "MAGNET", moves = { "WILD_CHARGE", "FLAME_CHARGE", "STOMP", "THUNDER_WAVE" } },
     } },
     KIRA_AND_DAN_2 = { party = {
-      { "VOLBEAT", 33, ability = "PRANKSTER", nature = "IMPISH", item = "SITRUS_BERRY", moves = { "STRUGGLE_BUG", "TAIL_GLOW", "CONFUSE_RAY", "MOONLIGHT" } },
+      { "VOLBEAT", 33, ability = "PRANKSTER", nature = "IMPISH", moves = { "STRUGGLE_BUG", "TAIL_GLOW", "CONFUSE_RAY", "MOONLIGHT" } },
       { "ILLUMISE", 33, ability = "PRANKSTER", nature = "BOLD", item = "SITRUS_BERRY", moves = { "STRUGGLE_BUG", "PROTECT", "MOONLIGHT", "PLAY_NICE" } },
     } },
     KIRA_AND_DAN_3 = { party = {
-      { "VOLBEAT", 38, ability = "PRANKSTER", nature = "IMPISH", item = "SITRUS_BERRY", moves = { "STRUGGLE_BUG", "TAIL_GLOW", "CONFUSE_RAY", "MOONLIGHT" } },
+      { "VOLBEAT", 38, ability = "PRANKSTER", nature = "IMPISH", moves = { "STRUGGLE_BUG", "TAIL_GLOW", "CONFUSE_RAY", "MOONLIGHT" } },
       { "ILLUMISE", 38, ability = "PRANKSTER", nature = "BOLD", item = "SITRUS_BERRY", moves = { "STRUGGLE_BUG", "PROTECT", "MOONLIGHT", "PLAY_NICE" } },
     } },
     KIRA_AND_DAN_4 = { party = {
-      { "VOLBEAT", 43, ability = "PRANKSTER", nature = "IMPISH", item = "SITRUS_BERRY", moves = { "STRUGGLE_BUG", "TAIL_GLOW", "CONFUSE_RAY", "MOONLIGHT" } },
+      { "VOLBEAT", 43, ability = "PRANKSTER", nature = "IMPISH", moves = { "STRUGGLE_BUG", "TAIL_GLOW", "CONFUSE_RAY", "MOONLIGHT" } },
       { "ILLUMISE", 43, ability = "PRANKSTER", nature = "BOLD", item = "SITRUS_BERRY", moves = { "STRUGGLE_BUG", "PROTECT", "MOONLIGHT", "PLAY_NICE" } },
     } },
     KIRA_AND_DAN_5 = { party = {
-      { "VOLBEAT", 48, ability = "PRANKSTER", nature = "IMPISH", item = "SITRUS_BERRY", moves = { "STRUGGLE_BUG", "TAIL_GLOW", "CONFUSE_RAY", "MOONLIGHT" } },
+      { "VOLBEAT", 48, ability = "PRANKSTER", nature = "IMPISH", moves = { "STRUGGLE_BUG", "TAIL_GLOW", "CONFUSE_RAY", "MOONLIGHT" } },
       { "ILLUMISE", 48, ability = "PRANKSTER", nature = "BOLD", item = "SITRUS_BERRY", moves = { "STRUGGLE_BUG", "PROTECT", "MOONLIGHT", "PLAY_NICE" } },
     } },
     KOJI_2 = { partner = "RM2_R126_KEN", party = {
       { "HARIYAMA", 44, ability = "THICK_FAT", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "FAKE_OUT", "CLOSE_COMBAT", "KNOCK_OFF", "WIDE_GUARD" } },
-      { "AGGRON", 43, ability = "STURDY", nature = "IMPISH", item = "SITRUS_BERRY", moves = { "IRON_HEAD", "ROCK_SLIDE", "HEADBUTT", "PROTECT" } },
+      { "AGGRON", 43, ability = "STURDY", nature = "IMPISH", moves = { "IRON_HEAD", "ROCK_SLIDE", "HEADBUTT", "PROTECT" } },
     } },
     KOJI_3 = { partner = "RM3_R126_KEN", party = {
       { "HARIYAMA", 46, ability = "THICK_FAT", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "FAKE_OUT", "CLOSE_COMBAT", "KNOCK_OFF", "WIDE_GUARD" } },
-      { "AGGRON", 45, ability = "STURDY", nature = "IMPISH", item = "SITRUS_BERRY", moves = { "IRON_HEAD", "ROCK_SLIDE", "HEADBUTT", "PROTECT" } },
+      { "AGGRON", 45, ability = "STURDY", nature = "IMPISH", moves = { "IRON_HEAD", "ROCK_SLIDE", "HEADBUTT", "PROTECT" } },
     } },
     KOJI_4 = { partner = "RM4_R126_KEN", party = {
       { "HARIYAMA", 48, ability = "THICK_FAT", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "FAKE_OUT", "CLOSE_COMBAT", "KNOCK_OFF", "WIDE_GUARD" } },
-      { "AGGRON", 47, ability = "STURDY", nature = "IMPISH", item = "SITRUS_BERRY", moves = { "IRON_HEAD", "ROCK_SLIDE", "HEADBUTT", "PROTECT" } },
+      { "AGGRON", 47, ability = "STURDY", nature = "IMPISH", moves = { "IRON_HEAD", "ROCK_SLIDE", "HEADBUTT", "PROTECT" } },
     } },
     KOJI_5 = { partner = "RM5_R126_KEN", party = {
       { "HARIYAMA", 50, ability = "THICK_FAT", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "FAKE_OUT", "CLOSE_COMBAT", "KNOCK_OFF", "WIDE_GUARD" } },
-      { "AGGRON", 49, ability = "STURDY", nature = "IMPISH", item = "SITRUS_BERRY", moves = { "IRON_HEAD", "ROCK_SLIDE", "HEADBUTT", "PROTECT" } },
+      { "AGGRON", 49, ability = "STURDY", nature = "IMPISH", moves = { "IRON_HEAD", "ROCK_SLIDE", "HEADBUTT", "PROTECT" } },
     } },
     LAO_2 = { partner = "RM2_R113_ZEN", party = {
       { "FROGADIER", 33, ability = "PROTEAN", nature = "TIMID", item = "MYSTIC_WATER", moves = { "WATER_PULSE", "QUICK_ATTACK", "PROTECT", "ROUND" } },
@@ -889,84 +889,84 @@ return {
       { "WEEZING", 47, ability = "LEVITATE", nature = "BOLD", item = "SITRUS_BERRY", moves = { "SLUDGE_BOMB", "SLUDGE", "PROTECT", "HAZE" } },
     } },
     LILA_AND_ROY_2 = { party = {
-      { "GASTRODON", 41, ability = "STORM_DRAIN", nature = "BOLD", item = "SITRUS_BERRY", moves = { "EARTH_POWER", "SCALD", "RECOVER", "ICY_WIND" } },
+      { "GASTRODON", 41, ability = "STORM_DRAIN", nature = "BOLD", moves = { "EARTH_POWER", "SCALD", "RECOVER", "ICY_WIND" } },
       { "LANTURN", 41, ability = "VOLT_ABSORB", nature = "MODEST", item = "SITRUS_BERRY", moves = { "DISCHARGE", "SURF", "CONFUSE_RAY", "THUNDER_WAVE" } },
     } },
     LILA_AND_ROY_3 = { party = {
-      { "GASTRODON", 43, ability = "STORM_DRAIN", nature = "BOLD", item = "SITRUS_BERRY", moves = { "EARTH_POWER", "SCALD", "RECOVER", "ICY_WIND" } },
+      { "GASTRODON", 43, ability = "STORM_DRAIN", nature = "BOLD", moves = { "EARTH_POWER", "SCALD", "RECOVER", "ICY_WIND" } },
       { "LANTURN", 43, ability = "VOLT_ABSORB", nature = "MODEST", item = "SITRUS_BERRY", moves = { "DISCHARGE", "SURF", "CONFUSE_RAY", "THUNDER_WAVE" } },
     } },
     LILA_AND_ROY_4 = { party = {
-      { "GASTRODON", 45, ability = "STORM_DRAIN", nature = "BOLD", item = "SITRUS_BERRY", moves = { "EARTH_POWER", "SCALD", "RECOVER", "ICY_WIND" } },
+      { "GASTRODON", 45, ability = "STORM_DRAIN", nature = "BOLD", moves = { "EARTH_POWER", "SCALD", "RECOVER", "ICY_WIND" } },
       { "LANTURN", 45, ability = "VOLT_ABSORB", nature = "MODEST", item = "SITRUS_BERRY", moves = { "DISCHARGE", "SURF", "CONFUSE_RAY", "THUNDER_WAVE" } },
     } },
     LILA_AND_ROY_5 = { party = {
-      { "GASTRODON", 48, ability = "STORM_DRAIN", nature = "BOLD", item = "SITRUS_BERRY", moves = { "EARTH_POWER", "SCALD", "RECOVER", "ICY_WIND" } },
+      { "GASTRODON", 48, ability = "STORM_DRAIN", nature = "BOLD", moves = { "EARTH_POWER", "SCALD", "RECOVER", "ICY_WIND" } },
       { "LANTURN", 48, ability = "VOLT_ABSORB", nature = "MODEST", item = "SITRUS_BERRY", moves = { "DISCHARGE", "SURF", "CONFUSE_RAY", "THUNDER_WAVE" } },
     } },
     LOLA_2 = { partner = "RM2_R109_KIM", party = {
       { "WAILMER", 33, ability = "OBLIVIOUS", nature = "MODEST", item = "SITRUS_BERRY", moves = { "BUBBLE_BEAM", "BRINE", "ROLLOUT", "ASTONISH" } },
-      { "LANTURN", 32, ability = "VOLT_ABSORB", nature = "MODEST", item = "SITRUS_BERRY", moves = { "ELECTRO_BALL", "WATER_PULSE", "THUNDER_WAVE", "CONFUSE_RAY" } },
+      { "LANTURN", 32, ability = "VOLT_ABSORB", nature = "MODEST", moves = { "ELECTRO_BALL", "WATER_PULSE", "THUNDER_WAVE", "CONFUSE_RAY" } },
     } },
     LOLA_3 = { partner = "RM3_R109_KIM", party = {
       { "WAILMER", 38, ability = "OBLIVIOUS", nature = "MODEST", item = "SITRUS_BERRY", moves = { "BUBBLE_BEAM", "BRINE", "ROLLOUT", "ASTONISH" } },
-      { "LANTURN", 37, ability = "VOLT_ABSORB", nature = "MODEST", item = "SITRUS_BERRY", moves = { "ELECTRO_BALL", "WATER_PULSE", "THUNDER_WAVE", "CONFUSE_RAY" } },
+      { "LANTURN", 37, ability = "VOLT_ABSORB", nature = "MODEST", moves = { "ELECTRO_BALL", "WATER_PULSE", "THUNDER_WAVE", "CONFUSE_RAY" } },
     } },
     LOLA_4 = { partner = "RM4_R109_KIM", party = {
       { "WAILORD", 43, ability = "GLUTTONY", nature = "MODEST", item = "SITRUS_BERRY", moves = { "BUBBLE_BEAM", "BRINE", "ROLLOUT", "ASTONISH" } },
-      { "LANTURN", 42, ability = "VOLT_ABSORB", nature = "MODEST", item = "SITRUS_BERRY", moves = { "ELECTRO_BALL", "WATER_PULSE", "THUNDER_WAVE", "CONFUSE_RAY" } },
+      { "LANTURN", 42, ability = "VOLT_ABSORB", nature = "MODEST", moves = { "ELECTRO_BALL", "WATER_PULSE", "THUNDER_WAVE", "CONFUSE_RAY" } },
     } },
     LOLA_5 = { partner = "RM5_R109_KIM", party = {
       { "WAILORD", 48, ability = "GLUTTONY", nature = "MODEST", item = "SITRUS_BERRY", moves = { "WATER_SPOUT", "BRINE", "ROLLOUT", "ASTONISH" } },
-      { "LANTURN", 47, ability = "VOLT_ABSORB", nature = "MODEST", item = "SITRUS_BERRY", moves = { "ELECTRO_BALL", "HYDRO_PUMP", "THUNDER_WAVE", "CONFUSE_RAY" } },
+      { "LANTURN", 47, ability = "VOLT_ABSORB", nature = "MODEST", moves = { "ELECTRO_BALL", "HYDRO_PUMP", "THUNDER_WAVE", "CONFUSE_RAY" } },
     } },
     LUCAS_2 = { partner = "RM2_R114_BOB", party = {
       { "MINIOR", 33, ability = "SHIELDS_DOWN", nature = "MODEST", item = "SITRUS_BERRY", moves = { "SWIFT", "ROCK_TOMB", "CONFUSE_RAY", "SELF_DESTRUCT" } },
-      { "FERROSEED", 32, ability = "IRON_BARBS", nature = "RELAXED", item = "SITRUS_BERRY", moves = { "FLASH_CANNON", "PIN_MISSILE", "LEECH_SEED", "PROTECT" } },
+      { "FERROSEED", 32, ability = "IRON_BARBS", nature = "RELAXED", moves = { "FLASH_CANNON", "PIN_MISSILE", "LEECH_SEED", "PROTECT" } },
     } },
     LYDIA_2 = { party = {
-      { "ELECTABUZZ", 33, ability = "STATIC", nature = "JOLLY", item = "SITRUS_BERRY", moves = { "DISCHARGE", "LOW_KICK", "QUICK_ATTACK", "THUNDER_WAVE" } },
-      { "MAGMAR", 33, ability = "FLAME_BODY", nature = "MODEST", item = "SITRUS_BERRY", moves = { "LAVA_PLUME", "CLEAR_SMOG", "FEINT_ATTACK", "PROTECT" } },
-      { "JYNX", 33, ability = "OBLIVIOUS", nature = "MODEST", item = "SITRUS_BERRY", moves = { "ICE_PUNCH", "HEART_STAMP", "SWEET_KISS", "SING" } },
+      { "ELECTABUZZ", 33, ability = "STATIC", nature = "JOLLY", moves = { "DISCHARGE", "LOW_KICK", "QUICK_ATTACK", "THUNDER_WAVE" } },
+      { "MAGMAR", 33, ability = "FLAME_BODY", nature = "MODEST", moves = { "LAVA_PLUME", "CLEAR_SMOG", "FEINT_ATTACK", "PROTECT" } },
+      { "JYNX", 33, ability = "OBLIVIOUS", nature = "MODEST", moves = { "ICE_PUNCH", "HEART_STAMP", "SWEET_KISS", "SING" } },
       { "DRAGONAIR", 33, ability = "SHED_SKIN", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "DRAGON_TAIL", "TWISTER", "THUNDER_WAVE", "AGILITY" } },
     } },
     LYDIA_3 = { party = {
-      { "ELECTIVIRE", 38, ability = "MOTOR_DRIVE", nature = "JOLLY", item = "SITRUS_BERRY", moves = { "DISCHARGE", "LOW_KICK", "QUICK_ATTACK", "THUNDER_WAVE" } },
-      { "MAGMORTAR", 38, ability = "FLAME_BODY", nature = "MODEST", item = "SITRUS_BERRY", moves = { "LAVA_PLUME", "CLEAR_SMOG", "DARK_PULSE", "PROTECT" } },
-      { "JYNX", 38, ability = "OBLIVIOUS", nature = "MODEST", item = "SITRUS_BERRY", moves = { "ICE_PUNCH", "PSYCHIC", "SWEET_KISS", "SING" } },
+      { "ELECTIVIRE", 38, ability = "MOTOR_DRIVE", nature = "JOLLY", moves = { "DISCHARGE", "LOW_KICK", "QUICK_ATTACK", "THUNDER_WAVE" } },
+      { "MAGMORTAR", 38, ability = "FLAME_BODY", nature = "MODEST", moves = { "LAVA_PLUME", "CLEAR_SMOG", "DARK_PULSE", "PROTECT" } },
+      { "JYNX", 38, ability = "OBLIVIOUS", nature = "MODEST", moves = { "ICE_PUNCH", "PSYCHIC", "SWEET_KISS", "SING" } },
       { "DRAGONAIR", 38, ability = "SHED_SKIN", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "DRAGON_TAIL", "TWISTER", "THUNDER_WAVE", "AGILITY" } },
     } },
     LYDIA_4 = { party = {
-      { "ELECTIVIRE", 43, ability = "MOTOR_DRIVE", nature = "JOLLY", item = "SITRUS_BERRY", moves = { "THUNDERBOLT", "LOW_KICK", "QUICK_ATTACK", "THUNDER_WAVE" } },
-      { "MAGMORTAR", 43, ability = "FLAME_BODY", nature = "MODEST", item = "SITRUS_BERRY", moves = { "FIRE_BLAST", "CLEAR_SMOG", "DARK_PULSE", "PROTECT" } },
-      { "JYNX", 43, ability = "OBLIVIOUS", nature = "MODEST", item = "SITRUS_BERRY", moves = { "ICE_PUNCH", "PSYCHIC", "SWEET_KISS", "SING" } },
+      { "ELECTIVIRE", 43, ability = "MOTOR_DRIVE", nature = "JOLLY", moves = { "THUNDERBOLT", "LOW_KICK", "QUICK_ATTACK", "THUNDER_WAVE" } },
+      { "MAGMORTAR", 43, ability = "FLAME_BODY", nature = "MODEST", moves = { "FIRE_BLAST", "CLEAR_SMOG", "DARK_PULSE", "PROTECT" } },
+      { "JYNX", 43, ability = "OBLIVIOUS", nature = "MODEST", moves = { "ICE_PUNCH", "PSYCHIC", "SWEET_KISS", "SING" } },
       { "DRAGONAIR", 43, ability = "SHED_SKIN", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "DRAGON_TAIL", "TWISTER", "THUNDER_WAVE", "AGILITY" } },
     } },
     LYDIA_5 = { party = {
-      { "ELECTIVIRE", 48, ability = "MOTOR_DRIVE", nature = "JOLLY", item = "SITRUS_BERRY", moves = { "THUNDERBOLT", "LOW_KICK", "QUICK_ATTACK", "THUNDER_WAVE" } },
-      { "MAGMORTAR", 48, ability = "FLAME_BODY", nature = "MODEST", item = "SITRUS_BERRY", moves = { "FIRE_BLAST", "CLEAR_SMOG", "DARK_PULSE", "PROTECT" } },
-      { "JYNX", 48, ability = "OBLIVIOUS", nature = "MODEST", item = "SITRUS_BERRY", moves = { "ICE_PUNCH", "PSYCHIC", "SWEET_KISS", "SING" } },
+      { "ELECTIVIRE", 48, ability = "MOTOR_DRIVE", nature = "JOLLY", moves = { "THUNDERBOLT", "LOW_KICK", "QUICK_ATTACK", "THUNDER_WAVE" } },
+      { "MAGMORTAR", 48, ability = "FLAME_BODY", nature = "MODEST", moves = { "FIRE_BLAST", "CLEAR_SMOG", "DARK_PULSE", "PROTECT" } },
+      { "JYNX", 48, ability = "OBLIVIOUS", nature = "MODEST", moves = { "ICE_PUNCH", "PSYCHIC", "SWEET_KISS", "SING" } },
       { "DRAGONAIR", 48, ability = "SHED_SKIN", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "DRAGON_TAIL", "TWISTER", "THUNDER_WAVE", "AGILITY" } },
     } },
     MADELINE_2 = { partner = "RM2_R113_UMA", party = {
       { "TROPIUS", 33, ability = "CHLOROPHYLL", nature = "MODEST", item = "SITRUS_BERRY", moves = { "LEAF_TORNADO", "AIR_CUTTER", "GROWTH", "PROTECT" } },
       { "CAMERUPT", 33, ability = "SOLID_ROCK", nature = "MODEST", item = "CHARCOAL", moves = { "FLAME_BURST", "LAVA_PLUME", "AMNESIA", "EARTH_POWER" } },
-      { "SEALEO", 32, ability = "THICK_FAT", nature = "IMPISH", item = "SITRUS_BERRY", moves = { "ICE_BALL", "DEFENSE_CURL", "BRINE", "ENCORE" } },
+      { "SEALEO", 32, ability = "THICK_FAT", nature = "IMPISH", moves = { "ICE_BALL", "DEFENSE_CURL", "BRINE", "ENCORE" } },
     } },
     MADELINE_3 = { partner = "RM3_R113_UMA", party = {
       { "TROPIUS", 38, ability = "CHLOROPHYLL", nature = "MODEST", item = "SITRUS_BERRY", moves = { "LEAF_TORNADO", "AIR_SLASH", "GROWTH", "PROTECT" } },
       { "CAMERUPT", 38, ability = "SOLID_ROCK", nature = "MODEST", item = "CHARCOAL", moves = { "FLAME_BURST", "LAVA_PLUME", "AMNESIA", "EARTH_POWER" } },
-      { "SEALEO", 37, ability = "THICK_FAT", nature = "IMPISH", item = "SITRUS_BERRY", moves = { "ICE_BALL", "DEFENSE_CURL", "BRINE", "ENCORE" } },
+      { "SEALEO", 37, ability = "THICK_FAT", nature = "IMPISH", moves = { "ICE_BALL", "DEFENSE_CURL", "BRINE", "ENCORE" } },
     } },
     MADELINE_4 = { partner = "RM4_R113_UMA", party = {
       { "TROPIUS", 43, ability = "CHLOROPHYLL", nature = "MODEST", item = "SITRUS_BERRY", moves = { "LEAF_TORNADO", "AIR_SLASH", "GROWTH", "PROTECT" } },
       { "CAMERUPT", 43, ability = "SOLID_ROCK", nature = "MODEST", item = "CHARCOAL", moves = { "FLAME_BURST", "FLAMETHROWER", "AMNESIA", "EARTHQUAKE" } },
-      { "SEALEO", 42, ability = "THICK_FAT", nature = "IMPISH", item = "SITRUS_BERRY", moves = { "ICE_BALL", "DEFENSE_CURL", "BRINE", "ENCORE" } },
+      { "SEALEO", 42, ability = "THICK_FAT", nature = "IMPISH", moves = { "ICE_BALL", "DEFENSE_CURL", "BRINE", "ENCORE" } },
     } },
     MADELINE_5 = { partner = "RM5_R113_UMA", party = {
       { "TROPIUS", 48, ability = "CHLOROPHYLL", nature = "MODEST", item = "SITRUS_BERRY", moves = { "LEAF_TORNADO", "AIR_SLASH", "GROWTH", "PROTECT" } },
       { "CAMERUPT", 48, ability = "SOLID_ROCK", nature = "MODEST", item = "CHARCOAL", moves = { "FLAME_BURST", "FLAMETHROWER", "AMNESIA", "EARTHQUAKE" } },
-      { "WALREIN", 47, ability = "THICK_FAT", nature = "IMPISH", item = "SITRUS_BERRY", moves = { "ICE_BALL", "DEFENSE_CURL", "SURF", "ENCORE" } },
+      { "WALREIN", 47, ability = "THICK_FAT", nature = "IMPISH", moves = { "ICE_BALL", "DEFENSE_CURL", "SURF", "ENCORE" } },
     } },
     MARIA_2 = { partner = "RM2_R117_MAE", party = {
       { "UNFEZANT", 32, ability = "SUPER_LUCK", nature = "JOLLY", item = "SCOPE_LENS", moves = { "DRILL_PECK", "QUICK_ATTACK", "DETECT", "TAILWIND" } },
@@ -1181,19 +1181,19 @@ return {
       { "CARBINK", 48, ability = "STURDY", nature = "BOLD", item = "SITRUS_BERRY", moves = { "ROCK_TOMB", "REFLECT", "SMACK_DOWN", "STEALTH_ROCK" } },
     } },
     SHELBY_2 = { partner = "RM2_MC_RUE", party = {
-      { "MIENFOO", 33, ability = "REGENERATOR", nature = "JOLLY", item = "SITRUS_BERRY", moves = { "FAKE_OUT", "LOW_SWEEP", "U_TURN", "DETECT" } },
+      { "MIENFOO", 33, ability = "REGENERATOR", nature = "JOLLY", moves = { "FAKE_OUT", "LOW_SWEEP", "U_TURN", "DETECT" } },
       { "WOBBUFFET", 33, ability = "SHADOW_TAG", nature = "BOLD", item = "SITRUS_BERRY", moves = { "COUNTER", "MIRROR_COAT", "SAFEGUARD", "DESTINY_BOND" } },
     } },
     SHELBY_3 = { partner = "RM3_MC_RUE", party = {
-      { "MIENFOO", 38, ability = "REGENERATOR", nature = "JOLLY", item = "SITRUS_BERRY", moves = { "FAKE_OUT", "LOW_SWEEP", "U_TURN", "DETECT" } },
+      { "MIENFOO", 38, ability = "REGENERATOR", nature = "JOLLY", moves = { "FAKE_OUT", "LOW_SWEEP", "U_TURN", "DETECT" } },
       { "WOBBUFFET", 38, ability = "SHADOW_TAG", nature = "BOLD", item = "SITRUS_BERRY", moves = { "COUNTER", "MIRROR_COAT", "SAFEGUARD", "DESTINY_BOND" } },
     } },
     SHELBY_4 = { partner = "RM4_MC_RUE", party = {
-      { "MIENSHAO", 43, ability = "REGENERATOR", nature = "JOLLY", item = "SITRUS_BERRY", moves = { "FAKE_OUT", "LOW_SWEEP", "U_TURN", "DETECT" } },
+      { "MIENSHAO", 43, ability = "REGENERATOR", nature = "JOLLY", moves = { "FAKE_OUT", "LOW_SWEEP", "U_TURN", "DETECT" } },
       { "WOBBUFFET", 43, ability = "SHADOW_TAG", nature = "BOLD", item = "SITRUS_BERRY", moves = { "COUNTER", "MIRROR_COAT", "SAFEGUARD", "DESTINY_BOND" } },
     } },
     SHELBY_5 = { partner = "RM5_MC_RUE", party = {
-      { "MIENSHAO", 48, ability = "REGENERATOR", nature = "JOLLY", item = "SITRUS_BERRY", moves = { "FAKE_OUT", "LOW_SWEEP", "U_TURN", "DETECT" } },
+      { "MIENSHAO", 48, ability = "REGENERATOR", nature = "JOLLY", moves = { "FAKE_OUT", "LOW_SWEEP", "U_TURN", "DETECT" } },
       { "WOBBUFFET", 48, ability = "SHADOW_TAG", nature = "BOLD", item = "SITRUS_BERRY", moves = { "COUNTER", "MIRROR_COAT", "SAFEGUARD", "DESTINY_BOND" } },
     } },
     STEVE_2 = { partner = "RM2_R114_HAL", party = {
@@ -1261,40 +1261,40 @@ return {
       { "GARDEVOIR", 48, ability = "TRACE", nature = "MODEST", item = "TWISTED_SPOON", moves = { "DRAINING_KISS", "PSYCHIC", "DISARMING_VOICE", "HYPNOSIS" } },
     } },
     TIMOTHY_2 = { partner = "RM2_R115N_KEN", party = {
-      { "HARIYAMA", 33, ability = "THICK_FAT", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "FAKE_OUT", "VITAL_THROW", "KNOCK_OFF", "WHIRLWIND" } },
+      { "HARIYAMA", 33, ability = "THICK_FAT", nature = "ADAMANT", moves = { "FAKE_OUT", "VITAL_THROW", "KNOCK_OFF", "WHIRLWIND" } },
       { "DUSKULL", 33, ability = "LEVITATE", nature = "BOLD", item = "SITRUS_BERRY", moves = { "NIGHT_SHADE", "WILL_O_WISP", "CONFUSE_RAY", "DISABLE" } },
       { "KADABRA", 33, ability = "INNER_FOCUS", nature = "TIMID", item = "TWISTED_SPOON", moves = { "PSYCHO_CUT", "SHOCK_WAVE", "DISABLE", "REFLECT" } },
     } },
     TIMOTHY_3 = { partner = "RM3_R115N_KEN", party = {
-      { "HARIYAMA", 38, ability = "THICK_FAT", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "FAKE_OUT", "WAKE_UP_SLAP", "KNOCK_OFF", "WHIRLWIND" } },
+      { "HARIYAMA", 38, ability = "THICK_FAT", nature = "ADAMANT", moves = { "FAKE_OUT", "WAKE_UP_SLAP", "KNOCK_OFF", "WHIRLWIND" } },
       { "DUSKNOIR", 38, ability = "PRESSURE", nature = "BOLD", item = "SITRUS_BERRY", moves = { "NIGHT_SHADE", "WILL_O_WISP", "CONFUSE_RAY", "DISABLE" } },
       { "ALAKAZAM", 38, ability = "INNER_FOCUS", nature = "TIMID", item = "TWISTED_SPOON", moves = { "PSYCHIC", "SHOCK_WAVE", "DISABLE", "REFLECT" } },
     } },
     TIMOTHY_4 = { partner = "RM4_R115N_KEN", party = {
-      { "HARIYAMA", 43, ability = "THICK_FAT", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "FAKE_OUT", "CLOSE_COMBAT", "KNOCK_OFF", "WHIRLWIND" } },
+      { "HARIYAMA", 43, ability = "THICK_FAT", nature = "ADAMANT", moves = { "FAKE_OUT", "CLOSE_COMBAT", "KNOCK_OFF", "WHIRLWIND" } },
       { "DUSKNOIR", 43, ability = "PRESSURE", nature = "BOLD", item = "SITRUS_BERRY", moves = { "NIGHT_SHADE", "WILL_O_WISP", "CONFUSE_RAY", "DISABLE" } },
       { "ALAKAZAM", 43, ability = "INNER_FOCUS", nature = "TIMID", item = "TWISTED_SPOON", moves = { "PSYCHIC", "SHOCK_WAVE", "DISABLE", "REFLECT" } },
     } },
     TIMOTHY_5 = { partner = "RM5_R115N_KEN", party = {
-      { "HARIYAMA", 48, ability = "THICK_FAT", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "FAKE_OUT", "CLOSE_COMBAT", "KNOCK_OFF", "WHIRLWIND" } },
+      { "HARIYAMA", 48, ability = "THICK_FAT", nature = "ADAMANT", moves = { "FAKE_OUT", "CLOSE_COMBAT", "KNOCK_OFF", "WHIRLWIND" } },
       { "DUSKNOIR", 48, ability = "PRESSURE", nature = "BOLD", item = "SITRUS_BERRY", moves = { "NIGHT_SHADE", "WILL_O_WISP", "CONFUSE_RAY", "DISABLE" } },
       { "ALAKAZAM", 48, ability = "INNER_FOCUS", nature = "TIMID", item = "TWISTED_SPOON", moves = { "PSYCHIC", "SHOCK_WAVE", "DISABLE", "REFLECT" } },
     } },
     TONY_2 = { partner = "RM2_SEA_MAC", party = {
       { "SHARPEDO", 33, ability = "SPEED_BOOST", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "NIGHT_SLASH", "AQUA_JET", "ICE_FANG", "PROTECT" } },
-      { "GOLISOPOD", 32, ability = "EMERGENCY_EXIT", nature = "JOLLY", item = "SITRUS_BERRY", moves = { "STRUGGLE_BUG", "AQUA_JET", "SAND_ATTACK", "PROTECT" } },
+      { "GOLISOPOD", 32, ability = "EMERGENCY_EXIT", nature = "JOLLY", moves = { "STRUGGLE_BUG", "AQUA_JET", "SAND_ATTACK", "PROTECT" } },
     } },
     TONY_3 = { partner = "RM3_SEA_MAC", party = {
       { "SHARPEDO", 38, ability = "SPEED_BOOST", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "CRUNCH", "AQUA_JET", "ICE_FANG", "PROTECT" } },
-      { "GOLISOPOD", 37, ability = "EMERGENCY_EXIT", nature = "JOLLY", item = "SITRUS_BERRY", moves = { "STRUGGLE_BUG", "AQUA_JET", "SAND_ATTACK", "PROTECT" } },
+      { "GOLISOPOD", 37, ability = "EMERGENCY_EXIT", nature = "JOLLY", moves = { "STRUGGLE_BUG", "AQUA_JET", "SAND_ATTACK", "PROTECT" } },
     } },
     TONY_4 = { partner = "RM4_SEA_MAC", party = {
       { "SHARPEDO", 43, ability = "SPEED_BOOST", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "CRUNCH", "AQUA_JET", "ICE_FANG", "PROTECT" } },
-      { "GOLISOPOD", 42, ability = "EMERGENCY_EXIT", nature = "JOLLY", item = "SITRUS_BERRY", moves = { "STRUGGLE_BUG", "AQUA_JET", "SAND_ATTACK", "PROTECT" } },
+      { "GOLISOPOD", 42, ability = "EMERGENCY_EXIT", nature = "JOLLY", moves = { "STRUGGLE_BUG", "AQUA_JET", "SAND_ATTACK", "PROTECT" } },
     } },
     TONY_5 = { partner = "RM5_SEA_MAC", party = {
       { "SHARPEDO", 48, ability = "SPEED_BOOST", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "CRUNCH", "AQUA_JET", "ICE_FANG", "PROTECT" } },
-      { "GOLISOPOD", 47, ability = "EMERGENCY_EXIT", nature = "JOLLY", item = "SITRUS_BERRY", moves = { "STRUGGLE_BUG", "AQUA_JET", "SAND_ATTACK", "PROTECT" } },
+      { "GOLISOPOD", 47, ability = "EMERGENCY_EXIT", nature = "JOLLY", moves = { "STRUGGLE_BUG", "AQUA_JET", "SAND_ATTACK", "PROTECT" } },
     } },
     TRENT_2 = { partner = "RM2_R112_ROB", party = {
       { "GRAVELER_ALOLAN", 33, ability = "GALVANIZE", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "ROCK_TOMB", "THUNDER_PUNCH", "SMACK_DOWN", "ROCK_POLISH" } },
@@ -1313,23 +1313,23 @@ return {
       { "GOLEM", 48, ability = "STURDY", nature = "ADAMANT", item = "HARD_STONE", moves = { "ROCK_TOMB", "BULLDOZE", "ROLLOUT", "DEFENSE_CURL" } },
     } },
     VALERIE_2 = { partner = "RM2_PYRE_NIA", party = {
-      { "SABLEYE", 35, ability = "PRANKSTER", nature = "IMPISH", item = "SITRUS_BERRY", moves = { "FAKE_OUT", "WILL_O_WISP", "KNOCK_OFF", "RECOVER" } },
-      { "DUSKULL", 34, ability = "LEVITATE", nature = "BOLD", item = "SITRUS_BERRY", moves = { "NIGHT_SHADE", "WILL_O_WISP", "CONFUSE_RAY", "DISABLE" } },
+      { "SABLEYE", 35, ability = "PRANKSTER", nature = "IMPISH", moves = { "FAKE_OUT", "WILL_O_WISP", "KNOCK_OFF", "RECOVER" } },
+      { "DUSKULL", 34, ability = "LEVITATE", nature = "BOLD", moves = { "NIGHT_SHADE", "WILL_O_WISP", "CONFUSE_RAY", "DISABLE" } },
       { "SPIRITOMB", 35, ability = "INFILTRATOR", nature = "CALM", item = "SITRUS_BERRY", moves = { "HEX", "SUCKER_PUNCH", "CONFUSE_RAY", "NASTY_PLOT" } },
     } },
     VALERIE_3 = { partner = "RM3_PYRE_NIA", party = {
-      { "SABLEYE", 38, ability = "PRANKSTER", nature = "IMPISH", item = "SITRUS_BERRY", moves = { "FAKE_OUT", "WILL_O_WISP", "KNOCK_OFF", "RECOVER" } },
-      { "DUSKNOIR", 37, ability = "PRESSURE", nature = "BOLD", item = "SITRUS_BERRY", moves = { "NIGHT_SHADE", "WILL_O_WISP", "CONFUSE_RAY", "DISABLE" } },
+      { "SABLEYE", 38, ability = "PRANKSTER", nature = "IMPISH", moves = { "FAKE_OUT", "WILL_O_WISP", "KNOCK_OFF", "RECOVER" } },
+      { "DUSKNOIR", 37, ability = "PRESSURE", nature = "BOLD", moves = { "NIGHT_SHADE", "WILL_O_WISP", "CONFUSE_RAY", "DISABLE" } },
       { "SPIRITOMB", 38, ability = "INFILTRATOR", nature = "CALM", item = "SITRUS_BERRY", moves = { "HEX", "SUCKER_PUNCH", "CONFUSE_RAY", "NASTY_PLOT" } },
     } },
     VALERIE_4 = { partner = "RM4_PYRE_NIA", party = {
-      { "SABLEYE", 43, ability = "PRANKSTER", nature = "IMPISH", item = "SITRUS_BERRY", moves = { "FAKE_OUT", "WILL_O_WISP", "KNOCK_OFF", "RECOVER" } },
-      { "DUSKNOIR", 42, ability = "PRESSURE", nature = "BOLD", item = "SITRUS_BERRY", moves = { "NIGHT_SHADE", "WILL_O_WISP", "CONFUSE_RAY", "DISABLE" } },
+      { "SABLEYE", 43, ability = "PRANKSTER", nature = "IMPISH", moves = { "FAKE_OUT", "WILL_O_WISP", "KNOCK_OFF", "RECOVER" } },
+      { "DUSKNOIR", 42, ability = "PRESSURE", nature = "BOLD", moves = { "NIGHT_SHADE", "WILL_O_WISP", "CONFUSE_RAY", "DISABLE" } },
       { "SPIRITOMB", 43, ability = "INFILTRATOR", nature = "CALM", item = "SITRUS_BERRY", moves = { "HEX", "SUCKER_PUNCH", "CONFUSE_RAY", "NASTY_PLOT" } },
     } },
     VALERIE_5 = { partner = "RM5_PYRE_NIA", party = {
-      { "SABLEYE", 48, ability = "PRANKSTER", nature = "IMPISH", item = "SITRUS_BERRY", moves = { "FAKE_OUT", "WILL_O_WISP", "KNOCK_OFF", "RECOVER" } },
-      { "DUSKNOIR", 47, ability = "PRESSURE", nature = "BOLD", item = "SITRUS_BERRY", moves = { "NIGHT_SHADE", "WILL_O_WISP", "CONFUSE_RAY", "DISABLE" } },
+      { "SABLEYE", 48, ability = "PRANKSTER", nature = "IMPISH", moves = { "FAKE_OUT", "WILL_O_WISP", "KNOCK_OFF", "RECOVER" } },
+      { "DUSKNOIR", 47, ability = "PRESSURE", nature = "BOLD", moves = { "NIGHT_SHADE", "WILL_O_WISP", "CONFUSE_RAY", "DISABLE" } },
       { "SPIRITOMB", 48, ability = "INFILTRATOR", nature = "CALM", item = "SITRUS_BERRY", moves = { "HEX", "SUCKER_PUNCH", "CONFUSE_RAY", "NASTY_PLOT" } },
     } },
     WALLY_VR_2 = { tier = "leader", party = {
@@ -1419,22 +1419,22 @@ return {
     WILTON_2 = { partner = "RM2_R111N_ZED", party = {
       { "HONEDGE", 33, ability = "NO_GUARD", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "SHADOW_SNEAK", "FURY_CUTTER", "METAL_SOUND", "AERIAL_ACE" } },
       { "GABITE", 32, ability = "ROUGH_SKIN", nature = "JOLLY", item = "SOFT_SAND", moves = { "DRAGON_RAGE", "SAND_TOMB", "SLASH", "PROTECT" } },
-      { "DUOSION", 32, ability = "MAGIC_GUARD", nature = "MODEST", item = "SITRUS_BERRY", moves = { "PSYSHOCK", "RECOVER", "CHARM", "PROTECT" } },
+      { "DUOSION", 32, ability = "MAGIC_GUARD", nature = "MODEST", moves = { "PSYSHOCK", "RECOVER", "CHARM", "PROTECT" } },
     } },
     WILTON_3 = { partner = "RM3_R111N_ZED", party = {
       { "AEGISLASH", 38, ability = "STANCE_CHANGE", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "SHADOW_SNEAK", "FURY_CUTTER", "METAL_SOUND", "AERIAL_ACE" } },
       { "GABITE", 37, ability = "ROUGH_SKIN", nature = "JOLLY", item = "SOFT_SAND", moves = { "DRAGON_RAGE", "SAND_TOMB", "SLASH", "PROTECT" } },
-      { "DUOSION", 37, ability = "MAGIC_GUARD", nature = "MODEST", item = "SITRUS_BERRY", moves = { "PSYCHIC", "RECOVER", "CHARM", "PROTECT" } },
+      { "DUOSION", 37, ability = "MAGIC_GUARD", nature = "MODEST", moves = { "PSYCHIC", "RECOVER", "CHARM", "PROTECT" } },
     } },
     WILTON_4 = { partner = "RM4_R111N_ZED", party = {
       { "AEGISLASH", 43, ability = "STANCE_CHANGE", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "SHADOW_SNEAK", "FURY_CUTTER", "METAL_SOUND", "AERIAL_ACE" } },
       { "GABITE", 42, ability = "ROUGH_SKIN", nature = "JOLLY", item = "SOFT_SAND", moves = { "DRAGON_RAGE", "SAND_TOMB", "SLASH", "PROTECT" } },
-      { "REUNICLUS", 42, ability = "MAGIC_GUARD", nature = "MODEST", item = "SITRUS_BERRY", moves = { "PSYCHIC", "RECOVER", "CHARM", "PROTECT" } },
+      { "REUNICLUS", 42, ability = "MAGIC_GUARD", nature = "MODEST", moves = { "PSYCHIC", "RECOVER", "CHARM", "PROTECT" } },
     } },
     WILTON_5 = { partner = "RM5_R111N_ZED", party = {
       { "AEGISLASH", 48, ability = "STANCE_CHANGE", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "SHADOW_SNEAK", "FURY_CUTTER", "METAL_SOUND", "AERIAL_ACE" } },
       { "GABITE", 47, ability = "ROUGH_SKIN", nature = "JOLLY", item = "SOFT_SAND", moves = { "DRAGON_RAGE", "SAND_TOMB", "SLASH", "PROTECT" } },
-      { "REUNICLUS", 47, ability = "MAGIC_GUARD", nature = "MODEST", item = "SITRUS_BERRY", moves = { "PSYCHIC", "RECOVER", "CHARM", "PROTECT" } },
+      { "REUNICLUS", 47, ability = "MAGIC_GUARD", nature = "MODEST", moves = { "PSYCHIC", "RECOVER", "CHARM", "PROTECT" } },
     } },
     WINONA_2 = { tier = "leader", party = {
       { "WHIMSICOTT", 58, ability = "PRANKSTER", nature = "TIMID", item = "FOCUS_SASH", moves = { "TAILWIND", "ENERGY_BALL", "GIGA_DRAIN", "ENCORE" } },
@@ -1488,19 +1488,19 @@ return {
 
   partners = {
     RM2_CR_ADA = { like = "ABIGAIL_1", name = "ADA", defeat = "That was electrifying. For you.", party = {
-      { "MINUN", 33, ability = "MINUS", nature = "TIMID", item = "SITRUS_BERRY", moves = { "DISCHARGE", "NUZZLE", "HELPING_HAND", "THUNDER_WAVE" } },
+      { "MINUN", 33, ability = "MINUS", nature = "TIMID", moves = { "DISCHARGE", "NUZZLE", "HELPING_HAND", "THUNDER_WAVE" } },
       { "PLUSLE", 33, ability = "PLUS", nature = "TIMID", item = "SITRUS_BERRY", moves = { "DISCHARGE", "NUZZLE", "HELPING_HAND", "ENCORE" } },
     } },
     RM3_CR_ADA = { like = "ABIGAIL_1", name = "ADA", defeat = "That was electrifying. For you.", party = {
-      { "MINUN", 38, ability = "MINUS", nature = "TIMID", item = "SITRUS_BERRY", moves = { "DISCHARGE", "NUZZLE", "HELPING_HAND", "THUNDER_WAVE" } },
+      { "MINUN", 38, ability = "MINUS", nature = "TIMID", moves = { "DISCHARGE", "NUZZLE", "HELPING_HAND", "THUNDER_WAVE" } },
       { "PLUSLE", 38, ability = "PLUS", nature = "TIMID", item = "SITRUS_BERRY", moves = { "DISCHARGE", "NUZZLE", "HELPING_HAND", "ENCORE" } },
     } },
     RM4_CR_ADA = { like = "ABIGAIL_1", name = "ADA", defeat = "That was electrifying. For you.", party = {
-      { "MINUN", 43, ability = "MINUS", nature = "TIMID", item = "SITRUS_BERRY", moves = { "DISCHARGE", "NUZZLE", "HELPING_HAND", "THUNDER_WAVE" } },
+      { "MINUN", 43, ability = "MINUS", nature = "TIMID", moves = { "DISCHARGE", "NUZZLE", "HELPING_HAND", "THUNDER_WAVE" } },
       { "PLUSLE", 43, ability = "PLUS", nature = "TIMID", item = "SITRUS_BERRY", moves = { "DISCHARGE", "NUZZLE", "HELPING_HAND", "ENCORE" } },
     } },
     RM5_CR_ADA = { like = "ABIGAIL_1", name = "ADA", defeat = "That was electrifying. For you.", party = {
-      { "MINUN", 48, ability = "MINUS", nature = "TIMID", item = "SITRUS_BERRY", moves = { "DISCHARGE", "NUZZLE", "HELPING_HAND", "THUNDER_WAVE" } },
+      { "MINUN", 48, ability = "MINUS", nature = "TIMID", moves = { "DISCHARGE", "NUZZLE", "HELPING_HAND", "THUNDER_WAVE" } },
       { "PLUSLE", 48, ability = "PLUS", nature = "TIMID", item = "SITRUS_BERRY", moves = { "DISCHARGE", "NUZZLE", "HELPING_HAND", "ENCORE" } },
     } },
     RM2_SEA_OTT = { like = "ANDRES_1", name = "OTTO", defeat = "Fossilized in defeat.", party = {
@@ -1552,35 +1552,35 @@ return {
       { "LUDICOLO", 48, ability = "SWIFT_SWIM", nature = "CALM", item = "SITRUS_BERRY", moves = { "ENERGY_BALL", "BUBBLE_BEAM", "ASTONISH", "PROTECT" } },
     } },
     RM2_R111N_MAY = { like = "BROOKE_1", name = "MAYA", defeat = "We were so in sync, too.", party = {
-      { "STARYU", 32, ability = "NATURAL_CURE", nature = "TIMID", item = "SITRUS_BERRY", moves = { "BUBBLE_BEAM", "SWIFT", "RECOVER", "THUNDER_WAVE" } },
+      { "STARYU", 32, ability = "NATURAL_CURE", nature = "TIMID", moves = { "BUBBLE_BEAM", "SWIFT", "RECOVER", "THUNDER_WAVE" } },
       { "JUMPLUFF", 32, ability = "INFILTRATOR", nature = "TIMID", item = "SITRUS_BERRY", moves = { "BULLET_SEED", "STUN_SPORE", "LEECH_SEED", "FAIRY_WIND" } },
     } },
     RM3_R111N_MAY = { like = "BROOKE_1", name = "MAYA", defeat = "We were so in sync, too.", party = {
-      { "STARMIE", 37, ability = "NATURAL_CURE", nature = "TIMID", item = "SITRUS_BERRY", moves = { "BUBBLE_BEAM", "SWIFT", "RECOVER", "THUNDER_WAVE" } },
+      { "STARMIE", 37, ability = "NATURAL_CURE", nature = "TIMID", moves = { "BUBBLE_BEAM", "SWIFT", "RECOVER", "THUNDER_WAVE" } },
       { "JUMPLUFF", 37, ability = "INFILTRATOR", nature = "TIMID", item = "SITRUS_BERRY", moves = { "BULLET_SEED", "STUN_SPORE", "LEECH_SEED", "FAIRY_WIND" } },
     } },
     RM4_R111N_MAY = { like = "BROOKE_1", name = "MAYA", defeat = "We were so in sync, too.", party = {
-      { "STARMIE", 42, ability = "NATURAL_CURE", nature = "TIMID", item = "SITRUS_BERRY", moves = { "BUBBLE_BEAM", "SWIFT", "RECOVER", "THUNDER_WAVE" } },
+      { "STARMIE", 42, ability = "NATURAL_CURE", nature = "TIMID", moves = { "BUBBLE_BEAM", "SWIFT", "RECOVER", "THUNDER_WAVE" } },
       { "JUMPLUFF", 42, ability = "INFILTRATOR", nature = "TIMID", item = "SITRUS_BERRY", moves = { "BULLET_SEED", "STUN_SPORE", "LEECH_SEED", "FAIRY_WIND" } },
     } },
     RM5_R111N_MAY = { like = "BROOKE_1", name = "MAYA", defeat = "We were so in sync, too.", party = {
-      { "STARMIE", 47, ability = "NATURAL_CURE", nature = "TIMID", item = "SITRUS_BERRY", moves = { "SURF", "SWIFT", "RECOVER", "THUNDER_WAVE" } },
+      { "STARMIE", 47, ability = "NATURAL_CURE", nature = "TIMID", moves = { "SURF", "SWIFT", "RECOVER", "THUNDER_WAVE" } },
       { "JUMPLUFF", 47, ability = "INFILTRATOR", nature = "TIMID", item = "SITRUS_BERRY", moves = { "BULLET_SEED", "STUN_SPORE", "LEECH_SEED", "FAIRY_WIND" } },
     } },
     RM2_R102_DALE = { like = "CALVIN_1", name = "DALE", defeat = "Aw, we were a good team, too!", party = {
-      { "PALPITOAD", 32, ability = "HYDRATION", nature = "MODEST", item = "SITRUS_BERRY", moves = { "BUBBLE_BEAM", "ROUND", "ACID", "PROTECT" } },
+      { "PALPITOAD", 32, ability = "HYDRATION", nature = "MODEST", moves = { "BUBBLE_BEAM", "ROUND", "ACID", "PROTECT" } },
       { "GOTHORITA", 32, ability = "FRISK", nature = "MODEST", item = "SITRUS_BERRY", moves = { "PSYSHOCK", "POUND", "PROTECT", "PLAY_NICE" } },
     } },
     RM3_R102_DALE = { like = "CALVIN_1", name = "DALE", defeat = "Aw, we were a good team, too!", party = {
-      { "SEISMITOAD", 37, ability = "POISON_TOUCH", nature = "MODEST", item = "SITRUS_BERRY", moves = { "LIQUIDATION", "HYPER_VOICE", "ACID", "PROTECT" } },
+      { "SEISMITOAD", 37, ability = "POISON_TOUCH", nature = "MODEST", moves = { "LIQUIDATION", "HYPER_VOICE", "ACID", "PROTECT" } },
       { "GOTHORITA", 37, ability = "FRISK", nature = "MODEST", item = "SITRUS_BERRY", moves = { "PSYCHIC", "POUND", "PROTECT", "PLAY_NICE" } },
     } },
     RM4_R102_DALE = { like = "CALVIN_1", name = "DALE", defeat = "Aw, we were a good team, too!", party = {
-      { "SEISMITOAD", 42, ability = "POISON_TOUCH", nature = "MODEST", item = "SITRUS_BERRY", moves = { "MUDDY_WATER", "HYPER_VOICE", "ACID", "PROTECT" } },
+      { "SEISMITOAD", 42, ability = "POISON_TOUCH", nature = "MODEST", moves = { "MUDDY_WATER", "HYPER_VOICE", "ACID", "PROTECT" } },
       { "GOTHITELLE", 42, ability = "FRISK", nature = "MODEST", item = "SITRUS_BERRY", moves = { "PSYCHIC", "POUND", "PROTECT", "PLAY_NICE" } },
     } },
     RM5_R102_DALE = { like = "CALVIN_1", name = "DALE", defeat = "Aw, we were a good team, too!", party = {
-      { "SEISMITOAD", 47, ability = "POISON_TOUCH", nature = "MODEST", item = "SITRUS_BERRY", moves = { "MUDDY_WATER", "HYPER_VOICE", "ACID", "PROTECT" } },
+      { "SEISMITOAD", 47, ability = "POISON_TOUCH", nature = "MODEST", moves = { "MUDDY_WATER", "HYPER_VOICE", "ACID", "PROTECT" } },
       { "GOTHITELLE", 47, ability = "FRISK", nature = "MODEST", item = "SITRUS_BERRY", moves = { "PSYCHIC", "POUND", "PROTECT", "PLAY_NICE" } },
     } },
     RM2_R123_VIC = { like = "CAMERON_1", name = "VICKI", defeat = "My visions were wrong.", party = {
@@ -1600,19 +1600,19 @@ return {
       { "ALAKAZAM", 48, ability = "INNER_FOCUS", nature = "TIMID", item = "TWISTED_SPOON", moves = { "PSYCHIC", "SHOCK_WAVE", "DISABLE", "REFLECT" } },
     } },
     RM2_R119_WEN = { like = "CATHERINE_1", name = "WEN", defeat = "Nature wins. Wait, no, you do.", party = {
-      { "KECLEON", 32, ability = "PROTEAN", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "SHADOW_SNEAK", "FEINT_ATTACK", "ANCIENT_POWER", "FURY_SWIPES" } },
+      { "KECLEON", 32, ability = "PROTEAN", nature = "ADAMANT", moves = { "SHADOW_SNEAK", "FEINT_ATTACK", "ANCIENT_POWER", "FURY_SWIPES" } },
       { "GLOOM", 32, ability = "CHLOROPHYLL", nature = "MODEST", item = "SITRUS_BERRY", moves = { "GIGA_DRAIN", "ACID", "SLEEP_POWDER", "STUN_SPORE" } },
     } },
     RM3_R119_WEN = { like = "CATHERINE_1", name = "WEN", defeat = "Nature wins. Wait, no, you do.", party = {
-      { "KECLEON", 37, ability = "PROTEAN", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "SHADOW_SNEAK", "FEINT_ATTACK", "ANCIENT_POWER", "FURY_SWIPES" } },
+      { "KECLEON", 37, ability = "PROTEAN", nature = "ADAMANT", moves = { "SHADOW_SNEAK", "FEINT_ATTACK", "ANCIENT_POWER", "FURY_SWIPES" } },
       { "VILEPLUME", 37, ability = "CHLOROPHYLL", nature = "MODEST", item = "SITRUS_BERRY", moves = { "PETAL_BLIZZARD", "ACID", "SLEEP_POWDER", "STUN_SPORE" } },
     } },
     RM4_R119_WEN = { like = "CATHERINE_1", name = "WEN", defeat = "Nature wins. Wait, no, you do.", party = {
-      { "KECLEON", 42, ability = "PROTEAN", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "SHADOW_SNEAK", "FEINT_ATTACK", "ANCIENT_POWER", "FURY_SWIPES" } },
+      { "KECLEON", 42, ability = "PROTEAN", nature = "ADAMANT", moves = { "SHADOW_SNEAK", "FEINT_ATTACK", "ANCIENT_POWER", "FURY_SWIPES" } },
       { "VILEPLUME", 42, ability = "CHLOROPHYLL", nature = "MODEST", item = "SITRUS_BERRY", moves = { "PETAL_BLIZZARD", "ACID", "SLEEP_POWDER", "STUN_SPORE" } },
     } },
     RM5_R119_WEN = { like = "CATHERINE_1", name = "WEN", defeat = "Nature wins. Wait, no, you do.", party = {
-      { "KECLEON", 47, ability = "PROTEAN", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "SHADOW_SNEAK", "SUCKER_PUNCH", "ANCIENT_POWER", "FURY_SWIPES" } },
+      { "KECLEON", 47, ability = "PROTEAN", nature = "ADAMANT", moves = { "SHADOW_SNEAK", "SUCKER_PUNCH", "ANCIENT_POWER", "FURY_SWIPES" } },
       { "VILEPLUME", 47, ability = "CHLOROPHYLL", nature = "MODEST", item = "SITRUS_BERRY", moves = { "PETAL_BLIZZARD", "ACID", "SLEEP_POWDER", "STUN_SPORE" } },
     } },
     RM2_R104_PERCY = { like = "WINSTON_1", name = "PERCY", defeat = "Hmph. Money can't buy everything.", party = {
@@ -1636,19 +1636,19 @@ return {
       { "PIDGEOT", 49, ability = "BIG_PECKS", nature = "JOLLY", item = "SHARP_BEAK", moves = { "WING_ATTACK", "QUICK_ATTACK", "PROTECT", "TACKLE" } },
     } },
     RM2_SEA_BEN = { like = "CORY_1", name = "BEN", defeat = "Aye, we sank.", party = {
-      { "WAILMER", 32, ability = "OBLIVIOUS", nature = "MODEST", item = "SITRUS_BERRY", moves = { "WATER_PULSE", "BUBBLE_BEAM", "ROLLOUT", "ASTONISH" } },
+      { "WAILMER", 32, ability = "OBLIVIOUS", nature = "MODEST", moves = { "WATER_PULSE", "BUBBLE_BEAM", "ROLLOUT", "ASTONISH" } },
       { "PELIPPER", 32, ability = "KEEN_EYE", nature = "MODEST", item = "SITRUS_BERRY", moves = { "WATER_PULSE", "WING_ATTACK", "TAILWIND", "PROTECT" } },
     } },
     RM3_SEA_BEN = { like = "CORY_1", name = "BEN", defeat = "Aye, we sank.", party = {
-      { "WAILMER", 37, ability = "OBLIVIOUS", nature = "MODEST", item = "SITRUS_BERRY", moves = { "WATER_PULSE", "BUBBLE_BEAM", "ROLLOUT", "ASTONISH" } },
+      { "WAILMER", 37, ability = "OBLIVIOUS", nature = "MODEST", moves = { "WATER_PULSE", "BUBBLE_BEAM", "ROLLOUT", "ASTONISH" } },
       { "PELIPPER", 37, ability = "KEEN_EYE", nature = "MODEST", item = "SITRUS_BERRY", moves = { "WATER_PULSE", "WING_ATTACK", "TAILWIND", "PROTECT" } },
     } },
     RM4_SEA_BEN = { like = "CORY_1", name = "BEN", defeat = "Aye, we sank.", party = {
-      { "WAILORD", 42, ability = "GLUTTONY", nature = "MODEST", item = "SITRUS_BERRY", moves = { "WATER_PULSE", "BUBBLE_BEAM", "ROLLOUT", "ASTONISH" } },
+      { "WAILORD", 42, ability = "GLUTTONY", nature = "MODEST", moves = { "WATER_PULSE", "BUBBLE_BEAM", "ROLLOUT", "ASTONISH" } },
       { "PELIPPER", 42, ability = "KEEN_EYE", nature = "MODEST", item = "SITRUS_BERRY", moves = { "WATER_PULSE", "WING_ATTACK", "TAILWIND", "PROTECT" } },
     } },
     RM5_SEA_BEN = { like = "CORY_1", name = "BEN", defeat = "Aye, we sank.", party = {
-      { "WAILORD", 47, ability = "GLUTTONY", nature = "MODEST", item = "SITRUS_BERRY", moves = { "WATER_PULSE", "BUBBLE_BEAM", "ROLLOUT", "ASTONISH" } },
+      { "WAILORD", 47, ability = "GLUTTONY", nature = "MODEST", moves = { "WATER_PULSE", "BUBBLE_BEAM", "ROLLOUT", "ASTONISH" } },
       { "PELIPPER", 47, ability = "KEEN_EYE", nature = "MODEST", item = "SITRUS_BERRY", moves = { "WATER_PULSE", "WING_ATTACK", "TAILWIND", "PROTECT" } },
     } },
     RM2_R121_ROX = { like = "CRISTIN_1", name = "ROXA", defeat = "Oof, too cool for us.", party = {
@@ -1668,19 +1668,19 @@ return {
       { "MIGHTYENA", 47, ability = "INTIMIDATE", nature = "ADAMANT", item = "BLACK_GLASSES", moves = { "CRUNCH", "ICE_FANG", "THUNDER_FANG", "ROAR" } },
     } },
     RM2_R115_JAN = { like = "CYNDY_1", name = "JAN", defeat = "Hyah! We'll train harder!", party = {
-      { "RIOLU", 32, ability = "INNER_FOCUS", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "FORCE_PALM", "QUICK_ATTACK", "METAL_CLAW", "FEINT" } },
+      { "RIOLU", 32, ability = "INNER_FOCUS", nature = "ADAMANT", moves = { "FORCE_PALM", "QUICK_ATTACK", "METAL_CLAW", "FEINT" } },
       { "JANGMO_O", 32, ability = "BULLETPROOF", nature = "IMPISH", item = "SITRUS_BERRY", moves = { "DRAGON_CLAW", "HEADBUTT", "SCARY_FACE", "PROTECT" } },
     } },
     RM3_R115_JAN = { like = "CYNDY_1", name = "JAN", defeat = "Hyah! We'll train harder!", party = {
-      { "LUCARIO", 37, ability = "INNER_FOCUS", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "FORCE_PALM", "QUICK_ATTACK", "METAL_CLAW", "FEINT" } },
+      { "LUCARIO", 37, ability = "INNER_FOCUS", nature = "ADAMANT", moves = { "FORCE_PALM", "QUICK_ATTACK", "METAL_CLAW", "FEINT" } },
       { "HAKAMO_O", 37, ability = "BULLETPROOF", nature = "IMPISH", item = "SITRUS_BERRY", moves = { "DRAGON_CLAW", "HEADBUTT", "SCARY_FACE", "PROTECT" } },
     } },
     RM4_R115_JAN = { like = "CYNDY_1", name = "JAN", defeat = "Hyah! We'll train harder!", party = {
-      { "LUCARIO", 42, ability = "INNER_FOCUS", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "AURA_SPHERE", "QUICK_ATTACK", "METAL_CLAW", "FEINT" } },
+      { "LUCARIO", 42, ability = "INNER_FOCUS", nature = "ADAMANT", moves = { "AURA_SPHERE", "QUICK_ATTACK", "METAL_CLAW", "FEINT" } },
       { "HAKAMO_O", 42, ability = "BULLETPROOF", nature = "IMPISH", item = "SITRUS_BERRY", moves = { "DRAGON_CLAW", "HEADBUTT", "SCARY_FACE", "PROTECT" } },
     } },
     RM5_R115_JAN = { like = "CYNDY_1", name = "JAN", defeat = "Hyah! We'll train harder!", party = {
-      { "LUCARIO", 47, ability = "INNER_FOCUS", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "AURA_SPHERE", "QUICK_ATTACK", "METAL_CLAW", "FEINT" } },
+      { "LUCARIO", 47, ability = "INNER_FOCUS", nature = "ADAMANT", moves = { "AURA_SPHERE", "QUICK_ATTACK", "METAL_CLAW", "FEINT" } },
       { "KOMMO_O", 47, ability = "BULLETPROOF", nature = "IMPISH", item = "SITRUS_BERRY", moves = { "CLANGING_SCALES", "HEADBUTT", "SCARY_FACE", "PROTECT" } },
     } },
     RM2_R118_REX = { like = "DALTON_1", name = "REX", defeat = "Encore? No thanks.", party = {
@@ -1748,35 +1748,35 @@ return {
       { "RAPIDASH", 48, ability = "FLASH_FIRE", nature = "JOLLY", item = "CHARCOAL", moves = { "FIRE_BLAST", "STOMP", "FLAME_CHARGE", "DOUBLE_KICK" } },
     } },
     RM2_R110_MOE = { like = "EDWIN_1", name = "MOE", defeat = "A rare loss for my collection.", party = {
-      { "KLANG", 32, ability = "CLEAR_BODY", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "VISE_GRIP", "DISCHARGE", "METAL_SOUND", "AUTOTOMIZE" } },
+      { "KLANG", 32, ability = "CLEAR_BODY", nature = "ADAMANT", moves = { "VISE_GRIP", "DISCHARGE", "METAL_SOUND", "AUTOTOMIZE" } },
       { "GLOOM", 33, ability = "CHLOROPHYLL", nature = "MODEST", item = "SITRUS_BERRY", moves = { "GIGA_DRAIN", "ACID", "SLEEP_POWDER", "STUN_SPORE" } },
     } },
     RM3_R110_MOE = { like = "EDWIN_1", name = "MOE", defeat = "A rare loss for my collection.", party = {
-      { "KLANG", 37, ability = "CLEAR_BODY", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "VISE_GRIP", "DISCHARGE", "METAL_SOUND", "AUTOTOMIZE" } },
+      { "KLANG", 37, ability = "CLEAR_BODY", nature = "ADAMANT", moves = { "VISE_GRIP", "DISCHARGE", "METAL_SOUND", "AUTOTOMIZE" } },
       { "VILEPLUME", 38, ability = "CHLOROPHYLL", nature = "MODEST", item = "SITRUS_BERRY", moves = { "PETAL_BLIZZARD", "ACID", "SLEEP_POWDER", "STUN_SPORE" } },
     } },
     RM4_R110_MOE = { like = "EDWIN_1", name = "MOE", defeat = "A rare loss for my collection.", party = {
-      { "KLINKLANG", 42, ability = "CLEAR_BODY", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "VISE_GRIP", "DISCHARGE", "METAL_SOUND", "AUTOTOMIZE" } },
+      { "KLINKLANG", 42, ability = "CLEAR_BODY", nature = "ADAMANT", moves = { "VISE_GRIP", "DISCHARGE", "METAL_SOUND", "AUTOTOMIZE" } },
       { "VILEPLUME", 43, ability = "CHLOROPHYLL", nature = "MODEST", item = "SITRUS_BERRY", moves = { "PETAL_BLIZZARD", "ACID", "SLEEP_POWDER", "STUN_SPORE" } },
     } },
     RM5_R110_MOE = { like = "EDWIN_1", name = "MOE", defeat = "A rare loss for my collection.", party = {
-      { "KLINKLANG", 47, ability = "CLEAR_BODY", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "VISE_GRIP", "DISCHARGE", "METAL_SOUND", "AUTOTOMIZE" } },
+      { "KLINKLANG", 47, ability = "CLEAR_BODY", nature = "ADAMANT", moves = { "VISE_GRIP", "DISCHARGE", "METAL_SOUND", "AUTOTOMIZE" } },
       { "VILEPLUME", 48, ability = "CHLOROPHYLL", nature = "MODEST", item = "SITRUS_BERRY", moves = { "PETAL_BLIZZARD", "ACID", "SLEEP_POWDER", "STUN_SPORE" } },
     } },
     RM2_R106_ROY = { like = "ELLIOT_1", name = "ROY", defeat = "Nothing's biting today, huh.", party = {
-      { "CHATOT", 33, ability = "BIG_PECKS", nature = "TIMID", item = "SITRUS_BERRY", moves = { "AIR_CUTTER", "TAUNT", "TAILWIND", "SING" } },
+      { "CHATOT", 33, ability = "BIG_PECKS", nature = "TIMID", moves = { "AIR_CUTTER", "TAUNT", "TAILWIND", "SING" } },
       { "MALAMAR", 33, ability = "CONTRARY", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "FOUL_PLAY", "PECK", "TOPSY_TURVY", "HYPNOSIS" } },
     } },
     RM3_R106_ROY = { like = "ELLIOT_1", name = "ROY", defeat = "Nothing's biting today, huh.", party = {
-      { "CHATOT", 38, ability = "BIG_PECKS", nature = "TIMID", item = "SITRUS_BERRY", moves = { "CHATTER", "TAUNT", "TAILWIND", "SING" } },
+      { "CHATOT", 38, ability = "BIG_PECKS", nature = "TIMID", moves = { "CHATTER", "TAUNT", "TAILWIND", "SING" } },
       { "MALAMAR", 38, ability = "CONTRARY", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "FOUL_PLAY", "PLUCK", "TOPSY_TURVY", "HYPNOSIS" } },
     } },
     RM4_R106_ROY = { like = "ELLIOT_1", name = "ROY", defeat = "Nothing's biting today, huh.", party = {
-      { "CHATOT", 43, ability = "BIG_PECKS", nature = "TIMID", item = "SITRUS_BERRY", moves = { "CHATTER", "TAUNT", "TAILWIND", "SING" } },
+      { "CHATOT", 43, ability = "BIG_PECKS", nature = "TIMID", moves = { "CHATTER", "TAUNT", "TAILWIND", "SING" } },
       { "MALAMAR", 43, ability = "CONTRARY", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "FOUL_PLAY", "PLUCK", "TOPSY_TURVY", "HYPNOSIS" } },
     } },
     RM5_R106_ROY = { like = "ELLIOT_1", name = "ROY", defeat = "Nothing's biting today, huh.", party = {
-      { "CHATOT", 48, ability = "BIG_PECKS", nature = "TIMID", item = "SITRUS_BERRY", moves = { "CHATTER", "TAUNT", "TAILWIND", "SING" } },
+      { "CHATOT", 48, ability = "BIG_PECKS", nature = "TIMID", moves = { "CHATTER", "TAUNT", "TAILWIND", "SING" } },
       { "MALAMAR", 48, ability = "CONTRARY", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "FOUL_PLAY", "PLUCK", "TOPSY_TURVY", "HYPNOSIS" } },
     } },
     RM2_R125_BEN = { like = "ERNEST_1", name = "BENN", defeat = "Aye, ye beat us fair.", party = {
@@ -1796,19 +1796,19 @@ return {
       { "PELIPPER", 47, ability = "DRIZZLE", nature = "MODEST", item = "DAMP_ROCK", moves = { "HURRICANE", "WATER_PULSE", "TAILWIND", "PROTECT" } },
     } },
     RM2_JP_GUS = { like = "ETHAN_1", name = "WALT", defeat = "Cold camp tonight.", party = {
-      { "TORKOAL", 32, ability = "WHITE_SMOKE", nature = "RELAXED", item = "SITRUS_BERRY", moves = { "LAVA_PLUME", "SMOKESCREEN", "CURSE", "PROTECT" } },
+      { "TORKOAL", 32, ability = "WHITE_SMOKE", nature = "RELAXED", moves = { "LAVA_PLUME", "SMOKESCREEN", "CURSE", "PROTECT" } },
       { "SPINDA", 32, ability = "OWN_TEMPO", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "SUCKER_PUNCH", "DIZZY_PUNCH", "PSYBEAM", "HYPNOSIS" } },
     } },
     RM3_JP_GUS = { like = "ETHAN_1", name = "WALT", defeat = "Cold camp tonight.", party = {
-      { "TORKOAL", 37, ability = "WHITE_SMOKE", nature = "RELAXED", item = "SITRUS_BERRY", moves = { "LAVA_PLUME", "SMOKESCREEN", "CURSE", "PROTECT" } },
+      { "TORKOAL", 37, ability = "WHITE_SMOKE", nature = "RELAXED", moves = { "LAVA_PLUME", "SMOKESCREEN", "CURSE", "PROTECT" } },
       { "SPINDA", 37, ability = "OWN_TEMPO", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "SUCKER_PUNCH", "DIZZY_PUNCH", "PSYBEAM", "HYPNOSIS" } },
     } },
     RM4_JP_GUS = { like = "ETHAN_1", name = "WALT", defeat = "Cold camp tonight.", party = {
-      { "TORKOAL", 42, ability = "WHITE_SMOKE", nature = "RELAXED", item = "SITRUS_BERRY", moves = { "FLAMETHROWER", "SMOKESCREEN", "CURSE", "PROTECT" } },
+      { "TORKOAL", 42, ability = "WHITE_SMOKE", nature = "RELAXED", moves = { "FLAMETHROWER", "SMOKESCREEN", "CURSE", "PROTECT" } },
       { "SPINDA", 42, ability = "OWN_TEMPO", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "SUCKER_PUNCH", "DIZZY_PUNCH", "PSYBEAM", "HYPNOSIS" } },
     } },
     RM5_JP_GUS = { like = "ETHAN_1", name = "WALT", defeat = "Cold camp tonight.", party = {
-      { "TORKOAL", 47, ability = "WHITE_SMOKE", nature = "RELAXED", item = "SITRUS_BERRY", moves = { "FLAMETHROWER", "SMOKESCREEN", "CURSE", "PROTECT" } },
+      { "TORKOAL", 47, ability = "WHITE_SMOKE", nature = "RELAXED", moves = { "FLAMETHROWER", "SMOKESCREEN", "CURSE", "PROTECT" } },
       { "SPINDA", 47, ability = "OWN_TEMPO", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "SUCKER_PUNCH", "DIZZY_PUNCH", "PSYBEAM", "HYPNOSIS" } },
     } },
     RM2_R123_JAX = { like = "FERNANDO_1", name = "JAXON", defeat = "The crowd went home.", party = {
@@ -1844,36 +1844,36 @@ return {
       { "GARDEVOIR", 48, ability = "TELEPATHY", nature = "MODEST", item = "TWISTED_SPOON", moves = { "PSYCHIC", "DISARMING_VOICE", "HYPNOSIS", "PROTECT" } },
     } },
     RM2_R110_ANN = { like = "ISABEL_1", name = "ANN", defeat = "Our babies did their best!", party = {
-      { "CLEFAIRY", 33, ability = "FRIEND_GUARD", nature = "BOLD", item = "SITRUS_BERRY", moves = { "FOLLOW_ME", "DISARMING_VOICE", "ENCORE", "SING" } },
+      { "CLEFAIRY", 33, ability = "FRIEND_GUARD", nature = "BOLD", moves = { "FOLLOW_ME", "DISARMING_VOICE", "ENCORE", "SING" } },
       { "PERSIAN", 33, ability = "TECHNICIAN", nature = "JOLLY", item = "SITRUS_BERRY", moves = { "FAKE_OUT", "FURY_SWIPES", "BITE", "TAUNT" } },
     } },
     RM3_R110_ANN = { like = "ISABEL_1", name = "ANN", defeat = "Our babies did their best!", party = {
-      { "CLEFABLE", 38, ability = "UNAWARE", nature = "BOLD", item = "SITRUS_BERRY", moves = { "FOLLOW_ME", "DISARMING_VOICE", "ENCORE", "SING" } },
+      { "CLEFABLE", 38, ability = "UNAWARE", nature = "BOLD", moves = { "FOLLOW_ME", "DISARMING_VOICE", "ENCORE", "SING" } },
       { "PERSIAN", 38, ability = "TECHNICIAN", nature = "JOLLY", item = "SITRUS_BERRY", moves = { "FAKE_OUT", "FURY_SWIPES", "BITE", "TAUNT" } },
     } },
     RM4_R110_ANN = { like = "ISABEL_1", name = "ANN", defeat = "Our babies did their best!", party = {
-      { "CLEFABLE", 43, ability = "UNAWARE", nature = "BOLD", item = "SITRUS_BERRY", moves = { "FOLLOW_ME", "DISARMING_VOICE", "ENCORE", "SING" } },
+      { "CLEFABLE", 43, ability = "UNAWARE", nature = "BOLD", moves = { "FOLLOW_ME", "DISARMING_VOICE", "ENCORE", "SING" } },
       { "PERSIAN", 43, ability = "TECHNICIAN", nature = "JOLLY", item = "SITRUS_BERRY", moves = { "FAKE_OUT", "FURY_SWIPES", "NIGHT_SLASH", "TAUNT" } },
     } },
     RM5_R110_ANN = { like = "ISABEL_1", name = "ANN", defeat = "Our babies did their best!", party = {
-      { "CLEFABLE", 48, ability = "UNAWARE", nature = "BOLD", item = "SITRUS_BERRY", moves = { "FOLLOW_ME", "DISARMING_VOICE", "ENCORE", "SING" } },
+      { "CLEFABLE", 48, ability = "UNAWARE", nature = "BOLD", moves = { "FOLLOW_ME", "DISARMING_VOICE", "ENCORE", "SING" } },
       { "PERSIAN", 48, ability = "TECHNICIAN", nature = "JOLLY", item = "SITRUS_BERRY", moves = { "FAKE_OUT", "FURY_SWIPES", "NIGHT_SLASH", "TAUNT" } },
     } },
     RM2_R126_SKY = { like = "ISAIAH_1", name = "SKY", defeat = "The sea floor's colder than this loss.", party = {
       { "WAILORD", 44, ability = "WATER_VEIL", nature = "MODEST", item = "SITRUS_BERRY", moves = { "WATER_SPOUT", "ICE_BEAM", "ROLLOUT", "AMNESIA" } },
-      { "SHARPEDO", 43, ability = "SPEED_BOOST", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "AQUA_JET", "CRUNCH", "ICE_FANG", "PROTECT" } },
+      { "SHARPEDO", 43, ability = "SPEED_BOOST", nature = "ADAMANT", moves = { "AQUA_JET", "CRUNCH", "ICE_FANG", "PROTECT" } },
     } },
     RM3_R126_SKY = { like = "ISAIAH_1", name = "SKY", defeat = "The sea floor's colder than this loss.", party = {
       { "WAILORD", 46, ability = "WATER_VEIL", nature = "MODEST", item = "SITRUS_BERRY", moves = { "WATER_SPOUT", "ICE_BEAM", "ROLLOUT", "AMNESIA" } },
-      { "SHARPEDO", 45, ability = "SPEED_BOOST", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "AQUA_JET", "CRUNCH", "ICE_FANG", "PROTECT" } },
+      { "SHARPEDO", 45, ability = "SPEED_BOOST", nature = "ADAMANT", moves = { "AQUA_JET", "CRUNCH", "ICE_FANG", "PROTECT" } },
     } },
     RM4_R126_SKY = { like = "ISAIAH_1", name = "SKY", defeat = "The sea floor's colder than this loss.", party = {
       { "WAILORD", 48, ability = "WATER_VEIL", nature = "MODEST", item = "SITRUS_BERRY", moves = { "WATER_SPOUT", "ICE_BEAM", "ROLLOUT", "AMNESIA" } },
-      { "SHARPEDO", 47, ability = "SPEED_BOOST", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "AQUA_JET", "CRUNCH", "ICE_FANG", "PROTECT" } },
+      { "SHARPEDO", 47, ability = "SPEED_BOOST", nature = "ADAMANT", moves = { "AQUA_JET", "CRUNCH", "ICE_FANG", "PROTECT" } },
     } },
     RM5_R126_SKY = { like = "ISAIAH_1", name = "SKY", defeat = "The sea floor's colder than this loss.", party = {
       { "WAILORD", 50, ability = "WATER_VEIL", nature = "MODEST", item = "SITRUS_BERRY", moves = { "WATER_SPOUT", "ICE_BEAM", "ROLLOUT", "AMNESIA" } },
-      { "SHARPEDO", 49, ability = "SPEED_BOOST", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "AQUA_JET", "CRUNCH", "ICE_FANG", "PROTECT" } },
+      { "SHARPEDO", 49, ability = "SPEED_BOOST", nature = "ADAMANT", moves = { "AQUA_JET", "CRUNCH", "ICE_FANG", "PROTECT" } },
     } },
     RM2_R123_IVY = { like = "JACKI_1", name = "IVA", defeat = "Dreams don't always come true.", party = {
       { "GARDEVOIR", 35, ability = "TRACE", nature = "MODEST", item = "TWISTED_SPOON", moves = { "PSYCHIC", "DRAINING_KISS", "DISARMING_VOICE", "HYPNOSIS" } },
@@ -1908,67 +1908,67 @@ return {
       { "LINOONE", 47, ability = "QUICK_FEET", nature = "JOLLY", item = "SILK_SCARF", moves = { "HEADBUTT", "COVET", "PIN_MISSILE", "HONE_CLAWS" } },
     } },
     RM2_PW_COLE = { like = "JAMES_1", name = "COLE", defeat = "Our spores weren't enough!", party = {
-      { "RIBOMBEE", 33, ability = "SHIELD_DUST", nature = "TIMID", item = "SITRUS_BERRY", moves = { "FAIRY_WIND", "STUN_SPORE", "STRUGGLE_BUG", "ABSORB" } },
+      { "RIBOMBEE", 33, ability = "SHIELD_DUST", nature = "TIMID", moves = { "FAIRY_WIND", "STUN_SPORE", "STRUGGLE_BUG", "ABSORB" } },
       { "LEDIAN", 33, ability = "AERILATE", nature = "JOLLY", item = "SITRUS_BERRY", moves = { "SWIFT", "TACKLE", "LIGHT_SCREEN", "REFLECT" } },
     } },
     RM3_PW_COLE = { like = "JAMES_1", name = "COLE", defeat = "Our spores weren't enough!", party = {
-      { "RIBOMBEE", 38, ability = "SHIELD_DUST", nature = "TIMID", item = "SITRUS_BERRY", moves = { "FAIRY_WIND", "STUN_SPORE", "STRUGGLE_BUG", "ABSORB" } },
+      { "RIBOMBEE", 38, ability = "SHIELD_DUST", nature = "TIMID", moves = { "FAIRY_WIND", "STUN_SPORE", "STRUGGLE_BUG", "ABSORB" } },
       { "LEDIAN", 38, ability = "AERILATE", nature = "JOLLY", item = "SITRUS_BERRY", moves = { "SWIFT", "TACKLE", "LIGHT_SCREEN", "REFLECT" } },
     } },
     RM4_PW_COLE = { like = "JAMES_1", name = "COLE", defeat = "Our spores weren't enough!", party = {
-      { "RIBOMBEE", 43, ability = "SHIELD_DUST", nature = "TIMID", item = "SITRUS_BERRY", moves = { "FAIRY_WIND", "STUN_SPORE", "STRUGGLE_BUG", "ABSORB" } },
+      { "RIBOMBEE", 43, ability = "SHIELD_DUST", nature = "TIMID", moves = { "FAIRY_WIND", "STUN_SPORE", "STRUGGLE_BUG", "ABSORB" } },
       { "LEDIAN", 43, ability = "AERILATE", nature = "JOLLY", item = "SITRUS_BERRY", moves = { "SWIFT", "TACKLE", "LIGHT_SCREEN", "REFLECT" } },
     } },
     RM5_PW_COLE = { like = "JAMES_1", name = "COLE", defeat = "Our spores weren't enough!", party = {
-      { "RIBOMBEE", 48, ability = "SHIELD_DUST", nature = "TIMID", item = "SITRUS_BERRY", moves = { "FAIRY_WIND", "STUN_SPORE", "STRUGGLE_BUG", "ABSORB" } },
+      { "RIBOMBEE", 48, ability = "SHIELD_DUST", nature = "TIMID", moves = { "FAIRY_WIND", "STUN_SPORE", "STRUGGLE_BUG", "ABSORB" } },
       { "LEDIAN", 48, ability = "AERILATE", nature = "JOLLY", item = "SITRUS_BERRY", moves = { "SWIFT", "TACKLE", "LIGHT_SCREEN", "REFLECT" } },
     } },
     RM2_R120_GUS = { like = "JEFFREY_1", name = "GUSS", defeat = "Swatted!", party = {
-      { "SCYTHER", 33, ability = "TECHNICIAN", nature = "JOLLY", item = "SITRUS_BERRY", moves = { "WING_ATTACK", "SLASH", "QUICK_ATTACK", "FOCUS_ENERGY" } },
+      { "SCYTHER", 33, ability = "TECHNICIAN", nature = "JOLLY", moves = { "WING_ATTACK", "SLASH", "QUICK_ATTACK", "FOCUS_ENERGY" } },
       { "JOLTIK", 33, ability = "COMPOUND_EYES", nature = "TIMID", item = "SITRUS_BERRY", moves = { "ELECTROWEB", "BUG_BITE", "THUNDER_WAVE", "SPIDER_WEB" } },
     } },
     RM3_R120_GUS = { like = "JEFFREY_1", name = "GUSS", defeat = "Swatted!", party = {
-      { "SCIZOR", 37, ability = "TECHNICIAN", nature = "JOLLY", item = "SITRUS_BERRY", moves = { "WING_ATTACK", "SLASH", "QUICK_ATTACK", "FOCUS_ENERGY" } },
+      { "SCIZOR", 37, ability = "TECHNICIAN", nature = "JOLLY", moves = { "WING_ATTACK", "SLASH", "QUICK_ATTACK", "FOCUS_ENERGY" } },
       { "GALVANTULA", 37, ability = "COMPOUND_EYES", nature = "TIMID", item = "SITRUS_BERRY", moves = { "ELECTROWEB", "SIGNAL_BEAM", "THUNDER_WAVE", "SPIDER_WEB" } },
     } },
     RM4_R120_GUS = { like = "JEFFREY_1", name = "GUSS", defeat = "Swatted!", party = {
-      { "SCIZOR", 42, ability = "TECHNICIAN", nature = "JOLLY", item = "SITRUS_BERRY", moves = { "WING_ATTACK", "SLASH", "QUICK_ATTACK", "FOCUS_ENERGY" } },
+      { "SCIZOR", 42, ability = "TECHNICIAN", nature = "JOLLY", moves = { "WING_ATTACK", "SLASH", "QUICK_ATTACK", "FOCUS_ENERGY" } },
       { "GALVANTULA", 42, ability = "COMPOUND_EYES", nature = "TIMID", item = "SITRUS_BERRY", moves = { "ELECTROWEB", "SIGNAL_BEAM", "THUNDER_WAVE", "SPIDER_WEB" } },
     } },
     RM5_R120_GUS = { like = "JEFFREY_1", name = "GUSS", defeat = "Swatted!", party = {
-      { "SCIZOR", 47, ability = "TECHNICIAN", nature = "JOLLY", item = "SITRUS_BERRY", moves = { "WING_ATTACK", "SLASH", "QUICK_ATTACK", "FOCUS_ENERGY" } },
+      { "SCIZOR", 47, ability = "TECHNICIAN", nature = "JOLLY", moves = { "WING_ATTACK", "SLASH", "QUICK_ATTACK", "FOCUS_ENERGY" } },
       { "GALVANTULA", 47, ability = "COMPOUND_EYES", nature = "TIMID", item = "SITRUS_BERRY", moves = { "ELECTROWEB", "BUG_BUZZ", "THUNDER_WAVE", "SPIDER_WEB" } },
     } },
     RM2_R124_MIA = { like = "JENNY_1", name = "MIA", defeat = "Out of air!", party = {
-      { "LUVDISC", 40, ability = "SWIFT_SWIM", nature = "TIMID", item = "SITRUS_BERRY", moves = { "WATER_PULSE", "DRAINING_KISS", "PROTECT", "AGILITY" } },
+      { "LUVDISC", 40, ability = "SWIFT_SWIM", nature = "TIMID", moves = { "WATER_PULSE", "DRAINING_KISS", "PROTECT", "AGILITY" } },
       { "PELIPPER", 40, ability = "KEEN_EYE", nature = "MODEST", item = "SITRUS_BERRY", moves = { "WATER_PULSE", "AIR_SLASH", "TAILWIND", "PROTECT" } },
     } },
     RM3_R124_MIA = { like = "JENNY_1", name = "MIA", defeat = "Out of air!", party = {
-      { "LUVDISC", 42, ability = "SWIFT_SWIM", nature = "TIMID", item = "SITRUS_BERRY", moves = { "WATER_PULSE", "DRAINING_KISS", "PROTECT", "AGILITY" } },
+      { "LUVDISC", 42, ability = "SWIFT_SWIM", nature = "TIMID", moves = { "WATER_PULSE", "DRAINING_KISS", "PROTECT", "AGILITY" } },
       { "PELIPPER", 42, ability = "KEEN_EYE", nature = "MODEST", item = "SITRUS_BERRY", moves = { "WATER_PULSE", "AIR_SLASH", "TAILWIND", "PROTECT" } },
     } },
     RM4_R124_MIA = { like = "JENNY_1", name = "MIA", defeat = "Out of air!", party = {
-      { "LUVDISC", 44, ability = "SWIFT_SWIM", nature = "TIMID", item = "SITRUS_BERRY", moves = { "WATER_PULSE", "DRAINING_KISS", "PROTECT", "AGILITY" } },
+      { "LUVDISC", 44, ability = "SWIFT_SWIM", nature = "TIMID", moves = { "WATER_PULSE", "DRAINING_KISS", "PROTECT", "AGILITY" } },
       { "PELIPPER", 44, ability = "KEEN_EYE", nature = "MODEST", item = "SITRUS_BERRY", moves = { "WATER_PULSE", "AIR_SLASH", "TAILWIND", "PROTECT" } },
     } },
     RM5_R124_MIA = { like = "JENNY_1", name = "MIA", defeat = "Out of air!", party = {
-      { "LUVDISC", 47, ability = "SWIFT_SWIM", nature = "TIMID", item = "SITRUS_BERRY", moves = { "WATER_PULSE", "DRAINING_KISS", "PROTECT", "AGILITY" } },
+      { "LUVDISC", 47, ability = "SWIFT_SWIM", nature = "TIMID", moves = { "WATER_PULSE", "DRAINING_KISS", "PROTECT", "AGILITY" } },
       { "PELIPPER", 47, ability = "KEEN_EYE", nature = "MODEST", item = "SITRUS_BERRY", moves = { "WATER_PULSE", "AIR_SLASH", "TAILWIND", "PROTECT" } },
     } },
     RM2_R116_LIAM = { like = "JERRY_1", name = "LIAM", defeat = "That wasn't in the textbook!", party = {
-      { "GOLBAT", 32, ability = "INNER_FOCUS", nature = "JOLLY", item = "SITRUS_BERRY", moves = { "AIR_CUTTER", "BITE", "CONFUSE_RAY", "ASTONISH" } },
+      { "GOLBAT", 32, ability = "INNER_FOCUS", nature = "JOLLY", moves = { "AIR_CUTTER", "BITE", "CONFUSE_RAY", "ASTONISH" } },
       { "EXEGGCUTE", 33, ability = "CHLOROPHYLL", nature = "MODEST", item = "SITRUS_BERRY", moves = { "BULLET_SEED", "LEECH_SEED", "HYPNOSIS", "REFLECT" } },
     } },
     RM3_R116_LIAM = { like = "JERRY_1", name = "LIAM", defeat = "That wasn't in the textbook!", party = {
-      { "CROBAT", 37, ability = "INNER_FOCUS", nature = "JOLLY", item = "SITRUS_BERRY", moves = { "WING_ATTACK", "BITE", "CONFUSE_RAY", "ASTONISH" } },
+      { "CROBAT", 37, ability = "INNER_FOCUS", nature = "JOLLY", moves = { "WING_ATTACK", "BITE", "CONFUSE_RAY", "ASTONISH" } },
       { "EXEGGUTOR", 38, ability = "CHLOROPHYLL", nature = "MODEST", item = "SITRUS_BERRY", moves = { "BULLET_SEED", "LEECH_SEED", "HYPNOSIS", "REFLECT" } },
     } },
     RM4_R116_LIAM = { like = "JERRY_1", name = "LIAM", defeat = "That wasn't in the textbook!", party = {
-      { "CROBAT", 42, ability = "INNER_FOCUS", nature = "JOLLY", item = "SITRUS_BERRY", moves = { "WING_ATTACK", "BITE", "CONFUSE_RAY", "ASTONISH" } },
+      { "CROBAT", 42, ability = "INNER_FOCUS", nature = "JOLLY", moves = { "WING_ATTACK", "BITE", "CONFUSE_RAY", "ASTONISH" } },
       { "EXEGGUTOR", 43, ability = "CHLOROPHYLL", nature = "MODEST", item = "SITRUS_BERRY", moves = { "BULLET_SEED", "LEECH_SEED", "HYPNOSIS", "REFLECT" } },
     } },
     RM5_R116_LIAM = { like = "JERRY_1", name = "LIAM", defeat = "That wasn't in the textbook!", party = {
-      { "CROBAT", 47, ability = "INNER_FOCUS", nature = "JOLLY", item = "SITRUS_BERRY", moves = { "WING_ATTACK", "BITE", "CONFUSE_RAY", "ASTONISH" } },
+      { "CROBAT", 47, ability = "INNER_FOCUS", nature = "JOLLY", moves = { "WING_ATTACK", "BITE", "CONFUSE_RAY", "ASTONISH" } },
       { "EXEGGUTOR", 48, ability = "CHLOROPHYLL", nature = "MODEST", item = "SITRUS_BERRY", moves = { "BULLET_SEED", "LEECH_SEED", "HYPNOSIS", "REFLECT" } },
     } },
     RM2_R121_ANN = { like = "JESSICA_1", name = "ANNA", defeat = "How utterly unbeautiful.", party = {
@@ -1988,36 +1988,36 @@ return {
       { "ROSERADE", 47, ability = "NATURAL_CURE", nature = "MODEST", item = "MIRACLE_SEED", moves = { "GIGA_DRAIN", "PETAL_BLIZZARD", "STUN_SPORE", "LEECH_SEED" } },
     } },
     RM2_R116_EMMA = { like = "KAREN_1", name = "EMMA", defeat = "We studied so hard for this!", party = {
-      { "AMPHAROS", 33, ability = "STATIC", nature = "MODEST", item = "SITRUS_BERRY", moves = { "DISCHARGE", "THUNDER_WAVE", "COTTON_SPORE", "CHARGE" } },
+      { "AMPHAROS", 33, ability = "STATIC", nature = "MODEST", moves = { "DISCHARGE", "THUNDER_WAVE", "COTTON_SPORE", "CHARGE" } },
       { "CHINGLING", 33, ability = "LEVITATE", nature = "MODEST", item = "SITRUS_BERRY", moves = { "CONFUSION", "HELPING_HAND", "YAWN", "ASTONISH" } },
     } },
     RM3_R116_EMMA = { like = "KAREN_1", name = "EMMA", defeat = "We studied so hard for this!", party = {
-      { "AMPHAROS", 38, ability = "STATIC", nature = "MODEST", item = "SITRUS_BERRY", moves = { "DISCHARGE", "THUNDER_WAVE", "COTTON_SPORE", "CHARGE" } },
+      { "AMPHAROS", 38, ability = "STATIC", nature = "MODEST", moves = { "DISCHARGE", "THUNDER_WAVE", "COTTON_SPORE", "CHARGE" } },
       { "CHIMECHO", 38, ability = "LEVITATE", nature = "MODEST", item = "SITRUS_BERRY", moves = { "EXTRASENSORY", "HELPING_HAND", "YAWN", "ASTONISH" } },
     } },
     RM4_R116_EMMA = { like = "KAREN_1", name = "EMMA", defeat = "We studied so hard for this!", party = {
-      { "AMPHAROS", 43, ability = "STATIC", nature = "MODEST", item = "SITRUS_BERRY", moves = { "DISCHARGE", "THUNDER_WAVE", "COTTON_SPORE", "CHARGE" } },
+      { "AMPHAROS", 43, ability = "STATIC", nature = "MODEST", moves = { "DISCHARGE", "THUNDER_WAVE", "COTTON_SPORE", "CHARGE" } },
       { "CHIMECHO", 43, ability = "LEVITATE", nature = "MODEST", item = "SITRUS_BERRY", moves = { "EXTRASENSORY", "HELPING_HAND", "YAWN", "ASTONISH" } },
     } },
     RM5_R116_EMMA = { like = "KAREN_1", name = "EMMA", defeat = "We studied so hard for this!", party = {
-      { "AMPHAROS", 48, ability = "STATIC", nature = "MODEST", item = "SITRUS_BERRY", moves = { "DISCHARGE", "THUNDER_WAVE", "COTTON_SPORE", "CHARGE" } },
+      { "AMPHAROS", 48, ability = "STATIC", nature = "MODEST", moves = { "DISCHARGE", "THUNDER_WAVE", "COTTON_SPORE", "CHARGE" } },
       { "CHIMECHO", 48, ability = "LEVITATE", nature = "MODEST", item = "SITRUS_BERRY", moves = { "EXTRASENSORY", "HELPING_HAND", "YAWN", "ASTONISH" } },
     } },
     RM2_R126_ELA = { like = "KATELYN_1", name = "ELA", defeat = "The sea floor's colder than this loss.", party = {
       { "LUMINEON", 44, ability = "STORM_DRAIN", nature = "CALM", item = "SITRUS_BERRY", moves = { "WATER_PULSE", "U_TURN", "TAILWIND", "PROTECT" } },
-      { "ALOMOMOLA", 43, ability = "REGENERATOR", nature = "BOLD", item = "SITRUS_BERRY", moves = { "SCALD", "HELPING_HAND", "HEAL_PULSE", "PROTECT" } },
+      { "ALOMOMOLA", 43, ability = "REGENERATOR", nature = "BOLD", moves = { "SCALD", "HELPING_HAND", "HEAL_PULSE", "PROTECT" } },
     } },
     RM3_R126_ELA = { like = "KATELYN_1", name = "ELA", defeat = "The sea floor's colder than this loss.", party = {
       { "LUMINEON", 46, ability = "STORM_DRAIN", nature = "CALM", item = "SITRUS_BERRY", moves = { "WATER_PULSE", "U_TURN", "TAILWIND", "PROTECT" } },
-      { "ALOMOMOLA", 45, ability = "REGENERATOR", nature = "BOLD", item = "SITRUS_BERRY", moves = { "SCALD", "HELPING_HAND", "HEAL_PULSE", "PROTECT" } },
+      { "ALOMOMOLA", 45, ability = "REGENERATOR", nature = "BOLD", moves = { "SCALD", "HELPING_HAND", "HEAL_PULSE", "PROTECT" } },
     } },
     RM4_R126_ELA = { like = "KATELYN_1", name = "ELA", defeat = "The sea floor's colder than this loss.", party = {
       { "LUMINEON", 48, ability = "STORM_DRAIN", nature = "CALM", item = "SITRUS_BERRY", moves = { "WATER_PULSE", "U_TURN", "TAILWIND", "PROTECT" } },
-      { "ALOMOMOLA", 47, ability = "REGENERATOR", nature = "BOLD", item = "SITRUS_BERRY", moves = { "SCALD", "HELPING_HAND", "HEAL_PULSE", "PROTECT" } },
+      { "ALOMOMOLA", 47, ability = "REGENERATOR", nature = "BOLD", moves = { "SCALD", "HELPING_HAND", "HEAL_PULSE", "PROTECT" } },
     } },
     RM5_R126_ELA = { like = "KATELYN_1", name = "ELA", defeat = "The sea floor's colder than this loss.", party = {
       { "LUMINEON", 50, ability = "STORM_DRAIN", nature = "CALM", item = "SITRUS_BERRY", moves = { "WATER_PULSE", "U_TURN", "TAILWIND", "PROTECT" } },
-      { "ALOMOMOLA", 49, ability = "REGENERATOR", nature = "BOLD", item = "SITRUS_BERRY", moves = { "SCALD", "HELPING_HAND", "HEAL_PULSE", "PROTECT" } },
+      { "ALOMOMOLA", 49, ability = "REGENERATOR", nature = "BOLD", moves = { "SCALD", "HELPING_HAND", "HEAL_PULSE", "PROTECT" } },
     } },
     RM2_R126_KEN = { like = "KOJI_1", name = "KEN", defeat = "The sea floor's colder than this loss.", party = {
       { "FLOATZEL", 44, ability = "SWIFT_SWIM", nature = "JOLLY", item = "MYSTIC_WATER", moves = { "AQUA_JET", "WATERFALL", "CRUNCH", "PROTECT" } },
@@ -2052,24 +2052,24 @@ return {
       { "NINJASK", 47, ability = "SPEED_BOOST", nature = "JOLLY", item = "SITRUS_BERRY", moves = { "X_SCISSOR", "AERIAL_ACE", "SAND_ATTACK", "PROTECT" } },
     } },
     RM2_R109_KIM = { like = "LOLA_1", name = "KIM", defeat = "Let's go build sandcastles instead.", party = {
-      { "SEADRA", 32, ability = "POISON_POINT", nature = "MODEST", item = "SITRUS_BERRY", moves = { "BUBBLE_BEAM", "TWISTER", "PROTECT", "BRINE" } },
+      { "SEADRA", 32, ability = "POISON_POINT", nature = "MODEST", moves = { "BUBBLE_BEAM", "TWISTER", "PROTECT", "BRINE" } },
       { "JIGGLYPUFF", 32, ability = "FRIEND_GUARD", nature = "MODEST", item = "SITRUS_BERRY", moves = { "DISARMING_VOICE", "SING", "ROLLOUT", "DEFENSE_CURL" } },
     } },
     RM3_R109_KIM = { like = "LOLA_1", name = "KIM", defeat = "Let's go build sandcastles instead.", party = {
-      { "KINGDRA", 37, ability = "SWIFT_SWIM", nature = "MODEST", item = "SITRUS_BERRY", moves = { "BUBBLE_BEAM", "TWISTER", "PROTECT", "BRINE" } },
+      { "KINGDRA", 37, ability = "SWIFT_SWIM", nature = "MODEST", moves = { "BUBBLE_BEAM", "TWISTER", "PROTECT", "BRINE" } },
       { "WIGGLYTUFF", 37, ability = "FRISK", nature = "MODEST", item = "SITRUS_BERRY", moves = { "DISARMING_VOICE", "SING", "ROLLOUT", "DEFENSE_CURL" } },
     } },
     RM4_R109_KIM = { like = "LOLA_1", name = "KIM", defeat = "Let's go build sandcastles instead.", party = {
-      { "KINGDRA", 42, ability = "SWIFT_SWIM", nature = "MODEST", item = "SITRUS_BERRY", moves = { "BUBBLE_BEAM", "DRAGON_PULSE", "PROTECT", "BRINE" } },
+      { "KINGDRA", 42, ability = "SWIFT_SWIM", nature = "MODEST", moves = { "BUBBLE_BEAM", "DRAGON_PULSE", "PROTECT", "BRINE" } },
       { "WIGGLYTUFF", 42, ability = "FRISK", nature = "MODEST", item = "SITRUS_BERRY", moves = { "DISARMING_VOICE", "SING", "ROLLOUT", "DEFENSE_CURL" } },
     } },
     RM5_R109_KIM = { like = "LOLA_1", name = "KIM", defeat = "Let's go build sandcastles instead.", party = {
-      { "KINGDRA", 47, ability = "SWIFT_SWIM", nature = "MODEST", item = "SITRUS_BERRY", moves = { "BUBBLE_BEAM", "DRAGON_PULSE", "PROTECT", "BRINE" } },
+      { "KINGDRA", 47, ability = "SWIFT_SWIM", nature = "MODEST", moves = { "BUBBLE_BEAM", "DRAGON_PULSE", "PROTECT", "BRINE" } },
       { "WIGGLYTUFF", 47, ability = "FRISK", nature = "MODEST", item = "SITRUS_BERRY", moves = { "DISARMING_VOICE", "SING", "ROLLOUT", "DEFENSE_CURL" } },
     } },
     RM2_R114_BOB = { like = "LUCAS_1", name = "BOB", defeat = "Meteor shower of losses.", party = {
       { "NOSEPASS", 33, ability = "STURDY", nature = "IMPISH", item = "SITRUS_BERRY", moves = { "ROCK_TOMB", "THUNDER_WAVE", "BLOCK", "PROTECT" } },
-      { "SOLROCK", 32, ability = "LEVITATE", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "ROCK_SLIDE", "ZEN_HEADBUTT", "ROCK_POLISH", "MORNING_SUN" } },
+      { "SOLROCK", 32, ability = "LEVITATE", nature = "ADAMANT", moves = { "ROCK_SLIDE", "ZEN_HEADBUTT", "ROCK_POLISH", "MORNING_SUN" } },
     } },
     RM2_R113_UMA = { like = "MADELINE_1", name = "UMA", defeat = "My parasol's full of ash.", party = {
       { "SWABLU", 32, ability = "NATURAL_CURE", nature = "CALM", item = "SITRUS_BERRY", moves = { "DISARMING_VOICE", "PECK", "SING", "PROTECT" } },
@@ -2084,19 +2084,19 @@ return {
       { "ALTARIA", 47, ability = "NATURAL_CURE", nature = "CALM", item = "SITRUS_BERRY", moves = { "DISARMING_VOICE", "PLUCK", "SING", "PROTECT" } },
     } },
     RM2_R117_MAE = { like = "MARIA_1", name = "MAE", defeat = "We'll train harder for the next race.", party = {
-      { "YANMA", 32, ability = "SPEED_BOOST", nature = "MODEST", item = "SITRUS_BERRY", moves = { "AIR_CUTTER", "U_TURN", "DETECT", "PROTECT" } },
+      { "YANMA", 32, ability = "SPEED_BOOST", nature = "MODEST", moves = { "AIR_CUTTER", "U_TURN", "DETECT", "PROTECT" } },
       { "MEDITITE", 32, ability = "PURE_POWER", nature = "JOLLY", item = "SITRUS_BERRY", moves = { "FAKE_OUT", "FORCE_PALM", "CONFUSION", "DETECT" } },
     } },
     RM3_R117_MAE = { like = "MARIA_1", name = "MAE", defeat = "We'll train harder for the next race.", party = {
-      { "YANMEGA", 37, ability = "SPEED_BOOST", nature = "MODEST", item = "SITRUS_BERRY", moves = { "AIR_SLASH", "U_TURN", "DETECT", "PROTECT" } },
+      { "YANMEGA", 37, ability = "SPEED_BOOST", nature = "MODEST", moves = { "AIR_SLASH", "U_TURN", "DETECT", "PROTECT" } },
       { "MEDICHAM", 37, ability = "PURE_POWER", nature = "JOLLY", item = "SITRUS_BERRY", moves = { "FAKE_OUT", "FORCE_PALM", "ZEN_HEADBUTT", "DETECT" } },
     } },
     RM4_R117_MAE = { like = "MARIA_1", name = "MAE", defeat = "We'll train harder for the next race.", party = {
-      { "YANMEGA", 42, ability = "SPEED_BOOST", nature = "MODEST", item = "SITRUS_BERRY", moves = { "AIR_SLASH", "U_TURN", "DETECT", "PROTECT" } },
+      { "YANMEGA", 42, ability = "SPEED_BOOST", nature = "MODEST", moves = { "AIR_SLASH", "U_TURN", "DETECT", "PROTECT" } },
       { "MEDICHAM", 42, ability = "PURE_POWER", nature = "JOLLY", item = "SITRUS_BERRY", moves = { "FAKE_OUT", "HIGH_JUMP_KICK", "ZEN_HEADBUTT", "DETECT" } },
     } },
     RM5_R117_MAE = { like = "MARIA_1", name = "MAE", defeat = "We'll train harder for the next race.", party = {
-      { "YANMEGA", 47, ability = "SPEED_BOOST", nature = "MODEST", item = "SITRUS_BERRY", moves = { "AIR_SLASH", "BUG_BUZZ", "DETECT", "PROTECT" } },
+      { "YANMEGA", 47, ability = "SPEED_BOOST", nature = "MODEST", moves = { "AIR_SLASH", "BUG_BUZZ", "DETECT", "PROTECT" } },
       { "MEDICHAM", 47, ability = "PURE_POWER", nature = "JOLLY", item = "SITRUS_BERRY", moves = { "FAKE_OUT", "HIGH_JUMP_KICK", "ZEN_HEADBUTT", "DETECT" } },
     } },
     RM2_R103_GUY = { like = "MIGUEL_1", name = "GUY", defeat = "My precious Pokémon!", party = {
@@ -2149,34 +2149,34 @@ return {
     } },
     RM2_R126_ACE = { like = "PABLO_1", name = "GILL", defeat = "The sea floor's colder than this loss.", party = {
       { "QUAGSIRE", 44, ability = "UNAWARE", nature = "RELAXED", item = "SITRUS_BERRY", moves = { "EARTHQUAKE", "WATERFALL", "YAWN", "PROTECT" } },
-      { "LAPRAS", 43, ability = "WATER_ABSORB", nature = "MODEST", item = "SITRUS_BERRY", moves = { "ICE_BEAM", "SURF", "CONFUSE_RAY", "SING" } },
+      { "LAPRAS", 43, ability = "WATER_ABSORB", nature = "MODEST", moves = { "ICE_BEAM", "SURF", "CONFUSE_RAY", "SING" } },
     } },
     RM3_R126_ACE = { like = "PABLO_1", name = "GILL", defeat = "The sea floor's colder than this loss.", party = {
       { "QUAGSIRE", 46, ability = "UNAWARE", nature = "RELAXED", item = "SITRUS_BERRY", moves = { "EARTHQUAKE", "WATERFALL", "YAWN", "PROTECT" } },
-      { "LAPRAS", 45, ability = "WATER_ABSORB", nature = "MODEST", item = "SITRUS_BERRY", moves = { "ICE_BEAM", "SURF", "CONFUSE_RAY", "SING" } },
+      { "LAPRAS", 45, ability = "WATER_ABSORB", nature = "MODEST", moves = { "ICE_BEAM", "SURF", "CONFUSE_RAY", "SING" } },
     } },
     RM4_R126_ACE = { like = "PABLO_1", name = "GILL", defeat = "The sea floor's colder than this loss.", party = {
       { "QUAGSIRE", 48, ability = "UNAWARE", nature = "RELAXED", item = "SITRUS_BERRY", moves = { "EARTHQUAKE", "WATERFALL", "YAWN", "PROTECT" } },
-      { "LAPRAS", 47, ability = "WATER_ABSORB", nature = "MODEST", item = "SITRUS_BERRY", moves = { "ICE_BEAM", "SURF", "CONFUSE_RAY", "SING" } },
+      { "LAPRAS", 47, ability = "WATER_ABSORB", nature = "MODEST", moves = { "ICE_BEAM", "SURF", "CONFUSE_RAY", "SING" } },
     } },
     RM5_R126_ACE = { like = "PABLO_1", name = "GILL", defeat = "The sea floor's colder than this loss.", party = {
       { "QUAGSIRE", 50, ability = "UNAWARE", nature = "RELAXED", item = "SITRUS_BERRY", moves = { "EARTHQUAKE", "WATERFALL", "YAWN", "PROTECT" } },
-      { "LAPRAS", 49, ability = "WATER_ABSORB", nature = "MODEST", item = "SITRUS_BERRY", moves = { "ICE_BEAM", "SURF", "CONFUSE_RAY", "SING" } },
+      { "LAPRAS", 49, ability = "WATER_ABSORB", nature = "MODEST", moves = { "ICE_BEAM", "SURF", "CONFUSE_RAY", "SING" } },
     } },
     RM2_R109_BO = { like = "RICKY_1", name = "BO", defeat = "Aww, sand in my shoes AND I lost.", party = {
-      { "PALPITOAD", 32, ability = "HYDRATION", nature = "MODEST", item = "SITRUS_BERRY", moves = { "BUBBLE_BEAM", "MUD_SHOT", "ROUND", "PROTECT" } },
+      { "PALPITOAD", 32, ability = "HYDRATION", nature = "MODEST", moves = { "BUBBLE_BEAM", "MUD_SHOT", "ROUND", "PROTECT" } },
       { "GOLDEEN", 32, ability = "LIGHTNING_ROD", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "HORN_ATTACK", "WATERFALL", "PROTECT", "AGILITY" } },
     } },
     RM3_R109_BO = { like = "RICKY_1", name = "BO", defeat = "Aww, sand in my shoes AND I lost.", party = {
-      { "SEISMITOAD", 37, ability = "POISON_TOUCH", nature = "MODEST", item = "SITRUS_BERRY", moves = { "LIQUIDATION", "MUD_SHOT", "HYPER_VOICE", "PROTECT" } },
+      { "SEISMITOAD", 37, ability = "POISON_TOUCH", nature = "MODEST", moves = { "LIQUIDATION", "MUD_SHOT", "HYPER_VOICE", "PROTECT" } },
       { "SEAKING", 37, ability = "LIGHTNING_ROD", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "HORN_ATTACK", "WATERFALL", "PROTECT", "AGILITY" } },
     } },
     RM4_R109_BO = { like = "RICKY_1", name = "BO", defeat = "Aww, sand in my shoes AND I lost.", party = {
-      { "SEISMITOAD", 42, ability = "POISON_TOUCH", nature = "MODEST", item = "SITRUS_BERRY", moves = { "MUDDY_WATER", "MUD_SHOT", "HYPER_VOICE", "PROTECT" } },
+      { "SEISMITOAD", 42, ability = "POISON_TOUCH", nature = "MODEST", moves = { "MUDDY_WATER", "MUD_SHOT", "HYPER_VOICE", "PROTECT" } },
       { "SEAKING", 42, ability = "LIGHTNING_ROD", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "HORN_ATTACK", "WATERFALL", "PROTECT", "AGILITY" } },
     } },
     RM5_R109_BO = { like = "RICKY_1", name = "BO", defeat = "Aww, sand in my shoes AND I lost.", party = {
-      { "SEISMITOAD", 47, ability = "POISON_TOUCH", nature = "MODEST", item = "SITRUS_BERRY", moves = { "MUDDY_WATER", "MUD_SHOT", "HYPER_VOICE", "PROTECT" } },
+      { "SEISMITOAD", 47, ability = "POISON_TOUCH", nature = "MODEST", moves = { "MUDDY_WATER", "MUD_SHOT", "HYPER_VOICE", "PROTECT" } },
       { "SEAKING", 47, ability = "LIGHTNING_ROD", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "HORN_ATTACK", "WATERFALL", "PROTECT", "AGILITY" } },
     } },
     RM2_R120_ACE = { like = "ROBERT_1", name = "ACE", defeat = "Clipped!", party = {
@@ -2197,19 +2197,19 @@ return {
     } },
     RM2_R118_IVY = { like = "ROSE_1", name = "IVY", defeat = "The petals scattered.", party = {
       { "VESPIQUEN", 33, ability = "PRESSURE", nature = "TIMID", item = "SITRUS_BERRY", moves = { "AIR_SLASH", "BUG_BITE", "PROTECT", "BUG_BUZZ" } },
-      { "ROSELIA", 32, ability = "NATURAL_CURE", nature = "MODEST", item = "SITRUS_BERRY", moves = { "GIGA_DRAIN", "MAGICAL_LEAF", "STUN_SPORE", "LEECH_SEED" } },
+      { "ROSELIA", 32, ability = "NATURAL_CURE", nature = "MODEST", moves = { "GIGA_DRAIN", "MAGICAL_LEAF", "STUN_SPORE", "LEECH_SEED" } },
     } },
     RM3_R118_IVY = { like = "ROSE_1", name = "IVY", defeat = "The petals scattered.", party = {
       { "VESPIQUEN", 38, ability = "PRESSURE", nature = "TIMID", item = "SITRUS_BERRY", moves = { "AIR_SLASH", "BUG_BITE", "PROTECT", "BUG_BUZZ" } },
-      { "ROSERADE", 37, ability = "NATURAL_CURE", nature = "MODEST", item = "SITRUS_BERRY", moves = { "PETAL_BLIZZARD", "GIGA_DRAIN", "STUN_SPORE", "LEECH_SEED" } },
+      { "ROSERADE", 37, ability = "NATURAL_CURE", nature = "MODEST", moves = { "PETAL_BLIZZARD", "GIGA_DRAIN", "STUN_SPORE", "LEECH_SEED" } },
     } },
     RM4_R118_IVY = { like = "ROSE_1", name = "IVY", defeat = "The petals scattered.", party = {
       { "VESPIQUEN", 43, ability = "PRESSURE", nature = "TIMID", item = "SITRUS_BERRY", moves = { "AIR_SLASH", "ATTACK_ORDER", "PROTECT", "BUG_BUZZ" } },
-      { "ROSERADE", 42, ability = "NATURAL_CURE", nature = "MODEST", item = "SITRUS_BERRY", moves = { "PETAL_BLIZZARD", "GIGA_DRAIN", "STUN_SPORE", "LEECH_SEED" } },
+      { "ROSERADE", 42, ability = "NATURAL_CURE", nature = "MODEST", moves = { "PETAL_BLIZZARD", "GIGA_DRAIN", "STUN_SPORE", "LEECH_SEED" } },
     } },
     RM5_R118_IVY = { like = "ROSE_1", name = "IVY", defeat = "The petals scattered.", party = {
       { "VESPIQUEN", 48, ability = "PRESSURE", nature = "TIMID", item = "SITRUS_BERRY", moves = { "AIR_SLASH", "ATTACK_ORDER", "PROTECT", "BUG_BUZZ" } },
-      { "ROSERADE", 47, ability = "NATURAL_CURE", nature = "MODEST", item = "SITRUS_BERRY", moves = { "PETAL_BLIZZARD", "GIGA_DRAIN", "STUN_SPORE", "LEECH_SEED" } },
+      { "ROSERADE", 47, ability = "NATURAL_CURE", nature = "MODEST", moves = { "PETAL_BLIZZARD", "GIGA_DRAIN", "STUN_SPORE", "LEECH_SEED" } },
     } },
     RM2_MC_BRAM = { like = "SAWYER_1", name = "BRAM", defeat = "Like a boulder down the mountain.", party = {
       { "GRAVELER", 34, ability = "STURDY", nature = "ADAMANT", item = "HARD_STONE", moves = { "ROCK_TOMB", "BULLDOZE", "ROLLOUT", "DEFENSE_CURL" } },
@@ -2229,19 +2229,19 @@ return {
     } },
     RM2_MC_RUE = { like = "SHELBY_1", name = "RUE", defeat = "Well fought. Truly.", party = {
       { "MEDICHAM", 33, ability = "PURE_POWER", nature = "JOLLY", item = "SITRUS_BERRY", moves = { "FORCE_PALM", "ZEN_HEADBUTT", "FAKE_OUT", "DETECT" } },
-      { "CHIMECHO", 32, ability = "LEVITATE", nature = "MODEST", item = "SITRUS_BERRY", moves = { "EXTRASENSORY", "ASTONISH", "YAWN", "HEALING_WISH" } },
+      { "CHIMECHO", 32, ability = "LEVITATE", nature = "MODEST", moves = { "EXTRASENSORY", "ASTONISH", "YAWN", "HEALING_WISH" } },
     } },
     RM3_MC_RUE = { like = "SHELBY_1", name = "RUE", defeat = "Well fought. Truly.", party = {
       { "MEDICHAM", 38, ability = "PURE_POWER", nature = "JOLLY", item = "SITRUS_BERRY", moves = { "FORCE_PALM", "ZEN_HEADBUTT", "FAKE_OUT", "DETECT" } },
-      { "CHIMECHO", 37, ability = "LEVITATE", nature = "MODEST", item = "SITRUS_BERRY", moves = { "EXTRASENSORY", "ASTONISH", "YAWN", "HEALING_WISH" } },
+      { "CHIMECHO", 37, ability = "LEVITATE", nature = "MODEST", moves = { "EXTRASENSORY", "ASTONISH", "YAWN", "HEALING_WISH" } },
     } },
     RM4_MC_RUE = { like = "SHELBY_1", name = "RUE", defeat = "Well fought. Truly.", party = {
       { "MEDICHAM", 43, ability = "PURE_POWER", nature = "JOLLY", item = "SITRUS_BERRY", moves = { "HIGH_JUMP_KICK", "ZEN_HEADBUTT", "FAKE_OUT", "DETECT" } },
-      { "CHIMECHO", 42, ability = "LEVITATE", nature = "MODEST", item = "SITRUS_BERRY", moves = { "EXTRASENSORY", "ASTONISH", "YAWN", "HEALING_WISH" } },
+      { "CHIMECHO", 42, ability = "LEVITATE", nature = "MODEST", moves = { "EXTRASENSORY", "ASTONISH", "YAWN", "HEALING_WISH" } },
     } },
     RM5_MC_RUE = { like = "SHELBY_1", name = "RUE", defeat = "Well fought. Truly.", party = {
       { "MEDICHAM", 48, ability = "PURE_POWER", nature = "JOLLY", item = "SITRUS_BERRY", moves = { "HIGH_JUMP_KICK", "ZEN_HEADBUTT", "FAKE_OUT", "DETECT" } },
-      { "CHIMECHO", 47, ability = "LEVITATE", nature = "MODEST", item = "SITRUS_BERRY", moves = { "EXTRASENSORY", "ASTONISH", "YAWN", "HEALING_WISH" } },
+      { "CHIMECHO", 47, ability = "LEVITATE", nature = "MODEST", moves = { "EXTRASENSORY", "ASTONISH", "YAWN", "HEALING_WISH" } },
     } },
     RM2_R114_HAL = { like = "STEVE_1", name = "HAL", defeat = "Fossil-fueled and still lost.", party = {
       { "ANORITH", 32, ability = "BATTLE_ARMOR", nature = "ADAMANT", item = "HARD_STONE", moves = { "ANCIENT_POWER", "BUG_BITE", "METAL_CLAW", "PROTECT" } },
@@ -2260,19 +2260,19 @@ return {
       { "CRADILY", 47, ability = "STORM_DRAIN", nature = "CALM", item = "SITRUS_BERRY", moves = { "POWER_GEM", "ENERGY_BALL", "CONFUSE_RAY", "INGRAIN" } },
     } },
     RM2_SHIP_LIV = { like = "THALIA_1", name = "LIV", defeat = "How dreadfully unfashionable.", party = {
-      { "SWIRLIX", 32, ability = "SWEET_VEIL", nature = "BOLD", item = "SITRUS_BERRY", moves = { "FAIRY_WIND", "DRAINING_KISS", "COTTON_SPORE", "PROTECT" } },
+      { "SWIRLIX", 32, ability = "SWEET_VEIL", nature = "BOLD", moves = { "FAIRY_WIND", "DRAINING_KISS", "COTTON_SPORE", "PROTECT" } },
       { "GLAMEOW", 32, ability = "LIMBER", nature = "JOLLY", item = "SITRUS_BERRY", moves = { "FAKE_OUT", "FURY_SWIPES", "FEINT_ATTACK", "PROTECT" } },
     } },
     RM3_SHIP_LIV = { like = "THALIA_1", name = "LIV", defeat = "How dreadfully unfashionable.", party = {
-      { "SLURPUFF", 37, ability = "SWEET_VEIL", nature = "BOLD", item = "SITRUS_BERRY", moves = { "FAIRY_WIND", "DRAINING_KISS", "COTTON_SPORE", "PROTECT" } },
+      { "SLURPUFF", 37, ability = "SWEET_VEIL", nature = "BOLD", moves = { "FAIRY_WIND", "DRAINING_KISS", "COTTON_SPORE", "PROTECT" } },
       { "GLAMEOW", 37, ability = "LIMBER", nature = "JOLLY", item = "SITRUS_BERRY", moves = { "FAKE_OUT", "FURY_SWIPES", "FEINT_ATTACK", "PROTECT" } },
     } },
     RM4_SHIP_LIV = { like = "THALIA_1", name = "LIV", defeat = "How dreadfully unfashionable.", party = {
-      { "SLURPUFF", 42, ability = "SWEET_VEIL", nature = "BOLD", item = "SITRUS_BERRY", moves = { "FAIRY_WIND", "DRAINING_KISS", "COTTON_SPORE", "PROTECT" } },
+      { "SLURPUFF", 42, ability = "SWEET_VEIL", nature = "BOLD", moves = { "FAIRY_WIND", "DRAINING_KISS", "COTTON_SPORE", "PROTECT" } },
       { "PURUGLY", 42, ability = "THICK_FAT", nature = "JOLLY", item = "SITRUS_BERRY", moves = { "FAKE_OUT", "FURY_SWIPES", "SUCKER_PUNCH", "PROTECT" } },
     } },
     RM5_SHIP_LIV = { like = "THALIA_1", name = "LIV", defeat = "How dreadfully unfashionable.", party = {
-      { "SLURPUFF", 47, ability = "SWEET_VEIL", nature = "BOLD", item = "SITRUS_BERRY", moves = { "FAIRY_WIND", "DRAINING_KISS", "COTTON_SPORE", "PROTECT" } },
+      { "SLURPUFF", 47, ability = "SWEET_VEIL", nature = "BOLD", moves = { "FAIRY_WIND", "DRAINING_KISS", "COTTON_SPORE", "PROTECT" } },
       { "PURUGLY", 47, ability = "THICK_FAT", nature = "JOLLY", item = "SITRUS_BERRY", moves = { "FAKE_OUT", "FURY_SWIPES", "SUCKER_PUNCH", "PROTECT" } },
     } },
     RM2_R115N_KEN = { like = "TIMOTHY_1", name = "KENT", defeat = "Expertly beaten.", party = {
@@ -2340,51 +2340,51 @@ return {
       { "CHANDELURE", 48, ability = "FLASH_FIRE", nature = "MODEST", item = "CHARCOAL", moves = { "FLAME_BURST", "HEX", "WILL_O_WISP", "PROTECT" } },
     } },
     RM2_R121_MAX = { like = "WALTER_1", name = "MAX", defeat = "A gentleman loses graciously.", party = {
-      { "PERSIAN", 34, ability = "TECHNICIAN", nature = "JOLLY", item = "SITRUS_BERRY", moves = { "FAKE_OUT", "FURY_SWIPES", "BITE", "TAUNT" } },
+      { "PERSIAN", 34, ability = "TECHNICIAN", nature = "JOLLY", moves = { "FAKE_OUT", "FURY_SWIPES", "BITE", "TAUNT" } },
       { "KECLEON", 34, ability = "PROTEAN", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "SHADOW_SNEAK", "FEINT_ATTACK", "ANCIENT_POWER", "FURY_SWIPES" } },
     } },
     RM3_R121_MAX = { like = "WALTER_1", name = "MAX", defeat = "A gentleman loses graciously.", party = {
-      { "PERSIAN", 37, ability = "TECHNICIAN", nature = "JOLLY", item = "SITRUS_BERRY", moves = { "FAKE_OUT", "FURY_SWIPES", "BITE", "TAUNT" } },
+      { "PERSIAN", 37, ability = "TECHNICIAN", nature = "JOLLY", moves = { "FAKE_OUT", "FURY_SWIPES", "BITE", "TAUNT" } },
       { "KECLEON", 37, ability = "PROTEAN", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "SHADOW_SNEAK", "FEINT_ATTACK", "ANCIENT_POWER", "FURY_SWIPES" } },
     } },
     RM4_R121_MAX = { like = "WALTER_1", name = "MAX", defeat = "A gentleman loses graciously.", party = {
-      { "PERSIAN", 42, ability = "TECHNICIAN", nature = "JOLLY", item = "SITRUS_BERRY", moves = { "FAKE_OUT", "FURY_SWIPES", "NIGHT_SLASH", "TAUNT" } },
+      { "PERSIAN", 42, ability = "TECHNICIAN", nature = "JOLLY", moves = { "FAKE_OUT", "FURY_SWIPES", "NIGHT_SLASH", "TAUNT" } },
       { "KECLEON", 42, ability = "PROTEAN", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "SHADOW_SNEAK", "FEINT_ATTACK", "ANCIENT_POWER", "FURY_SWIPES" } },
     } },
     RM5_R121_MAX = { like = "WALTER_1", name = "MAX", defeat = "A gentleman loses graciously.", party = {
-      { "PERSIAN", 47, ability = "TECHNICIAN", nature = "JOLLY", item = "SITRUS_BERRY", moves = { "FAKE_OUT", "FURY_SWIPES", "NIGHT_SLASH", "TAUNT" } },
+      { "PERSIAN", 47, ability = "TECHNICIAN", nature = "JOLLY", moves = { "FAKE_OUT", "FURY_SWIPES", "NIGHT_SLASH", "TAUNT" } },
       { "KECLEON", 47, ability = "PROTEAN", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "SHADOW_SNEAK", "SUCKER_PUNCH", "ANCIENT_POWER", "FURY_SWIPES" } },
     } },
     RM2_R111N_ZED = { like = "WILTON_1", name = "ZED", defeat = "Cool under pressure, still lost.", party = {
-      { "DUSKULL", 32, ability = "LEVITATE", nature = "BOLD", item = "SITRUS_BERRY", moves = { "NIGHT_SHADE", "WILL_O_WISP", "CONFUSE_RAY", "DISABLE" } },
+      { "DUSKULL", 32, ability = "LEVITATE", nature = "BOLD", moves = { "NIGHT_SHADE", "WILL_O_WISP", "CONFUSE_RAY", "DISABLE" } },
       { "AXEW", 33, ability = "MOLD_BREAKER", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "DRAGON_RAGE", "CRUNCH", "ASSURANCE", "TAUNT" } },
     } },
     RM3_R111N_ZED = { like = "WILTON_1", name = "ZED", defeat = "Cool under pressure, still lost.", party = {
-      { "DUSKNOIR", 37, ability = "PRESSURE", nature = "BOLD", item = "SITRUS_BERRY", moves = { "NIGHT_SHADE", "WILL_O_WISP", "CONFUSE_RAY", "DISABLE" } },
+      { "DUSKNOIR", 37, ability = "PRESSURE", nature = "BOLD", moves = { "NIGHT_SHADE", "WILL_O_WISP", "CONFUSE_RAY", "DISABLE" } },
       { "FRAXURE", 38, ability = "MOLD_BREAKER", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "DRAGON_RAGE", "CRUNCH", "ASSURANCE", "TAUNT" } },
     } },
     RM4_R111N_ZED = { like = "WILTON_1", name = "ZED", defeat = "Cool under pressure, still lost.", party = {
-      { "DUSKNOIR", 42, ability = "PRESSURE", nature = "BOLD", item = "SITRUS_BERRY", moves = { "NIGHT_SHADE", "WILL_O_WISP", "CONFUSE_RAY", "DISABLE" } },
+      { "DUSKNOIR", 42, ability = "PRESSURE", nature = "BOLD", moves = { "NIGHT_SHADE", "WILL_O_WISP", "CONFUSE_RAY", "DISABLE" } },
       { "FRAXURE", 43, ability = "MOLD_BREAKER", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "DRAGON_RAGE", "CRUNCH", "ASSURANCE", "TAUNT" } },
     } },
     RM5_R111N_ZED = { like = "WILTON_1", name = "ZED", defeat = "Cool under pressure, still lost.", party = {
-      { "DUSKNOIR", 47, ability = "PRESSURE", nature = "BOLD", item = "SITRUS_BERRY", moves = { "NIGHT_SHADE", "WILL_O_WISP", "CONFUSE_RAY", "DISABLE" } },
+      { "DUSKNOIR", 47, ability = "PRESSURE", nature = "BOLD", moves = { "NIGHT_SHADE", "WILL_O_WISP", "CONFUSE_RAY", "DISABLE" } },
       { "HAXORUS", 48, ability = "MOLD_BREAKER", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "DRAGON_RAGE", "CRUNCH", "ASSURANCE", "TAUNT" } },
     } },
     RM2_R104_ROSA = { like = "CINDY_1", name = "ROSA", defeat = "My, how unladylike of me to lose.", party = {
-      { "PETILIL", 32, ability = "OWN_TEMPO", nature = "MODEST", item = "SITRUS_BERRY", moves = { "SLEEP_POWDER", "GIGA_DRAIN", "FAIRY_WIND", "LEECH_SEED" } },
+      { "PETILIL", 32, ability = "OWN_TEMPO", nature = "MODEST", moves = { "SLEEP_POWDER", "GIGA_DRAIN", "FAIRY_WIND", "LEECH_SEED" } },
       { "CHERRIM", 32, ability = "FLOWER_GIFT", nature = "BOLD", item = "SITRUS_BERRY", moves = { "HELPING_HAND", "LEECH_SEED", "MORNING_SUN", "TACKLE" } },
     } },
     RM3_R104_ROSA = { like = "CINDY_1", name = "ROSA", defeat = "My, how unladylike of me to lose.", party = {
-      { "LILLIGANT", 37, ability = "OWN_TEMPO", nature = "MODEST", item = "SITRUS_BERRY", moves = { "SLEEP_POWDER", "ENERGY_BALL", "FAIRY_WIND", "LEECH_SEED" } },
+      { "LILLIGANT", 37, ability = "OWN_TEMPO", nature = "MODEST", moves = { "SLEEP_POWDER", "ENERGY_BALL", "FAIRY_WIND", "LEECH_SEED" } },
       { "CHERRIM", 37, ability = "FLOWER_GIFT", nature = "BOLD", item = "SITRUS_BERRY", moves = { "HELPING_HAND", "LEECH_SEED", "MORNING_SUN", "TACKLE" } },
     } },
     RM4_R104_ROSA = { like = "CINDY_1", name = "ROSA", defeat = "My, how unladylike of me to lose.", party = {
-      { "LILLIGANT", 42, ability = "OWN_TEMPO", nature = "MODEST", item = "SITRUS_BERRY", moves = { "SLEEP_POWDER", "ENERGY_BALL", "FAIRY_WIND", "LEECH_SEED" } },
+      { "LILLIGANT", 42, ability = "OWN_TEMPO", nature = "MODEST", moves = { "SLEEP_POWDER", "ENERGY_BALL", "FAIRY_WIND", "LEECH_SEED" } },
       { "CHERRIM", 42, ability = "FLOWER_GIFT", nature = "BOLD", item = "SITRUS_BERRY", moves = { "HELPING_HAND", "LEECH_SEED", "MORNING_SUN", "TACKLE" } },
     } },
     RM5_R104_ROSA = { like = "CINDY_1", name = "ROSA", defeat = "My, how unladylike of me to lose.", party = {
-      { "LILLIGANT", 47, ability = "OWN_TEMPO", nature = "MODEST", item = "SITRUS_BERRY", moves = { "SLEEP_POWDER", "LEAF_STORM", "FAIRY_WIND", "LEECH_SEED" } },
+      { "LILLIGANT", 47, ability = "OWN_TEMPO", nature = "MODEST", moves = { "SLEEP_POWDER", "LEAF_STORM", "FAIRY_WIND", "LEECH_SEED" } },
       { "CHERRIM", 47, ability = "FLOWER_GIFT", nature = "BOLD", item = "SITRUS_BERRY", moves = { "HELPING_HAND", "LEECH_SEED", "MORNING_SUN", "TACKLE" } },
     } },
   },

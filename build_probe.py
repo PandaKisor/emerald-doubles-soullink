@@ -104,10 +104,16 @@ function D.ballShow(act, caught, shakes, res, target, song, finish)
   -- a partner's throw is announced with the partner's name
   local thrower = st.link and st.linkNames and st.linkNames[act.battler]
   if thrower then st.playerName = thrower end
+  -- catch_seq names the thrower from the session first (catch_text): give
+  -- it one that carries the partner's name, everything else this game's
+  local session = st.session
+  if thrower and session and session.name ~= thrower then
+    session = setmetatable({ name = thrower }, { __index = st.session })
+  end
   Catching._replay = res or { success = true, location = "party", firstTimeCaught = false }
   CatchSeq.begin(st, act.itemId, caught, shakes, {
     pushMsg = function(text, wait) if wait then Ui.pushTimed(text, wait) else Ui.push(text) end end,
-    session = st.session, target = target,
+    session = session, target = target,
   })
   Battle._phase = "ball_show"
 end
@@ -324,8 +330,143 @@ return Coop
      "  opts.wild = true\n"
      "  if plain and BattleBridge.allDoubles then\n"
      "    local session = require(\"src.core.game3.runtime\").getSession()\n"
-     "    if BattleBridge.allDoubles(session) then opts.wildPartner = roll_wild_partner(session) end\n"
+     "    if BattleBridge.allDoubles(session) then\n"
+     "      opts.wildPartner = roll_wild_partner(session)\n"
+     "      -- wildPick (g3_coop's Soul Link) may swap the rolls: no duplicate lines\n"
+     "      -- on a first encounter. A step encounter's lead may be rerolled too.\n"
+     "      if BattleBridge.wildPick and opts.wildPartner then\n"
+     "        local ok, a, b = pcall(BattleBridge.wildPick, encounter, opts.wildPartner,\n"
+     "          function() return roll_wild_partner(session) end)\n"
+     "        if ok and type(a) == \"table\" and type(b) == \"table\" then encounter, opts.wildPartner = a, b end\n"
+     "      end\n"
+     "    end\n"
      "  end\n"),
+    # The flag store remembers the session it was loaded from and is only
+    # ever written back there: starting a New Game while the old field was
+    # still active saved the old game's flags (beaten trainers, items) into
+    # the new session (user, 2026-10-28).
+    # B takes back this turn's choice in a co-op multi battle while the
+    # partner hasn't chosen (user, 2026-10-28). The asking game waits for the
+    # partner's answer; the partner says yes only when it hasn't sent its own
+    # action for that turn (else it has already played the turn with ours).
+    # the link layer drops message types it has no schema for
+    ("src/link/Wire.lua",
+     "Wire.SCHEMAS = SCHEMAS\n",
+     "-- campaign: a co-op battle take-back (B) and its answer (link/battle.lua)\n"
+     "SCHEMAS.game3_battle_retract = inner3(function(m)\n"
+     "  return { turn = Wire.num(m.turn, 0, 0, MAX_INT), forSeat = Wire.num(m.forSeat, nil, 0, MAX_SEAT) }\n"
+     "end)\n"
+     "SCHEMAS.game3_battle_retract_reply = inner3(function(m)\n"
+     "  return { turn = Wire.num(m.turn, 0, 0, MAX_INT), ok = Wire.bool(m.ok, false) }\n"
+     "end)\n\n"
+     "Wire.SCHEMAS = SCHEMAS\n"),
+    ("src/core/game3/link/battle.lua",
+     '  FORFEIT = "forfeit",\n}\n',
+     '  FORFEIT = "forfeit",\n'
+     '  -- campaign: take back this turn\'s action (LB.requestRetract)\n'
+     '  RETRACT = "game3_battle_retract",\n'
+     '  RETRACT_REPLY = "game3_battle_retract_reply",\n}\n'),
+    ("src/core/game3/link/battle.lua",
+     "  LB._sent = {}\n",
+     "  LB._sent = {}\n  LB._retract = nil\n"),
+    ("src/core/game3/link/battle.lua",
+     "local STALE = { LB.MSG.ACTION, LB.MSG.SWITCH, LB.MSG.HASH, LB.MSG.OUTCOME, LB.MSG.FORFEIT }\n",
+     "local STALE = { LB.MSG.ACTION, LB.MSG.SWITCH, LB.MSG.HASH, LB.MSG.OUTCOME, LB.MSG.FORFEIT,\n"
+     "  LB.MSG.RETRACT, LB.MSG.RETRACT_REPLY }\n"),
+    ("src/core/game3/link/battle.lua",
+     "  local h = lk:take(LB.MSG.HASH)\n",
+     "  LB.pumpRetracts(lk)\n"
+     "  local h = lk:take(LB.MSG.HASH)\n"),
+    ("src/core/game3/link/battle.lua",
+     "function LB.peerAction(turn)\n",
+     "-- campaign: take-backs (B). The partner takes back an action: we drop it\n"
+     "-- if we haven't sent ours for that turn (so we can't have played the turn\n"
+     "-- with it). Runs every frame of a multi battle, choosing included.\n"
+     "function LB.pumpRetracts(lk)\n"
+     "  lk = lk or link().link or LB._lk\n"
+     "  if not (lk and LB.isMulti()) then return end\n"
+     "  if lk:isOpen() then lk:update(0) end\n"
+     "  local rq = lk:take(LB.MSG.RETRACT)\n"
+     "  while rq do\n"
+     "    if not isOwn(rq) then\n"
+     "      local turn = math.floor(tonumber(rq.turn) or 0)\n"
+     "      local seat = tonumber(rq.forSeat) or LB.mapSeat(tonumber(rq.seat))\n"
+     "      local ok = seat ~= nil and not LB._sent[turn]\n"
+     "      if ok and LB._seatActions[seat] then LB._seatActions[seat][turn] = nil end\n"
+     "      lk:send({ type = LB.MSG.RETRACT_REPLY, turn = turn, ok = ok and true or false })\n"
+     "    end\n"
+     "    rq = lk:take(LB.MSG.RETRACT)\n"
+     "  end\n"
+     "  local rp = lk:take(LB.MSG.RETRACT_REPLY)\n"
+     "  while rp do\n"
+     "    local R = LB._retract\n"
+     "    if not isOwn(rp) and R and R.answer == nil and math.floor(tonumber(rp.turn) or 0) == R.turn then\n"
+     "      R.answer = rp.ok == true\n"
+     "    end\n"
+     "    rp = lk:take(LB.MSG.RETRACT_REPLY)\n"
+     "  end\n"
+     "end\n\n"
+     "-- campaign: ask to take back our action for `turn` (multi battles). The\n"
+     "-- answer lands in LB._retract.answer (true: choose again, false: too late).\n"
+     "function LB.requestRetract(turn)\n"
+     "  local lk = link().link\n"
+     "  turn = math.floor(tonumber(turn) or 0)\n"
+     "  if LB._retract or not LB.isMulti() or not LB._sent[turn] or not (lk and lk:isOpen()) then return false end\n"
+     "  LB._retract = { turn = turn }\n"
+     "  lk:send({ type = LB.MSG.RETRACT, turn = turn })\n"
+     "  return true\n"
+     "end\n\n"
+     "function LB.peerAction(turn)\n"),
+    ("src/core/game3/battle/init.lua",
+     "local function multi_turn_step()\n  local st = Battle._st\n  local LB = link_battle()\n  local got = {}\n",
+     "local function multi_turn_step()\n  local st = Battle._st\n  local LB = link_battle()\n"
+     "  -- campaign: a take-back waits for the partner's answer (LB.requestRetract)\n"
+     "  local R = LB._retract\n"
+     "  if R then\n"
+     "    if R.answer == nil then LB.pumpActions() end\n"
+     "    if R.answer == nil then\n"
+     "      if not LB.linkOpen() then LB._retract = nil; LB.peerDropped() end\n"
+     "      return false\n"
+     "    end\n"
+     "    LB._retract = nil\n"
+     "    if R.answer then\n"
+     "      LB._sent[R.turn] = nil\n"
+     "      Battle._linkAct, Battle._linkMulti = nil, nil\n"
+     "      st.turn = math.max(0, st.turn - 1)\n"
+     "      Battle._phase = \"command\"\n"
+     "      D.startSelection()\n"
+     "      return false\n"
+     "    end\n"
+     "  end\n"
+     "  local got = {}\n"),
+    ("src/core/game3/battle/init.lua",
+     '  if Battle._phase == "linkwait" then\n    link_turn_step()\n    return\n  end\n',
+     '  -- campaign: answer the partner\'s take-backs while we are still choosing\n'
+     '  if Battle._st and Battle._st.multi and Battle._st.link then\n'
+     '    local LB = link_battle()\n'
+     '    if LB and LB.pumpRetracts and LB.isActive() then LB.pumpRetracts() end\n'
+     '  end\n'
+     '  if Battle._phase == "linkwait" then\n'
+     '    -- campaign: B takes back this turn\'s choice while the partner hasn\'t chosen\n'
+     '    if Battle._linkMulti and input and input:wasPressed("b") then\n'
+     '      local LB = link_battle()\n'
+     '      if LB and LB.requestRetract then LB.requestRetract(Battle._st.turn) end\n'
+     '    end\n'
+     '    link_turn_step()\n    return\n  end\n'),
+    ("src/core/game3/scripting/space.lua",
+     "  Space.store = Flags.newStore()\n",
+     "  Space.store = Flags.newStore()\n  Space._storeSession = nil\n"),
+    ("src/core/game3/scripting/space.lua",
+     "    Flags.loadInto(Space.store, {\n      flags = session.flags,\n",
+     "    Space._storeSession = session\n    Flags.loadInto(Space.store, {\n      flags = session.flags,\n"),
+    ("src/core/game3/scripting/space.lua",
+     "  local snap = Flags.serialize(Space.store)\n  local session = resolve_session(mod, game)\n",
+     "  local snap = Flags.serialize(Space.store)\n  local session = Space._storeSession or resolve_session(mod, game)\n"),
+    ("src/core/game3/scripting/space.lua",
+     "  if Space.active and Space.mapId == mapId then\n    return Space.vm\n  end\n",
+     "  if Space.active and Space.mapId == mapId\n"
+     "      and (Space._storeSession == nil or Space._storeSession == resolve_session(mod, game)) then\n"
+     "    return Space.vm\n  end\n"),
 ]
 
 POSTLUDE = '''  -- native D1: every battle is a double while the campaign is active

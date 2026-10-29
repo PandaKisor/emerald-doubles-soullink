@@ -106,6 +106,11 @@
    const linkStep=ch0.steps.findIndex(s=>s.maps.some(m=>D.maps[m].mapsec===snap.soulLink.rows[0].a));
    ok(G.loadSync(syncWith([item.flag,...ch0.steps[roxStep].trainers.map(id=>0x500+id)]))&&G.sync.party.length===1,'Load a game sync file');
    ok(!G.loadSync('{"format":"nope"}'),'A foreign sync file is refused');
+   // dropping the file on the page loads it too (Chrome's picker refuses AppData on Windows)
+   {const dt=new DataTransfer();dt.items.add(new File([syncWith([item.flag])],'guide-sync.bin'));window.dispatchEvent(new DragEvent('drop',{dataTransfer:dt,cancelable:true}));await sleep(300);
+    ok(G.sync&&G.sync.flags.includes(item.flag)&&!G.sync.flags.includes(0x500+ch0.steps[roxStep].trainers[0]),'Dropping guide-sync.bin on the page loads it');
+    ok(G.loadSync(syncWith([item.flag,...ch0.steps[roxStep].trainers.map(id=>0x500+id)])),'Load the full sync again');}
+   ok($('sync-win-path').textContent==='%APPDATA%\\pokemon-love2d\\mod_storage\\emerald','The help names the Windows folder to paste');
    ok($('sync-chip').textContent.includes('1 badge'),'Header shows the loaded game');
    ok(G.state.roster.me[0].species===snap.party[0][0]&&G.state.roster.me[0].ivs.spa===snap.party[0][8]&&G.state.roster.me[0].evs.spe===snap.party[0][16],'Your team follows the game with its IVs and EVs');
    ok(G.state.roster.partner[0].species===snap.partner.party[0][0],'The partner’s team comes from co-op');

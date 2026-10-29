@@ -120,7 +120,7 @@
   // game sync: guide-sync.bin from START > GUIDE SYNC (campaign/guide_sync.lua) --------
   // mon rows: species, level, item, ability, nature, IVs x6, EVs x6, moves x4, hp, maxHp, uid, nickname
   const SYNC = 'emerald-field-guide-sync', BADGE = 0x820, TRAINER_FLAG = 0x500;
-  let sync = null, flags = new Set(), syncHandle = null;
+  let sync = null, flags = new Set();
   // Lua encodes an empty table as {}: lists are normalized here
   const arr = x => Array.isArray(x) ? x : [];
   function validSync(v) {
@@ -160,7 +160,7 @@
   function syncAge() { const m = Math.round((Date.now() - sync.loadedAt) / 60000); return m < 1 ? 'just now' : m < 60 ? m + ' min ago' : m < 1440 ? Math.round(m / 60) + ' h ago' : Math.round(m / 1440) + ' d ago'; }
   function renderSyncChip() {
     $('sync-chip').innerHTML = sync ? `<b>${esc(sync.player?.name || 'Your game')}</b> · ${plural(badgeCount(), 'badge')}${sync.player?.cap ? ' · cap ' + sync.player.cap : ''} · ${esc(mapName(sync.player?.map))} <small>${syncAge()}</small>` : '';
-    $('sync-load').textContent = sync && syncHandle ? 'Reload ↻' : 'Load game';
+    $('sync-load').textContent = sync ? 'Reload ↻' : 'Load game';
   }
   function renderSyncPanel() {
     const el = $('sync-panel');
@@ -182,32 +182,25 @@
     if (!quiet) toast(`Loaded ${sync.player?.name || 'your game'}: ${plural(badgeCount(), 'badge')}, ${sync.party.length} in the party${sync.partner ? ', partner included' : ''}${v.campaign && v.campaign !== D.meta.campaignVersion ? ' (game on ' + v.campaign + ', guide ' + D.meta.campaignVersion + ')' : ''}.`);
     return true;
   }
-  // Chrome / Edge: keep the file handle in IndexedDB so Reload is one click
-  const idb = (mode, fn) => new Promise((ok, fail) => {
-    try { const r = indexedDB.open('emerald-field-guide', 1); r.onupgradeneeded = () => r.result.createObjectStore('h'); r.onerror = () => fail(r.error);
-      r.onsuccess = () => { const tx = r.result.transaction('h', mode), q = fn(tx.objectStore('h')); tx.oncomplete = () => ok(q?.result); tx.onerror = () => fail(tx.error); }; } catch (e) { fail(e); }
-  });
-  async function readHandle(h) {
-    if ((await h.queryPermission?.({mode: 'read'})) !== 'granted' && (await h.requestPermission?.({mode: 'read'})) !== 'granted') throw Error('Permission to read the file was refused.');
-    return loadSync(await (await h.getFile()).text());
+  // the browser's plain file chooser: Chrome's newer picker refuses files under
+  // AppData (where the game writes on Windows) as "system files"
+  function pickSync() { $('sync-help').close(); $('sync-file').click(); }
+  async function loadSyncFile(f) {
+    if (!f) return;
+    if (f.size > 8e6) toast('That file is too large.'); else loadSync(await f.text());
   }
-  async function pickSync() {
-    $('sync-help').close();
-    if (!window.showOpenFilePicker) { $('sync-file').click(); return; }
-    try {
-      const [h] = await showOpenFilePicker({id: 'guide-sync', types: [{description: 'Guide sync', accept: {'application/octet-stream': ['.bin'], 'application/json': ['.json']}}]});
-      if (await readHandle(h)) { syncHandle = h; try { await idb('readwrite', st => st.put(h, 'sync')); } catch {} renderSyncChip(); }
-    } catch (e) { if (e.name !== 'AbortError') $('sync-file').click(); }
-  }
-  $('sync-load').onclick = async () => {
-    if (syncHandle) { try { await readHandle(syncHandle); return; } catch (e) { toast(e.message || 'Could not read the file again; choose it once more.'); } }
-    $('sync-help').showModal();
-  };
+  $('sync-load').onclick = () => $('sync-help').showModal();
   $('sync-pick').onclick = pickSync;
   $('sync-help-close').onclick = () => $('sync-help').close();
-  $('sync-forget').onclick = () => { useSync(null); syncHandle = null; try { localStorage.removeItem(SYNC); idb('readwrite', st => st.delete('sync')).catch(() => {}); } catch {} $('sync-help').close(); renderSyncChip(); show(currentView); toast('The loaded game was forgotten.'); };
-  $('sync-file').onchange = async () => { const f = $('sync-file').files[0]; if (f) { if (f.size > 8e6) toast('That file is too large.'); else loadSync(await f.text()); } $('sync-file').value = ''; };
-  if (window.indexedDB) idb('readonly', st => st.get('sync')).then(h => { if (h) { syncHandle = h; renderSyncChip(); } }).catch(() => {});
+  $('sync-forget').onclick = () => { useSync(null); try { localStorage.removeItem(SYNC); } catch {} $('sync-help').close(); renderSyncChip(); show(currentView); toast('The loaded game was forgotten.'); };
+  $('sync-file').onchange = async () => { await loadSyncFile($('sync-file').files[0]); $('sync-file').value = ''; };
+  $('sync-copy-path').onclick = async () => {
+    try { await navigator.clipboard.writeText($('sync-win-path').textContent); toast('Copied. Paste it into the file window\'s address bar and press Enter.'); }
+    catch { toast('Select the path and copy it by hand.'); }
+  };
+  // or drop the file anywhere on the page
+  addEventListener('dragover', e => { if ([...(e.dataTransfer?.types || [])].includes('Files')) e.preventDefault(); });
+  addEventListener('drop', e => { const f = e.dataTransfer?.files?.[0]; if (!f) return; e.preventDefault(); $('sync-help').close(); loadSyncFile(f); });
 
   // teams: both players' rosters, filled from the game or by hand -------------------------
   const sideName = side => side === 'me' ? (sync?.player?.name || 'You') : (sync?.partner?.name || 'Partner');
