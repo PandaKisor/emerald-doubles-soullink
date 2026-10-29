@@ -56,4 +56,29 @@ snap = G.snapshot(game, old)
 seen = false
 for _, f in ipairs(snap.flags) do if f == CALVIN then seen = true end end
 T.check(seen, 'the old game\'s own sync still lists its flags')
+
+-- A New Game gets its own mod storage (user, 2026-10-29: fights came back on a
+-- new save). Stock New Game left the session without a playthrough id, so mod
+-- storage fell back to the slot's binding -- the old game's -- where g3_coop's
+-- trainer credits live and set their flags again on every connect.
+local ModRuntime = require('src.mods.Runtime')
+local Storage = require('src.mods.Storage')
+local Schema = require('src.core.game3.save_schema_firered')
+local SD = require('src.core.SaveData')
+local coopStore = Storage.new('g3_coop')
+local oldSave = { version = 'emerald', meta = {} }
+local oldId = SD.ensurePlaythroughId(oldSave)
+T.check(type(oldId) == 'string', 'the old game has a playthrough id')
+coopStore:write({ save = oldSave }, 'credits', { 318 })
+local bare = Schema.toSaveTable(F.session())
+T.check(SD.ensurePlaythroughId(bare) == oldId, 'without the fix a New Game lands in the old storage (the leak)')
+local session = F.session()
+ModRuntime.emit('save.created', { save = session })
+local newSave = Schema.toSaveTable(session)
+local newId = newSave.meta and newSave.meta.playthroughId
+T.check(type(newId) == 'string' and newId ~= oldId, 'save.created gives the New Game its own playthrough id')
+local okR, got = pcall(coopStore.read, coopStore, { save = newSave }, 'credits')
+T.check(not (okR and type(got) == 'table' and #got > 0), 'the New Game sees no old co-op credits')
+local okO, old = pcall(coopStore.read, coopStore, { save = oldSave }, 'credits')
+T.check(okO and type(old) == 'table' and old[1] == 318, 'the old game keeps its own storage')
 T.finish('campaign New Game flag isolation')

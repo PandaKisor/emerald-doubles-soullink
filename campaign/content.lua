@@ -83,6 +83,7 @@ return function(mod, active)
   local partyTools = source("campaign/party_tools.lua")(mod, active)
   local starterKit = source("campaign/starter_kit.lua")(mod, data, active)
   local guideSync = source("campaign/guide_sync.lua")(mod, active)
+  local newGame = source("campaign/new_game.lua")(mod, active)
   -- after every tool: START > TOOLS gathers their entries
   local startTools = source("campaign/start_tools.lua")(mod, active)
   source("full/tutors.lua").install({ Pokemon = Pokemon,
@@ -102,5 +103,5 @@ return function(mod, active)
     Version = require("src.core.GameVersion"), SaveFileIO = require("src.import.SaveFileIO"),
     SaveConvert = require("src.save_convert.SaveConvert") }, data, active)
   return { content = data, save = Save, active = active, learnsets = gate, moves = moves, trainers = trainers, world = world,
-    battleMoves = battleMoves, candy = candy, repel = repel, heal = heal, partyTools = partyTools, starterKit = starterKit, guideSync = guideSync, startTools = startTools, footprints = footprints, partnerNpcs = partnerNpcs }
+    battleMoves = battleMoves, candy = candy, repel = repel, heal = heal, partyTools = partyTools, starterKit = starterKit, guideSync = guideSync, startTools = startTools, footprints = footprints, partnerNpcs = partnerNpcs, newGame = newGame }
 end
