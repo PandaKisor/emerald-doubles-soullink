@@ -54,6 +54,11 @@ using items or running out of steps. Save the game to keep your choice.
 The starter counts as Littleroot Town's Soul Link encounter, including in
 existing run records, so it does not use Route 101's encounter.
 
+**START > TOOLS > IV / EV** shows each party member's IVs, EVs, nature and Hidden
+Power type, and lets you set its EVs directly: UP/DOWN picks a stat, LEFT/RIGHT
+takes or adds 4, A fills it (252 at most, 510 in all) or clears it, and L/R
+flips through the party. Stats update at once.
+
 **START > HEAL TEAM** restores your entire party's HP, status and PP for free.
 With Soul Link hard rules on, dead or disallowed Pokémon remain excluded.
 Birch's rescue battle and Norman's borrowed Zigzagoon/Wally's catching tutorial

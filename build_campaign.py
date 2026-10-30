@@ -465,10 +465,21 @@ def lua(value):
     return "{" + ", ".join(f"{k} = {lua(v)}" for k, v in value.items()) + "}"
 
 
+# Campaign changes to the donor's wild tables: map -> area -> {donor species:
+# replacement} (same slots and levels). Early answers to Roxanne (user,
+# 2026-10-29: a run shouldn't hinge on rolling a super-effective Pokémon):
+# Water on Route 101, Fighting on Route 103, Water/Ground on Route 104.
+WILD_EDITS = {
+    "ROUTE101": {"land": {"SPECIES_WURMPLE": "SPECIES_POLIWAG"}},
+    "ROUTE103": {"land": {"SPECIES_KRICKETOT": "SPECIES_MACHOP"}},
+    "ROUTE104": {"land": {"SPECIES_SENTRET": "SPECIES_WOOPER"}},
+}
+
+
 def wild_maps():
     """The donor's map encounter tables (src/data/wild_encounters.json), keyed
-    by the vanilla map name without MAP_. Honey encounters have no vanilla
-    mechanic and are left out."""
+    by the vanilla map name without MAP_, with WILD_EDITS applied. Honey
+    encounters have no vanilla mechanic and are left out."""
     wild = json.loads((DONOR / "src/data/wild_encounters.json").read_text())
     group = next(g for g in wild["wild_encounter_groups"] if g["label"] == "gWildMonHeaders")
     rows, variants = [], {}
@@ -477,8 +488,10 @@ def wild_maps():
         areas = {}
         for key, area in AREAS:
             if key in entry:
+                swap = WILD_EDITS.get(name, {}).get(area, {})
                 areas[area] = {"rate": entry[key]["encounter_rate"],
-                               "slots": [[m["species"], m["min_level"], m["max_level"]] for m in entry[key]["mons"]]}
+                               "slots": [[swap.get(m["species"], m["species"]), m["min_level"], m["max_level"]]
+                                         for m in entry[key]["mons"]]}
         if not areas:
             continue
         if name == "ALTERING_CAVE":

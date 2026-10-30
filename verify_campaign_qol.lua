@@ -163,7 +163,7 @@ for _, e in ipairs(entries()) do
   if e.id == 'g3_campaign_ivs' then ivEntry = e end
 end
 T.check(relearnEntry and relearnEntry.label == 'RELEARN MOVE', 'START menu offers RELEARN MOVE')
-T.check(ivEntry and ivEntry.label == 'IV CHECK', 'START menu offers IV CHECK')
+T.check(ivEntry and ivEntry.label == 'IV / EV', 'START menu offers IV / EV')
 local ivMon = F.mon('TREECKO', 20, {'POUND'})
 ivMon.ivs = { hp = 31, atk = 0, def = 12, spa = 30, spd = 7, spe = 25 }
 ivMon.evs = { hp = 4, atk = 0, def = 0, spa = 252, spd = 0, spe = 252 }
@@ -178,6 +178,25 @@ ivMon.personality = 0
 local _, _, _ = PT.ivRows(ivMon)
 T.check(select(1, PT.ivRows(ivMon))[1].mark == '', 'neutral natures mark nothing')
 T.check(type(hpType) == 'string' and #hpType > 0, 'Hidden Power type is named')
+local Pokemon = require('src.core.game3.pokemon')
+-- EV editing (0.42.2): clamps per stat and in total, recalculates stats, keeps damage
+local evMon = F.mon('TREECKO', 50, {'POUND'})
+evMon.ivs = { hp = 31, atk = 31, def = 31, spa = 31, spd = 31, spe = 31 }
+evMon.evs = { hp = 0, atk = 0, def = 0, spa = 0, spd = 0, spe = 0 }
+Pokemon.applyStats(evMon); evMon.hp = evMon.maxHp - 10
+local spe0, hp0 = evMon.speed, evMon.maxHp
+T.eq(PT.setEv(evMon, 'spe', 300), 252, 'an EV stops at 252')
+T.check(evMon.speed > spe0, 'Speed is recalculated at once')
+T.eq(PT.toggleEv(evMon, 'spa'), 252, 'A fills a stat')
+T.eq(PT.toggleEv(evMon, 'hp'), 6, 'the last stat gets only what is left of 510')
+T.eq(Pokemon.evCount(evMon), 510, '510 in all')
+T.eq(evMon.hp, evMon.maxHp - 10, 'HP keeps its damage when max HP grows')
+T.check(evMon.maxHp > hp0, 'max HP grows with HP EVs')
+T.eq(PT.setEv(evMon, 'atk', 4), 0, 'no room left: Attack stays 0')
+T.eq(PT.toggleEv(evMon, 'spa'), 0, 'A on a full stat clears it')
+T.eq(PT.setEv(evMon, 'atk', 5), 5, 'freed room can be spent')
+evMon.hp = 0; PT.setEv(evMon, 'hp', 0)
+T.eq(evMon.hp, 0, 'a fainted Pokémon stays fainted')
 local ks = F.session()
 local oran, potionId = F.ids.items.ITEM_ORAN_BERRY, F.ids.items.ITEM_POTION
 T.check(K.grant(ks), 'starter kit granted once')
