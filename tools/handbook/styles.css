@@ -415,3 +415,51 @@ main:has(.guide.with-battle){max-width:1720px}
   .form-grid.four{grid-template-columns:1fr 1fr}
 }
 @media (max-width:720px){.global-search{order:5;flex-basis:100%;max-width:none}}
+
+/* Pokémon page (Pokédex dialog) */
+dialog.dex{max-width:880px;padding:0;max-height:calc(100vh - 32px)}
+.dex-bar{position:sticky;top:0;z-index:1;display:flex;gap:8px;align-items:center;padding:12px 16px;background:var(--panel);border-bottom:1px solid var(--line)}
+.dex-search{flex:1;min-width:0}
+#dex-body{padding:16px 20px 20px}
+.dex-head{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.dex-head h2{margin:0}
+.dex-head .muted{font:600 12px var(--mono)}
+.dex-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-bottom:14px}
+.dex-grid section{background:var(--bg2);border-radius:10px;padding:10px 12px}
+.dex-grid h4,.dex-learn h4{margin:0 0 6px;font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
+.base-stats{display:grid;grid-template-columns:36px 30px 1fr;gap:3px 8px;align-items:center;font:600 12px var(--mono)}
+.base-stats small{font:600 10px var(--sans);color:var(--muted)}
+.base-stats i{display:block;height:7px;border-radius:4px;background:var(--accent)}
+.base-stats i.low{background:#e0794b}.base-stats i.mid{background:#d9b23f}.base-stats i.high{background:#4fa36b}
+.dex-list{list-style:none;margin:0;padding:0;font-size:13px}
+.dex-list li{margin:3px 0}
+.dex-list small{color:var(--muted)}
+.dex-mon{display:inline-flex;align-items:center;gap:2px;border:0;background:none;padding:0;color:var(--accent);font:inherit;font-weight:600;cursor:pointer}
+.dex-mon .mi{margin:-6px -2px -6px -6px}
+.dex-learn .tabs{margin:0 0 6px}
+.learn-table{width:100%;border-collapse:collapse;font-size:13px}
+.learn-table th{text-align:left;font:600 10px var(--sans);text-transform:uppercase;color:var(--muted);padding:4px 6px;border-bottom:1px solid var(--line)}
+.learn-table td{padding:4px 6px;border-bottom:1px solid var(--line);vertical-align:middle}
+.learn-table td.num{font:600 12px var(--mono);white-space:nowrap}
+.learn-table .desc{color:var(--muted);font-size:12px}
+.mi[data-dex]{cursor:zoom-in}
+.result-mons{display:flex;flex-wrap:wrap;gap:8px}
+.result-mon{display:flex;align-items:center;gap:6px;cursor:pointer;padding:6px 12px 6px 6px}
+@media (max-width:640px){.learn-table .desc,.learn-table .acc{display:none}#dex-body{padding:12px}}
+.dex-filters{flex-wrap:wrap;align-items:flex-end;gap:10px;margin-bottom:12px}
+.dex-filters .search{flex:1;min-width:200px}
+.dex-filters .check{display:flex;gap:6px;align-items:center;font-size:13px;padding-bottom:8px}
+.dex-table-wrap{overflow-x:auto}
+.dex-table{width:100%;border-collapse:collapse;font-size:13px;background:var(--panel);border-radius:12px;overflow:hidden}
+.dex-table th{text-align:left;font:600 10px var(--sans);text-transform:uppercase;color:var(--muted);padding:8px;border-bottom:1px solid var(--line);white-space:nowrap}
+.dex-table td{padding:4px 8px;border-bottom:1px solid var(--line);vertical-align:middle}
+.dex-table td.num{font:600 12px var(--mono);text-align:right}
+.dex-table tr[data-dex]{cursor:pointer}
+.dex-table tr[data-dex]:hover{background:var(--bg2)}
+.dex-table .who{display:flex;align-items:center;gap:4px;font-weight:600;white-space:nowrap}
+.learn-chips summary{cursor:pointer;font-size:12px;color:var(--ink2);margin-top:6px}
+.learn-chips .chips{margin-top:6px;max-height:220px;overflow-y:auto}
+.learn-chips small{display:block;margin:6px 0 2px;color:var(--muted);font-size:10px;text-transform:uppercase}
+@media (max-width:640px){.dex-table .stat-col{display:none}}
+.dex-table th.num{text-align:right}
+@media (max-width:640px){.learn-table .type-col{display:none}}

@@ -18,6 +18,7 @@
    if(view==='results'){$('search').value=params.get('q')||'Roxanne';G.show('results');return;}
    G.show(view);
    if(view==='guide')for(const i of (params.get('open')||'').split(',').filter(Boolean))openStep(i);
+   if(params.has('dex'))G.openDex(+params.get('dex'));
    if(params.has('battle')){G.openBattle(rox.id);if(params.get('battle')!=='hits')document.querySelector(`[data-bview="${params.get('battle')}"]`).click();}
    return;
   }
@@ -125,6 +126,15 @@
    const ld=openStep(linkStep);ok(ld.querySelector('.link-row')&&ld.textContent.includes('ZIGGY'),'Soul Link pairs show on their stop');
    G.show('calculator');ok(document.querySelector('[data-from-team="d"] option[value="partner:0"]')&&document.querySelector('[data-from-team="d"] option[value^="sync-b:"]'),'Calculator offers both teams and the boxes');
    change(document.querySelector('[data-from-team="d"]'),'partner:0');ok(G.state.d.species===snap.partner.party[0][0],'Load the partner’s Pokémon as defender');
+   // Pokédex page, entries, learnsets
+   G.show('pokedex');ok(document.querySelectorAll('#pokedex-list tr[data-dex]').length>300,'The Pokédex lists every Pokémon');
+   change($('pokedex-search'),'Ralts','input');const ralts=document.querySelector('#pokedex-list tr[data-dex]');ok(ralts&&ralts.textContent.includes('Ralts'),'Filter the Pokédex by name');
+   ralts.click();ok($('dex').open&&$('dex-body').textContent.includes('Synchronize')&&$('dex-body').querySelector('.learn-table tbody tr'),'A Pokémon page shows abilities and level-up moves');
+   $('dex-body').querySelector('[data-dex-tab="machine"]').click();ok($('dex-body').querySelector('[data-dex-tab="machine"].active')&&/TM\d\d/.test($('dex-body').textContent),'TM tab lists its machines');
+   $('dex-body').querySelector('.dex-mon').click();ok($('dex-body').textContent.includes('Kirlia'),'Evolution links open the next page');
+   const kirlia=+Object.values(D.species).find(s=>s.symbol==='SPECIES_KIRLIA').id;ok([...G.learnable(kirlia).values()].flat().some(x=>/as Ralts/.test(x.label)),'Pre-evolution moves count');
+   $('dex-close').click();change($('pokedex-search'),'Thunder Wave','input');ok($('pokedex-note').textContent.includes('can learn Thunder Wave'),'Filter the Pokédex by move');
+   G.show('calculator');ok(document.querySelector('#move-quick details.learn-chips .chip')&&document.querySelector('#learn-a option'),'Calculator offers everything the attacker can learn');
    G.show('guide');
    ok(!errors.length,'No runtime errors');
    sessionStorage.setItem('smokeChecks',JSON.stringify(checks));sessionStorage.setItem('smokeReload','1');location.reload();return;

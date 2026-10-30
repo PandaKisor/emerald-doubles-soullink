@@ -24,7 +24,7 @@
   const icon = (id, cls = '') => {
     const n = I.index[id];
     if (n == null) return `<span class="mi ${cls}"></span>`;
-    return `<span class="mi ${cls}" style="background-position:-${(n % I.columns) * I.cell}px -${Math.floor(n / I.columns) * I.cell}px" title="${esc(name('species', id))}"></span>`;
+    return `<span class="mi ${cls}" data-dex="${id}" style="background-position:-${(n % I.columns) * I.cell}px -${Math.floor(n / I.columns) * I.cell}px" title="${esc(name('species', id))}"></span>`;
   };
   const moveChip = id => {
     const m = D.moves[id];
@@ -98,11 +98,11 @@
 
   // views: the route guide, search results, the calculator ----------------------------
   function show(view) {
-    if (!['guide', 'results', 'calculator'].includes(view)) view = 'guide';
+    if (!['guide', 'results', 'calculator', 'pokedex'].includes(view)) view = 'guide';
     currentView = view;
     document.querySelectorAll('.page').forEach(p => p.classList.toggle('active', p.id === view));
     history.replaceState(null, '', '#' + view);
-    if (view === 'guide') renderGuide(); if (view === 'results') renderResults(); if (view === 'calculator') renderCalc();
+    if (view === 'guide') renderGuide(); if (view === 'results') renderResults(); if (view === 'calculator') renderCalc(); if (view === 'pokedex') renderPokedex();
   }
   $('calc-open').onclick = () => { show('calculator'); window.scrollTo(0, 0); };
   $('calc-back').onclick = () => { show('guide'); };
@@ -577,12 +577,153 @@
     const parts = [];
     if (stops.length) parts.push(`<h2 class="results-h">Stops</h2><div class="result-stops">${stops.slice(0, 24).map(([ci, si, s]) => `<button class="panel result-stop" data-goto="${ci}.${si}"><small>Chapter ${ci + 1} · ${esc(G[ci].title)}</small><b>${esc(s.title)}</b></button>`).join('')}</div>`);
     if (ts.length) parts.push(`<h2 class="results-h">Trainers</h2><div class="grid">${ts.slice(0, 12).map(g => { const t = g.t || rivalPick(g), [ci, si] = stepOf[t.id], link = `<div class="partner-bar"><button class="text-button" data-goto="${ci}.${si}">Go to ${esc(G[ci].steps[si].title)} →</button></div>`; return g.t ? trainerCard(g.t, link) : rivalCard(g); }).join('')}</div>${ts.length > 12 ? `<p class="footnote">${ts.length - 12} more: search more precisely.</p>` : ''}`);
-    if (wild.length) parts.push(`<h2 class="results-h">Wild Pokémon</h2><div class="grid">${wild.map(([s, where]) => `<article class="panel"><div class="panel-head"><div class="who-line">${icon(s.id)}<h3>${esc(name('species', s.id))}</h3></div><span>${typePills(s.types || [])}</span></div><ul class="source-list">${where.slice(0, 10).map(w => { const sl = w.slots.filter(x => x.species === s.id), wt = sl.reduce((n, x) => n + x.weight, 0); return `<li><div class="source-line"><button class="text-button location" ${goto(w.map)}>${esc(w.mapName)}</button><span class="pct">${wt}%</span></div><div class="location-info"><span class="tag">${esc(w.method)}</span>Lv ${Math.min(...sl.map(x => x.minLevel))}–${Math.max(...sl.map(x => x.maxLevel))}</div></li>`; }).join('')}</ul>${where.length > 10 ? `<p class="footnote">${where.length - 10} more areas.</p>` : ''}</article>`).join('')}</div>`);
+    const mons = species.filter(s => norm(name('species', s.id)).includes(q)).slice(0, 24);
+    if (mons.length) parts.push(`<h2 class="results-h">Pokémon</h2><div class="result-mons">${mons.map(s => `<button class="panel result-mon" data-dex="${s.id}">${icon(s.id)}<b>${esc(name('species', s.id))}</b>${typePills(s.types || [])}</button>`).join('')}</div>`);
+    if (wild.length) parts.push(`<h2 class="results-h">Wild Pokémon</h2><div class="grid">${wild.map(([s, where]) => `<article class="panel"><div class="panel-head"><div class="who-line">${icon(s.id)}<h3><button class="text-button" data-dex="${s.id}">${esc(name('species', s.id))}</button></h3></div><span>${typePills(s.types || [])}</span></div><ul class="source-list">${where.slice(0, 10).map(w => { const sl = w.slots.filter(x => x.species === s.id), wt = sl.reduce((n, x) => n + x.weight, 0); return `<li><div class="source-line"><button class="text-button location" ${goto(w.map)}>${esc(w.mapName)}</button><span class="pct">${wt}%</span></div><div class="location-info"><span class="tag">${esc(w.method)}</span>Lv ${Math.min(...sl.map(x => x.minLevel))}–${Math.max(...sl.map(x => x.maxLevel))}</div></li>`; }).join('')}</ul>${where.length > 10 ? `<p class="footnote">${where.length - 10} more areas.</p>` : ''}</article>`).join('')}</div>`);
     if (its.length) parts.push(`<h2 class="results-h">Items</h2><div class="grid">${its.map(([i, src]) => `<article class="panel"><div class="panel-head"><div><div class="kicker">${esc(clean(i.pocket))}</div><h3>${esc(i.name)}</h3></div><span class="pill">${plural(src.length, 'source')}</span></div><p class="footnote" style="margin-top:0">${esc(i.description)}</p><ul class="source-list">${src.slice(0, 8).map(x => `<li><div class="source-line">${x.map ? `<button class="text-button location" ${goto(x.map)}>${esc(x.mapName || x.label)}</button>` : `<span class="location">${esc(x.label || 'Field menu')}</span>`}</div><div class="location-info"><span class="tag">${esc(x.kind)}</span>${x.x != null ? 'Tile ' + x.x + ', ' + x.y : ''}${x.minBadges != null ? ' · from ' + plural(x.minBadges, 'badge') : ''}</div></li>`).join('')}</ul>${src.length > 8 ? `<p class="footnote">${src.length - 8} more sources.</p>` : ''}</article>`).join('')}</div>`);
     $('results-body').innerHTML = parts.join('') || empty('Nothing found', 'Try a trainer, a place, a Pokémon or an item.');
   }
 
+  // Pokédex: every species' page, and what each one can learn ----------------------------
+  // evolves-from, for pre-evolution moves and the "Evolves from" line
+  const evolvesFrom = {};
+  for (const s of species) {
+    for (const e of s.evolutions || []) if (e.target && !evolvesFrom[e.target]) evolvesFrom[e.target] = [s.id, e, false];
+    for (const e of s.itemEvolutions || []) if (e.target && !evolvesFrom[e.target]) evolvesFrom[e.target] = [s.id, e, true];
+  }
+  const evoText = (e, byItem) => {
+    if (byItem) return `Use ${name('items', e.item)}${e.gender === 'M' ? ' (male)' : e.gender === 'F' ? ' (female)' : ''}`;
+    const p = e.param, lv = `Lv ${p}`;
+    switch (e.method) {
+      case 'EVO_LEVEL': case 'EVO_LEVEL_NINJASK': return lv;
+      case 'EVO_LEVEL_FEMALE': return lv + ' (female)';
+      case 'EVO_LEVEL_MALE': return lv + ' (male)';
+      case 'EVO_LEVEL_NIGHT': return lv + ' at night';
+      case 'EVO_LEVEL_DAY': return lv + ' in the day';
+      case 'EVO_LEVEL_DUSK': return lv + ' at dusk';
+      case 'EVO_LEVEL_RAIN': return lv + ' in rain';
+      case 'EVO_LEVEL_SILCOON': case 'EVO_LEVEL_CASCOON': return lv + ' (random)';
+      case 'EVO_LEVEL_ATK_GT_DEF': return lv + ', Attack > Defense';
+      case 'EVO_LEVEL_ATK_LT_DEF': return lv + ', Attack < Defense';
+      case 'EVO_LEVEL_ATK_EQ_DEF': return lv + ', Attack = Defense';
+      case 'EVO_LEVEL_DARK_TYPE_MON_IN_PARTY': return lv + ' with a Dark type in the party';
+      case 'EVO_FRIENDSHIP': return 'Level up with high friendship';
+      case 'EVO_FRIENDSHIP_DAY': return 'High friendship, in the day';
+      case 'EVO_FRIENDSHIP_NIGHT': return 'High friendship, at night';
+      case 'EVO_ITEM_HOLD': return `Level up holding ${name('items', p)}`;
+      case 'EVO_ITEM_HOLD_DAY': return `Level up holding ${name('items', p)} in the day`;
+      case 'EVO_ITEM_HOLD_NIGHT': return `Level up holding ${name('items', p)} at night`;
+      case 'EVO_MOVE': return `Level up knowing ${name('moves', p)}`;
+      case 'EVO_MOVE_TYPE': return `Level up knowing a ${D.types[p] || '?'}-type move`;
+      case 'EVO_SPECIFIC_MON_IN_PARTY': return `Level up with ${name('species', p)} in the party`;
+      case 'EVO_SPECIFIC_MAPSEC': return 'Level up in a special place';
+      case 'EVO_BEAUTY': return 'Level up with high Beauty';
+      default: return clean(String(e.method).replace(/^EVO_/, '')) + (p ? ' ' + p : '');
+    }
+  };
+  const machineOf = {};
+  for (const i of items) if (i.machineMove) machineOf[i.id] = i;
+  // move ID -> where it comes from: [{kind, label, sort}], level-up first; pre-evolutions too
+  function learnable(id) {
+    const out = new Map(), add = (move, kind, label, sort) => { if (!D.moves[move]) return; if (!out.has(move)) out.set(move, []); const l = out.get(move); if (!l.some(x => x.label === label)) l.push({kind, label, sort}); };
+    const seen = new Set();
+    for (let cur = +id, depth = 0; cur && !seen.has(cur); cur = evolvesFrom[cur]?.[0], depth++) {
+      seen.add(cur);
+      const s = D.species[cur]; if (!s) break;
+      const as = depth ? ` (as ${name('species', cur)})` : '';
+      for (const [lv, m] of s.learnset || []) add(m, 'level', (lv <= 1 ? 'Start' : 'Lv ' + lv) + as, depth * 1000 + lv);
+      for (const it of s.machines || []) { const mi = machineOf[it]; if (mi) add(mi.machineMove, 'machine', (mi.machine === 'HM' ? 'HM' : 'TM') + String(mi.machineNumber).padStart(2, '0'), 5000 + (mi.machine === 'HM' ? 100 : 0) + mi.machineNumber); }
+      for (const t of s.tutors || []) if (D.tutorMoves[t] != null) add(D.tutorMoves[t], 'tutor', 'Tutor', 7000);
+      for (const m of s.eggMoves || []) add(m, 'egg', 'Egg move' + as, 8000 + depth);
+    }
+    return out;
+  }
+  const bst = s => C.keys.reduce((n, k) => n + (s.stats?.[k] || 0), 0);
+  const wildOf = id => D.wild.filter(w => w.slots.some(x => x.species === +id));
+  const dexMon = id => `<button class="dex-mon" data-dex="${id}">${icon(id)}${esc(name('species', id))}</button>`;
+  const learnRow = (id, label) => { const m = D.moves[id]; return `<tr><td class="num">${esc(label)}</td><td>${moveChip(id)}</td><td class="type-col">${typePills([m.type])}</td><td>${esc(m.category)}</td><td class="num">${m.power || '—'}</td><td class="num acc">${m.accuracy ? m.accuracy + '%' : '—'}</td><td class="num">${m.pp}</td><td class="desc">${esc(m.description)}</td></tr>`; };
+  const learnTable = rows => rows.length ? `<table class="learn-table"><thead><tr><th></th><th>Move</th><th class="type-col">Type</th><th>Cat.</th><th>Pow</th><th class="acc">Acc</th><th>PP</th><th class="desc"></th></tr></thead><tbody>${rows.map(([id, l]) => learnRow(id, l)).join('')}</tbody></table>` : '<p class="footnote">None.</p>';
+  let dexTab = 'level';
+  function dexBody(id) {
+    const s = D.species[id];
+    if (!s) return empty('Unknown Pokémon', 'Pick one from the list.');
+    const total = bst(s);
+    const statRow = k => { const v = s.stats[k] || 0; return `<small>${({hp: 'HP', atk: 'Atk', def: 'Def', spa: 'SpA', spd: 'SpD', spe: 'Spe'})[k]}</small><b>${v}</b><i class="${v < 60 ? 'low' : v < 90 ? 'mid' : 'high'}" style="width:${Math.min(100, v / 1.8)}%"></i>`; };
+    const ab = s.abilities || [], abil = [];
+    if (ab[0]) abil.push([ab[0], '']); if (ab[1] && ab[1] !== ab[0]) abil.push([ab[1], '']); if (ab[2] && !ab.slice(0, 2).includes(ab[2])) abil.push([ab[2], 'Hidden']);
+    const from = evolvesFrom[id], evos = [...(s.evolutions || []).map(e => [e, false]), ...(s.itemEvolutions || []).map(e => [e, true])].filter(([e]) => e.target && D.species[e.target]);
+    const where = wildOf(id), shown = where.filter(w => !mapLocked(w.map));
+    const goto = map => { const ci = mapChapter[map]; if (ci == null) return 'disabled'; return `data-goto="${ci}.${G[ci].steps.findIndex(st => st.maps.includes(map))}"`; };
+    const all = learnable(id), by = kind => [...all].filter(([, l]) => l.some(x => x.kind === kind)).map(([m, l]) => [m, l.filter(x => x.kind === kind)]).sort((a, b) => Math.min(...a[1].map(x => x.sort)) - Math.min(...b[1].map(x => x.sort)) || name('moves', a[0]).localeCompare(name('moves', b[0])));
+    const tabs = [['level', 'Level-up'], ['machine', 'TM / HM'], ['tutor', 'Tutor'], ['egg', 'Egg']].map(([k, l]) => [k, l, by(k)]);
+    if (!tabs.some(t => t[0] === dexTab && t[2].length)) dexTab = (tabs.find(t => t[2].length) || tabs[0])[0];
+    const cur = tabs.find(t => t[0] === dexTab);
+    return `<div class="dex-head">${icon(id, 'big')}<div><h2>${esc(name('species', id))}</h2><span class="muted">#${String(s.dex?.national || s.id).padStart(3, '0')}${s.dex?.hoenn ? ' · Hoenn #' + s.dex.hoenn : ''}${s.weightKg ? ' · ' + s.weightKg + ' kg' : ''}</span></div><div>${typePills(s.types || [])}</div><button class="button small" data-dex-calc="${id}" title="Load into the calculator as the attacker">Calc from</button></div>
+    <div class="dex-grid">
+      <section><h4>Base stats · ${total}</h4><div class="base-stats">${C.keys.map(statRow).join('')}</div></section>
+      <section><h4>Abilities</h4><ul class="dex-list">${abil.map(([a, tag]) => `<li><b>${esc(name('abilities', a))}</b>${tag ? ` <span class="tag">${tag}</span>` : ''}<br><small>${esc(D.abilities[a]?.description || '')}</small></li>`).join('') || '<li><small>None</small></li>'}</ul></section>
+      <section><h4>Evolution</h4><ul class="dex-list">${from ? `<li>From ${dexMon(from[0])} <small>${esc(evoText(from[1], from[2]))}</small></li>` : ''}${evos.map(([e, it]) => `<li>Into ${dexMon(e.target)} <small>${esc(evoText(e, it))}</small></li>`).join('')}${!from && !evos.length ? '<li><small>Does not evolve.</small></li>' : ''}</ul></section>
+      <section><h4>In the wild</h4><ul class="dex-list">${shown.slice(0, 8).map(w => { const sl = w.slots.filter(x => x.species === +id); return `<li><button class="text-button" ${goto(w.map)}>${esc(w.mapName)}</button> <small>${esc(w.method)} · Lv ${Math.min(...sl.map(x => x.minLevel))}–${Math.max(...sl.map(x => x.maxLevel))} · ${sl.reduce((n, x) => n + x.weight, 0)}%</small></li>`; }).join('') || `<li><small>${where.length ? 'Only in areas past your badges.' : 'Not in any wild table: evolve, breed, or get it as a gift.'}</small></li>`}${shown.length > 8 ? `<li><small>${shown.length - 8} more areas.</small></li>` : ''}</ul></section>
+    </div>
+    <div class="dex-learn"><h4>Moves it can learn</h4><div class="tabs" role="tablist">${tabs.map(([k, l, rows]) => `<button role="tab" class="${k === dexTab ? 'active' : ''}" data-dex-tab="${k}">${l}<b>${rows.length}</b></button>`).join('')}</div>
+    ${learnTable(cur[2].map(([m, l]) => [m, l.map(x => x.label).join(', ')]))}
+    <p class="footnote">${dexTab === 'level' ? 'START › TOOLS › RELEARN MOVE teaches any level-up move it has reached, for free. Moves from a pre-evolution are marked.' : dexTab === 'egg' ? 'Egg moves pass down through breeding.' : dexTab === 'tutor' ? 'Move tutors around Hoenn.' : 'Where to find each TM is in the search (type its number).'}</p></div>`;
+  }
+  let dexId = null;
+  function openDex(id) {
+    if (!D.species[id]) return;
+    dexId = +id; $('dex-body').innerHTML = dexBody(dexId); $('dex-search').value = '';
+    if (!$('dex').open) $('dex').showModal();
+    $('dex').scrollTop = 0;
+  }
+  $('dex-species').innerHTML = species.map(s => `<option value="${esc(name('species', s.id))}"></option>`).join('');
+  $('dex-search').onchange = () => { const row = lookup(species, $('dex-search').value); if (row) openDex(row.id); else toast('Choose a Pokémon from the list.'); };
+  $('dex-close').onclick = () => $('dex').close();
+  $('dex').addEventListener('click', e => {
+    if (e.target === $('dex')) { $('dex').close(); return; }
+    const tab = e.target.closest('[data-dex-tab]');
+    if (tab) { dexTab = tab.dataset.dexTab; $('dex-body').innerHTML = dexBody(dexId); return; }
+    const calc = e.target.closest('[data-dex-calc]');
+    if (calc) { state.a = freshMon(+calc.dataset.dexCalc, state.a?.level || 15); calcRef = null; chooseDefaultMove(); save(); $('dex').close(); show('calculator'); window.scrollTo(0, 0); return; }
+    if (e.target.closest('[data-goto]')) $('dex').close();
+  });
+
+  // the Pokédex page: every species, filtered and sorted
+  $('pokedex-type').innerHTML = `<option value="">All types</option>` + Object.entries(D.types).filter(([i, t]) => t && +i !== 9).map(([i, t]) => `<option value="${i}">${esc(t)}</option>`).join('');
+  const wildSet = new Set(D.wild.flatMap(w => w.slots.map(x => x.species)));
+  const dexIndex = new Map(species.map(s => [s.id, norm(name('species', s.id) + ' ' + (s.abilities || []).map(a => name('abilities', a)).join(' '))]));
+  function renderPokedex() {
+    const q = norm($('pokedex-search').value), type = $('pokedex-type').value, sort = $('pokedex-sort').value, onlyWild = $('pokedex-wild').checked;
+    // a move name filters to the Pokémon that can learn it
+    const mv = q.length > 2 ? moves.find(m => norm(m.name) === q) : null;
+    let rows = species.filter(s => (!type || (s.types || []).includes(+type)) && (!onlyWild || wildSet.has(s.id))
+      && (!q || dexIndex.get(s.id).includes(q) || (mv && learnable(s.id).has(mv.id))));
+    const key = s => sort === 'name' ? 0 : sort === 'dex' ? (s.dex?.national || 9999) * 10000 + s.id : sort === 'bst' ? -bst(s) : -(s.stats?.[sort] || 0);
+    rows.sort((a, b) => key(a) - key(b) || name('species', a.id).localeCompare(name('species', b.id)));
+    $('pokedex-note').textContent = `${rows.length} Pokémon${mv ? ` that can learn ${mv.name}` : ''}. Pick one for its full page: stats, evolutions, where to catch it and everything it can learn.`;
+    const shown = rows.slice(0, 400);
+    $('pokedex-list').innerHTML = shown.length ? `<table class="dex-table"><thead><tr><th>#</th><th>Pokémon</th><th>Type</th>${C.keys.map(k => `<th class="num stat-col">${k.toUpperCase()}</th>`).join('')}<th class="num">Total</th></tr></thead><tbody>${shown.map(s => `<tr data-dex="${s.id}"><td class="num">${s.dex?.national || ''}</td><td><span class="who">${icon(s.id)}${esc(name('species', s.id))}</span></td><td>${typePills(s.types || [])}</td>${C.keys.map(k => `<td class="num stat-col">${s.stats?.[k] || 0}</td>`).join('')}<td class="num"><b>${bst(s)}</b></td></tr>`).join('')}</tbody></table>${rows.length > shown.length ? `<p class="footnote">${rows.length - shown.length} more: narrow the filter.</p>` : ''}` : empty('No Pokémon match', 'Try another name, type, ability or move.');
+  }
+  for (const id of ['pokedex-search', 'pokedex-type', 'pokedex-sort', 'pokedex-wild']) $(id).addEventListener(id === 'pokedex-search' ? 'input' : 'change', renderPokedex);
+  $('dex-open').onclick = () => { show('pokedex'); window.scrollTo(0, 0); };
+  $('pokedex-back').onclick = () => show('guide');
+  // any Pokémon icon or row opens its page (not icons inside other buttons)
+  document.addEventListener('click', e => {
+    let el = e.target.closest('[data-dex]');
+    if (!el) return;
+    // an icon inside a control belongs to that control, unless it opens a page too
+    const ctl = el.closest('button, a, summary, label');
+    if (el.matches('.mi') && ctl) { if (!ctl.dataset.dex) return; el = ctl; }
+    if (+el.dataset.dex === dexId && $('dex').open) return;
+    openDex(+el.dataset.dex);
+  });
+
   // calculator -------------------------------------------------------------------------
+  // what a species can learn, strongest attacks first; the box still takes any move
+  function learnSorted(id) {
+    return [...learnable(id)].sort(([a], [b]) => { const x = D.moves[a], y = D.moves[b]; return (x.category === 'status') - (y.category === 'status') || (y.power || 0) - (x.power || 0) || x.name.localeCompare(y.name); });
+  }
+  const learnOptions = id => learnSorted(id).map(([m, l]) => `<option value="${esc(name('moves', m))}" label="${esc(l.map(x => x.label).slice(0, 3).join(', '))}"></option>`).join('');
   function card(side) {
     const m = state[side], sp = D.species[m.species], st = C.stats(D, m), isA = side === 'a';
     const abilityRows = [[0, 'No ability'], ...sp.abilities.filter(x => x > 0).map(id => [id, name('abilities', id)])];
@@ -597,7 +738,7 @@
      <div class="form-grid"><label class="field">Ability<select data-mon="${side}" data-key="ability">${options(abilityRows, m.ability)}</select></label><label class="field">Held item<input data-mon="${side}" data-key="item" list="item-list" value="${m.item ? esc(name('items', m.item)) : ''}" placeholder="No item"></label></div>
      <div class="form-grid three"><label class="field">Nature<select data-mon="${side}" data-key="nature">${options(Object.entries(D.natures).map(([id, n]) => [id, n.name]), m.nature)}</select></label><label class="field">Current HP<input data-mon="${side}" data-key="hp" type="number" min="1" max="${st.hp}" value="${m.hp ?? st.hp}" title="Maximum HP: ${st.hp}"></label><label class="field">Status<select data-mon="${side}" data-key="status">${options([['', 'Healthy'], ['BRN', 'Burn'], ['PAR', 'Paralysis'], ['PSN', 'Poison'], ['TOX', 'Bad poison'], ['SLP', 'Sleep'], ['FRZ', 'Freeze']], m.status)}</select></label></div>
      <div class="stat-row">${C.keys.map(k => `<div class="stat-cell"><small>${({hp: 'HP', atk: 'ATK', def: 'DEF', spa: 'SPA', spd: 'SPD', spe: 'SPE'})[k]}</small><strong>${st[k]}</strong></div>`).join('')}</div>
-     <div class="form-grid four">${[0, 1, 2, 3].map(i => `<label class="field">Move ${i + 1}<input data-mon="${side}" data-move-slot="${i}" list="move-list" value="${m.moves?.[i] ? esc(name('moves', m.moves[i])) : ''}" placeholder="—"></label>`).join('')}</div>
+     <div class="form-grid four">${[0, 1, 2, 3].map(i => `<label class="field">Move ${i + 1}<input data-mon="${side}" data-move-slot="${i}" list="learn-${side}" value="${m.moves?.[i] ? esc(name('moves', m.moves[i])) : ''}" placeholder="—"></label>`).join('')}</div><datalist id="learn-${side}">${learnOptions(m.species)}</datalist>
      <details ${m.editOpen ? 'open' : ''} data-edit="${side}"><summary>IVs, EVs & stat stages</summary><div class="stat-edit"><span></span>${C.keys.map(k => `<span>${k.toUpperCase()}</span>`).join('')}${['ivs', 'evs', 'stages'].map(group => `<span>${group === 'stages' ? 'Stage' : group === 'ivs' ? 'IVs' : 'EVs'}</span>${C.keys.map(k => group === 'stages' && k === 'hp' ? '<span>—</span>' : `<input aria-label="${isA ? 'Attacker' : 'Defender'} ${k} ${group}" data-mon="${side}" data-group="${group}" data-key="${k}" type="number" min="${group === 'stages' ? -6 : 0}" max="${group === 'stages' ? 6 : group === 'ivs' ? 31 : 252}" value="${m[group]?.[k] || 0}">`).join('')}`).join('')}</div><p class="footnote">EV total: ${Object.values(m.evs || {}).reduce((n, v) => n + Number(v), 0)} / 510. Enter Intimidate and other entry effects as stages.</p><label class="field">Friendship (Return / Frustration)<input data-mon="${side}" data-key="friendship" type="number" min="0" max="255" value="${m.friendship ?? 255}"></label></details>
      <div class="checks"><label><input data-mon="${side}" data-key="tailwind" type="checkbox" ${m.tailwind ? 'checked' : ''}> Tailwind</label>${!isA ? `<label><input data-mon="${side}" data-key="reflect" type="checkbox" ${m.reflect ? 'checked' : ''}> Reflect</label><label><input data-mon="${side}" data-key="lightScreen" type="checkbox" ${m.lightScreen ? 'checked' : ''}> Light Screen / Veil</label>` : ''}</div>
      ${isA ? `<div class="toolbar tight">${['me', 'partner'].map(s => `<button class="button small" data-roster-add="${s}" ${state.roster[s].length >= 6 ? 'disabled' : ''}>Add to ${esc(sideName(s))}’s team</button>`).join('')}</div>` : ''}`;
@@ -630,10 +771,14 @@
   function chooseDefaultMove() { if (!(state.a.moves || []).includes(state.move)) { const found = (state.a.moves || []).find(id => D.moves[id]?.category !== 'status'); if (found) state.move = found; } syncSpread(); }
   function syncSpread() { state.field.spread = [8, 32].includes(D.moves[state.move]?.target); }
   function renderCalc() { renderCombatants(); renderMove(); syncField(); renderResult(); }
+  let moveListOpen = false;
   function renderMove() {
     const m = D.moves[state.move]; $('move-input').value = m?.name || '';
-    const suggested = [...new Set([...(state.a.moves || []), ...D.species[state.a.species].learnset.filter(r => r[0] <= state.a.level).slice(-4).map(r => r[1])])].filter(id => D.moves[id]).slice(0, 8);
-    $('move-quick').innerHTML = suggested.map(id => `<button class="chip ${id === state.move ? 'active' : ''}" data-move="${id}">${esc(name('moves', id))}</button>`).join('');
+    const own = [...new Set(state.a.moves || [])].filter(id => D.moves[id]);
+    const chip = id => `<button class="chip ${id === state.move ? 'active' : ''}" data-move="${id}" title="${esc(D.types[D.moves[id].type])} · ${esc(D.moves[id].category)}${D.moves[id].power ? ' · ' + D.moves[id].power + ' BP' : ''}">${esc(name('moves', id))}</button>`;
+    const all = learnSorted(state.a.species), hits = all.filter(([id]) => D.moves[id].category !== 'status'), other = all.filter(([id]) => D.moves[id].category === 'status');
+    $('move-quick').innerHTML = own.map(chip).join('') + `<details class="learn-chips" ${moveListOpen ? 'open' : ''}><summary>Everything ${esc(name('species', state.a.species))} can learn (${all.length}): any level-up move can be relearned</summary><div class="chips"><small>Attacks, strongest first</small>${hits.map(([id]) => chip(id)).join('')}${other.length ? `<small>Status moves</small>${other.map(([id]) => chip(id)).join('')}` : ''}</div></details>`;
+    $('move-quick').querySelector('details').addEventListener('toggle', e => { moveListOpen = e.target.open; });
     $('move-quick').querySelectorAll('[data-move]').forEach(b => b.onclick = () => { state.move = +b.dataset.move; syncSpread(); renderMove(); syncField(); renderResult(); save(); });
     $('move-facts').innerHTML = m ? `<div class="move-meta"><span><small>TYPE</small>${typePills([m.type])}</span><span><small>CATEGORY</small>${esc(m.category)}</span><span><small>POWER</small>${m.power || '—'}</span><span><small>ACCURACY</small>${m.accuracy ? m.accuracy + '%' : 'Always'}</span><span><small>PRIORITY</small>${m.priority > 0 ? '+' : ''}${m.priority}</span></div><p class="footnote">${esc(m.description)}</p>` : '';
   }
@@ -690,6 +835,7 @@
     <p><strong>Route guide.</strong> Vanilla Emerald’s story in order, one chapter per level cap. Each stop lists its trainers (with tag partners and rematches), wild tables, items, shops at your badge count, and your own notes. ${hand} of ${trainers.length} trainers have hand-picked teams; the rest are generated from the donor hack’s and marked “Generated”.</p>
     <p><strong>Battle plans.</strong> “Battle plan ⚔” on a trainer opens a side panel against your teams: each side’s best move with damage and KO odds, spread damage (and what hits your own ally), and the speed order with Tailwind, Trick Room and paralysis. Every cell opens in the calculator.</p>
     <p><strong>Your game.</strong> START › GUIDE SYNC (or saving) writes guide-sync.bin; Load game reads it to fill both teams, tick off beaten trainers and found items, show Soul Link pairs, and hide chapters past your badges.</p>
+    <p><strong>Pokédex.</strong> Every Pokémon in the campaign with base stats, abilities, evolutions, where to catch it, and everything it can learn (level-up, TM/HM, tutor, egg and pre-evolution moves). Filter by name, ability, type or a move it can learn. Click any Pokémon icon in the guide to open its page.</p>
     <p><strong>Calculator.</strong> Direct damage for one attacker and defender, with IVs, EVs, natures, stages, current HP, status, supported abilities and items, weather, terrain, screens, spread damage and crits. Entry triggers such as Intimidate go in as stages. It is not a full battle simulator.</p>
     <p><strong>Notes</strong> are stored in this browser. Use Export / Import to share or back up.</p>
     <p><strong>Data coverage and limits</strong></p><ul>${D.meta.limitations.map(x => `<li>${esc(x)}</li>`).join('')}</ul>
@@ -698,7 +844,7 @@
   document.querySelector('.brand').onclick = e => { e.preventDefault(); $('search').value = ''; show('guide'); };
 
   if (sync && state.rosterFollowsGame && !state.roster.me.length) rosterFromGame(true);
-  renderSyncChip(); show(location.hash.slice(1) === 'calculator' ? 'calculator' : 'guide');
+  renderSyncChip(); show(['calculator', 'pokedex'].includes(location.hash.slice(1)) ? location.hash.slice(1) : 'guide');
   // A small explicit test surface for the offline browser smoke harness.
-  window.GuideTest = {get state() { return state; }, get sync() { return sync; }, loadSync, data: D, show, renderGuide, renderCalc, openBattle, gotoStep, validateNotes, lookup, rematches};
+  window.GuideTest = {get state() { return state; }, get sync() { return sync; }, loadSync, data: D, show, openDex, learnable, renderPokedex, renderGuide, renderCalc, openBattle, gotoStep, validateNotes, lookup, rematches};
 })();

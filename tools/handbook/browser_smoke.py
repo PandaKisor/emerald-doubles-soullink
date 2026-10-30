@@ -45,7 +45,7 @@ with (OUT/'firefox.log').open('w') as log:
     (OUT/'report.json').write_text(json.dumps(report[-1],indent=2))
     print(json.dumps(report[-1],indent=2),flush=True)
     if not report[-1].get('ok'):raise SystemExit(1)
-    for view,size,extra in [('guide','1440,1400','&chapter=0&open=1,3'),('guide','1440,1400','&chapter=0&open=1,3&sync=1'),('guide','1720,1300','&chapter=0&open=10&team=1&battle=hits'),('guide','1720,1100','&chapter=0&team=1&battle=taken'),('guide','1440,1000','&chapter=0&team=1&battle=speed'),('guide','1440,900','&chapter=4&sync=1'),('results','1440,1200','&q=Zigzagoon'),('calculator','1440,1200','&team=1'),('guide','390,1400','&chapter=0&open=1&sync=1'),('guide','390,1200','&chapter=0&team=1&battle=hits')]:
+    for view,size,extra in [('guide','1440,1400','&chapter=0&open=1,3'),('guide','1440,1400','&chapter=0&open=1,3&sync=1'),('guide','1720,1300','&chapter=0&open=10&team=1&battle=hits'),('guide','1720,1100','&chapter=0&team=1&battle=taken'),('guide','1440,1000','&chapter=0&team=1&battle=speed'),('guide','1440,900','&chapter=4&sync=1'),('results','1440,1200','&q=Zigzagoon'),('calculator','1440,1200','&team=1'),('guide','390,1400','&chapter=0&open=1&sync=1'),('guide','390,1200','&chapter=0&team=1&battle=hits'),('pokedex','1440,1100',''),('pokedex','1440,1300','&dex=392'),('pokedex','390,1300','&dex=392'),('calculator','1440,1300','&team=1&moves=1')]:
         dest=OUT/f'{view}{extra.replace("&","-").replace("=","")}-{size.split(",")[0]}.png'
         subprocess.run(command+['--screenshot',str(dest),'--window-size',size,page.as_uri()+'?preview='+view+extra],stdout=log,stderr=log,env=env,check=True,timeout=40)
         print(dest,flush=True)
