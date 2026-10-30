@@ -203,4 +203,21 @@ player.cellX=0
 T.eq(TS.checkLineOfSight(eo,player,nil),true,'returning into LOS re-enables encounter')
 C.isLedge,C.cell,C.elevationMismatchOn=priorLedge,priorCell,priorElevation
 Hud.openMessage=show;Runtime.hooks=savedHooks
+
+-- The gate's wait box holds the field with its own lock: closing it never
+-- leaves the generic lock set when another lock was already held (user,
+-- 2026-10-29: frozen in front of the Route 103 rival, A re-opened the box).
+do
+  local Field=require('src.core.game3.field')
+  for k in pairs(Field._locks) do Field._locks[k]=nil end
+  Field.lock('g3coop_wild')
+  local closeBox
+  Gate.show('Please wait for your partner.',{adapters={openMessageAsync=function(_,d) closeBox=d end}})
+  T.check(Field.isLocked(),'the wait box holds the field')
+  closeBox()
+  T.eq(Field._locks.default,nil,'closing the wait box sets no generic lock')
+  T.eq(Field._locks.joint_gate,nil,'closing the wait box drops its own lock')
+  Field.unlock('g3coop_wild')
+  T.eq(Field.isLocked(),false,'the field is free once the other lock goes')
+end
 T.finish('Campaign trainer pool and pre-event gate')

@@ -341,6 +341,20 @@ return Coop
      "      end\n"
      "    end\n"
      "  end\n"),
+    # The joint gate's "wait for your partner" box held the field with the
+    # generic lock and on close restored it to Field.locked as it was: true
+    # whenever any other lock was held (co-op's own, a script's), so the
+    # generic lock stayed set for good. The field froze, A re-talked to the
+    # trainer into the same box, and the partner's queued story replay never
+    # found a free field (user, 2026-10-29: Route 103 rival). Its own tag now.
+    ("src/core/game3/trainer_joint_gate.lua",
+     "  local Field=package.loaded[\"src.core.game3.field\"]\n"
+     "  local wasLocked=Field and Field.locked\n"
+     "  if Field then Field.locked=true end\n"
+     "  local function done() if Field then Field.locked=wasLocked end end\n",
+     "  local Field=package.loaded[\"src.core.game3.field\"]\n"
+     "  if Field then Field.lock(\"joint_gate\") end\n"
+     "  local function done() if Field then Field.unlock(\"joint_gate\") end end\n"),
     # The flag store remembers the session it was loaded from and is only
     # ever written back there: starting a New Game while the old field was
     # still active saved the old game's flags (beaten trainers, items) into
