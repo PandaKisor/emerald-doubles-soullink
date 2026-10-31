@@ -109,12 +109,14 @@ own ROM.
 ## Credits
 
 - Campaign, co-op and Soul Link by Aeryk Kisor.
-- Some species, moves, trainer and item data and the Pokémon icons are adapted from
+- Some species, moves, trainer and item data, the Pokémon icons, cries and move animations are adapted from
   [Inclement Emerald](https://www.pokecommunity.com/threads/pok%C3%A9mon-inclement-emerald-a-decomp-difficulty-hack-version-1-13.457039/)
   by Buffel Saft and contributors (the "donor hack" in this repo's sources).
 - Gen1Recomp by BOIS CLUB GAMES, LLC.
 - Pokémon © Nintendo / Creatures / GAME FREAK. This project is unofficial and not
   affiliated with them.
+
+Official Pokédex text, base data and rare-move learnsets checked against [PokeAPI](https://github.com/PokeAPI/pokeapi).
 
 ## License
 

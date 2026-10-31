@@ -839,7 +839,7 @@
     <p><strong>Calculator.</strong> Direct damage for one attacker and defender, with IVs, EVs, natures, stages, current HP, status, supported abilities and items, weather, terrain, screens, spread damage and crits. Entry triggers such as Intimidate go in as stages. It is not a full battle simulator.</p>
     <p><strong>Notes</strong> are stored in this browser. Use Export / Import to share or back up.</p>
     <p><strong>Data coverage and limits</strong></p><ul>${D.meta.limitations.map(x => `<li>${esc(x)}</li>`).join('')}</ul>
-    <p class="footnote">Pokémon © Nintendo / Creatures / GAME FREAK. Campaign by Aeryk Kisor; some species, moves, trainer and item data and the Pokémon icons adapted from Inclement Emerald by Buffel Saft and contributors; Gen1Recomp by BOIS CLUB GAMES. No ROM or save data is included.</p>`;
+    <p class="footnote">Pokémon © Nintendo / Creatures / GAME FREAK. Campaign by Aeryk Kisor; some species, moves, trainer and item data, the Pokémon icons, cries and move animations adapted from Inclement Emerald by Buffel Saft and contributors; Gen1Recomp by BOIS CLUB GAMES. No ROM or save data is included.</p>`;
   $('about-footer').onclick = $('about-open').onclick = () => $('about').showModal(); $('about-close').onclick = () => $('about').close();
   document.querySelector('.brand').onclick = e => { e.preventDefault(); $('search').value = ''; show('guide'); };
 

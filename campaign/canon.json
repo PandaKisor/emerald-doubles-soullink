@@ -1,0 +1,7060 @@
+{
+"abilities": {
+"1": "Helps repel wild Pok\u00e9mon.",
+"124": "Reduces a sleeping foe's HP.",
+"135": "Doubles the Pok\u00e9mon's weight.",
+"136": "Halves the Pok\u00e9mon's weight.",
+"179": "Powers up pulse moves.",
+"201": "Powers up Steel-type moves.",
+"22": "Lowers the foe's ATTACK.",
+"26": "Not hit by GROUND attacks.",
+"264": "Powers up Dragon-type moves.",
+"3": "Gradually boosts SPEED.",
+"33": "Raises SPEED in rain.",
+"34": "Raises SPEED in sunshine.",
+"37": "Raises ATTACK.",
+"42": "Traps STEEL-type Pok\u00e9mon.",
+"52": "Prevents ATTACK reduction.",
+"57": "Powers up with MINUS.",
+"58": "Powers up with PLUS.",
+"62": "Ups ATTACK if suffering.",
+"63": "Ups DEFENSE if suffering.",
+"65": "Ups GRASS moves in a pinch.",
+"66": "Ups FIRE moves in a pinch.",
+"67": "Ups WATER moves in a pinch.",
+"68": "Ups BUG moves in a pinch.",
+"74": "Raises ATTACK.",
+"90": "Powers up punching moves."
+},
+"dex": {
+"1000": "It has a sturdy body made up of\nstacked coins. Gholdengo overwhelms\nits enemies by firing coin after coin\nat them in quick succession.",
+"1001": "It drains the life-force from\nvegetation, causing nearby forests to\ninstantly wither and fields to turn\nbarren.",
+"1002": "The hatred of those who perished by\nthe sword long ago has clad itself in\nsnow and become a Pok\u00e9mon.",
+"1003": "It slowly brings its exceedingly heavy\nhead down upon the ground, splitting\nthe earth open with huge fissures that\nrun over 160 feet deep.",
+"1004": "The envy accumulated within curved\nbeads that sparked multiple conflicts\nhas clad itself in fire and become a\nPok\u00e9mon.",
+"1005": "According to an article in a dubious\nmagazine, this Pok\u00e9mon has some\nconnection to a phenomenon that occurs\nin a certain region.",
+"1006": "It's possible that this is the object\nlisted as Iron Valiant in a certain\nexpedition journal.",
+"1007": "This Pok\u00e9mon resembles Cyclizar, but\nit is far burlier and more ferocious.\nNothing is known about its ecology or\nother features.",
+"1008": "This seems to be the Iron Serpent\nmentioned in an old book. The Iron\nSerpent is said to have turned the\nland to ash with its lightning.",
+"1009": "It resembles an illustration published\nin a paranormal magazine, said to be a\ndepiction of a super-ancient Suicune.",
+"1010": "According to the few eyewitness\naccounts that exist, it used its\nshining blades to julienne large trees\nand boulders.",
+"1011": "The head sticking out belongs to the\nfore-wyrm, while the tail belongs to\nthe core-wyrm. The two share one apple\nand help each other out.",
+"1012": "Poltchageist looks like a regional\nform of Sinistea, but it was recently\ndiscovered that the two Pok\u00e9mon are\nentirely unrelated.",
+"1013": "It pretends to be tea, trying to fool\npeople into drinking it so it can\ndrain their life-force. Its ruse is\ngenerally unsuccessful.",
+"1014": "Okidogi is a ruffian with a short\ntemper. It can pulverize anything by\nswinging around the chain on its neck.",
+"1015": "Munkidori keeps itself somewhere safe\nwhile it toys with its foes, using\npsychokinesis to induce intense\ndizziness.",
+"1016": "Fezandipiti beats its glossy wings to\nscatter pheromones that captivate\npeople and Pok\u00e9mon.",
+"1017": "This mischief-loving Pok\u00e9mon is full\nof curiosity. It battles by drawing\nout the type-based energy contained\nwithin its masks.",
+"1018": "It digs holes on mountains, searching\nfor food. It's so durable that being\ncaught in a cave-in won't faze it.",
+"1019": "These capricious syrpents have banded\ntogether. On the rare occasion that\ntheir moods align, their true power is\nunleashed.",
+"1020": "It resembles an eerie Pok\u00e9mon once\nshown in a paranormal magazine. That\nPok\u00e9mon was said to be an Entei\nregenerated from a fossil.",
+"1021": "It bears resemblance to a Pok\u00e9mon that\nbecame a hot topic for a short while\nafter a paranormal magazine touted it\nas Raikou's ancestor.",
+"1022": "It was named after a mysterious object\nrecorded in an old book. Its body\nseems to be metallic.",
+"1023": "There was supposedly an incident in\nwhich it launched shining blades to\ncut everything around it to pieces.\nLittle else is known about it.",
+"1024": "It's thought that this Pok\u00e9mon lived\nin ancient Paldea until it got caught\nin seismic shifts and went extinct.",
+"1025": "Its peach-shaped shell serves as\nstorage for a potent poison. It makes\npoisonous mochi and serves them to\npeople and Pok\u00e9mon.",
+"387": "It undertakes photosynthesis with its\nbody, making oxygen. The leaf on its\nhead wilts if it is thirsty.",
+"388": "Appears where there is clean spring\nwater. The fruit that grows on the\nshrubs on its shell is sweet,\nnutritious, and truly delicious.",
+"389": "Small Pok\u00e9mon occasionally gather on\nits unmoving back to begin building\ntheir nests.",
+"390": "The gas made in its belly burns from\nits rear end. The fire burns weakly\nwhen it feels sick.",
+"391": "It uses ceilings and walls to launch\naerial attacks. Its fiery tail is but\none weapon.",
+"392": "A tall, hardy Pok\u00e9mon with a dazzling\nappearance. It shrouds itself in flame\nand battles as if engaged in\ndance\u2014truly a sight to behold.",
+"393": "Because it is very proud, it hates\naccepting food from people. Its thick\ndown guards it from cold.",
+"394": "It swims gracefully through the frigid\nsea and sings with a voice like the\nroaring tide. It has powerful, sturdy\nwings and dignity to match.",
+"395": "The three horns that extend from its\nbeak attest to its power. The leader\nhas the biggest horns.",
+"396": "They flock around mountains and\nfields, chasing after bug Pok\u00e9mon.\nTheir singing is noisy and annoying.",
+"397": "It lives in forests and fields.\nSquabbles over territory occur when\nflocks collide.",
+"398": "When Staravia evolve into Staraptor,\nthey leave the flock to live alone.\nThey have sturdy wings.",
+"399": "It constantly gnaws on logs and rocks\nto whittle down its front teeth. It\nnests alongside water.",
+"400": "Bibarel fur repels water and is also a\nfantastic material for heat retention.\nThese Pok\u00e9mon create dams on rivers to\nlive in.",
+"401": "When its antennae hit each other, it\nsounds like the music of a xylophone.",
+"402": "It signals its emotions with its\nmelodies. Scientists are studying\nthese melodic patterns.",
+"403": "Shakes its body to generate\nelectricity. Its stature belies its\naggression\u2014one must be patient to tame\nthis Pok\u00e9mon.",
+"404": "Proudly uses its electrified claws as\nweapons. It seems to be a gracious\nPok\u00e9mon, evenly sharing the spoils of\nthe hunt with others of its kind.",
+"405": "They form packs, each having one male\nas leader. Legends say that when\nLuxray's two eyes shimmer with gold,\nthe Pok\u00e9mon can see through anything.",
+"406": "This Pok\u00e9mon is highly sensitive to\ntemperature changes. When its bud\nstarts to open, that means spring is\nright around the corner.",
+"407": "The poison in its right hand is quick\nacting. The poison in its left hand is\nslow acting. Both are life\nthreatening.",
+"408": "Its hard skull is its distinguishing\nfeature. It snapped trees by\nheadbutting them, and then it fed on\ntheir ripe berries.",
+"409": "Very little is known about its\nbiology. Can knock down massive trees\nby smashing its beautiful, pearl-like\ncrown against them.",
+"410": "Although its fossils can be found in\nlayers of primeval rock, nothing but\nits face has ever been discovered.",
+"411": "This Pok\u00e9mon is from roughly 100\nmillion years ago. Its terrifyingly\ntough face is harder than steel.",
+"412": "If its cloak is broken in battle, it\nquickly remakes the cloak with\nmaterials nearby.",
+"413": "When Burmy evolved, its cloak became a\npart of this Pok\u00e9mon's body. The cloak\nis never shed.",
+"414": "It flutters around at night and steals\nhoney from the Combee hive.",
+"415": "They swear fealty to a queen Pok\u00e9mon\nand work diligently to gather nectar.\nEach swarm produces a different flavor\nof honey.",
+"416": "Commands its subjects to build its\nhive. It will dispatch any interlopers\nwho dare sneak into its nest and use\nthem as nourishment for itself.",
+"417": "A species related to the Pikachu line.\nThough Pachirisu is a calm Pok\u00e9mon, it\nstill presents a danger should one\ntouch its electrified tail or cheeks.",
+"418": "It moves freely in the water by\nspinning its forked tail for\npropulsion. The resemblance to the\nscrew of a steamboat is coincidental.",
+"419": "Its flotation sac developed as a\nresult of pursuing aquatic prey. It\ncan double as a rubber raft.",
+"420": "The deeper a Cherubi's red, the more\nnutrients it has stockpiled in its\nbody. And the sweeter and tastier its\nsmall ball!",
+"421": "Its folded petals are pretty tough.\nBird Pok\u00e9mon can peck at them all they\nwant, and Cherrim won't be bothered at\nall.",
+"422": "Subjecting this Pok\u00e9mon to a strong\nforce causes it to secrete a strange\npurple fluid. Though harmless, the\nfluid is awfully sticky.",
+"423": "Eats beach sand for nourishment.\nShould one Gastrodon encounter another\nof a different color, a fierce battle\nwill inevitably ensue.",
+"424": "It uses its tails for everything. If\nit wraps both of its tails around you\nand gives you a squeeze, that's proof\nit really likes you.",
+"425": "The gathering of many souls gave rise\nto this Pok\u00e9mon. During humid seasons,\nthey seem to appear in abundance.",
+"426": "It grabs people and Pok\u00e9mon and\ncarries them off somewhere. Where do\nthey go? Nobody knows.",
+"427": "Buneary can attack by rolling up their\nears and then striking with the force\ncreated by unrolling them. This attack\nbecomes stronger with training.",
+"428": "Its fur is warm and yet remarkably\nlight. This Pok\u00e9mon kicks as though it\nwere a master of karate, driving back\nits opponents with ease.",
+"429": "Its muttered curses can cause awful\nheadaches or terrifying visions that\ntorment others.",
+"430": "It will absolutely not forgive failure\nfrom or betrayal by its goons. It has\nno choice in this if it wants to\nmaintain the order of the flock.",
+"431": "When it's happy, Glameow demonstrates\nbeautiful movements of its tail, like\na dancing ribbon.",
+"432": "Though impudent and difficult to tame,\nPurugly enjoys great popularity due to\nits fur, the beauty of which surpasses\neven velveteen.",
+"433": "There is an orb inside its mouth. When\nit hops, the orb bounces all over and\nmakes a ringing sound.",
+"434": "The poison that gushes from its aft\nend is accompanied by an utterly\nevil-smelling odor with such potency\nthat one whiff can induce memory loss.",
+"435": "Sprays a poisonous fluid to take down\nprey. Sometimes, unable to stomach the\nstench of its own fluid, it leaves the\nbested prey uneaten.",
+"436": "Polishing Bronzor to a shine makes its\nsurface reflect the truth, according\nto common lore. Be that as it may,\nBronzor hates being polished.",
+"437": "Some believe that its bell-like cry\nopens holes to another world. It has\nbeen revered as a deity since ancient\ntimes.",
+"438": "This Pok\u00e9mon lives in dry, rocky\nareas. As its green spheres dry out,\ntheir dull luster increases.",
+"439": "It looks for a Mr. Rime that's a good\ndancer and carefully copies the Mr.\nRime's steps like an apprentice.",
+"440": "Happiny's willing to lend its precious\nround stone to those it's friendly\nwith, but if the stone isn't returned,\nHappiny will cry and throw a tantrum.",
+"441": "It can learn and speak human words. If\nthey gather, they all learn the same\nsaying.",
+"442": "All Spiritomb's mischief and misdeeds\ncompelled a traveler to use a\nmysterious spell to bind Spiritomb to\nan odd keystone.",
+"443": "It nests in caves untouched by\nsunlight. Its sharp teeth may fall out\nwhen worn away or after an impact, but\nthey regrow within a few days.",
+"444": "Though Gabite are usually of a violent\ndisposition, when I gave one a glass\nbead it had been eyeing covetously, it\nsuddenly became quite docile.",
+"445": "Garchomp is fast both underground and\nabove. It can bring down prey and\nreturn to its den before its body has\nchilled from being outside.",
+"446": "It stores food beneath its fur. It\nmight share just one bite, but only if\nit really trusts you.",
+"447": "It can use waves called auras to gauge\nhow others are feeling. These same\nwaves can also tell this Pok\u00e9mon about\nthe state of the environment.",
+"448": "It can tell what people are thinking.\nOnly Trainers who have justice in\ntheir hearts can earn this Pok\u00e9mon's\ntrust.",
+"449": "This Pok\u00e9mon is active during the day\nand passes the cold desert nights\nburrowed snugly into the sand.",
+"450": "Short-tempered and easily moved to\nviolence. It whips up whirlwinds of\nsand to crush its foes' spirits, then\ngoes in for the attack.",
+"451": "It attacks using the claws on its\ntail. Once locked in its grip, its\nprey is unable to move as this\nPok\u00e9mon's poison seeps in.",
+"452": "Has a brutish, ferocious temperament.\nWith immense strength and a sturdy\nshell off which swords will bounce, it\nrampages about and wreaks havoc.",
+"453": "Once diluted, its poison becomes\nmedicinal. This Pok\u00e9mon came into\npopularity after a pharmaceutical\ncompany chose it as a mascot.",
+"454": "It booms out a victory croak when its\nprey goes down in defeat. This Pok\u00e9mon\nand Seismitoad are related species.",
+"455": "Though this is a plant Pok\u00e9mon, it has\na gluttonous and unruly temperament.\nCarnivine attacks its prey with its\ncavernous maw wide open.",
+"456": "It lures in prey with its shining tail\nfins. It stays near the surface during\nthe day and moves to the depths when\nnight falls.",
+"457": "They traverse the deep waters as if\ncrawling over the seafloor. The\nfantastic lights of its fins shine\nlike stars in the night sky.",
+"458": "It swims along with a school of\nRemoraid, and they'll all fight\ntogether to repel attackers.",
+"459": "The berries that grow around its belly\nare like ice pops. Galarian Darumaka\nabsolutely love these berries.",
+"460": "This Pok\u00e9mon is known to bring\nblizzards. A shake of its massive body\nis enough to cause whiteout\nconditions.",
+"461": "With its claws, it leaves behind signs\nfor its friends to find. The number of\ndistinct signs is said to be over 500.",
+"462": "It's thought that a special magnetic\nfield changed the molecular structure\nof this Pok\u00e9mon's body, and that's\nwhat caused the Pok\u00e9mon's evolution.",
+"463": "It uses its tongue much more\nskillfully than its hands or its feet.\nIt can deftly pick up a single small\nbean with its tongue.",
+"464": "It relies on its carapace to deflect\nincoming attacks and throw its enemy\noff balance. As soon as that happens,\nit drives its drill into the foe.",
+"465": "Tangrowth has two arms that it can\nextend as it pleases. Recent research\nhas shown that these arms are, in\nfact, bundles of vines.",
+"466": "In terms of electrical-energy output,\nElectivire is one of the best among\nall Electric Pok\u00e9mon. It discharges\nhigh-voltage currents from its tails.",
+"467": "Living in the crater of a volcano has\ncaused this Pok\u00e9mon's body to resemble\nits environment\u2014 it has an organ\nsimilar to a magma chamber.",
+"468": "Known as a bringer of blessings, it's\nbeen depicted on good-luck charms\nsince ancient times.",
+"469": "This six-legged Pok\u00e9mon is easily\ncapable of transporting an adult in\nflight. The wings on its tail help it\nstay balanced.",
+"470": "This Pok\u00e9mon's tail is blade sharp,\nwith a fantastic cutting edge that can\nslice right though large trees.",
+"471": "The coldness emanating from Glaceon\ncauses powdery snow to form, making it\nquite a popular Pok\u00e9mon at ski\nresorts.",
+"472": "Its flight is soundless. It uses its\nlengthy tail to carry off its prey...\nThen its elongated fangs do the rest.",
+"473": "It looks strong, and that's exactly\nwhat it is. As the weather grows\ncolder, its ice tusks grow longer,\nthicker, and more impressive.",
+"474": "Some say an additional program made\nthis Pok\u00e9mon evolve, but even\nacademics can't agree on whether\nPorygon-Z is really an evolution.",
+"475": "The blades extending from its elbows\nare sharper than the finest swords.\nIts swordsmanship, albeit self-taught,\nis astonishingly impressive.",
+"476": "It uses three small units to catch\nprey and battle enemies. The main body\nmostly just gives orders.",
+"477": "With the mouth on its belly, Dusknoir\nswallows its target whole. The soul is\nthe only thing eaten\u2014 Dusknoir\ndisgorges the body before departing.",
+"478": "After a woman met her end on a snowy\nmountain, her regrets lingered on.\nFrom them, this Pok\u00e9mon was born. Its\nfavorite food is frozen souls.",
+"479": "This bizarre Pok\u00e9mon appears to be a\nwill-o'-the-wisp powered by\nelectricity. Be wary, as Rotom is both\nsmart and mischievous.",
+"480": "It is said that its emergence gave\nhumans the intelligence to improve\ntheir quality of life.",
+"481": "Known as the Being of Emotion. In\nlegend, this Pok\u00e9mon was feared, as\nany who showed disrespect would have\ntheir emotions thrown into disarray.",
+"482": "It is thought that Uxie, Mesprit, and\nAzelf all came from the same egg.",
+"483": "This Pok\u00e9mon is revered as a deity in\nHisuian legend. The birth of Dialga\nwas what caused the vast river of time\nto begin flowing in our world.",
+"484": "It has the ability to distort space.\nIt is described as a deity in\nSinnoh-region mythology.",
+"485": "Stories tell of this Pok\u00e9mon being\nbirthed from the boiling magma within\nMount Coronet. Its molten-steel body\nholds many mysteries.",
+"486": "It's said that Regigigas created other\nPok\u00e9mon from many different materials\nbefore it moved the continents to\nwhere they are today.",
+"487": "There is one Hisuian verse that tells\nof a powerful light creating a deep\nshadow. I imagine that this deep\nshadow is Giratina.",
+"488": "Those who sleep holding Cresselia's\nfeather are assured of joyful dreams.\nIt is said to represent the crescent\nmoon.",
+"489": "It drifts in warm seas. It always\nreturns to where it was born, no\nmatter how far it may have drifted.",
+"490": "It starts its life with a wondrous\npower that permits it to bond with any\nkind of Pok\u00e9mon.",
+"491": "It can lull people to sleep and make\nthem dream. It is active during nights\nof the new moon.",
+"492": "The blooming of Gracidea flowers\nconfers the power of flight upon it.\nFeelings of gratitude are the message\nit delivers.",
+"493": "It is told in mythology that this\nPok\u00e9mon was born before the universe\neven existed.",
+"494": "When it shares the infinite energy it\ncreates, that being's entire body will\nbe overflowing with power.",
+"495": "They photosynthesize by bathing their\ntails in sunlight. When they are not\nfeeling well, their tails droop.",
+"496": "When it gets dirty, its leaves can't\nbe used in photosynthesis, so it\nalways keeps itself clean.",
+"497": "It can stop its opponents' movements\nwith just a glare. It takes in solar\nenergy and boosts it internally.",
+"498": "It loves to eat roasted berries, but\nsometimes it gets too excited and\nburns them to a crisp.",
+"499": "When its internal fire flares up, its\nmovements grow sharper and faster.\nWhen in trouble, it emits smoke.",
+"500": "It has mastered fast and powerful\nfighting moves. It grows a beard of\nfire.",
+"501": "It fights using the scalchop on its\nstomach. In response to an attack, it\nretaliates immediately by slashing.",
+"502": "As a result of strict training, each\nDewott learns different forms for\nusing the scalchops.",
+"503": "One swing of the sword incorporated in\nits armor can fell an opponent. A\nsimple glare from one of them quiets\neverybody.",
+"504": "Extremely cautious, one of them will\nalways be on the lookout, but it won't\nnotice a foe coming from behind.",
+"505": "When they see an enemy, their tails\nstand high, and they spit the seeds of\nberries stored in their cheek pouches.",
+"506": "This Pok\u00e9mon is far brighter than the\naverage child, and Lillipup won't\nforget the love it receives or any\nabuse it suffers.",
+"507": "The black fur that covers this\nPok\u00e9mon's body is dense and springy.\nEven sharp fangs bounce right off.",
+"508": "Stoutland is immensely proud of its\nimpressive moustache. It's said that\nmoustache length is what determines\nsocial standing among this species.",
+"509": "Opponents that get drawn in by its\nadorable behavior come away with\nstinging scratches from its claws and\nstinging pride from its laughter.",
+"510": "This stealthy Pok\u00e9mon sneaks up behind\nprey without making any sound at all.\nIt competes with Thievul for\nterritory.",
+"511": "It's good at finding berries and\ngathers them from all over. It's kind\nenough to share them with friends.",
+"512": "Ill tempered, it fights by swinging\nits barbed tail around wildly. The\nleaf growing on its head is very\nbitter.",
+"513": "This Pok\u00e9mon lives in caves in\nvolcanoes. The fire within the tuft on\nits head can reach 600 degrees\nFahrenheit.",
+"514": "When it gets excited, embers rise from\nits head and tail and it gets hot. For\nsome reason, it loves sweets.",
+"515": "The water stored inside the tuft on\nits head is full of nutrients. Plants\nthat receive its water grow large.",
+"516": "It prefers places with clean water.\nWhen its tuft runs low, it replenishes\nit by siphoning up water with its\ntail.",
+"517": "It eats dreams and releases mist. The\nmist is pink when it's eating a good\ndream, and black when it's eating a\nnightmare.",
+"518": "It drowses and dreams all the time.\nIt's best to leave it be if it's just\nwoken up, as it's a terrible grump\nwhen freshly roused from sleep.",
+"519": "It's forgetful and not very bright,\nbut many Trainers love it anyway for\nits friendliness and sincerity.",
+"520": "These bright Pok\u00e9mon have acute\nmemories. Apparently delivery workers\noften choose them as their partners.",
+"521": "This Pok\u00e9mon is intelligent and\nintensely proud. People will sit up\nand take notice if you become the\nTrainer of one.",
+"522": "Its mane shines when it discharges\nelectricity. They use the frequency\nand rhythm of these flashes to\ncommunicate.",
+"523": "They have lightning-like movements.\nWhen Zebstrika run at full speed, the\nsound of thunder reverberates.",
+"524": "When it detects a noise, it starts to\nmove. The energy core inside it makes\nthis Pok\u00e9mon slightly warm to the\ntouch.",
+"525": "It relies on sound in order to monitor\nwhat's in its vicinity. When angered,\nit will attack without ever changing\nthe direction it's facing.",
+"526": "Although its energy blasts can blow\naway a dump truck, they have a\nlimitation\u2014 they can only be fired\nwhen the sun is out.",
+"527": "It emits ultrasonic waves as it\nflutters about, searching for its\nprey\u2014bug Pok\u00e9mon.",
+"528": "The auspicious shape of this Pok\u00e9mon's\nnose apparently led some regions to\nconsider Swoobat a symbol of good\nluck.",
+"529": "It's a digger, using its claws to\nburrow through the ground. It causes\ndamage to vegetable crops, so many\nfarmers have little love for it.",
+"530": "Known as the Drill King, this Pok\u00e9mon\ncan tunnel through the terrain at\nspeeds of over 90 mph.",
+"531": "This Pok\u00e9mon has a kind heart. By\ntouching with its feelers, Audino can\ngauge other creatures' feelings and\nphysical conditions.",
+"532": "Timburr that have started carrying\nlogs that are about three times their\nsize are nearly ready to evolve.",
+"533": "It shows off its muscles to Machoke\nand other Gurdurr. If it fails to\nmeasure up to the other Pok\u00e9mon, it\nlies low for a little while.",
+"534": "When going all out, this Pok\u00e9mon\nthrows aside its concrete pillars and\nleaps at opponents to pummel them with\nits fists.",
+"535": "It uses sound waves to communicate\nwith others of its kind. People and\nother Pok\u00e9mon species can't hear its\ncries of warning.",
+"536": "On occasion, their cries are sublimely\npleasing to the ear. Palpitoad with\nlarger lumps on their bodies can sing\nwith a wider range of sounds.",
+"537": "This Pok\u00e9mon is popular among the\nelderly, who say the vibrations of its\nlumps are great for massages.",
+"538": "They train in groups of five. Any\nmember that can't keep up will discard\nits belt and leave the group.",
+"539": "The karate chops of a Sawk that's\ntrained itself to the limit can cleave\nthe ocean itself.",
+"540": "Since this Pok\u00e9mon makes its own\nclothes out of leaves, it is a popular\nmascot for fashion designers.",
+"541": "It protects itself from the cold by\nwrapping up in leaves. It stays on the\nmove, eating leaves in forests.",
+"542": "It keeps its eggs warm with heat from\nfermenting leaves. It also uses leaves\nto make warm wrappings for Sewaddle.",
+"543": "Its fangs are highly venomous. If this\nPok\u00e9mon finds prey it thinks it can\neat, it leaps for them without any\nthought of how things might turn out.",
+"544": "Whirlipede protects itself with a\nsturdy shell and poisonous spikes\nwhile it stores up the energy it'll\nneed for evolution.",
+"545": "Scolipede engage in fierce territorial\nbattles with Centiskorch. At the end\nof one of these battles, the victor\nmakes a meal of the loser.",
+"546": "Weaving together the cotton of both\nCottonee and Eldegoss produces\nexquisite cloth that's highly prized\nby many luxury brands.",
+"547": "It scatters cotton all over the place\nas a prank. If it gets wet, it'll\nbecome too heavy to move and have no\nchoice but to answer for its mischief.",
+"548": "The deeper the color of a Petilil's\nleaves, the healthier the Pok\u00e9mon is.\nPetilil sometimes makes its home in a\nwell-tended field or flowerbed.",
+"549": "Essential oils made from Lilligant\nflowers have a sublime scent, but\nthey're also staggeringly expensive.",
+"550": "In the past, it often appeared on the\ndinner table. The meat of red-striped\nBasculin is on the fatty side, and\nit's more popular with the youth.",
+"551": "The desert gets cold at night, so when\nthe sun sets, this Pok\u00e9mon burrows\ndeep into the sand and sleeps until\nsunrise.",
+"552": "Although this Pok\u00e9mon has specialized\neyes that allow it to see in the dark,\nKrokorok won't move much at night\u2014the\ndesert gets cold after sunset.",
+"553": "While terribly aggressive, Krookodile\nalso has the patience to stay hidden\nunder sand for days, lying in wait for\nprey.",
+"554": "This popular symbol of good fortune\nwill never fall over in its sleep, no\nmatter how it's pushed or pulled.",
+"555": "This Pok\u00e9mon's power level rises along\nwith the temperature of its fire,\nwhich can reach 2,500 degrees\nFahrenheit.",
+"556": "Once each year, this Pok\u00e9mon scatters\nits seeds. They're jam-packed with\nnutrients, making them a precious food\nsource out in the desert.",
+"557": "It first tries to find a rock to live\nin, but if there are no suitable rocks\nto be found, Dwebble may move in to\nthe ports of a Hippowdon.",
+"558": "Its thick claws are its greatest\nweapons. They're mighty enough to\ncrack Rhyperior's carapace.",
+"559": "It protects itself with its durable\nskin. It's thought that this Pok\u00e9mon\nwill evolve once its skin has\ncompletely stretched out.",
+"560": "While mostly known for having the\ntemperament of an aggressive ruffian,\nthis Pok\u00e9mon takes very good care of\nits family, friends, and territory.",
+"561": "A discovery was made in the desert\nwhere Sigilyph fly. The ruins of what\nmay have been an ancient city were\nfound beneath the sands.",
+"562": "The spirit of a person from a bygone\nage became this Pok\u00e9mon. It rambles\nthrough ruins, searching for someone\nwho knows its face.",
+"563": "There are many depictions of\nCofagrigus decorating ancient tombs.\nThey're symbols of the wealth that\nkings of bygone eras had.",
+"564": "Tirtouga is considered to be the\nancestor of many turtle Pok\u00e9mon. It\nwas restored to life from a fossil.",
+"565": "This Pok\u00e9mon emerges from the water in\nsearch of prey despite the fact that\nit moves more slowly on land.",
+"566": "Archen is said to be the ancestor of\nbird Pok\u00e9mon. It lived in treetops,\neating berries and bug Pok\u00e9mon.",
+"567": "Though capable of flight, Archeops was\napparently better at hunting on the\nground.",
+"568": "This Pok\u00e9mon was born from a bag\nstuffed with trash. Galarian Weezing\nrelish the fumes belched by Trubbish.",
+"569": "The toxic liquid it launches from its\nright arm is so virulent that it can\nkill a weakened creature instantly.",
+"570": "Zorua sometimes transforms into a\nperson and goes into cities to search\nfor food. When Zorua does this, it\nusually takes on the form of a child.",
+"571": "Seeking to ease the burden of their\nsolitude, lonely Trainers tell Zoroark\nto show illusions to them.",
+"572": "They pet each other with their tails\nas a form of greeting. Of the two, the\none whose tail is fluffier is a bit\nmore boastful.",
+"573": "A special oil that seeps through their\nfur helps them avoid attacks. The oil\nfetches a high price at market.",
+"574": "Even when nobody seems to be around,\nGothita can still be heard making a\nmuted cry. Many believe it's speaking\nto something only it can see.",
+"575": "On nights when the stars shine, this\nPok\u00e9mon's psychic power is at its\nstrongest. It's unknown just what link\nGothorita has to the greater universe.",
+"576": "A criminal who was shown his fate by a\nGothitelle went missing that same day\nand was never seen again.",
+"577": "Many say that the special liquid\ncovering this Pok\u00e9mon's body would\nallow it to survive in the vacuum of\nspace.",
+"578": "Its brain has split into two, and the\ntwo halves rarely think alike. Its\nactions are utterly unpredictable.",
+"579": "It's said that drinking the liquid\nsurrounding Reuniclus grants wisdom.\nProblem is, the liquid is highly toxic\nto anything besides Reuniclus itself.",
+"580": "They are better at swimming than\nflying, and they happily eat their\nfavorite food, peat moss, as they dive\nunderwater.",
+"581": "Swanna start to dance at dusk. The one\ndancing in the middle is the leader of\nthe flock.",
+"582": "Unable to survive in hot areas, it\nmakes itself comfortable by breathing\nout air cold enough to cause snow. It\nburrows into the snow to sleep.",
+"583": "By drinking pure water, it grows its\nicy body. This Pok\u00e9mon can be hard to\nfind on days with warm, sunny weather.",
+"584": "People believe this Pok\u00e9mon formed\nwhen two Vanillish stuck together. Its\nbody temperature is roughly 21 degrees\nFahrenheit.",
+"585": "The turning of the seasons changes the\ncolor and scent of this Pok\u00e9mon's fur.\nPeople use it to mark the seasons.",
+"586": "They migrate according to the seasons,\nso some people call Sawsbuck the\nharbingers of spring.",
+"587": "This Pok\u00e9mon absolutely loves sweet\nberries. Sometimes it stuffs its\ncheeks full of so much food that it\ncan't fly properly.",
+"588": "It spits a liquid from its mouth to\nmelt through Shelmet's shell.\nKarrablast doesn't eat the shell\u2014 it\neats only the contents.",
+"589": "It charges its enemies, lances at the\nready. An image of one of its duels is\ncaptured in a famous painting of\nEscavalier clashing with Sirfetch'd.",
+"590": "The spores released from this\nPok\u00e9mon's hands are highly poisonous,\nbut when thoroughly dried, the spores\ncan be used as stomach medicine.",
+"591": "Amoonguss generally doesn't move much.\nIt tends to stand still near Pok\u00e9\nBalls that have been dropped on the\nground.",
+"592": "Legend has it that the residents of a\nsunken ancient city changed into these\nPok\u00e9mon.",
+"593": "Whenever a full moon hangs in the\nnight sky, schools of Jellicent gather\nnear the surface of the sea, waiting\nfor their prey to appear.",
+"594": "The reason it helps Pok\u00e9mon in a\nweakened condition is that any Pok\u00e9mon\ncoming after them may also attack\nAlomomola.",
+"595": "Joltik latch on to other Pok\u00e9mon and\nsuck out static electricity. They're\noften found sticking to Yamper's\nhindquarters.",
+"596": "It lays traps of electrified threads\nnear the nests of bird Pok\u00e9mon, aiming\nto snare chicks that are not yet good\nat flying.",
+"597": "Mossy caves are their preferred\ndwellings. Enzymes contained in mosses\nhelp Ferroseed's spikes grow big and\nstrong.",
+"598": "Its spikes are harder than steel. This\nPok\u00e9mon crawls across rock walls by\nstabbing the spikes on its feelers\ninto the stone.",
+"599": "It's suspected that Klink were the\ninspiration behind ancient people's\ninvention of the first gears.",
+"600": "Many companies in the Galar region\nchoose Klang as their logo. This\nPok\u00e9mon is considered the symbol of\nindustrial technology.",
+"601": "The three gears that compose this\nPok\u00e9mon spin at high speed. Its new\nspiked gear isn't a living creature.",
+"602": "One alone can emit only a trickle of\nelectricity, so a group of them\ngathers to unleash a powerful electric\nshock.",
+"603": "These Pok\u00e9mon have a big appetite.\nWhen they spot their prey, they attack\nit and paralyze it with electricity.",
+"604": "They crawl out of the ocean using\ntheir arms. They will attack prey on\nshore and immediately drag it into the\nocean.",
+"605": "This Pok\u00e9mon was discovered about 50\nyears ago. Its highly developed brain\nenables it to exert its psychic\npowers.",
+"606": "Sometimes found drifting above wheat\nfields, this Pok\u00e9mon can control the\nmemories of its opponents.",
+"607": "The younger the life this Pok\u00e9mon\nabsorbs, the brighter and eerier the\nflame on its head burns.",
+"608": "It lurks in cities, pretending to be a\nlamp. Once it finds someone whose\ndeath is near, it will trail quietly\nafter them.",
+"609": "In homes illuminated by Chandelure\ninstead of lights, funerals were a\nconstant occurrence\u2014 or so it's said.",
+"610": "These Pok\u00e9mon nest in the ground and\nuse their tusks to crush hard berries.\nCrushing berries is also how they test\neach other's strength.",
+"611": "Its skin is as hard as a suit of\narmor. Fraxure's favorite strategy is\nto tackle its opponents, stabbing them\nwith its tusks at the same time.",
+"612": "While usually kindhearted, it can be\nterrifying if angered. Tusks that can\nslice through steel beams are how\nHaxorus deals with its adversaries.",
+"613": "It sniffles before performing a move,\nusing its frosty snot to provide an\nicy element to any move that needs it.",
+"614": "It swims energetically through frigid\nseas. When it gets tired, it freezes\nthe seawater with its breath so it can\nrest on the ice.",
+"615": "When the weather gets hot, these\nPok\u00e9mon turn into water vapor.\nCryogonal are almost never seen during\nsummer.",
+"616": "It has a strange physiology that\nresponds to electricity. When together\nwith Karrablast, Shelmet evolves for\nsome reason.",
+"617": "Discarding its shell made it nimble.\nTo keep itself from dehydrating, it\nwraps its body in bands of membrane.",
+"618": "For some reason, this Pok\u00e9mon smiles\nslightly when it emits a strong\nelectric current from the yellow\nmarkings on its body.",
+"619": "Though small, Mienfoo's temperament is\nfierce. Any creature that approaches\nMienfoo carelessly will be greeted\nwith a flurry of graceful attacks.",
+"620": "Delivered at blinding speeds, kicks\nfrom this Pok\u00e9mon can shatter massive\nboulders into tiny pieces.",
+"621": "Druddigon are vicious and cunning.\nThey take up residence in nests dug\nout by other Pok\u00e9mon, treating the\nstolen nests as their own lairs.",
+"622": "This Pok\u00e9mon was created from clay. It\nreceived orders from its master many\nthousands of years ago, and it still\nfollows those orders to this day.",
+"623": "There's a theory that inside Golurk is\na perpetual motion machine that\nproduces limitless energy, but this\nbelief hasn't been proven.",
+"624": "A pack of these Pok\u00e9mon forms to serve\na Bisharp boss. Each Pawniard trains\ndiligently, dreaming of one day taking\nthe lead.",
+"625": "Violent conflicts erupt between\nBisharp and Fraxure over places where\nsharpening stones can be found.",
+"626": "These Pok\u00e9mon live in herds of about\n20 individuals. Bouffalant that betray\nthe herd will lose the hair on their\nheads for some reason.",
+"627": "Its chick-like looks belie its\nhotheadedness. It challenges its\nparents at every opportunity,\ndesperate to prove its strength.",
+"628": "Because this Pok\u00e9mon is hotheaded and\nbelligerent, it's Corviknight that's\ntaken the role of transportation in\nGalar.",
+"629": "Vullaby grow quickly. Bones that have\ngotten too small for older Vullaby to\nwear often get passed down to younger\nones in the nest.",
+"630": "They adorn themselves with bones.\nThere seem to be fashion trends among\nthem, as different bones come into and\nfall out of popularity.",
+"631": "A flame serves as its tongue, melting\nthrough the hard shell of Durant so\nthat Heatmor can devour their insides.",
+"632": "With their large mandibles, these\nPok\u00e9mon can crunch their way through\nrock. They work together to protect\ntheir eggs from Sandaconda.",
+"633": "Because it can't see, this Pok\u00e9mon is\nconstantly biting at everything it\ntouches, trying to keep track of its\nsurroundings.",
+"634": "Their two heads will fight each other\nover a single piece of food. Zweilous\nare covered in scars even without\nbattling others.",
+"635": "The three heads take turns sinking\ntheir teeth into the opponent. Their\nattacks won't slow until their target\ngoes down.",
+"636": "Larvesta's body is warm all over. It\nspouts fire from the tips of its horns\nto intimidate predators and scare\nprey.",
+"637": "This Pok\u00e9mon emerges from a cocoon\nformed of raging flames. Ancient\nmurals depict Volcarona as a deity of\nfire.",
+"638": "From the moment it's born, this\nPok\u00e9mon radiates the air of a leader.\nIts presence will calm even vicious\nfoes.",
+"639": "In Unovan legend, Terrakion battled\nagainst humans in an effort to protect\nother Pok\u00e9mon.",
+"640": "It darts around opponents with a\nflurry of quick movements, slicing\nthem up with its horns.",
+"641": "This storm-stirring Pok\u00e9mon is said to\ncause the seasons to turn by whipping\nup the air. I suspect its humanlike\nform to be a false one.",
+"642": "As it flies around, it shoots\nlightning all over the place and\ncauses forest fires. It is therefore\ndisliked.",
+"643": "According to myth, if people ignore\ntruth and let themselves become\nconsumed by greed, Reshiram will\narrive to burn their kingdoms down.",
+"644": "Mythology tells us that if people lose\nthe righteousness in their hearts,\ntheir kingdoms will be razed by\nZekrom's lightning.",
+"645": "From the forces of lightning and wind,\nit creates energy to give nutrients to\nthe soil and make the land abundant.",
+"646": "It appears that this Pok\u00e9mon uses its\npowers over ice to freeze its own body\nin order to stabilize its cellular\nstructure.",
+"647": "They say that Keldeo must survive\nharsh battles and fully develop the\nhorn on its forehead before this\nPok\u00e9mon's true power will awaken.",
+"648": "Its melodies are sung with a special\nvocalization method that can control\nthe feelings of those who hear it.",
+"649": "This Pok\u00e9mon existed 300 million years\nago. Team Plasma altered it and\nattached a cannon to its back.",
+"650": "Such a thick shell of wood covers its\nhead and back that even a direct hit\nfrom a truck wouldn't faze it.",
+"651": "They strengthen their lower bodies by\nrunning into one another. They are\nvery kind and won't start fights.",
+"652": "When it takes a defensive posture with\nits fists guarding its face, it could\nwithstand a bomb blast.",
+"653": "As it walks, it munches on a twig in\nplace of a snack. It intimidates\nopponents by puffing hot air out of\nits ears.",
+"654": "When the twig is plucked from its\ntail, friction sets the twig alight.\nThe flame is used to send signals to\nits allies.",
+"655": "Using psychic power, it generates a\nfiery vortex of 5,400 degrees\nFahrenheit, incinerating foes swept\ninto this whirl of flame.",
+"656": "It protects its skin by covering its\nbody in delicate bubbles. Beneath its\nhappy-go-lucky air, it keeps a\nwatchful eye on its surroundings.",
+"657": "Its swiftness is unparalleled. It can\nscale a tower of more than 2,000 feet\nin a minute's time.",
+"658": "It appears and vanishes with a ninja's\ngrace. It toys with its enemies using\nswift movements, while slicing them\nwith throwing stars of sharpest water.",
+"659": "It's very sensitive to danger. The\nsound of Corviknight's flapping will\nhave Bunnelby digging a hole to hide\nunderground in moments.",
+"660": "The fur on its belly retains heat\nexceptionally well. People used to\nmake heavy winter clothing from fur\nshed by this Pok\u00e9mon.",
+"661": "When this Pok\u00e9mon gets excited, its\nbody temperature increases sharply. If\nyou touch a Fletchling with bare\nhands, you might get burned.",
+"662": "Fletchinder are exceedingly\nterritorial and aggressive. These\nPok\u00e9mon fight among themselves over\nfeeding grounds.",
+"663": "Talonflame dives toward prey at speeds\nof up to 310 mph and assaults them\nwith powerful kicks, giving the prey\nno chance to escape.",
+"664": "The powder that covers its body\nregulates its temperature, so it can\nlive in any region or climate.",
+"665": "The beaks of bird Pok\u00e9mon can't begin\nto scratch its stalwart body. To\ndefend itself, it spews powder.",
+"666": "The patterns on this Pok\u00e9mon's wings\ndepend on the climate and topography\nof its habitat. It scatters colorful\nscales.",
+"667": "This hot-blooded Pok\u00e9mon is filled\nwith curiosity. When it gets angry or\nstarts fighting, its short mane gets\nhot.",
+"668": "The temperature of its breath is over\n10,000 degrees Fahrenheit, but Pyroar\ndoesn't use it on its prey. This\nPok\u00e9mon prefers to eat raw meat.",
+"669": "Flab\u00e9b\u00e9 wears a crown made from pollen\nit's collected from its flower. The\ncrown has hidden healing properties.",
+"670": "It gives its own power to flowers,\npouring its heart into caring for\nthem. Floette never forgives anyone\nwho messes up a flower bed.",
+"671": "Its life can span several hundred\nyears. It's said to devote its entire\nlife to protecting gardens.",
+"672": "If it has sunshine and water, it\ndoesn't need to eat, because it can\ngenerate energy from the leaves on its\nback.",
+"673": "They inhabit mountainous regions. The\nleader of the herd is decided by a\nbattle of clashing horns.",
+"674": "Wanting to make sure it's taken\nseriously, Pancham's always giving\nothers a glare. But if it's not\nfocusing, it ends up smiling.",
+"675": "Using its leaf, Pangoro can predict\nthe moves of its opponents. It strikes\nwith punches that can turn a dump\ntruck into scrap with just one hit.",
+"676": "Left alone, its fur will grow longer\nand longer, but it will only allow\nsomeone it trusts to cut it.",
+"677": "There's enough psychic power in Espurr\nto send a wrestler flying, but because\nthis power can't be controlled, Espurr\nfinds it troublesome.",
+"678": "The defensive instinct of the males is\nstrong. It's when they're protecting\nthemselves or their partners that they\nunleash their full power.",
+"679": "The blue eye on the sword's handguard\nis the true body of Honedge. With its\nold cloth, it drains people's lives\naway.",
+"680": "The two swords employ a strategy of\nrapidly alternating between offense\nand defense to bring down their prey.",
+"681": "Its potent spectral powers allow it to\nmanipulate others. It once used its\npowers to force people and Pok\u00e9mon to\nbuild a kingdom to its liking.",
+"682": "The scent its body gives off\nenraptures those who smell it. Noble\nladies had no shortage of love for\nSpritzee.",
+"683": "The scents Aromatisse can produce\nrange from sweet smells that bolster\nallies to foul smells that sap an\nopponent's will to fight.",
+"684": "The sweet smell of cotton candy\nperfumes Swirlix's fluffy fur. This\nPok\u00e9mon spits out sticky string to\ntangle up its enemies.",
+"685": "Slurpuff's fur contains a lot of air,\nmaking it soft to the touch and\nlighter than it looks.",
+"686": "By exposing foes to the blinking of\nits luminescent spots, Inkay\ndemoralizes them, and then it seizes\nthe chance to flee.",
+"687": "It's said that Malamar's hypnotic\npowers played a role in certain\nhistory-changing events.",
+"688": "If the two don't work well together,\nboth their offense and defense fall\napart. Without good teamwork, they\nwon't survive.",
+"689": "Having an eye on each palm allows it\nto keep watch in all directions. In a\npinch, its limbs start to act on their\nown to ensure the enemy's defeat.",
+"690": "Skrelp looks like a piece of rotten\nseaweed, so it can blend in with\nseaweed drifting on the ocean and\navoid being detected by enemies.",
+"691": "Dragalge generates dragon energy by\nsticking the plume on its head out\nabove the ocean's surface and bathing\nit in sunlight.",
+"692": "By detonating gas that accumulates in\nits right claw, this Pok\u00e9mon launches\nwater like a bullet. This is how\nClauncher defeats its enemies.",
+"693": "Clawitzer's right arm is a cannon that\nlaunches projectiles made of seawater.\nShots from a Clawitzer's cannon arm\ncan sink a tanker.",
+"694": "The sun powers this Pok\u00e9mon's\nelectricity generation. Interruption\nof that process stresses Helioptile to\nthe point of weakness.",
+"695": "One Heliolisk basking in the sun with\nits frill outspread is all it would\ntake to produce enough electricity to\npower a city.",
+"696": "This Pok\u00e9mon is selfish and likes to\nbe pampered. It can also inflict\ngrievous wounds on its Trainer just by\nplaying around.",
+"697": "A single bite of Tyrantrum's massive\njaws will demolish a car. This Pok\u00e9mon\nwas the king of the ancient world.",
+"698": "Amaura is an ancient Pok\u00e9mon that has\ngone extinct. Specimens of this\nspecies can sometimes be found frozen\nin ice.",
+"699": "When gripped by rage, Aurorus will\nemanate freezing air, covering\neverything around it in ice.",
+"700": "There's a Galarian fairy tale that\ndescribes a beautiful Sylveon\nvanquishing a dreadful dragon Pok\u00e9mon.",
+"701": "It always strikes a pose before going\nfor its finishing move. Sometimes\nopponents take advantage of that time\nto counterattack.",
+"702": "Since Dedenne can't generate much\nelectricity on its own, it steals\nelectricity from outlets or other\nelectric Pok\u00e9mon.",
+"703": "It's said that somewhere in the world,\nthere's a mineral vein housing a large\npack of slumbering Carbink. It's also\nsaid that this pack has a queen.",
+"704": "Their horns are powerful sensors. As\nsoon as Goomy pick up any sign of\nenemies, they go into hiding. This is\nhow they've survived.",
+"705": "The lump on its back contains its tiny\nbrain. It thinks only of food and\nescaping its enemies.",
+"706": "Its form of offense is forcefully\nstretching out its horns. The strikes\nland 100 times harder than any blow\nfrom a heavyweight boxer.",
+"707": "Klefki sucks in metal ions with the\nhorn topping its head. It seems this\nPok\u00e9mon loves keys so much that its\nhead needed to look like one, too.",
+"708": "With a voice like a human child's, it\ncries out to lure adults deep into the\nforest, getting them lost among the\ntrees.",
+"709": "Small roots that extend from the tips\nof this Pok\u00e9mon's feet can tie into\nthe trees of the forest and give\nTrevenant control over them.",
+"710": "The light that streams out from the\nholes in the pumpkin can hypnotize and\ncontrol the people and Pok\u00e9mon that\nsee it.",
+"711": "In the darkness of a new-moon night,\nGourgeist will come knocking. Whoever\nanswers the door will be swept off to\nthe afterlife.",
+"712": "Lives on mountains blanketed in\nperennial snow. It freezes water vapor\nin the air to make the ice helmet that\nit dons for defense.",
+"713": "As Avalugg moves about during the day,\nthe cracks in its body deepen. The\nPok\u00e9mon's body returns to a pristine\nstate overnight.",
+"714": "No wavelength of sound is beyond\nNoibat's ability to produce. The\nultrasonic waves it generates can\novercome much larger Pok\u00e9mon.",
+"715": "Flying through the darkness, it\nweakens enemies with ultrasonic waves\nthat could crush stone. Its fangs\nfinish the fight.",
+"716": "When the horns on its head shine in\nseven colors, it is said to be sharing\neverlasting life.",
+"717": "When its life comes to an end, it\nabsorbs the life energy of every\nliving thing and turns into a cocoon\nonce more.",
+"718": "Some say it can change to an even more\npowerful form when battling those who\nthreaten the ecosystem.",
+"719": "It can instantly create many diamonds\nby compressing the carbon in the air\nbetween its hands.",
+"720": "It gathers things it likes and passes\nthem through its loop to teleport them\nto a secret place.",
+"721": "It expels its internal steam from the\narms on its back. It has enough power\nto blow away a mountain.",
+"722": "Flies noiselessly on delicate wings.\nIt has mastered the art of deftly\nlaunching dagger-sharp feathers from\nthose same wings.",
+"723": "It throws one knifelike feather after\nanother at its enemies, and each one\nprecisely strikes a weak point. These\nfeathers are known as blade quills.",
+"724": "In a tenth of a second, it can nock\nand fire an arrow quill, piercing an\nopponent's weak point before they\nnotice what's happening.",
+"725": "Trying to pet Litten before it trusts\nyou will result in a nasty scratch\nfrom its sharp claws. Be careful.",
+"726": "When facing a powerful enemy,\nTorracat's fighting spirit gets pumped\nup, and its fire bell blazes hotter.",
+"727": "Incineroar's rough and aggressive\nbehavior is its most notable trait,\nbut the way it helps out small Pok\u00e9mon\nshows that it has a kind side as well.",
+"728": "It creates special bouncy balloons to\nsend at its opponents. When the\nballoons pop, the sheer force of their\nbursting is what deals damage.",
+"729": "On nights when the sea is calm,\nBrionne dance with one another to the\nsinging of the Primarina that's\nleading them.",
+"730": "For Primarina, every battle's a stage.\nIts singing and the dancing of its\nballoons will mesmerize the audience.",
+"731": "It may look spindly, but its neck\nmuscles are heavy-duty. It can peck at\na tree 16 times per second!",
+"732": "From its mouth, it fires the seeds of\nberries it has eaten. The scattered\nseeds give rise to new plants.",
+"733": "Known for forming harmonious couples,\nthis Pok\u00e9mon is brought to wedding\nceremonies as a good luck charm.",
+"734": "Although it will eat anything, it\nprefers fresh living things, so it\nmarches down streets in search of\nprey.",
+"735": "Patient by nature, this Pok\u00e9mon loses\ncontrol of itself and pounces when it\nspots its favorite meal\u2014Rattata!",
+"736": "It uses its big jaws to dig nests into\nthe forest floor, and it loves to feed\non sweet tree sap.",
+"737": "Its digestive processes convert the\nleaves it eats into electricity. An\nelectric sac in its belly stores the\nelectricity for later use.",
+"738": "If it carries a Charjabug to use as a\nspare battery, a flying Vikavolt can\nrapidly fire high-powered beams of\nelectricity.",
+"739": "Crabrawler has been known to mistake\nExeggutor for a coconut tree and climb\nit. The enraged Exeggutor shakes it\noff and stomps it.",
+"740": "Before it stops to think, it just\nstarts pummeling. There are records of\nits turning back avalanches with a\nflurry of punches.",
+"741": "This Oricorio has drunk red nectar. If\nits Trainer gives the wrong order,\nthis passionate Pok\u00e9mon becomes\nfiercely angry.",
+"742": "An opponent's aura can tell Cutiefly\nwhat that opponent's next move will\nbe. Then Cutiefly can glide around the\nattack and strike back.",
+"743": "Ribombee absolutely hate getting wet\nor rained on. In the cloudy Galar\nregion, they are very seldom seen.",
+"744": "This Pok\u00e9mon intimidates opponents by\nstriking the ground with the rocks on\nits neck. The moment an opponent\nflinches, Rockruff attacks.",
+"745": "With swift movements, this Pok\u00e9mon\ngradually backs its prey into a\ncorner. Lycanroc's fangs are always\naimed toward opponents' weak spots.",
+"746": "When it senses danger, its eyes tear\nup. The sparkle of its tears signals\nother Wishiwashi to gather.",
+"747": "Unlike their Alolan counterparts, the\nMareanie of the Galar region have not\nyet figured out that the branches of\nCorsola are delicious.",
+"748": "To survive in the cold waters of\nGalar, this Pok\u00e9mon forms a dome with\nits legs, enclosing its body so it can\ncapture its own body heat.",
+"749": "It eats dirt to create mud and smears\nthis mud all over its feet, giving\nthem the grip needed to walk on rough\nterrain without slipping.",
+"750": "Mudsdale has so much stamina that it\ncould carry over 10 tons across the\nGalar region without rest or sleep.",
+"751": "Dewpider normally lives underwater.\nWhen it comes onto land in search of\nfood, it takes water with it in the\nform of a bubble on its head.",
+"752": "It acts as a caretaker for Dewpider,\nputting them inside its bubble and\nletting them eat any leftover food.",
+"753": "During the day, Fomantis basks in\nsunlight and sleeps peacefully. It\nwakes and moves around at night.",
+"754": "The petals on this Pok\u00e9mon's arms are\nthin and super sharp, and they can\nfire laser beams if Lurantis gathers\nlight first.",
+"755": "Morelull live in forests that stay\ndark even during the day. They scatter\nflickering spores that put enemies to\nsleep.",
+"756": "If you see a light deep in a forest at\nnight, don't go near. Shiinotic will\nmake you fall fast asleep.",
+"757": "This sneaky Pok\u00e9mon will slink behind\nits prey and immobilize it with\npoisonous gas before the prey even\nrealizes Salandit is there.",
+"758": "The winner of competitions between\nSalazzle is decided by which one has\nthe most male Salandit with it.",
+"759": "The way it protects itself by flailing\nits arms may be an adorable sight, but\nstay well away. This is flailing that\ncan snap thick tree trunks.",
+"760": "The moves it uses to take down its\nprey would make a martial artist\njealous. It tucks subdued prey under\nits arms to carry them to its nest.",
+"761": "When under attack, it secretes a sweet\nand delicious sweat. The scent only\ncalls more enemies to it.",
+"762": "Any Corvisquire that pecks at this\nPok\u00e9mon will be greeted with a smack\nfrom its sepals followed by a sharp\nkick.",
+"763": "A kick from the hardened tips of this\nPok\u00e9mon's legs leaves a wound in the\nopponent's body and soul that will\nnever heal.",
+"764": "These Pok\u00e9mon smell very nice. All\nComfey wear different flowers, so each\nof these Pok\u00e9mon has its own\nindividual scent.",
+"765": "It knows the forest inside and out. If\nit comes across a wounded Pok\u00e9mon,\nOranguru will gather medicinal herbs\nto treat it.",
+"766": "Passimian live in groups of about 20,\nwith each member performing an\nassigned role. Through cooperation,\nthe group survives.",
+"767": "Wimpod gather in swarms, constantly on\nthe lookout for danger. They scatter\nthe moment they detect an enemy's\npresence.",
+"768": "They live in sunken ships or in holes\nin the seabed. When Golisopod and\nGrapploct battle, the loser becomes\nthe winner's meal.",
+"769": "Sandygast mainly inhabits beaches. It\ntakes control of anyone who puts their\nhand into its mouth, forcing them to\nmake its body bigger.",
+"770": "This Pok\u00e9mon lives on beaches, but it\nhates water. Palossand can't maintain\nits castle-like shape if it gets\ndrenched by a heavy rain.",
+"771": "It's covered in a slime that keeps its\nskin moist, allowing it to stay on\nland for days without drying up.",
+"772": "It was modeled after a mighty Pok\u00e9mon\nof myth. The mask placed upon it\nlimits its power in order to keep it\nunder control.",
+"773": "The final factor needed to release\nthis Pok\u00e9mon's true power was a strong\nbond with a Trainer it trusts.",
+"774": "Although its outer shell is uncommonly\ndurable, the shock of falling to the\nground smashes the shell to\nsmithereens.",
+"775": "It remains asleep from birth to death\nas a result of the sedative properties\nof the leaves that form its diet.",
+"776": "Eating sulfur in its volcanic habitat\nis what causes explosive compounds to\ndevelop in its shell. Its droppings\nare also dangerously explosive.",
+"777": "When it's in trouble, it curls up into\na ball, makes its fur spikes stand on\nend, and then discharges electricity\nindiscriminately.",
+"778": "There was a scientist who peeked under\nMimikyu's old rag in the name of\nresearch. The scientist died of a\nmysterious disease.",
+"779": "Its skin is thick enough to fend off\nMareanie's spikes. With its robust\nteeth, Bruxish crunches up the spikes\nand eats them.",
+"780": "Drampa is a kind and friendly\nPok\u00e9mon\u2014up until it's angered. When\nthat happens, it stirs up a gale and\nflattens everything around.",
+"781": "After lowering its anchor, it waits\nfor its prey. It catches large Wailord\nand drains their life-force.",
+"782": "Jangmo-o strikes its scales to\ncommunicate with others of its kind.\nIts scales are actually fur that's\nbecome as hard as metal.",
+"783": "Before attacking its enemies, it\nclashes its scales together and roars.\nIts sharp claws shred the opposition.",
+"784": "Certain ruins have paintings of\nancient warriors wearing armor made of\nKommo-o scales.",
+"785": "The lightning-wielding guardian deity\nof Melemele, Tapu Koko is brimming\nwith curiosity and appears before\npeople from time to time.",
+"786": "Although called a guardian deity, Tapu\nLele is devoid of guilt about its\ncruel disposition and can be described\nas nature incarnate.",
+"787": "Although it's called a guardian deity,\nit's violent enough to crush anyone it\nsees as an enemy.",
+"788": "Although it's called a guardian deity,\nterrible calamities sometimes befall\nthose who recklessly approach Tapu\nFini.",
+"789": "Cosmog is very curious but not very\ncautious, often placing itself in\ndanger. If things start to look dicey,\nit teleports away.",
+"790": "It sucks in dust from the air at an\nastounding rate, frantically building\nup energy within its core as\npreparation for evolution.",
+"791": "Solgaleo was once known as the Beast\nThat Devours the Sun. Energy in the\nform of light radiates boundlessly\nfrom it.",
+"792": "It steals the light from its\nsurroundings and then becomes the full\nmoon, showering its own light across\nthe night sky.",
+"793": "It appeared in this world from an\nUltra Wormhole. Nihilego appears to be\na parasite that lives by feeding on\npeople and Pok\u00e9mon.",
+"794": "Buzzwole goes around showing off its\nabnormally swollen muscles. It is one\nkind of Ultra Beast.",
+"795": "Although it's alien to this world and\na danger here, it's apparently a\ncommon organism in the world where it\nnormally lives.",
+"796": "They've been dubbed Ultra Beasts. Some\nof them stand unmoving, like trees,\nwith their arms and legs stuck into\nthe ground.",
+"797": "Although it's alien to this world and\na danger here, it's apparently a\ncommon organism in the world where it\nnormally lives.",
+"798": "Although it's alien to this world and\na danger here, it's apparently a\ncommon organism in the world where it\nnormally lives.",
+"799": "An unknown life-form called a UB. It\nmay be constantly hungry\u2014it is\ncertainly always devouring something.",
+"800": "It needs light to survive, and it goes\non a rampage seeking it out. Its laser\nbeams will cut anything to pieces.",
+"801": "Built roughly 500 years ago by a\nscientist, the part called the\nSoul-Heart is the actual life-form.",
+"802": "This Pok\u00e9mon can conceal itself in any\nshadow, so it went undiscovered for a\nlong time.",
+"803": "An Ultra Beast that lives in a\ndifferent world, it cackles wildly as\nit sprays its opponents with poison\nfrom the needles on its head.",
+"804": "One kind of Ultra Beast, it fires a\nglowing, venomous liquid from its\nneedles. This liquid is also immensely\nadhesive.",
+"805": "When stone walls started moving and\nattacking, the brute's true identity\nwas this mysterious life-form, which\nbrings to mind an Ultra Beast.",
+"806": "A UB that appeared from an Ultra\nWormhole, it causes explosions, then\ntakes advantage of opponents' surprise\nto rob them of their vitality.",
+"807": "Electricity sparks from the pads on\nits limbs. Wherever Zeraora runs,\nlightning flashes and thunder echoes.",
+"808": "They live as a group, but when the\ntime comes, one strong Meltan will\nabsorb all the others and evolve.",
+"809": "Centrifugal force is behind the\npunches of Melmetal's heavy hex-nut\narms. Melmetal is said to deliver the\nstrongest punches of all Pok\u00e9mon.",
+"810": "It attacks with rapid beats of its\nstick. As it strikes with amazing\nspeed, it gets more and more pumped.",
+"811": "When it's drumming out rapid beats in\nbattle, it gets so caught up in the\nrhythm that it won't even notice that\nit's already knocked out its opponent.",
+"812": "The one with the best drumming\ntechniques becomes the boss of the\ntroop. It has a gentle disposition and\nvalues harmony among its group.",
+"813": "It has special pads on the backs of\nits feet, and one on its nose. Once\nit's raring to fight, these pads\nradiate tremendous heat.",
+"814": "It kicks berries right off the\nbranches of trees and then juggles\nthem with its feet, practicing its\nfootwork.",
+"815": "It juggles a pebble with its feet,\nturning it into a burning soccer ball.\nIts shots strike opponents hard and\nleave them scorched.",
+"816": "When it gets wet, its skin changes\ncolor, and this Pok\u00e9mon becomes\ninvisible as if it were camouflaged.",
+"817": "Highly intelligent but also very lazy,\nit keeps enemies out of its territory\nby laying traps everywhere.",
+"818": "Its nictitating membranes let it pick\nout foes' weak points so it can\nprecisely blast them with water that\nshoots from its fingertips at Mach 3.",
+"819": "It eats berries nonstop\u2014a habit that\nhas made it more resilient than it\nlooks. It'll show up on farms,\nsearching for yet more berries.",
+"820": "Common throughout the Galar region,\nthis Pok\u00e9mon has strong teeth and can\nchew through the toughest of berry\nshells.",
+"821": "Jumping nimbly about, this\nsmall-bodied Pok\u00e9mon takes advantage\nof even the slightest opportunity to\ndisorient larger opponents.",
+"822": "The lessons of many harsh battles have\ntaught it how to accurately judge an\nopponent's strength.",
+"823": "With their great intellect and flying\nskills, these Pok\u00e9mon very\nsuccessfully act as the Galar region's\nairborne taxi service.",
+"824": "Often found in gardens, this Pok\u00e9mon\nhas hairs on its body that it uses to\nassess its surroundings.",
+"825": "As it grows inside its shell, it uses\nits psychic abilities to monitor the\noutside world and prepare for\nevolution.",
+"826": "It emits psychic energy to observe and\nstudy what's around it\u2014and what's\naround it can include things over six\nmiles away.",
+"827": "Aided by the soft pads on its feet, it\nsilently raids the food stores of\nother Pok\u00e9mon. It survives off its\nill-gotten gains.",
+"828": "With a lithe body and sharp claws, it\ngoes around stealing food and eggs.\nBoltund is its natural enemy.",
+"829": "It whirls around in the wind while\nsinging a joyous song. This delightful\ndisplay has charmed many into raising\nthis Pok\u00e9mon.",
+"830": "The cotton on the head of this Pok\u00e9mon\ncan be spun into a glossy, gorgeous\nyarn\u2014a Galar regional specialty.",
+"831": "If its fleece grows too long, Wooloo\nwon't be able to move. Cloth made with\nthe wool of this Pok\u00e9mon is\nsurprisingly strong.",
+"832": "Its majestic horns are meant only to\nimpress the opposite gender. They\nnever see use in battle.",
+"833": "It starts off battles by attacking\nwith its rock-hard horn, but as soon\nas the opponent flinches, this Pok\u00e9mon\nbites down and never lets go.",
+"834": "This Pok\u00e9mon rapidly extends its\nretractable neck to sink its sharp\nfangs into distant enemies and take\nthem down.",
+"835": "This gluttonous Pok\u00e9mon only assists\npeople with their work because it\nwants treats. As it runs, it crackles\nwith electricity.",
+"836": "It sends electricity through its legs\nto boost their strength. Running at\ntop speed, it easily breaks 50 mph.",
+"837": "It can race around like a unicycle,\neven on rough, rocky terrain. Burning\ncoal sustains it.",
+"838": "By rapidly rolling its legs, it can\ntravel at over 18 mph. The temperature\nof the flames it breathes exceeds\n1,800 degrees Fahrenheit.",
+"839": "While it's engaged in battle, its\nmountain of coal will burn bright red,\nsending off sparks that scorch the\nsurrounding area.",
+"840": "It spends its entire life inside an\napple. It hides from its natural\nenemies, bird Pok\u00e9mon, by pretending\nit's just an apple and nothing more.",
+"841": "It flies on wings of apple skin and\nspits a powerful acid. It can also\nchange its shape into that of an\napple.",
+"842": "Its body is covered in sweet nectar,\nand the skin on its back is especially\nyummy. Children used to have it as a\nsnack.",
+"843": "It spews sand from its nostrils. While\nthe enemy is blinded, it burrows into\nthe ground to hide.",
+"844": "Its unique style of coiling allows it\nto blast sand out of its sand sac more\nefficiently.",
+"845": "This hungry Pok\u00e9mon swallows Arrokuda\nwhole. Occasionally, it makes a\nmistake and tries to swallow a Pok\u00e9mon\nother than its preferred prey.",
+"846": "After it's eaten its fill, its\nmovements become extremely sluggish.\nThat's when Cramorant swallows it up.",
+"847": "It spins its tail fins to propel\nitself, surging forward at speeds of\nover 100 knots before ramming prey and\nspearing into them.",
+"848": "It manipulates the chemical makeup of\nits poison to produce electricity. The\nvoltage is weak, but it can cause a\ntingling paralysis.",
+"849": "This short-tempered and aggressive\nPok\u00e9mon chugs stagnant water to absorb\nany toxins it might contain.",
+"850": "It wraps prey up with its heated body,\ncooking them in its coils. Once\nthey're well-done, it will voraciously\nnibble them down to the last morsel.",
+"851": "While its burning body is already\ndangerous on its own, this excessively\nhostile Pok\u00e9mon also has large and\nvery sharp fangs.",
+"852": "Its tentacles tear off easily, but it\nisn't alarmed when that happens\u2014it\nknows they'll grow back. It's about as\nsmart as a three-year-old.",
+"853": "Searching for an opponent to test its\nskills against, it emerges onto land.\nOnce the battle is over, it returns to\nthe sea.",
+"854": "The teacup in which this Pok\u00e9mon makes\nits home is a famous piece of antique\ntableware. Many forgeries are in\ncirculation.",
+"855": "Leaving leftover black tea unattended\nis asking for this Pok\u00e9mon to come\nalong and pour itself into it, turning\nthe tea into a new Polteageist.",
+"856": "If this Pok\u00e9mon senses a strong\nemotion, it will run away as fast as\nit can. It prefers areas without\npeople.",
+"857": "Using the braids on its head, it\npummels foes to get them to quiet\ndown. One blow from those braids would\nknock out a professional boxer.",
+"858": "If you're too loud around it, you risk\nbeing torn apart by the claws on its\ntentacle. This Pok\u00e9mon is also known\nas the Forest Witch.",
+"859": "It sneaks into people's homes,\nstealing things and feasting on the\nnegative energy of the frustrated\noccupants.",
+"860": "With sly cunning, it tries to lure\npeople into the woods. Some believe it\nto have the power to make crops grow.",
+"861": "Its hairs work like muscle fibers.\nWhen its hairs unfurl, they latch on\nto opponents, ensnaring them as\ntentacles would.",
+"862": "It evolved after experiencing numerous\nfights. While crossing its arms, it\nlets out a shout that would make any\nopponent flinch.",
+"863": "After many battles, it evolved\ndangerous claws that come together to\nform daggers when extended.",
+"864": "Be cautious of the ectoplasmic body\nsurrounding its soul. You'll become\nstiff as stone if you touch it.",
+"865": "After deflecting attacks with its hard\nleaf shield, it strikes back with its\nsharp leek stalk. The leek stalk is\nboth weapon and food.",
+"866": "Its amusing movements make it very\npopular. It releases its psychic power\nfrom the pattern on its belly.",
+"867": "Never touch its shadowlike body, or\nyou'll be shown the horrific memories\nbehind the picture carved into it.",
+"868": "They say that any patisserie visited\nby Milcery is guaranteed success and\ngood fortune.",
+"869": "When Alcremie is content, the cream it\nsecretes from its hands becomes\nsweeter and richer.",
+"870": "The six of them work together as one\nPok\u00e9mon. Teamwork is also their battle\nstrategy, and they constantly change\ntheir formation as they fight.",
+"871": "It stores electricity in each spine.\nEven if one gets broken off, it still\ncontinues to emit electricity for at\nleast three hours.",
+"872": "It eats snow that piles up on the\nground. The more snow it eats, the\nbigger and more impressive the spikes\non its back grow.",
+"873": "It shows no mercy to any who desecrate\nfields and mountains. It will fly\naround on its icy wings, causing a\nblizzard to chase offenders away.",
+"874": "Once a year, on a specific date and at\na specific time, they gather out of\nnowhere and form up in a circle.",
+"875": "This Pok\u00e9mon keeps its heat-sensitive\nhead cool with ice. It fishes for its\nfood, dangling its single hair into\nthe sea to lure in prey.",
+"876": "Through its horns, it can pick up on\nthe emotions of creatures around it.\nPositive emotions are the source of\nits strength.",
+"878": "If a job requires serious strength,\nthis Pok\u00e9mon will excel at it. Its\ncopper body tarnishes in the rain,\nturning a vibrant green color.",
+"879": "These Pok\u00e9mon live in herds. Their\ntrunks have incredible grip strength,\nstrong enough to crush giant rocks\ninto powder.",
+"880": "The powerful muscles in its tail\ngenerate its electricity. Compared to\nits lower body, its upper half is\nentirely too small.",
+"881": "This Pok\u00e9mon lived on prehistoric\nseashores and was able to preserve\nfood with the ice on its body. It went\nextinct because it moved so slowly.",
+"882": "Its mighty legs are capable of running\nat speeds exceeding 40 mph, but this\nPok\u00e9mon can't breathe unless it's\nunderwater.",
+"883": "The skin on its face is impervious to\nattack, but breathing difficulties\nmade this Pok\u00e9mon go extinct anyway.",
+"884": "The special metal that composes its\nbody is very light, so this Pok\u00e9mon\nhas considerable agility. It lives in\ncaves because it dislikes the rain.",
+"885": "After being reborn as a ghost Pok\u00e9mon,\nDreepy wanders the areas it used to\ninhabit back when it was alive in\nprehistoric seas.",
+"886": "Without a Dreepy to place on its head\nand care for, it gets so uneasy it'll\ntry to substitute any Pok\u00e9mon it finds\nfor the missing Dreepy.",
+"887": "Apparently the Dreepy inside\nDragapult's horns eagerly look forward\nto being launched out at Mach speeds.",
+"888": "This Pok\u00e9mon has slumbered for many\nyears. Some say it's Zamazenta's elder\nsister\u2014others say the two Pok\u00e9mon are\nrivals.",
+"889": "This Pok\u00e9mon slept for aeons while in\nthe form of a statue. It was asleep\nfor so long, people forgot that it\never existed.",
+"890": "It was inside a meteorite that fell\n20,000 years ago. There seems to be a\nconnection between this Pok\u00e9mon and\nthe Dynamax phenomenon.",
+"891": "If Kubfu pulls the long white hair on\nits head, its fighting spirit\nheightens and power wells up from the\ndepths of its belly.",
+"892": "Inhabiting the mountains of a distant\nregion, this Pok\u00e9mon races across\nsheer cliffs, training its legs and\nrefining its moves.",
+"893": "Once the vines on Zarude's body tear\noff, they become nutrients in the\nsoil. This helps the plants of the\nforest grow.",
+"894": "Its entire body is made up of a single\norgan that generates electrical\nenergy. Regieleki is capable of\ncreating all Galar's electricity.",
+"895": "Its body is composed of crystallized\ndragon energy. Regidrago is said to\nhave the powers of every dragon\nPok\u00e9mon.",
+"896": "Glastrier has tremendous physical\nstrength, and the mask of ice covering\nits face is 100 times harder than\ndiamond.",
+"897": "As it dashes through the night,\nSpectrier absorbs the life-force of\nsleeping creatures. It craves silence\nand solitude.",
+"898": "Calyrex is a merciful Pok\u00e9mon, capable\nof providing healing and blessings. It\nreigned over the Galar region in times\nof yore.",
+"901": "I believe it was Hisui's swampy\nterrain that gave Ursaluna its burly\nphysique and newfound capacity to\nmanipulate peat at will.",
+"906": "The sweet scent its body gives off\nmesmerizes those around it. The scent\ngrows stronger when this Pok\u00e9mon is in\nthe sun.",
+"907": "The hardness of Floragato's fur\ndepends on the Pok\u00e9mon's mood. When\nFloragato is prepared to battle, its\nfur becomes pointed and needle sharp.",
+"908": "With skillful misdirection, it rigs\nfoes with pollen-packed flower bombs.\nMeowscarada sets off the bombs before\nits foes realize what's going on.",
+"909": "Its flame sac is small, so energy is\nalways leaking out. This energy is\nreleased from the dent atop Fuecoco's\nhead and flickers to and fro.",
+"910": "The valve in Crocalor's flame sac is\nclosely connected to its vocal cords.\nThis Pok\u00e9mon utters a guttural cry as\nit spews flames every which way.",
+"911": "The fiery bird changes shape when\nSkeledirge sings. Rumor has it that\nthe bird was born when the fireball on\nSkeledirge's head gained a soul.",
+"912": "Its strong legs let it easily swim\naround in even fast-flowing rivers. It\nlikes to keep things tidy and is prone\nto overthinking things.",
+"913": "The hardworking Quaxwell observes\npeople and Pok\u00e9mon from various\nregions and incorporates their\nmovements into its own dance routines.",
+"914": "A single kick from a Quaquaval can\nsend a truck rolling. This Pok\u00e9mon\nuses its powerful legs to perform\nstriking dances from far-off lands.",
+"915": "This Pok\u00e9mon spurns all but the finest\nof foods. Its body gives off an\nherblike scent that bug Pok\u00e9mon\ndetest.",
+"916": "It entrances female Pok\u00e9mon with the\nsweet, alluring scent that wafts from\nall over its body.",
+"917": "The thread it secretes from its rear\nis as strong as wire. The secret\nbehind the thread's strength is the\ntopic of ongoing research.",
+"918": "Spidops covers its territory in tough,\nsticky threads to set up traps for\nintruders.",
+"919": "It has its third set of legs folded\nup. When it's in a tough spot, this\nPok\u00e9mon jumps over 30 feet using the\nstrength of its legs.",
+"920": "It uses its normally folded third set\nof legs when in Showdown Mode. This\nplaces a huge burden on its body, so\nit can't stay in this mode for long.",
+"923": "Pawmot's fluffy fur acts as a battery.\nIt can store the same amount of\nelectricity as an electric car.",
+"924": "The pair sticks together no matter\nwhat. They split any food they find\nexactly in half and then eat it\ntogether.",
+"925": "The larger pair protects the little\nones during battles. When facing\nstrong opponents, the whole group will\njoin the fight.",
+"926": "The yeast in Fidough's breath is\nuseful for cooking, so this Pok\u00e9mon\nhas been protected by people since\nlong ago.",
+"927": "The surface of this Pok\u00e9mon's skin\nhardens when exposed to intense heat,\nand its body has an appetizing aroma.",
+"928": "This Pok\u00e9mon converts nutrients into\noil, which it stores in the fruit on\nits head. It can easily go a whole\nweek without eating or drinking.",
+"929": "Dolliv shares its tasty, fresh-scented\noil with others. This species has\ncoexisted with humans since times long\ngone.",
+"930": "This Pok\u00e9mon drives back enemies by\nlaunching its rich, aromatic oil at\nthem with enough force to smash a\nboulder.",
+"931": "Green-feathered flocks hold the most\nsway. When they're out searching for\nfood in the mornings and evenings, it\ngets very noisy.",
+"933": "It compresses rock salt inside its\nbody and shoots out hardened salt\npellets with enough force to perforate\nan iron sheet.",
+"934": "Many Pok\u00e9mon gather around Garganacl,\nhoping to lick at its mineral-rich\nsalt.",
+"935": "Its firepower increases when it\nfights, reaching over 1,800 degrees\nFahrenheit. It likes berries that are\nrich in fat.",
+"936": "This Pok\u00e9mon clads itself in armor\nthat has been fortified by psychic and\nfire energy, and it shoots blazing\nfireballs.",
+"937": "An old set of armor steeped in grudges\ncaused this Pok\u00e9mon's evolution.\nCeruledge cuts its enemies to pieces\nwithout mercy.",
+"938": "It floats using the electricity stored\nin its body. When thunderclouds are\naround, Tadbulb will float higher off\nthe ground.",
+"939": "What appear to be eyeballs are\nactually organs for discharging the\nelectricity generated by Bellibolt's\nbelly-button dynamo.",
+"940": "These Pok\u00e9mon make their nests on\ncoastal cliffs. The nests have a\nstrange, crackling texture, and\nthey're a popular delicacy.",
+"941": "It uses its throat sac to store\nelectricity generated by its wings.\nThere's hardly any oil in its\nfeathers, so it is a poor swimmer.",
+"942": "Its well-developed jaw and fangs are\nstrong enough to crunch through\nboulders, and its thick fat makes for\nan excellent defense.",
+"943": "Mabosstiff loves playing with\nchildren. Though usually gentle, it\ntakes on an intimidating look when\nprotecting its family.",
+"944": "To keep enemies away from its\nterritory, it paints markings around\nits nest using a poisonous liquid that\nhas an acrid odor.",
+"945": "Each Grafaiai paints its own\nindividual pattern, and it will paint\nthat same pattern over and over again\nthroughout its life.",
+"946": "Not even Bramblin knows where it is\nheaded as it tumbles across the\nwilderness, blown by the wind. It\nloathes getting wet.",
+"947": "Brambleghast wanders around arid\nregions. On rare occasions, mass\noutbreaks of these Pok\u00e9mon will bury\nan entire town.",
+"948": "Though it looks like Tentacool,\nToedscool is a completely different\nspecies. Its legs may be thin, but it\ncan run at a speed of 30 mph.",
+"949": "It coils its 10 tentacles around prey\nand sucks out their nutrients, causing\nthe prey pain. The folds along the rim\nof its head are a popular delicacy.",
+"950": "This Pok\u00e9mon lives on sheer cliffs. It\nsidesteps opponents' attacks, then\nlunges for their weak spots with its\nclaws.",
+"951": "Traditional Paldean dishes can be\nextremely spicy because they include\nthe shed front teeth of Capsakid among\ntheir ingredients.",
+"952": "The green head has turned vicious due\nto the spicy chemicals stimulating its\nbrain. Once it goes on a rampage,\nthere is no stopping it.",
+"953": "It rolls its mud ball around while the\nenergy it needs for evolution matures.\nEventually the time comes for it to\nevolve.",
+"954": "An infant sleeps inside the ball.\nRabsca rolls the ball soothingly with\nits legs to ensure the infant sleeps\ncomfortably.",
+"955": "It spends its time running around\nwastelands. If anyone steals its\nbeloved berries, it will chase them\ndown and exact its revenge.",
+"956": "It emits psychic power from the gaps\nbetween its multicolored frills and\nsprints at speeds greater than 120\nmph.",
+"957": "This Pok\u00e9mon pounds iron scraps\ntogether to make a hammer. It will\nremake the hammer again and again\nuntil it's satisfied with the result.",
+"958": "These Pok\u00e9mon make their homes in\npiles of scrap metal. They test the\nstrength of each other's hammers by\nsmashing them together.",
+"959": "The hammer tops 220 pounds, yet it\ngets swung around easily by Tinkaton\nas it steals whatever it pleases and\ncarries its plunder back home.",
+"960": "Though it looks like Diglett, Wiglett\nis an entirely different species. The\nresemblance seems to be a coincidental\nresult of environmental adaptation.",
+"961": "A variety of fish Pok\u00e9mon, Wugtrio was\nonce considered to be a regional form\nof Dugtrio.",
+"962": "Bombirdier uses the apron on its chest\nto bundle up food, which it carries\nback to its nest. It enjoys dropping\nthings that make loud noises.",
+"963": "Its water ring is made from seawater\nmixed with a sticky fluid that Finizen\nsecretes from its blowhole.",
+"964": "Its physical capabilities are no\ndifferent than a Finizen's, but when\nits allies are in danger, it\ntransforms and powers itself up.",
+"965": "The steel section is Varoom's actual\nbody. This Pok\u00e9mon clings to rocks and\nconverts the minerals within into\nenergy to fuel its activities.",
+"966": "It creates a gas out of poison and\nminerals from rocks. It then detonates\nthe gas in its cylinders\u2014now numbering\neight\u2014to generate energy.",
+"967": "It can sprint at over 70 mph while\ncarrying a human. The rider's body\nheat warms Cyclizar's back and lifts\nthe Pok\u00e9mon's spirit.",
+"968": "This Pok\u00e9mon lives in arid deserts. It\nmaintains its metal body by consuming\niron from the soil.",
+"969": "Glimmet's toxic mineral crystals look\njust like flower petals. This Pok\u00e9mon\nscatters poisonous powder like pollen\nto protect itself.",
+"970": "Glimmora's petals are made of\ncrystallized poison energy. It has\nrecently become evident that these\npetals resemble Tera Jewels.",
+"971": "This friendly Pok\u00e9mon doesn't like\nbeing alone. Pay it even the slightest\nbit of attention, and it will follow\nyou forever.",
+"972": "A lovingly mourned Pok\u00e9mon was reborn\nas Houndstone. It doesn't like anyone\ntouching the protuberance atop its\nhead.",
+"973": "This Pok\u00e9mon apparently ties the base\nof its neck into a knot so that energy\nstored in its belly does not escape\nfrom its beak.",
+"974": "It lives in frigid regions in pods of\nfive or so individuals. It loves the\nminerals found in snow and ice.",
+"975": "Ice energy builds up in the horn on\nits upper jaw, causing the horn to\nreach cryogenic temperatures that\nfreeze its surroundings.",
+"976": "Veluza has excellent regenerative\ncapabilities. It sheds spare flesh\nfrom its body to boost its agility,\nthen charges at its prey.",
+"977": "It treats Tatsugiri like its boss and\nfollows it loyally. Though powerful,\nDondozo is apparently not very smart.",
+"978": "Tatsugiri is an extremely cunning\nPok\u00e9mon. It feigns weakness to lure in\nprey, then orders its partner to\nattack.",
+"979": "When its anger rose beyond a critical\npoint, this Pok\u00e9mon gained power that\nis unfettered by the limits of its\nphysical body.",
+"980": "It lives at the bottom of ponds and\nswamps. It will carry Wooper on its\nback and ferry them across water from\none shore to the other.",
+"981": "The hardened head from the tail\nprotects the head of the main body as\nFarigiraf whips its long neck around\nto headbutt enemies.",
+"982": "It drives enemies out of its nest by\nsucking in enough air to fill its\nlong, narrow lungs, then releasing the\nair in an intense blast.",
+"983": "Though it commands a massive army in\nbattle, it's not skilled at devising\ncomplex strategies. It just uses brute\nstrength to keep pushing.",
+"984": "This creature resembles a mysterious\nPok\u00e9mon that, according to a\nparanormal magazine, has lived since\nancient times.",
+"985": "It resembles a mysterious Pok\u00e9mon\ndescribed in a paranormal magazine as\na Jigglypuff from one billion years\nago.",
+"986": "It bears a slight resemblance to a\nPok\u00e9mon described in a dubious\nmagazine as a cross between a dinosaur\nand a mushroom.",
+"987": "It has similar features to a ghostly\npterosaur that was covered in a\nparanormal magazine, but the two have\nlittle else in common.",
+"988": "This Pok\u00e9mon somewhat resembles an\nancient form of Volcarona that was\nintroduced in a dubious magazine.",
+"989": "It slightly resembles a Magneton that\nlived for 10,000 years and was\nfeatured in an article in a paranormal\nmagazine.",
+"990": "Sightings of this Pok\u00e9mon have\noccurred in recent years. It resembles\na mysterious object described in an\nold expedition journal.",
+"991": "It resembles a mysterious object\nmentioned in an old book. There are\nonly two reported sightings of this\nPok\u00e9mon.",
+"992": "This Pok\u00e9mon shares many similarities\nwith Iron Hands, an object mentioned\nin a certain expedition journal.",
+"993": "It's possible that Iron Jugulis, an\nobject described in an old book, may\nactually be this Pok\u00e9mon.",
+"994": "No records exist of this species being\ncaught. Data is lacking, but the\nPok\u00e9mon's traits match up with an\nobject described in an old book.",
+"995": "Some of its notable features match\nthose of an object named within a\ncertain expedition journal as Iron\nThorns.",
+"996": "This Pok\u00e9mon lives in forests and\ncraggy areas. Using the power of its\ndorsal fin, it cools the inside of its\nnest like a refrigerator.",
+"997": "Arctibax freezes the air around it,\nprotecting its face with an ice mask\nand turning its dorsal fin into a\nblade of ice.",
+"998": "It launches itself into battle by\nflipping upside down and spewing\nfrigid air from its mouth. It finishes\nopponents off with its dorsal blade.",
+"999": "It lives inside an old treasure chest.\nSometimes it gets left in shop corners\nsince no one realizes it's actually a\nPok\u00e9mon."
+},
+"learnsets": {
+"179": {
+"294": 347
+},
+"180": {
+"294": 347
+},
+"181": {
+"294": 347
+},
+"192": {
+"465": 412
+},
+"203": {
+"354": 326
+},
+"208": {
+"622": 334
+},
+"308": {
+"354": 94
+},
+"375": {
+"128": 44
+},
+"462": {
+"663": 157
+},
+"464": {
+"622": 254
+},
+"520": {
+"463": 126
+},
+"547": {
+"549": 196,
+"550": 87,
+"558": 126,
+"559": 528
+}
+},
+"moveText": {
+"1": "Pounds with fore legs or\ntail.",
+"10": "Scratches with sharp claws.",
+"100": "A move for fleeing from\nbattle.",
+"101": "The user's level equals\ndamage HP.",
+"102": "Copies a move used by the\nfoe.",
+"103": "Sharply reduces the foe's\nDEFENSE.",
+"104": "Heightens evasive ness.",
+"105": "Restores HP by 1/2 the max\nHP.",
+"106": "Raises the user's DEFENSE.",
+"107": "Heightens evasive ness.",
+"108": "Lowers the foe's accuracy.",
+"109": "A move that causes\nconfusion.",
+"11": "Grips with power ful\npincers.",
+"110": "Heightens the user's\nDEFENSE.",
+"111": "Heightens the user's\nDEFENSE.",
+"112": "Sharply increases user's\nDEFENSE.",
+"113": "Ups SPCL.DEF with a wall of\nlight.",
+"114": "Eliminates all stat changes.",
+"115": "Raises DEFENSE with a\nbarrier.",
+"116": "Raises the criti cal hit\nratio.",
+"117": "Waits 2-3 turns & hits back\ndouble.",
+"118": "Randomly uses any Pok\u00e9mon\nmove.",
+"119": "Counters with the same move.",
+"12": "A one-hit KO, pincer attack.",
+"120": "Powerful but makes the user\nfaint.",
+"121": "Eggs are hurled at the foe.",
+"122": "An attack that may cause\nparalysis.",
+"123": "An attack that may poison\nthe foe.",
+"124": "An attack that may poison\nthe foe.",
+"125": "An attack that may cause\nflinching.",
+"126": "An attack that may cause a\nburn.",
+"127": "An aquatic charge attack.",
+"128": "Traps the foe for 2-5 turns.",
+"129": "An attack that never misses.",
+"13": "1st turn: Prepare 2nd turn:\nAttack",
+"130": "1st turn: Prepare 2nd turn:\nAttack",
+"131": "Fires spikes to hit 2-5\ntimes.",
+"132": "An attack that may lower\nSPEED.",
+"133": "Sharply raises the user's\nSPCL.DEF.",
+"134": "Reduces the foe's accuracy.",
+"135": "The user restores its own\nHP.",
+"136": "May miss and hurt the user.",
+"137": "A move that may cause\nparalysis.",
+"138": "Steals HP from a sleeping\nvictim.",
+"139": "A move that may poison the\nfoe.",
+"14": "A dance that in creases\nATTACK.",
+"140": "Throws orbs to hit 2-5\ntimes.",
+"141": "Steals 1/2 of the damage\ninflicted.",
+"142": "May cause the foe to fall\nasleep.",
+"143": "1st turn: Prepare 2nd turn:\nAttack",
+"144": "The user assumes the foe's\nguise.",
+"145": "An attack that may reduce\nSPEED.",
+"146": "An attack that may cause\nconfusion.",
+"147": "A move that induces sleep.",
+"148": "Blinds the foe to reduce\naccuracy.",
+"149": "An attack with variable\npower.",
+"15": "Cuts using claws, scythes,\netc.",
+"150": "Has no effect whatsoever.",
+"151": "Sharply raises the user's\nDEFENSE.",
+"152": "Has a high criti cal hit\nratio.",
+"153": "Very powerful but makes user\nfaint.",
+"154": "Quickly scratches 2-5 times.",
+"155": "An attack that strikes\ntwice.",
+"156": "Sleep for 2 turns to fully\nrecover.",
+"157": "An attack that may cause\nflinching.",
+"158": "An attack that may cause\nflinching.",
+"159": "A move that raises the\nuser's ATTACK.",
+"16": "Whips up a strong gust of\nwind.",
+"160": "Change user's type to a\nmove's type.",
+"161": "Fires three kinds of beams\nat once.",
+"162": "Cuts the foe's HP by 1/2.",
+"163": "Has a high criti cal hit\nratio.",
+"164": "Makes a decoy with 1/4\nuser's max HP.",
+"165": "Used only if all PP are\nexhausted.",
+"166": "Copies the foe's move\npermanently.",
+"167": "Hits three times with rising\npower.",
+"168": "An attack that may steal a\nheld item.",
+"169": "Prevents fleeing or\nswitching.",
+"17": "Strikes the target with\nwings.",
+"170": "Ensures the next attack will\nhit.",
+"171": "A sleeper loses 1/4 HP every\nturn.",
+"172": "An attack that may cause a\nburn.",
+"173": "An attack useable only while\nasleep.",
+"174": "Works differently for\nghost-types.",
+"175": "Stronger if the user's HP is\nlow.",
+"176": "The user's type is made\nresistant.",
+"177": "Has a high criti cal hit\nratio.",
+"178": "Sharply reduces the foe's\nSPEED.",
+"179": "Stronger if the user's HP is\nlow.",
+"18": "Blows away the foe & ends\nbattle.",
+"180": "Cuts the PP of the foe's\nlast move.",
+"181": "An attack that may cause\nfreezing.",
+"182": "Foils attack that turn. It\nmay fail.",
+"183": "A fast punch that lands\nfirst.",
+"184": "Sharply reduces the foe's\nSPEED.",
+"185": "An attack that never misses.",
+"186": "A move that causes\nconfusion.",
+"187": "Reduces own HP to maximize\nATTACK.",
+"188": "An attack that may poison\nthe foe.",
+"189": "Reduces the foe's accuracy.",
+"19": "1st turn: Fly 2nd turn:\nAttack",
+"190": "An attack that may reduce\naccuracy.",
+"191": "Hurts foes when they switch\nout.",
+"192": "An attack that always\nparalyzes.",
+"193": "Negates accuracy reduction\nmoves.",
+"194": "The foe faints if the user\ndoes.",
+"195": "Both user and foe faint in 3\nturns.",
+"196": "An icy attack that lowers\nSPEED.",
+"197": "Evades attack that turn. It\nmay fail.",
+"198": "An attack that hits 2-5\ntimes.",
+"199": "Ensures the next attack will\nhit.",
+"2": "Has a high criti cal hit\nratio.",
+"20": "Binds the target for 2-5\nturns.",
+"200": "Works 2-3 turns and confuses\nuser.",
+"201": "Inflicts damage every turn.",
+"202": "Steals 1/2 of the damage\ninflicted.",
+"203": "Always leaves at least 1HP.",
+"204": "Sharply lowers the foe's\nATTACK.",
+"205": "Attacks 5 turns with rising\npower.",
+"206": "Leaves the foe with at least\n1HP.",
+"207": "Causes confusion and raises\nATTACK.",
+"208": "Restores HP by 1/2 the max\nHP.",
+"209": "An attack that may cause\nparalysis.",
+"21": "Slams the foe with a tail,\nvine, etc.",
+"210": "Successive hits raise power.",
+"211": "Stiff wings strike the foe.",
+"212": "Prevents fleeing or\nswitching.",
+"213": "Makes the opposite gender\ninfatuated.",
+"214": "Randomly attacks while\nasleep.",
+"215": "Eliminates all status\nproblems.",
+"216": "An attack that is based on\nloyalty.",
+"217": "A bomb that may restore HP.",
+"218": "An attack based on lack of\nloyalty.",
+"219": "Prevents all status\nproblems.",
+"22": "Whips the foe with slender\nvines.",
+"220": "Adds user & foe's HPs.\nShares total.",
+"221": "An attack that may inflict a\nburn.",
+"222": "A ground attack with random\npower.",
+"223": "An attack that always\nconfuses.",
+"224": "A powerful charge attack.",
+"225": "A strong breath attack.",
+"226": "Switches while keeping\neffects.",
+"227": "Makes the foe re peat 2-6\ntimes.",
+"228": "Heavily strikes switching\nPok\u00e9mon.",
+"229": "A high-speed spinning\nattack.",
+"23": "An attack that may cause\nflinching.",
+"230": "Reduces the foe's\nevasiveness.",
+"231": "An attack that may reduce\nDEFENSE.",
+"232": "An attack that may up user's\nATTACK.",
+"233": "A 2nd-strike move that never\nmisses.",
+"234": "Restores HP (varies by\ntime).",
+"235": "Restores HP (varies by\ntime).",
+"236": "Restores HP (varies by\ntime).",
+"237": "The power varies with the\nPok\u00e9mon.",
+"238": "Has a high criti cal hit\nratio.",
+"239": "Whips up a tornado to\nattack.",
+"24": "A double kicking attack.",
+"240": "Boosts water-type moves for\n5 turns.",
+"241": "Boosts fire-type moves for 5\nturns.",
+"242": "An attack that may lower\nSPCL.DEF.",
+"243": "Counters a SPCL. ATK move\ndouble.",
+"244": "Copies the foe's stat\nchanges.",
+"245": "A powerful first- strike\nmove.",
+"247": "An attack that may lower\nSPCL.DEF.",
+"248": "An attack that hits on 3rd\nturn.",
+"249": "An attack that may lower\nDEFENSE.",
+"25": "A powerful kicking attack.",
+"250": "Traps the foe for 2-5 turns.",
+"251": "Party Pok\u00e9mon join in the\nattack.",
+"26": "May miss, damaging the user.",
+"260": "Confuses the foe, but raises\nits SP. ATK.",
+"263": "Boosts ATTACK when burned,\nparalyzed, or poisoned.",
+"27": "A fast, spinning kick.",
+"28": "Reduces accuracy by throwing\nsand.",
+"280": "Destroys barriers such as\nREFLECT and causes damage.",
+"288": "If the user faints, deletes\nthe PP of the final move.",
+"289": "Steals the effects of the\nmove the foe uses next.",
+"29": "An attack that may make foe\nflinch.",
+"294": "Flashes a light that sharply\nraises SP. ATK.",
+"295": "Attacks with a burst of\nlight. May lower SP. DEF.",
+"296": "Attacks with a flurry of\ndown. May lower SP. ATK.",
+"297": "Envelops the foe with down\nto sharply reduce ATTACK.",
+"3": "Repeatedly slaps 2-5 times.",
+"30": "An attack using a horn to\njab.",
+"306": "Tears at the foe with sharp\nclaws. May lower DEFENSE.",
+"309": "Fires a meteor-like punch.\nMay raise ATTACK.",
+"31": "Jabs the target 2-5 times.",
+"313": "Feigns crying to sharply\nlower the foe's SP. DEF.",
+"315": "Allows a full-power attack,\nbut sharply lowers SP. ATK.",
+"317": "Stops the foe from moving\nwith rocks and cuts SPEED.",
+"319": "Emits a horrible screech\nthat sharply lowers SP. DEF.",
+"32": "A one-hit KO, drill attack.",
+"321": "Makes the foe laugh to lower\nATTACK and DEFENSE.",
+"322": "Raises DEFENSE and SP. DEF\nwith a mystic power.",
+"326": "The user attacks with an\nodd, unseeable power.",
+"33": "A full-body charge attack.",
+"334": "Hardens the body's surface\nto sharply raise DEFENSE.",
+"336": "Howls to raise the spirit\nand boosts ATTACK.",
+"339": "Bulks up the body to boost\nboth ATTACK and DEFENSE.",
+"34": "An attack that may cause\nparalysis.",
+"341": "Hurls mud at the foe and\nreduces SPEED.",
+"347": "Raises SP. ATK and SP. DEF\nby focusing the mind.",
+"349": "A mystical dance that ups\nATTACK and SPEED.",
+"35": "Squeezes the foe for 2-5\nturns.",
+"352": "Attacks with ultrasonic\nwaves. May confuse the foe",
+"354": "Allows a full-power attack,\nbut sharply lowers SP. ATK.",
+"36": "A tackle that also hurts the\nuser.",
+"37": "Works 2-3 turns and confuses\nuser.",
+"376": "The fewer PP this move has,\nthe greater its power.",
+"38": "A tackle that also hurts the\nuser.",
+"39": "Lowers the foe's DEFENSE.",
+"4": "Repeatedly punches 2-5\ntimes.",
+"40": "An attack that may poison\nthe target.",
+"41": "Jabs the foe twice using\nstingers.",
+"42": "Fires pins that strike 2-5\ntimes.",
+"43": "Reduces the foe's DEFENSE.",
+"44": "An attack that may cause\nflinching.",
+"442": "The user slams the target\nwith its steel-hard head.",
+"45": "Reduces the foe's ATTACK.",
+"46": "Scares wild foes to end\nbattle.",
+"47": "May cause the foe to fall\nasleep.",
+"48": "Sound waves that cause\nconfusion.",
+"49": "Always inflicts 20HP damage.",
+"5": "A powerful punch thrown very\nhard.",
+"50": "Disables the foe's most\nrecent move.",
+"51": "An attack that may lower\nDEFENSE.",
+"52": "An attack that may inflict a\nburn.",
+"53": "An attack that may inflict a\nburn.",
+"54": "Prevents stat reduction.",
+"55": "Squirts water to attack.",
+"56": "A powerful water- type\nattack.",
+"57": "A strong water- type attack.",
+"58": "An attack that may freeze\nthe foe.",
+"59": "An attack that may freeze\nthe foe.",
+"6": "Throws coins. Gets them back\nlater.",
+"60": "An attack that may confuse\nthe foe.",
+"606": "The Pok\u00e9mon congratulates\nyou on your special day!",
+"61": "An attack that may lower\nSPEED.",
+"62": "An attack that may lower\nATTACK.",
+"63": "1st turn: Attack 2nd turn:\nRest",
+"633": "The user attacks by pelting\nthe target with leaves.",
+"64": "Jabs the foe with a beak,\netc.",
+"646": "The user exchanges Speed\nstats with the target.",
+"65": "A strong, spin ning-peck\nattack.",
+"66": "An attack that al so hurts\nthe user.",
+"67": "An attack that may cause\nflinching.",
+"68": "Returns a physical blow\ndouble.",
+"69": "The user's level equals\ndamage HP.",
+"7": "A fiery punch. May cause a\nburn.",
+"70": "A powerful physi cal attack.",
+"71": "Steals 1/2 of the damage\ninflicted.",
+"72": "Steals 1/2 of the damage\ninflicted.",
+"73": "Steals HP from the foe on\nevery turn.",
+"74": "Raises the SPCL. ATK rating.",
+"75": "Has a high criti cal hit\nratio.",
+"76": "1st turn: Prepare 2nd turn:\nAttack",
+"77": "A move that may poison the\nfoe.",
+"78": "A move that may paralyze the\nfoe.",
+"79": "May cause the foe to fall\nasleep.",
+"8": "An icy punch. May cause\nfreezing.",
+"80": "Works 2-3 turns and confuses\nuser.",
+"81": "A move that lowers the foe's\nSPEED.",
+"82": "Always inflicts 40HP damage.",
+"83": "Traps foe in fire for 2-5\nturns.",
+"84": "An attack that may cause\nparalysis.",
+"85": "An attack that may cause\nparalysis.",
+"86": "A move that may cause\nparalysis.",
+"87": "An attack that may cause\nparalysis.",
+"88": "Drops rocks on the enemy.",
+"89": "Tough but useless vs. flying\nfoes.",
+"9": "An electric punch. It may\nparalyze.",
+"90": "A ground-type, one-hit KO\nattack.",
+"91": "1st turn: Burrow 2nd turn:\nAttack",
+"92": "A poison move with\nincreasing damage.",
+"93": "An attack that may cause\nconfusion.",
+"94": "An attack that may lower\nSPCL.DEF.",
+"95": "May put the foe to sleep.",
+"96": "Raises the user's ATTACK.",
+"97": "Sharply increases the user's\nSPEED.",
+"98": "Lets the user get in the\nfirst hit.",
+"99": "Raises ATTACK if the user is\nhit."
+},
+"moves": {
+"105": {
+"pp": 5
+},
+"107": {
+"pp": 10
+},
+"112": {
+"pp": 20
+},
+"128": {
+"accuracy": 85,
+"pp": 15
+},
+"130": {
+"pp": 10
+},
+"131": {
+"power": 20
+},
+"135": {
+"pp": 5
+},
+"136": {
+"pp": 10
+},
+"137": {
+"accuracy": 100
+},
+"139": {
+"accuracy": 90
+},
+"14": {
+"pp": 20
+},
+"141": {
+"pp": 10
+},
+"148": {
+"accuracy": 100
+},
+"149": {
+"accuracy": 100
+},
+"15": {
+"power": 50
+},
+"151": {
+"pp": 20
+},
+"152": {
+"accuracy": 90
+},
+"156": {
+"pp": 5
+},
+"167": {
+"power": 10
+},
+"168": {
+"pp": 25
+},
+"17": {
+"power": 60
+},
+"178": {
+"accuracy": 100
+},
+"184": {
+"accuracy": 100
+},
+"186": {
+"type": 18
+},
+"190": {
+"power": 65
+},
+"198": {
+"accuracy": 90,
+"power": 25
+},
+"20": {
+"accuracy": 85
+},
+"200": {
+"pp": 10
+},
+"202": {
+"pp": 10
+},
+"204": {
+"type": 18
+},
+"207": {
+"accuracy": 85
+},
+"208": {
+"pp": 5
+},
+"211": {
+"power": 70
+},
+"22": {
+"pp": 25
+},
+"236": {
+"type": 18
+},
+"248": {
+"accuracy": 100,
+"pp": 10
+},
+"249": {
+"power": 40
+},
+"250": {
+"accuracy": 85
+},
+"254": {
+"pp": 20
+},
+"26": {
+"pp": 10
+},
+"261": {
+"accuracy": 85
+},
+"292": {
+"power": 15
+},
+"302": {
+"power": 60
+},
+"303": {
+"pp": 5
+},
+"309": {
+"accuracy": 90
+},
+"317": {
+"accuracy": 95,
+"pp": 15
+},
+"325": {
+"power": 60
+},
+"326": {
+"pp": 20
+},
+"328": {
+"accuracy": 85
+},
+"33": {
+"accuracy": 100
+},
+"343": {
+"pp": 25
+},
+"35": {
+"accuracy": 90
+},
+"350": {
+"accuracy": 90
+},
+"352": {
+"power": 60
+},
+"353": {
+"accuracy": 100
+},
+"355": {
+"pp": 5
+},
+"37": {
+"pp": 10
+},
+"395": {
+"pp": 10
+},
+"4": {
+"power": 18
+},
+"408": {
+"power": 80,
+"pp": 20
+},
+"41": {
+"power": 25
+},
+"42": {
+"accuracy": 95
+},
+"426": {
+"accuracy": 85,
+"pp": 10
+},
+"431": {
+"type": 0
+},
+"440": {
+"power": 70,
+"pp": 20
+},
+"448": {
+"power": 65,
+"pp": 20
+},
+"464": {
+"accuracy": 50
+},
+"50": {
+"accuracy": 100
+},
+"532": {
+"pp": 10
+},
+"541": {
+"accuracy": 85
+},
+"544": {
+"accuracy": 85
+},
+"547": {
+"power": 75
+},
+"549": {
+"power": 65
+},
+"561": {
+"pp": 10
+},
+"570": {
+"power": 65,
+"pp": 20
+},
+"573": {
+"power": 70,
+"pp": 20
+},
+"574": {
+"power": 40
+},
+"577": {
+"power": 50
+},
+"595": {
+"power": 75
+},
+"622": {
+"pp": 5
+},
+"625": {
+"power": 80
+},
+"626": {
+"power": 85
+},
+"627": {
+"power": 90
+},
+"658": {
+"pp": 5
+},
+"66": {
+"power": 80,
+"pp": 20
+},
+"676": {
+"power": 80,
+"pp": 10
+},
+"680": {
+"power": 60,
+"pp": 20
+},
+"681": {
+"power": 60,
+"pp": 20
+},
+"682": {
+"power": 60,
+"pp": 20
+},
+"683": {
+"accuracy": 95,
+"power": 80
+},
+"684": {
+"accuracy": 95,
+"power": 80
+},
+"685": {
+"accuracy": 90,
+"power": 100,
+"pp": 10
+},
+"686": {
+"accuracy": 90,
+"power": 100,
+"pp": 10
+},
+"687": {
+"accuracy": 85,
+"power": 120,
+"pp": 5
+},
+"70": {
+"power": 80
+},
+"71": {
+"power": 20,
+"pp": 25
+},
+"72": {
+"power": 40,
+"pp": 15
+},
+"731": {
+"power": 55
+},
+"74": {
+"pp": 20
+},
+"745": {
+"power": 75
+},
+"752": {
+"power": 120
+},
+"80": {
+"pp": 10
+},
+"83": {
+"accuracy": 85
+},
+"86": {
+"accuracy": 90
+},
+"92": {
+"accuracy": 90
+}
+},
+"species": {
+"1": {
+"abilities": [
+65,
+65,
+34
+]
+},
+"1003": {
+"abilities": [
+83,
+55,
+47
+],
+"stats": {
+"atk": 71,
+"def": 70,
+"hp": 75,
+"spa": 40,
+"spd": 80,
+"spe": 77
+}
+},
+"1004": {
+"stats": {
+"atk": 85,
+"def": 50,
+"hp": 60,
+"spa": 95,
+"spd": 85,
+"spe": 110
+}
+},
+"1006": {
+"stats": {
+"atk": 100,
+"def": 120,
+"hp": 75,
+"spa": 25,
+"spd": 65,
+"spe": 65
+}
+},
+"1008": {
+"stats": {
+"atk": 67,
+"def": 75,
+"hp": 73,
+"spa": 81,
+"spd": 100,
+"spe": 109
+}
+},
+"101": {
+"abilities": [
+43,
+9,
+107
+]
+},
+"1012": {
+"stats": {
+"atk": 60,
+"def": 60,
+"hp": 65,
+"spa": 75,
+"spd": 65,
+"spe": 115
+}
+},
+"1015": {
+"stats": {
+"atk": 120,
+"def": 130,
+"hp": 80,
+"spa": 55,
+"spd": 65,
+"spe": 45
+}
+},
+"1018": {
+"abilities": [
+120,
+120,
+140
+]
+},
+"1019": {
+"stats": {
+"atk": 80,
+"def": 110,
+"hp": 60,
+"spa": 50,
+"spd": 80,
+"spe": 45
+}
+},
+"102": {
+"abilities": [
+34,
+34,
+140
+]
+},
+"103": {
+"abilities": [
+34,
+34,
+140
+]
+},
+"105": {
+"stats": {
+"atk": 80,
+"def": 110,
+"hp": 60,
+"spa": 50,
+"spd": 80,
+"spe": 45
+}
+},
+"106": {
+"stats": {
+"atk": 120,
+"def": 53,
+"hp": 50,
+"spa": 35,
+"spd": 110,
+"spe": 87
+}
+},
+"1062": {
+"stats": {
+"atk": 79,
+"def": 105,
+"hp": 60,
+"spa": 59,
+"spd": 85,
+"spe": 36
+}
+},
+"1063": {
+"stats": {
+"atk": 69,
+"def": 95,
+"hp": 60,
+"spa": 69,
+"spd": 95,
+"spe": 36
+}
+},
+"1064": {
+"stats": {
+"atk": 60,
+"def": 70,
+"hp": 70,
+"spa": 87,
+"spd": 78,
+"spe": 85
+}
+},
+"107": {
+"abilities": [
+51,
+90,
+39
+],
+"stats": {
+"atk": 105,
+"def": 79,
+"hp": 50,
+"spa": 35,
+"spd": 110,
+"spe": 76
+}
+},
+"1091": {
+"stats": {
+"atk": 92,
+"def": 65,
+"hp": 70,
+"spa": 80,
+"spd": 55,
+"spe": 98
+}
+},
+"1097": {
+"stats": {
+"atk": 100,
+"def": 70,
+"hp": 80,
+"spa": 60,
+"spd": 70,
+"spe": 95
+}
+},
+"1098": {
+"stats": {
+"atk": 100,
+"def": 70,
+"hp": 80,
+"spa": 60,
+"spd": 70,
+"spe": 95
+}
+},
+"1099": {
+"stats": {
+"atk": 100,
+"def": 70,
+"hp": 80,
+"spa": 60,
+"spd": 70,
+"spe": 95
+}
+},
+"110": {
+"stats": {
+"atk": 90,
+"def": 120,
+"hp": 65,
+"spa": 85,
+"spd": 70,
+"spe": 60
+}
+},
+"1154": {
+"stats": {
+"atk": 48,
+"def": 76,
+"hp": 74,
+"spa": 83,
+"spd": 81,
+"spe": 104
+}
+},
+"1156": {
+"stats": {
+"atk": 66,
+"def": 70,
+"hp": 44,
+"spa": 44,
+"spd": 55,
+"spe": 56
+}
+},
+"1157": {
+"stats": {
+"atk": 66,
+"def": 70,
+"hp": 54,
+"spa": 44,
+"spd": 55,
+"spe": 46
+}
+},
+"1158": {
+"stats": {
+"atk": 66,
+"def": 70,
+"hp": 59,
+"spa": 44,
+"spd": 55,
+"spe": 41
+}
+},
+"1159": {
+"stats": {
+"atk": 85,
+"def": 122,
+"hp": 55,
+"spa": 58,
+"spd": 75,
+"spe": 99
+}
+},
+"1160": {
+"stats": {
+"atk": 95,
+"def": 122,
+"hp": 75,
+"spa": 58,
+"spd": 75,
+"spe": 69
+}
+},
+"1161": {
+"stats": {
+"atk": 100,
+"def": 122,
+"hp": 85,
+"spa": 58,
+"spd": 75,
+"spe": 54
+}
+},
+"1168": {
+"stats": {
+"atk": 70,
+"def": 70,
+"hp": 75,
+"spa": 98,
+"spd": 70,
+"spe": 93
+}
+},
+"1169": {
+"stats": {
+"atk": 70,
+"def": 70,
+"hp": 75,
+"spa": 98,
+"spd": 70,
+"spe": 93
+}
+},
+"1170": {
+"stats": {
+"atk": 70,
+"def": 70,
+"hp": 75,
+"spa": 98,
+"spd": 70,
+"spe": 93
+}
+},
+"1172": {
+"stats": {
+"atk": 115,
+"def": 75,
+"hp": 85,
+"spa": 55,
+"spd": 75,
+"spe": 82
+}
+},
+"1173": {
+"stats": {
+"atk": 117,
+"def": 65,
+"hp": 75,
+"spa": 55,
+"spd": 65,
+"spe": 110
+}
+},
+"119": {
+"stats": {
+"atk": 92,
+"def": 65,
+"hp": 80,
+"spa": 65,
+"spd": 80,
+"spe": 68
+}
+},
+"12": {
+"stats": {
+"atk": 45,
+"def": 50,
+"hp": 60,
+"spa": 90,
+"spd": 80,
+"spe": 70
+}
+},
+"122": {
+"stats": {
+"atk": 45,
+"def": 65,
+"hp": 40,
+"spa": 100,
+"spd": 120,
+"spe": 90
+}
+},
+"1226": {
+"stats": {
+"atk": 150,
+"def": 115,
+"hp": 92,
+"spa": 80,
+"spd": 115,
+"spe": 148
+}
+},
+"1227": {
+"stats": {
+"atk": 120,
+"def": 140,
+"hp": 92,
+"spa": 80,
+"spd": 140,
+"spe": 128
+}
+},
+"1233": {
+"abilities": [
+137,
+137,
+137
+]
+},
+"1235": {
+"abilities": [
+90,
+90,
+90
+]
+},
+"1238": {
+"abilities": [
+160,
+160,
+160
+]
+},
+"124": {
+"stats": {
+"atk": 50,
+"def": 35,
+"hp": 65,
+"spa": 115,
+"spd": 95,
+"spe": 95
+}
+},
+"128": {
+"abilities": [
+22,
+84,
+126
+],
+"stats": {
+"atk": 100,
+"def": 95,
+"hp": 75,
+"spa": 40,
+"spd": 70,
+"spe": 110
+}
+},
+"130": {
+"abilities": [
+22,
+22,
+154
+]
+},
+"131": {
+"stats": {
+"atk": 85,
+"def": 80,
+"hp": 130,
+"spa": 85,
+"spd": 95,
+"spe": 60
+}
+},
+"136": {
+"stats": {
+"atk": 130,
+"def": 60,
+"hp": 65,
+"spa": 95,
+"spd": 110,
+"spe": 65
+}
+},
+"141": {
+"abilities": [
+33,
+4,
+134
+]
+},
+"144": {
+"stats": {
+"atk": 85,
+"def": 100,
+"hp": 90,
+"spa": 95,
+"spd": 125,
+"spe": 85
+}
+},
+"15": {
+"abilities": [
+68,
+68,
+98
+],
+"stats": {
+"atk": 90,
+"def": 40,
+"hp": 65,
+"spa": 45,
+"spd": 80,
+"spe": 75
+}
+},
+"152": {
+"abilities": [
+65,
+65,
+103
+]
+},
+"153": {
+"abilities": [
+65,
+65,
+103
+]
+},
+"154": {
+"abilities": [
+65,
+65,
+103
+],
+"stats": {
+"atk": 82,
+"def": 100,
+"hp": 80,
+"spa": 83,
+"spd": 100,
+"spe": 80
+},
+"types": [
+12,
+12
+]
+},
+"155": {
+"abilities": [
+66,
+66,
+18
+]
+},
+"156": {
+"abilities": [
+66,
+66,
+18
+],
+"types": [
+10,
+10
+]
+},
+"157": {
+"abilities": [
+66,
+66,
+18
+],
+"types": [
+10,
+10
+]
+},
+"158": {
+"abilities": [
+67,
+67,
+126
+]
+},
+"159": {
+"abilities": [
+67,
+67,
+126
+]
+},
+"16": {
+"abilities": [
+51,
+78,
+146
+],
+"stats": {
+"atk": 45,
+"def": 40,
+"hp": 40,
+"spa": 35,
+"spd": 35,
+"spe": 56
+}
+},
+"160": {
+"abilities": [
+67,
+67,
+126
+],
+"stats": {
+"atk": 105,
+"def": 100,
+"hp": 85,
+"spa": 79,
+"spd": 83,
+"spe": 78
+},
+"types": [
+11,
+11
+]
+},
+"161": {
+"abilities": [
+50,
+51,
+120
+]
+},
+"162": {
+"abilities": [
+50,
+51,
+120
+],
+"stats": {
+"atk": 76,
+"def": 64,
+"hp": 85,
+"spa": 45,
+"spd": 55,
+"spe": 90
+}
+},
+"164": {
+"stats": {
+"atk": 50,
+"def": 50,
+"hp": 100,
+"spa": 86,
+"spd": 96,
+"spe": 70
+}
+},
+"165": {
+"abilities": [
+68,
+48,
+156
+],
+"stats": {
+"atk": 20,
+"def": 30,
+"hp": 40,
+"spa": 40,
+"spd": 80,
+"spe": 55
+}
+},
+"166": {
+"abilities": [
+68,
+48,
+90
+],
+"stats": {
+"atk": 35,
+"def": 50,
+"hp": 55,
+"spa": 55,
+"spd": 110,
+"spe": 85
+}
+},
+"167": {
+"abilities": [
+68,
+15,
+98
+]
+},
+"168": {
+"abilities": [
+68,
+15,
+98
+],
+"stats": {
+"atk": 90,
+"def": 70,
+"hp": 70,
+"spa": 60,
+"spd": 70,
+"spe": 40
+}
+},
+"17": {
+"abilities": [
+51,
+78,
+146
+],
+"stats": {
+"atk": 60,
+"def": 55,
+"hp": 63,
+"spa": 50,
+"spd": 50,
+"spe": 71
+}
+},
+"171": {
+"stats": {
+"atk": 58,
+"def": 58,
+"hp": 125,
+"spa": 76,
+"spd": 76,
+"spe": 67
+}
+},
+"178": {
+"stats": {
+"atk": 75,
+"def": 70,
+"hp": 65,
+"spa": 95,
+"spd": 70,
+"spe": 95
+}
+},
+"179": {
+"abilities": [
+9,
+9,
+57
+]
+},
+"18": {
+"abilities": [
+51,
+78,
+146
+],
+"stats": {
+"atk": 80,
+"def": 75,
+"hp": 83,
+"spa": 70,
+"spd": 70,
+"spe": 101
+}
+},
+"180": {
+"abilities": [
+9,
+9,
+57
+]
+},
+"181": {
+"abilities": [
+9,
+9,
+57
+],
+"types": [
+13,
+13
+]
+},
+"182": {
+"abilities": [
+34,
+34,
+132
+],
+"stats": {
+"atk": 80,
+"def": 95,
+"hp": 75,
+"spa": 90,
+"spd": 100,
+"spe": 50
+}
+},
+"185": {
+"stats": {
+"atk": 100,
+"def": 115,
+"hp": 70,
+"spa": 30,
+"spd": 65,
+"spe": 30
+}
+},
+"186": {
+"stats": {
+"atk": 75,
+"def": 75,
+"hp": 90,
+"spa": 90,
+"spd": 100,
+"spe": 70
+},
+"types": [
+11,
+11
+]
+},
+"189": {
+"stats": {
+"atk": 55,
+"def": 70,
+"hp": 75,
+"spa": 55,
+"spd": 95,
+"spe": 110
+}
+},
+"192": {
+"abilities": [
+34,
+95,
+48
+],
+"stats": {
+"atk": 75,
+"def": 55,
+"hp": 75,
+"spa": 105,
+"spd": 85,
+"spe": 30
+},
+"types": [
+12,
+12
+]
+},
+"195": {
+"stats": {
+"atk": 85,
+"def": 85,
+"hp": 95,
+"spa": 65,
+"spd": 65,
+"spe": 35
+}
+},
+"197": {
+"abilities": [
+28,
+28,
+39
+]
+},
+"2": {
+"abilities": [
+65,
+65,
+34
+]
+},
+"20": {
+"abilities": [
+50,
+62,
+55
+],
+"stats": {
+"atk": 81,
+"def": 60,
+"hp": 55,
+"spa": 50,
+"spd": 70,
+"spe": 97
+}
+},
+"200": {
+"abilities": [
+26,
+26,
+26
+],
+"types": [
+7,
+7
+]
+},
+"203": {
+"abilities": [
+39,
+48,
+158
+],
+"stats": {
+"atk": 80,
+"def": 65,
+"hp": 70,
+"spa": 90,
+"spd": 65,
+"spe": 85
+}
+},
+"205": {
+"stats": {
+"atk": 90,
+"def": 140,
+"hp": 75,
+"spa": 60,
+"spd": 60,
+"spe": 40
+}
+},
+"206": {
+"abilities": [
+32,
+50,
+156
+],
+"stats": {
+"atk": 70,
+"def": 70,
+"hp": 100,
+"spa": 65,
+"spd": 65,
+"spe": 45
+}
+},
+"208": {
+"abilities": [
+69,
+5,
+126
+],
+"stats": {
+"atk": 85,
+"def": 200,
+"hp": 75,
+"spa": 55,
+"spd": 65,
+"spe": 30
+}
+},
+"210": {
+"stats": {
+"atk": 120,
+"def": 75,
+"hp": 90,
+"spa": 60,
+"spd": 60,
+"spe": 45
+},
+"types": [
+18,
+18
+]
+},
+"211": {
+"stats": {
+"atk": 95,
+"def": 85,
+"hp": 65,
+"spa": 55,
+"spd": 55,
+"spe": 85
+}
+},
+"217": {
+"stats": {
+"atk": 130,
+"def": 75,
+"hp": 90,
+"spa": 75,
+"spd": 75,
+"spe": 55
+}
+},
+"219": {
+"abilities": [
+40,
+49,
+134
+]
+},
+"22": {
+"abilities": [
+51,
+51,
+98
+],
+"stats": {
+"atk": 90,
+"def": 65,
+"hp": 65,
+"spa": 61,
+"spd": 61,
+"spe": 100
+}
+},
+"222": {
+"abilities": [
+55,
+30,
+145
+],
+"stats": {
+"atk": 55,
+"def": 95,
+"hp": 65,
+"spa": 65,
+"spd": 95,
+"spe": 35
+}
+},
+"224": {
+"stats": {
+"atk": 105,
+"def": 75,
+"hp": 75,
+"spa": 105,
+"spd": 75,
+"spe": 45
+}
+},
+"225": {
+"abilities": [
+72,
+55,
+15
+],
+"stats": {
+"atk": 55,
+"def": 45,
+"hp": 45,
+"spa": 65,
+"spd": 45,
+"spe": 75
+}
+},
+"229": {
+"stats": {
+"atk": 90,
+"def": 50,
+"hp": 75,
+"spa": 110,
+"spd": 80,
+"spe": 95
+}
+},
+"232": {
+"stats": {
+"atk": 120,
+"def": 120,
+"hp": 90,
+"spa": 60,
+"spd": 60,
+"spe": 50
+}
+},
+"234": {
+"stats": {
+"atk": 95,
+"def": 62,
+"hp": 73,
+"spa": 85,
+"spd": 65,
+"spe": 85
+}
+},
+"237": {
+"abilities": [
+22,
+102,
+81
+],
+"stats": {
+"atk": 95,
+"def": 95,
+"hp": 50,
+"spa": 35,
+"spd": 110,
+"spe": 70
+}
+},
+"24": {
+"stats": {
+"atk": 95,
+"def": 69,
+"hp": 60,
+"spa": 65,
+"spd": 79,
+"spe": 80
+},
+"types": [
+3,
+3
+]
+},
+"247": {
+"abilities": [
+61,
+61,
+61
+]
+},
+"26": {
+"stats": {
+"atk": 90,
+"def": 55,
+"hp": 60,
+"spa": 90,
+"spd": 80,
+"spe": 110
+}
+},
+"277": {
+"abilities": [
+65,
+65,
+85
+]
+},
+"278": {
+"abilities": [
+65,
+65,
+85
+]
+},
+"279": {
+"abilities": [
+65,
+65,
+85
+],
+"types": [
+12,
+12
+]
+},
+"28": {
+"stats": {
+"atk": 100,
+"def": 110,
+"hp": 75,
+"spa": 45,
+"spd": 55,
+"spe": 65
+}
+},
+"280": {
+"abilities": [
+66,
+66,
+3
+]
+},
+"281": {
+"abilities": [
+66,
+66,
+3
+]
+},
+"282": {
+"abilities": [
+66,
+66,
+3
+]
+},
+"283": {
+"abilities": [
+67,
+67,
+6
+]
+},
+"284": {
+"abilities": [
+67,
+67,
+6
+]
+},
+"285": {
+"abilities": [
+67,
+67,
+6
+]
+},
+"287": {
+"stats": {
+"atk": 90,
+"def": 70,
+"hp": 70,
+"spa": 60,
+"spd": 60,
+"spe": 70
+}
+},
+"289": {
+"stats": {
+"atk": 70,
+"def": 61,
+"hp": 78,
+"spa": 50,
+"spd": 61,
+"spe": 100
+}
+},
+"290": {
+"abilities": [
+19,
+19,
+50
+]
+},
+"292": {
+"abilities": [
+68,
+68,
+80
+],
+"stats": {
+"atk": 70,
+"def": 50,
+"hp": 60,
+"spa": 100,
+"spd": 50,
+"spe": 65
+}
+},
+"294": {
+"abilities": [
+19,
+19,
+14
+],
+"stats": {
+"atk": 50,
+"def": 70,
+"hp": 60,
+"spa": 50,
+"spd": 90,
+"spe": 65
+}
+},
+"297": {
+"stats": {
+"atk": 70,
+"def": 70,
+"hp": 80,
+"spa": 90,
+"spd": 100,
+"spe": 70
+}
+},
+"3": {
+"abilities": [
+65,
+65,
+34
+]
+},
+"300": {
+"abilities": [
+34,
+34,
+125
+],
+"stats": {
+"atk": 100,
+"def": 60,
+"hp": 90,
+"spa": 90,
+"spd": 60,
+"spe": 80
+}
+},
+"302": {
+"stats": {
+"atk": 90,
+"def": 45,
+"hp": 61,
+"spa": 50,
+"spd": 50,
+"spe": 160
+}
+},
+"303": {
+"stats": {
+"atk": 90,
+"def": 45,
+"hp": 1,
+"spa": 30,
+"spd": 30,
+"spe": 40
+}
+},
+"305": {
+"stats": {
+"atk": 85,
+"def": 60,
+"hp": 60,
+"spa": 75,
+"spd": 50,
+"spe": 125
+}
+},
+"308": {
+"stats": {
+"atk": 60,
+"def": 60,
+"hp": 60,
+"spa": 60,
+"spd": 60,
+"spe": 60
+}
+},
+"312": {
+"stats": {
+"atk": 60,
+"def": 62,
+"hp": 70,
+"spa": 100,
+"spd": 82,
+"spe": 80
+}
+},
+"314": {
+"abilities": [
+41,
+12,
+46
+],
+"stats": {
+"atk": 90,
+"def": 45,
+"hp": 170,
+"spa": 90,
+"spd": 45,
+"spe": 60
+}
+},
+"316": {
+"stats": {
+"atk": 65,
+"def": 65,
+"hp": 70,
+"spa": 55,
+"spd": 55,
+"spe": 90
+}
+},
+"317": {
+"stats": {
+"atk": 90,
+"def": 70,
+"hp": 60,
+"spa": 60,
+"spd": 120,
+"spe": 40
+}
+},
+"319": {
+"stats": {
+"atk": 70,
+"def": 105,
+"hp": 60,
+"spa": 70,
+"spd": 120,
+"spe": 75
+}
+},
+"322": {
+"stats": {
+"atk": 75,
+"def": 75,
+"hp": 50,
+"spa": 65,
+"spd": 65,
+"spe": 50
+}
+},
+"324": {
+"abilities": [
+12,
+108,
+94
+],
+"stats": {
+"atk": 78,
+"def": 73,
+"hp": 110,
+"spa": 76,
+"spd": 71,
+"spe": 60
+}
+},
+"325": {
+"abilities": [
+33,
+33,
+94
+],
+"stats": {
+"atk": 30,
+"def": 55,
+"hp": 43,
+"spa": 40,
+"spd": 65,
+"spe": 97
+}
+},
+"329": {
+"abilities": [
+63,
+173,
+56
+]
+},
+"331": {
+"stats": {
+"atk": 120,
+"def": 40,
+"hp": 70,
+"spa": 95,
+"spd": 40,
+"spe": 95
+}
+},
+"334": {
+"abilities": [
+26,
+26,
+26
+],
+"stats": {
+"atk": 100,
+"def": 80,
+"hp": 80,
+"spa": 80,
+"spd": 80,
+"spe": 100
+}
+},
+"336": {
+"stats": {
+"atk": 120,
+"def": 60,
+"hp": 144,
+"spa": 40,
+"spd": 60,
+"spe": 50
+}
+},
+"338": {
+"stats": {
+"atk": 75,
+"def": 60,
+"hp": 70,
+"spa": 105,
+"spd": 60,
+"spe": 105
+}
+},
+"340": {
+"abilities": [
+40,
+117,
+84
+],
+"stats": {
+"atk": 100,
+"def": 70,
+"hp": 70,
+"spa": 105,
+"spd": 75,
+"spe": 40
+}
+},
+"345": {
+"abilities": [
+8,
+8,
+11
+],
+"stats": {
+"atk": 115,
+"def": 60,
+"hp": 70,
+"spa": 115,
+"spd": 60,
+"spe": 55
+}
+},
+"347": {
+"abilities": [
+39,
+116,
+142
+],
+"stats": {
+"atk": 80,
+"def": 80,
+"hp": 80,
+"spa": 80,
+"spd": 80,
+"spe": 80
+},
+"types": [
+15,
+15
+]
+},
+"348": {
+"stats": {
+"atk": 55,
+"def": 65,
+"hp": 90,
+"spa": 95,
+"spd": 85,
+"spe": 70
+}
+},
+"349": {
+"stats": {
+"atk": 95,
+"def": 85,
+"hp": 90,
+"spa": 55,
+"spd": 65,
+"spe": 70
+}
+},
+"352": {
+"stats": {
+"atk": 45,
+"def": 65,
+"hp": 80,
+"spa": 90,
+"spd": 110,
+"spe": 80
+}
+},
+"353": {
+"abilities": [
+57,
+57,
+31
+],
+"stats": {
+"atk": 50,
+"def": 40,
+"hp": 60,
+"spa": 85,
+"spd": 75,
+"spe": 95
+}
+},
+"354": {
+"abilities": [
+58,
+58,
+10
+],
+"stats": {
+"atk": 40,
+"def": 50,
+"hp": 60,
+"spa": 75,
+"spd": 85,
+"spe": 95
+}
+},
+"355": {
+"abilities": [
+52,
+22,
+126
+],
+"stats": {
+"atk": 85,
+"def": 85,
+"hp": 50,
+"spa": 55,
+"spd": 55,
+"spe": 50
+}
+},
+"359": {
+"stats": {
+"atk": 70,
+"def": 90,
+"hp": 75,
+"spa": 70,
+"spd": 105,
+"spe": 80
+}
+},
+"364": {
+"abilities": [
+54,
+54,
+54
+]
+},
+"366": {
+"abilities": [
+54,
+54,
+54
+]
+},
+"368": {
+"stats": {
+"atk": 73,
+"def": 83,
+"hp": 100,
+"spa": 73,
+"spd": 83,
+"spe": 55
+}
+},
+"369": {
+"abilities": [
+34,
+95,
+140
+],
+"stats": {
+"atk": 68,
+"def": 83,
+"hp": 99,
+"spa": 72,
+"spd": 87,
+"spe": 51
+}
+},
+"37": {
+"abilities": [
+18,
+18,
+70
+]
+},
+"372": {
+"stats": {
+"atk": 91,
+"def": 63,
+"hp": 104,
+"spa": 91,
+"spd": 73,
+"spe": 68
+}
+},
+"374": {
+"abilities": [
+33,
+33,
+41
+],
+"stats": {
+"atk": 104,
+"def": 105,
+"hp": 55,
+"spa": 94,
+"spd": 75,
+"spe": 52
+}
+},
+"375": {
+"abilities": [
+33,
+33,
+94
+],
+"stats": {
+"atk": 84,
+"def": 105,
+"hp": 55,
+"spa": 114,
+"spd": 75,
+"spe": 52
+}
+},
+"376": {
+"abilities": [
+46,
+106,
+155
+],
+"stats": {
+"atk": 130,
+"def": 60,
+"hp": 65,
+"spa": 75,
+"spd": 60,
+"spe": 75
+}
+},
+"377": {
+"types": [
+7,
+7
+]
+},
+"378": {
+"abilities": [
+15,
+120,
+131
+],
+"stats": {
+"atk": 115,
+"def": 65,
+"hp": 64,
+"spa": 83,
+"spd": 63,
+"spe": 65
+},
+"types": [
+7,
+7
+]
+},
+"379": {
+"abilities": [
+61,
+61,
+152
+],
+"stats": {
+"atk": 100,
+"def": 60,
+"hp": 73,
+"spa": 100,
+"spd": 60,
+"spe": 65
+}
+},
+"38": {
+"abilities": [
+18,
+18,
+70
+],
+"stats": {
+"atk": 76,
+"def": 75,
+"hp": 73,
+"spa": 81,
+"spd": 100,
+"spe": 100
+},
+"types": [
+10,
+10
+]
+},
+"380": {
+"stats": {
+"atk": 115,
+"def": 60,
+"hp": 73,
+"spa": 60,
+"spd": 60,
+"spe": 90
+}
+},
+"381": {
+"stats": {
+"atk": 90,
+"def": 130,
+"hp": 100,
+"spa": 45,
+"spd": 65,
+"spe": 55
+}
+},
+"385": {
+"stats": {
+"atk": 70,
+"def": 70,
+"hp": 70,
+"spa": 70,
+"spd": 70,
+"spe": 70
+}
+},
+"386": {
+"stats": {
+"atk": 73,
+"def": 75,
+"hp": 65,
+"spa": 47,
+"spd": 85,
+"spe": 85
+},
+"types": [
+6,
+6
+]
+},
+"387": {
+"stats": {
+"atk": 47,
+"def": 75,
+"hp": 65,
+"spa": 73,
+"spd": 85,
+"spe": 85
+},
+"types": [
+6,
+6
+]
+},
+"389": {
+"stats": {
+"atk": 81,
+"def": 97,
+"hp": 86,
+"spa": 81,
+"spd": 107,
+"spe": 43
+}
+},
+"39": {
+"abilities": [
+56,
+173,
+133
+],
+"stats": {
+"atk": 45,
+"def": 20,
+"hp": 115,
+"spa": 45,
+"spd": 25,
+"spe": 20
+}
+},
+"391": {
+"stats": {
+"atk": 125,
+"def": 100,
+"hp": 75,
+"spa": 70,
+"spd": 80,
+"spe": 45
+}
+},
+"394": {
+"stats": {
+"atk": 65,
+"def": 65,
+"hp": 68,
+"spa": 125,
+"spd": 115,
+"spe": 80
+}
+},
+"4": {
+"abilities": [
+66,
+66,
+95
+]
+},
+"40": {
+"abilities": [
+56,
+173,
+120
+],
+"stats": {
+"atk": 70,
+"def": 45,
+"hp": 140,
+"spa": 85,
+"spd": 50,
+"spe": 45
+}
+},
+"411": {
+"stats": {
+"atk": 50,
+"def": 80,
+"hp": 75,
+"spa": 95,
+"spd": 90,
+"spe": 65
+}
+},
+"440": {
+"abilities": [
+65,
+65,
+75
+]
+},
+"441": {
+"abilities": [
+65,
+65,
+75
+]
+},
+"442": {
+"abilities": [
+65,
+65,
+75
+],
+"stats": {
+"atk": 109,
+"def": 105,
+"hp": 95,
+"spa": 75,
+"spd": 85,
+"spe": 56
+}
+},
+"443": {
+"abilities": [
+66,
+66,
+90
+]
+},
+"444": {
+"abilities": [
+66,
+66,
+90
+]
+},
+"445": {
+"abilities": [
+66,
+66,
+90
+]
+},
+"446": {
+"abilities": [
+67,
+67,
+173
+]
+},
+"447": {
+"abilities": [
+67,
+67,
+173
+]
+},
+"448": {
+"abilities": [
+67,
+67,
+173
+]
+},
+"45": {
+"stats": {
+"atk": 80,
+"def": 85,
+"hp": 75,
+"spa": 110,
+"spd": 90,
+"spe": 50
+}
+},
+"453": {
+"stats": {
+"atk": 85,
+"def": 60,
+"hp": 79,
+"spa": 55,
+"spd": 60,
+"spe": 71
+}
+},
+"454": {
+"types": [
+6,
+6
+]
+},
+"455": {
+"stats": {
+"atk": 85,
+"def": 51,
+"hp": 77,
+"spa": 55,
+"spd": 51,
+"spe": 65
+},
+"types": [
+6,
+6
+]
+},
+"458": {
+"abilities": [
+80,
+22,
+62
+],
+"stats": {
+"atk": 120,
+"def": 79,
+"hp": 80,
+"spa": 95,
+"spd": 79,
+"spe": 70
+},
+"types": [
+13,
+13
+]
+},
+"461": {
+"abilities": [
+105,
+105,
+126
+]
+},
+"462": {
+"abilities": [
+105,
+105,
+126
+],
+"stats": {
+"atk": 165,
+"def": 60,
+"hp": 97,
+"spa": 65,
+"spd": 50,
+"spe": 58
+}
+},
+"464": {
+"stats": {
+"atk": 52,
+"def": 168,
+"hp": 60,
+"spa": 47,
+"spd": 138,
+"spe": 30
+}
+},
+"466": {
+"stats": {
+"atk": 59,
+"def": 85,
+"hp": 60,
+"spa": 79,
+"spd": 105,
+"spe": 36
+}
+},
+"467": {
+"stats": {
+"atk": 94,
+"def": 50,
+"hp": 70,
+"spa": 94,
+"spd": 50,
+"spe": 66
+}
+},
+"469": {
+"abilities": [
+46,
+46,
+128
+],
+"stats": {
+"atk": 80,
+"def": 102,
+"hp": 70,
+"spa": 80,
+"spd": 102,
+"spe": 40
+}
+},
+"47": {
+"stats": {
+"atk": 95,
+"def": 80,
+"hp": 60,
+"spa": 60,
+"spd": 80,
+"spe": 30
+}
+},
+"470": {
+"abilities": [
+50,
+53,
+10
+],
+"stats": {
+"atk": 45,
+"def": 70,
+"hp": 60,
+"spa": 45,
+"spd": 90,
+"spe": 95
+}
+},
+"472": {
+"stats": {
+"atk": 105,
+"def": 55,
+"hp": 85,
+"spa": 85,
+"spd": 50,
+"spe": 115
+}
+},
+"473": {
+"stats": {
+"atk": 35,
+"def": 45,
+"hp": 45,
+"spa": 62,
+"spd": 53,
+"spe": 35
+},
+"types": [
+12,
+12
+]
+},
+"474": {
+"stats": {
+"atk": 60,
+"def": 70,
+"hp": 70,
+"spa": 87,
+"spd": 78,
+"spe": 85
+},
+"types": [
+12,
+12
+]
+},
+"477": {
+"stats": {
+"atk": 100,
+"def": 66,
+"hp": 75,
+"spa": 60,
+"spd": 66,
+"spe": 115
+}
+},
+"479": {
+"stats": {
+"atk": 80,
+"def": 44,
+"hp": 150,
+"spa": 90,
+"spd": 54,
+"spe": 80
+}
+},
+"481": {
+"abilities": [
+56,
+104,
+7
+],
+"stats": {
+"atk": 76,
+"def": 84,
+"hp": 65,
+"spa": 54,
+"spd": 96,
+"spe": 105
+},
+"types": [
+0,
+0
+]
+},
+"482": {
+"abilities": [
+26,
+26,
+26
+],
+"stats": {
+"atk": 60,
+"def": 60,
+"hp": 60,
+"spa": 105,
+"spd": 105,
+"spe": 105
+},
+"types": [
+7,
+7
+]
+},
+"485": {
+"stats": {
+"atk": 82,
+"def": 64,
+"hp": 71,
+"spa": 64,
+"spd": 59,
+"spe": 112
+}
+},
+"488": {
+"stats": {
+"atk": 93,
+"def": 67,
+"hp": 103,
+"spa": 71,
+"spd": 61,
+"spe": 84
+}
+},
+"49": {
+"stats": {
+"atk": 65,
+"def": 60,
+"hp": 70,
+"spa": 90,
+"spd": 75,
+"spe": 90
+}
+},
+"494": {
+"stats": {
+"atk": 65,
+"def": 45,
+"hp": 76,
+"spa": 92,
+"spd": 42,
+"spe": 91
+}
+},
+"495": {
+"stats": {
+"atk": 92,
+"def": 108,
+"hp": 50,
+"spa": 92,
+"spd": 108,
+"spe": 35
+}
+},
+"5": {
+"abilities": [
+66,
+66,
+95
+]
+},
+"505": {
+"stats": {
+"atk": 90,
+"def": 110,
+"hp": 70,
+"spa": 60,
+"spd": 75,
+"spe": 95
+}
+},
+"507": {
+"stats": {
+"atk": 106,
+"def": 65,
+"hp": 83,
+"spa": 86,
+"spd": 65,
+"spe": 85
+}
+},
+"508": {
+"stats": {
+"atk": 100,
+"def": 72,
+"hp": 74,
+"spa": 90,
+"spd": 72,
+"spe": 46
+}
+},
+"509": {
+"abilities": [
+33,
+115,
+41
+]
+},
+"510": {
+"abilities": [
+33,
+115,
+41
+],
+"stats": {
+"atk": 69,
+"def": 76,
+"hp": 69,
+"spa": 69,
+"spd": 86,
+"spe": 91
+}
+},
+"513": {
+"stats": {
+"atk": 92,
+"def": 75,
+"hp": 90,
+"spa": 92,
+"spd": 85,
+"spe": 60
+}
+},
+"516": {
+"stats": {
+"atk": 85,
+"def": 95,
+"hp": 110,
+"spa": 80,
+"spd": 95,
+"spe": 50
+}
+},
+"519": {
+"abilities": [
+79,
+79,
+72
+],
+"types": [
+13,
+13
+]
+},
+"520": {
+"abilities": [
+49,
+49,
+72
+],
+"stats": {
+"atk": 95,
+"def": 67,
+"hp": 75,
+"spa": 125,
+"spd": 95,
+"spe": 83
+}
+},
+"522": {
+"stats": {
+"atk": 76,
+"def": 86,
+"hp": 86,
+"spa": 116,
+"spd": 56,
+"spe": 95
+}
+},
+"523": {
+"abilities": [
+103,
+103,
+34
+]
+},
+"524": {
+"abilities": [
+82,
+82,
+116
+]
+},
+"528": {
+"abilities": [
+81,
+81,
+155
+],
+"stats": {
+"atk": 125,
+"def": 65,
+"hp": 68,
+"spa": 65,
+"spd": 115,
+"spe": 80
+}
+},
+"529": {
+"stats": {
+"atk": 55,
+"def": 145,
+"hp": 60,
+"spa": 75,
+"spd": 150,
+"spe": 40
+}
+},
+"53": {
+"abilities": [
+7,
+102,
+128
+],
+"stats": {
+"atk": 70,
+"def": 60,
+"hp": 65,
+"spa": 65,
+"spd": 65,
+"spe": 115
+}
+},
+"530": {
+"abilities": [
+46,
+46,
+120
+],
+"stats": {
+"atk": 100,
+"def": 135,
+"hp": 45,
+"spa": 65,
+"spd": 135,
+"spe": 45
+}
+},
+"531": {
+"abilities": [
+82,
+82,
+131
+],
+"stats": {
+"atk": 80,
+"def": 70,
+"hp": 70,
+"spa": 80,
+"spd": 70,
+"spe": 110
+}
+},
+"539": {
+"abilities": [
+113,
+113,
+113
+]
+},
+"541": {
+"stats": {
+"atk": 70,
+"def": 110,
+"hp": 120,
+"spa": 75,
+"spd": 120,
+"spe": 85
+}
+},
+"548": {
+"abilities": [
+65,
+65,
+127
+]
+},
+"549": {
+"abilities": [
+65,
+65,
+127
+]
+},
+"55": {
+"abilities": [
+6,
+13,
+33
+],
+"stats": {
+"atk": 82,
+"def": 78,
+"hp": 80,
+"spa": 95,
+"spd": 80,
+"spe": 85
+},
+"types": [
+11,
+11
+]
+},
+"550": {
+"abilities": [
+65,
+65,
+127
+],
+"types": [
+12,
+12
+]
+},
+"551": {
+"abilities": [
+66,
+66,
+47
+]
+},
+"552": {
+"abilities": [
+66,
+66,
+47
+]
+},
+"553": {
+"abilities": [
+66,
+66,
+121
+],
+"stats": {
+"atk": 123,
+"def": 65,
+"hp": 110,
+"spa": 100,
+"spd": 65,
+"spe": 65
+}
+},
+"554": {
+"abilities": [
+67,
+67,
+75
+]
+},
+"555": {
+"abilities": [
+67,
+67,
+75
+],
+"types": [
+11,
+11
+]
+},
+"556": {
+"abilities": [
+67,
+67,
+75
+],
+"types": [
+11,
+11
+]
+},
+"558": {
+"abilities": [
+35,
+51,
+149
+],
+"stats": {
+"atk": 85,
+"def": 69,
+"hp": 60,
+"spa": 60,
+"spd": 69,
+"spe": 77
+}
+},
+"561": {
+"stats": {
+"atk": 110,
+"def": 90,
+"hp": 85,
+"spa": 45,
+"spd": 90,
+"spe": 80
+}
+},
+"563": {
+"stats": {
+"atk": 88,
+"def": 50,
+"hp": 64,
+"spa": 88,
+"spd": 50,
+"spe": 106
+}
+},
+"565": {
+"stats": {
+"atk": 98,
+"def": 63,
+"hp": 75,
+"spa": 98,
+"spd": 63,
+"spe": 101
+}
+},
+"567": {
+"stats": {
+"atk": 98,
+"def": 63,
+"hp": 75,
+"spa": 98,
+"spd": 63,
+"spe": 101
+}
+},
+"569": {
+"stats": {
+"atk": 98,
+"def": 63,
+"hp": 75,
+"spa": 98,
+"spd": 63,
+"spe": 101
+}
+},
+"57": {
+"stats": {
+"atk": 105,
+"def": 60,
+"hp": 65,
+"spa": 60,
+"spd": 70,
+"spe": 95
+}
+},
+"571": {
+"abilities": [
+109,
+28,
+141
+],
+"stats": {
+"atk": 55,
+"def": 85,
+"hp": 116,
+"spa": 107,
+"spd": 95,
+"spe": 29
+}
+},
+"574": {
+"abilities": [
+146,
+106,
+80
+],
+"stats": {
+"atk": 115,
+"def": 80,
+"hp": 80,
+"spa": 65,
+"spd": 55,
+"spe": 93
+}
+},
+"576": {
+"stats": {
+"atk": 100,
+"def": 63,
+"hp": 75,
+"spa": 80,
+"spd": 63,
+"spe": 116
+}
+},
+"577": {
+"stats": {
+"atk": 75,
+"def": 85,
+"hp": 55,
+"spa": 25,
+"spd": 25,
+"spe": 15
+}
+},
+"578": {
+"stats": {
+"atk": 105,
+"def": 105,
+"hp": 70,
+"spa": 50,
+"spd": 40,
+"spe": 20
+}
+},
+"579": {
+"abilities": [
+5,
+45,
+160
+],
+"stats": {
+"atk": 135,
+"def": 130,
+"hp": 85,
+"spa": 60,
+"spd": 80,
+"spe": 25
+}
+},
+"581": {
+"stats": {
+"atk": 57,
+"def": 55,
+"hp": 67,
+"spa": 77,
+"spd": 55,
+"spe": 114
+}
+},
+"584": {
+"stats": {
+"atk": 60,
+"def": 86,
+"hp": 103,
+"spa": 60,
+"spd": 86,
+"spe": 50
+}
+},
+"590": {
+"stats": {
+"atk": 95,
+"def": 75,
+"hp": 105,
+"spa": 85,
+"spd": 75,
+"spe": 74
+}
+},
+"595": {
+"stats": {
+"atk": 103,
+"def": 80,
+"hp": 75,
+"spa": 70,
+"spd": 80,
+"spe": 92
+}
+},
+"6": {
+"abilities": [
+66,
+66,
+95
+]
+},
+"601": {
+"types": [
+12,
+12
+]
+},
+"602": {
+"types": [
+12,
+12
+]
+},
+"603": {
+"stats": {
+"atk": 92,
+"def": 65,
+"hp": 70,
+"spa": 80,
+"spd": 55,
+"spe": 98
+}
+},
+"609": {
+"abilities": [
+11,
+34,
+115
+],
+"stats": {
+"atk": 86,
+"def": 67,
+"hp": 75,
+"spa": 106,
+"spd": 67,
+"spe": 60
+}
+},
+"611": {
+"stats": {
+"atk": 105,
+"def": 125,
+"hp": 70,
+"spa": 65,
+"spd": 75,
+"spe": 45
+}
+},
+"616": {
+"types": [
+7,
+7
+]
+},
+"618": {
+"stats": {
+"atk": 108,
+"def": 133,
+"hp": 74,
+"spa": 83,
+"spd": 65,
+"spe": 32
+}
+},
+"619": {
+"abilities": [
+130,
+130,
+130
+]
+},
+"62": {
+"stats": {
+"atk": 95,
+"def": 95,
+"hp": 90,
+"spa": 70,
+"spd": 90,
+"spe": 70
+}
+},
+"620": {
+"abilities": [
+130,
+130,
+130
+]
+},
+"622": {
+"stats": {
+"atk": 95,
+"def": 82,
+"hp": 80,
+"spa": 60,
+"spd": 82,
+"spe": 75
+},
+"types": [
+3,
+3
+]
+},
+"626": {
+"stats": {
+"atk": 95,
+"def": 60,
+"hp": 75,
+"spa": 65,
+"spd": 60,
+"spe": 115
+}
+},
+"633": {
+"abilities": [
+51,
+146,
+94
+]
+},
+"634": {
+"abilities": [
+51,
+146,
+94
+],
+"stats": {
+"atk": 87,
+"def": 63,
+"hp": 75,
+"spa": 87,
+"spd": 63,
+"spe": 98
+}
+},
+"637": {
+"stats": {
+"atk": 95,
+"def": 85,
+"hp": 71,
+"spa": 110,
+"spd": 95,
+"spe": 79
+}
+},
+"639": {
+"stats": {
+"atk": 100,
+"def": 70,
+"hp": 80,
+"spa": 60,
+"spd": 70,
+"spe": 95
+}
+},
+"640": {
+"abilities": [
+9,
+9,
+79
+],
+"stats": {
+"atk": 75,
+"def": 60,
+"hp": 55,
+"spa": 75,
+"spd": 60,
+"spe": 103
+}
+},
+"649": {
+"stats": {
+"atk": 77,
+"def": 60,
+"hp": 70,
+"spa": 97,
+"spd": 60,
+"spe": 108
+}
+},
+"652": {
+"abilities": [
+57,
+58,
+29
+]
+},
+"653": {
+"abilities": [
+57,
+58,
+29
+]
+},
+"654": {
+"abilities": [
+57,
+58,
+29
+]
+},
+"655": {
+"abilities": [
+26,
+26,
+26
+]
+},
+"656": {
+"abilities": [
+26,
+26,
+26
+]
+},
+"657": {
+"abilities": [
+26,
+26,
+26
+],
+"stats": {
+"atk": 115,
+"def": 80,
+"hp": 85,
+"spa": 105,
+"spd": 80,
+"spe": 50
+}
+},
+"659": {
+"abilities": [
+141,
+28,
+149
+]
+},
+"662": {
+"abilities": [
+18,
+49,
+152
+]
+},
+"667": {
+"stats": {
+"atk": 130,
+"def": 80,
+"hp": 95,
+"spa": 70,
+"spd": 80,
+"spe": 50
+},
+"types": [
+15,
+15
+]
+},
+"670": {
+"abilities": [
+94,
+60,
+85
+]
+},
+"671": {
+"abilities": [
+9,
+7,
+8
+]
+},
+"674": {
+"stats": {
+"atk": 120,
+"def": 90,
+"hp": 77,
+"spa": 60,
+"spd": 90,
+"spe": 48
+}
+},
+"676": {
+"stats": {
+"atk": 124,
+"def": 80,
+"hp": 89,
+"spa": 55,
+"spd": 80,
+"spe": 55
+}
+},
+"684": {
+"abilities": [
+83,
+18,
+73
+],
+"stats": {
+"atk": 97,
+"def": 66,
+"hp": 85,
+"spa": 105,
+"spd": 66,
+"spe": 65
+},
+"types": [
+10,
+10
+]
+},
+"685": {
+"stats": {
+"atk": 109,
+"def": 112,
+"hp": 58,
+"spa": 48,
+"spd": 48,
+"spe": 109
+}
+},
+"686": {
+"abilities": [
+55,
+55,
+55
+]
+},
+"687": {
+"abilities": [
+55,
+55,
+55
+]
+},
+"688": {
+"abilities": [
+26,
+26,
+26
+]
+},
+"7": {
+"abilities": [
+67,
+67,
+44
+]
+},
+"703": {
+"abilities": [
+65,
+65,
+172
+]
+},
+"704": {
+"abilities": [
+65,
+65,
+172
+]
+},
+"705": {
+"abilities": [
+65,
+65,
+172
+]
+},
+"706": {
+"abilities": [
+66,
+66,
+171
+]
+},
+"707": {
+"abilities": [
+66,
+66,
+171
+]
+},
+"708": {
+"abilities": [
+66,
+66,
+171
+]
+},
+"709": {
+"abilities": [
+67,
+67,
+169
+]
+},
+"710": {
+"abilities": [
+67,
+67,
+169
+]
+},
+"711": {
+"abilities": [
+67,
+67,
+169
+]
+},
+"721": {
+"abilities": [
+80,
+128,
+154
+],
+"stats": {
+"atk": 68,
+"def": 72,
+"hp": 86,
+"spa": 109,
+"spd": 66,
+"spe": 106
+}
+},
+"722": {
+"abilities": [
+167,
+167,
+181
+]
+},
+"723": {
+"abilities": [
+167,
+167,
+181
+]
+},
+"724": {
+"abilities": [
+167,
+167,
+181
+]
+},
+"725": {
+"abilities": [
+158,
+158,
+180
+]
+},
+"726": {
+"abilities": [
+158,
+158,
+180
+],
+"stats": {
+"atk": 100,
+"def": 62,
+"hp": 123,
+"spa": 97,
+"spd": 81,
+"spe": 68
+}
+},
+"731": {
+"abilities": [
+51,
+152,
+159
+],
+"stats": {
+"atk": 48,
+"def": 76,
+"hp": 74,
+"spa": 83,
+"spd": 81,
+"spe": 104
+}
+},
+"746": {
+"stats": {
+"atk": 73,
+"def": 88,
+"hp": 71,
+"spa": 120,
+"spd": 89,
+"spe": 59
+}
+},
+"748": {
+"stats": {
+"atk": 55,
+"def": 52,
+"hp": 62,
+"spa": 109,
+"spd": 94,
+"spe": 109
+}
+},
+"750": {
+"stats": {
+"atk": 121,
+"def": 119,
+"hp": 82,
+"spa": 69,
+"spd": 59,
+"spe": 71
+}
+},
+"752": {
+"stats": {
+"atk": 77,
+"def": 72,
+"hp": 123,
+"spa": 99,
+"spd": 92,
+"spe": 58
+}
+},
+"755": {
+"abilities": [
+168,
+53,
+57
+],
+"stats": {
+"atk": 58,
+"def": 57,
+"hp": 67,
+"spa": 81,
+"spd": 67,
+"spe": 101
+}
+},
+"759": {
+"abilities": [
+158,
+94,
+184
+],
+"stats": {
+"atk": 100,
+"def": 70,
+"hp": 90,
+"spa": 110,
+"spd": 150,
+"spe": 80
+},
+"types": [
+16,
+16
+]
+},
+"76": {
+"stats": {
+"atk": 120,
+"def": 130,
+"hp": 80,
+"spa": 55,
+"spd": 65,
+"spe": 45
+}
+},
+"762": {
+"abilities": [
+30,
+120,
+140
+],
+"stats": {
+"atk": 110,
+"def": 76,
+"hp": 85,
+"spa": 65,
+"spd": 82,
+"spe": 56
+}
+},
+"763": {
+"abilities": [
+53,
+120,
+15
+],
+"stats": {
+"atk": 66,
+"def": 70,
+"hp": 49,
+"spa": 44,
+"spd": 55,
+"spe": 51
+}
+},
+"764": {
+"abilities": [
+53,
+120,
+15
+],
+"stats": {
+"atk": 90,
+"def": 122,
+"hp": 65,
+"spa": 58,
+"spd": 75,
+"spe": 84
+}
+},
+"77": {
+"abilities": [
+50,
+18,
+49
+]
+},
+"775": {
+"abilities": [
+65,
+65,
+204
+]
+},
+"776": {
+"abilities": [
+65,
+65,
+204
+]
+},
+"777": {
+"abilities": [
+65,
+65,
+204
+],
+"stats": {
+"atk": 107,
+"def": 75,
+"hp": 78,
+"spa": 100,
+"spd": 100,
+"spe": 70
+}
+},
+"778": {
+"abilities": [
+66,
+66,
+22
+]
+},
+"779": {
+"abilities": [
+66,
+66,
+22
+]
+},
+"78": {
+"abilities": [
+50,
+18,
+49
+],
+"stats": {
+"atk": 100,
+"def": 70,
+"hp": 65,
+"spa": 80,
+"spd": 80,
+"spe": 105
+}
+},
+"780": {
+"abilities": [
+66,
+66,
+22
+]
+},
+"781": {
+"abilities": [
+67,
+67,
+205
+]
+},
+"782": {
+"abilities": [
+67,
+67,
+205
+]
+},
+"783": {
+"abilities": [
+67,
+67,
+205
+]
+},
+"786": {
+"stats": {
+"atk": 120,
+"def": 75,
+"hp": 80,
+"spa": 75,
+"spd": 75,
+"spe": 60
+}
+},
+"788": {
+"stats": {
+"atk": 110,
+"def": 60,
+"hp": 88,
+"spa": 55,
+"spd": 60,
+"spe": 45
+}
+},
+"790": {
+"stats": {
+"atk": 82,
+"def": 95,
+"hp": 57,
+"spa": 55,
+"spd": 75,
+"spe": 36
+}
+},
+"791": {
+"stats": {
+"atk": 70,
+"def": 90,
+"hp": 77,
+"spa": 145,
+"spd": 75,
+"spe": 43
+}
+},
+"793": {
+"stats": {
+"atk": 132,
+"def": 77,
+"hp": 97,
+"spa": 62,
+"spd": 67,
+"spe": 43
+}
+},
+"794": {
+"stats": {
+"atk": 70,
+"def": 70,
+"hp": 75,
+"spa": 98,
+"spd": 70,
+"spe": 93
+}
+},
+"798": {
+"stats": {
+"atk": 115,
+"def": 65,
+"hp": 75,
+"spa": 55,
+"spd": 65,
+"spe": 112
+},
+"types": [
+5,
+5
+]
+},
+"8": {
+"abilities": [
+67,
+67,
+44
+]
+},
+"805": {
+"stats": {
+"atk": 70,
+"def": 92,
+"hp": 68,
+"spa": 50,
+"spd": 132,
+"spe": 42
+}
+},
+"807": {
+"stats": {
+"atk": 105,
+"def": 90,
+"hp": 70,
+"spa": 80,
+"spd": 90,
+"spe": 45
+}
+},
+"809": {
+"stats": {
+"atk": 45,
+"def": 80,
+"hp": 60,
+"spa": 90,
+"spd": 100,
+"spe": 30
+}
+},
+"816": {
+"stats": {
+"atk": 120,
+"def": 98,
+"hp": 72,
+"spa": 50,
+"spd": 98,
+"spe": 72
+},
+"types": [
+12,
+12
+]
+},
+"820": {
+"abilities": [
+194,
+194,
+194
+]
+},
+"821": {
+"abilities": [
+195,
+195,
+195
+]
+},
+"823": {
+"abilities": [
+196,
+196,
+8
+],
+"stats": {
+"atk": 75,
+"def": 110,
+"hp": 85,
+"spa": 100,
+"spd": 75,
+"spe": 35
+}
+},
+"826": {
+"stats": {
+"atk": 95,
+"def": 95,
+"hp": 95,
+"spa": 95,
+"spd": 95,
+"spe": 95
+}
+},
+"828": {
+"stats": {
+"atk": 115,
+"def": 65,
+"hp": 65,
+"spa": 75,
+"spd": 95,
+"spe": 65
+}
+},
+"829": {
+"abilities": [
+75,
+75,
+75
+],
+"stats": {
+"atk": 78,
+"def": 135,
+"hp": 60,
+"spa": 91,
+"spd": 85,
+"spe": 36
+}
+},
+"83": {
+"abilities": [
+51,
+39,
+129
+],
+"stats": {
+"atk": 90,
+"def": 55,
+"hp": 52,
+"spa": 58,
+"spd": 62,
+"spe": 60
+},
+"types": [
+0,
+2
+]
+},
+"830": {
+"stats": {
+"atk": 98,
+"def": 63,
+"hp": 65,
+"spa": 40,
+"spd": 73,
+"spe": 96
+}
+},
+"834": {
+"stats": {
+"atk": 131,
+"def": 100,
+"hp": 70,
+"spa": 86,
+"spd": 90,
+"spe": 40
+}
+},
+"85": {
+"abilities": [
+50,
+48,
+78
+],
+"stats": {
+"atk": 110,
+"def": 70,
+"hp": 60,
+"spa": 60,
+"spd": 60,
+"spe": 110
+}
+},
+"86": {
+"abilities": [
+47,
+94,
+116
+]
+},
+"863": {
+"abilities": [
+65,
+65,
+230
+]
+},
+"864": {
+"abilities": [
+65,
+65,
+230
+]
+},
+"865": {
+"abilities": [
+65,
+65,
+230
+]
+},
+"866": {
+"abilities": [
+66,
+66,
+237
+]
+},
+"867": {
+"abilities": [
+66,
+66,
+237
+]
+},
+"868": {
+"abilities": [
+66,
+66,
+237
+]
+},
+"869": {
+"abilities": [
+67,
+67,
+98
+]
+},
+"87": {
+"abilities": [
+47,
+94,
+116
+],
+"stats": {
+"atk": 70,
+"def": 80,
+"hp": 90,
+"spa": 70,
+"spd": 95,
+"spe": 70
+}
+},
+"870": {
+"abilities": [
+67,
+67,
+98
+]
+},
+"871": {
+"abilities": [
+67,
+67,
+98
+]
+},
+"872": {
+"abilities": [
+168,
+168,
+83
+]
+},
+"873": {
+"abilities": [
+168,
+168,
+83
+]
+},
+"888": {
+"abilities": [
+238,
+238,
+156
+]
+},
+"889": {
+"abilities": [
+174,
+174,
+173
+]
+},
+"89": {
+"abilities": [
+1,
+60,
+144
+],
+"stats": {
+"atk": 105,
+"def": 75,
+"hp": 105,
+"spa": 65,
+"spd": 100,
+"spe": 50
+}
+},
+"898": {
+"abilities": [
+242,
+242,
+242
+]
+},
+"899": {
+"abilities": [
+33,
+33,
+240
+]
+},
+"9": {
+"abilities": [
+67,
+67,
+44
+]
+},
+"900": {
+"abilities": [
+33,
+33,
+240
+]
+},
+"905": {
+"abilities": [
+7,
+7,
+102
+]
+},
+"906": {
+"abilities": [
+7,
+7,
+102
+]
+},
+"907": {
+"abilities": [
+134,
+134,
+131
+]
+},
+"908": {
+"abilities": [
+134,
+134,
+131
+]
+},
+"917": {
+"abilities": [
+134,
+134,
+254
+]
+},
+"918": {
+"abilities": [
+81,
+81,
+114
+]
+},
+"92": {
+"abilities": [
+26,
+26,
+26
+]
+},
+"920": {
+"abilities": [
+255,
+255,
+255
+]
+},
+"923": {
+"abilities": [
+4,
+4,
+129
+]
+},
+"924": {
+"abilities": [
+31,
+31,
+227
+]
+},
+"925": {
+"abilities": [
+19,
+19,
+247
+]
+},
+"926": {
+"abilities": [
+19,
+19,
+247
+]
+},
+"927": {
+"abilities": [
+250,
+250,
+250
+]
+},
+"928": {
+"abilities": [
+249,
+249,
+249
+]
+},
+"93": {
+"abilities": [
+26,
+26,
+26
+]
+},
+"930": {
+"abilities": [
+259,
+259,
+259
+]
+},
+"931": {
+"abilities": [
+126,
+126,
+135
+]
+},
+"932": {
+"abilities": [
+126,
+126,
+135
+]
+},
+"94": {
+"abilities": [
+131,
+131,
+131
+]
+},
+"941": {
+"abilities": [
+235,
+235,
+235
+],
+"stats": {
+"atk": 120,
+"def": 115,
+"hp": 92,
+"spa": 80,
+"spd": 115,
+"spe": 138
+}
+},
+"942": {
+"abilities": [
+236,
+236,
+236
+],
+"stats": {
+"atk": 120,
+"def": 115,
+"hp": 92,
+"spa": 80,
+"spd": 115,
+"spe": 138
+}
+},
+"943": {
+"abilities": [
+46,
+46,
+46
+]
+},
+"944": {
+"abilities": [
+39,
+39,
+39
+]
+},
+"945": {
+"abilities": [
+261,
+261,
+261
+]
+},
+"946": {
+"abilities": [
+103,
+103,
+103
+]
+},
+"947": {
+"abilities": [
+263,
+263,
+263
+]
+},
+"948": {
+"abilities": [
+264,
+264,
+264
+]
+},
+"949": {
+"abilities": [
+265,
+265,
+265
+]
+},
+"950": {
+"abilities": [
+266,
+266,
+266
+]
+},
+"97": {
+"stats": {
+"atk": 73,
+"def": 70,
+"hp": 85,
+"spa": 73,
+"spd": 115,
+"spe": 67
+}
+},
+"973": {
+"abilities": [
+34,
+34,
+34
+]
+},
+"99": {
+"stats": {
+"atk": 130,
+"def": 115,
+"hp": 55,
+"spa": 50,
+"spd": 50,
+"spe": 75
+}
+},
+"995": {
+"abilities": [
+118,
+118,
+118
+]
+},
+"996": {
+"abilities": [
+102,
+102,
+102
+]
+}
+},
+"strip": {
+"1004": {
+"tutors": [
+75
+]
+},
+"1005": {
+"machines": [
+618
+]
+},
+"1006": {
+"machines": [
+618
+],
+"tutors": [
+124
+]
+},
+"1013": {
+"tutors": [
+124
+]
+},
+"1014": {
+"tutors": [
+124
+]
+},
+"1015": {
+"tutors": [
+124
+]
+},
+"1018": {
+"tutors": [
+87
+]
+},
+"1019": {
+"tutors": [
+75
+]
+},
+"1024": {
+"tutors": [
+75
+]
+},
+"1027": {
+"tutors": [
+75
+]
+},
+"1031": {
+"tutors": [
+75
+]
+},
+"1036": {
+"tutors": [
+75,
+124
+]
+},
+"105": {
+"tutors": [
+75
+]
+},
+"107": {
+"tutors": [
+124
+]
+},
+"1072": {
+"tutors": [
+87
+]
+},
+"1074": {
+"tutors": [
+99
+]
+},
+"1075": {
+"tutors": [
+99
+]
+},
+"1076": {
+"tutors": [
+99
+]
+},
+"1077": {
+"tutors": [
+99
+]
+},
+"1078": {
+"tutors": [
+99
+]
+},
+"1079": {
+"tutors": [
+99
+]
+},
+"1080": {
+"tutors": [
+99
+]
+},
+"1081": {
+"tutors": [
+99
+]
+},
+"1082": {
+"tutors": [
+99
+]
+},
+"1083": {
+"tutors": [
+99
+]
+},
+"1084": {
+"tutors": [
+99
+]
+},
+"1085": {
+"tutors": [
+99
+]
+},
+"1086": {
+"tutors": [
+99
+]
+},
+"1087": {
+"tutors": [
+99
+]
+},
+"1088": {
+"tutors": [
+99
+]
+},
+"1089": {
+"tutors": [
+99
+]
+},
+"1090": {
+"tutors": [
+99
+]
+},
+"1100": {
+"tutors": [
+75
+]
+},
+"1101": {
+"tutors": [
+75
+]
+},
+"1102": {
+"tutors": [
+75
+]
+},
+"1103": {
+"tutors": [
+75
+]
+},
+"1104": {
+"tutors": [
+75
+]
+},
+"112": {
+"tutors": [
+75,
+124
+]
+},
+"115": {
+"tutors": [
+75,
+99,
+124
+]
+},
+"1159": {
+"tutors": [
+75
+]
+},
+"1160": {
+"tutors": [
+75
+]
+},
+"1161": {
+"tutors": [
+75
+]
+},
+"1167": {
+"tutors": [
+75
+]
+},
+"1215": {
+"tutors": [
+75
+]
+},
+"1216": {
+"tutors": [
+75
+]
+},
+"1217": {
+"tutors": [
+75
+]
+},
+"1218": {
+"tutors": [
+75
+]
+},
+"1219": {
+"tutors": [
+75
+]
+},
+"122": {
+"tutors": [
+75
+]
+},
+"1220": {
+"tutors": [
+75
+]
+},
+"1221": {
+"tutors": [
+75
+]
+},
+"1222": {
+"tutors": [
+75
+]
+},
+"1226": {
+"tutors": [
+87
+]
+},
+"1229": {
+"tutors": [
+124
+]
+},
+"124": {
+"machines": [
+618
+],
+"tutors": [
+75
+]
+},
+"125": {
+"tutors": [
+75,
+124
+]
+},
+"126": {
+"tutors": [
+75,
+99
+]
+},
+"127": {
+"tutors": [
+75
+]
+},
+"128": {
+"tutors": [
+99
+]
+},
+"133": {
+"eggMoves": [
+245
+]
+},
+"136": {
+"tutors": [
+99
+]
+},
+"143": {
+"tutors": [
+75
+]
+},
+"149": {
+"tutors": [
+75,
+99,
+124
+]
+},
+"150": {
+"tutors": [
+124
+]
+},
+"156": {
+"tutors": [
+99
+]
+},
+"157": {
+"tutors": [
+75,
+99
+]
+},
+"160": {
+"tutors": [
+75,
+124
+]
+},
+"162": {
+"tutors": [
+75
+]
+},
+"166": {
+"tutors": [
+75
+]
+},
+"18": {
+"tutors": [
+75
+]
+},
+"181": {
+"tutors": [
+75,
+87
+]
+},
+"184": {
+"tutors": [
+75
+]
+},
+"186": {
+"tutors": [
+75
+]
+},
+"195": {
+"tutors": [
+75
+]
+},
+"199": {
+"tutors": [
+75
+]
+},
+"206": {
+"tutors": [
+87,
+126
+]
+},
+"210": {
+"tutors": [
+75,
+124
+]
+},
+"212": {
+"tutors": [
+81,
+124
+]
+},
+"214": {
+"tutors": [
+75
+]
+},
+"215": {
+"machines": [
+618
+]
+},
+"217": {
+"tutors": [
+75,
+124
+]
+},
+"23": {
+"tutors": [
+87
+]
+},
+"238": {
+"machines": [
+618
+]
+},
+"24": {
+"tutors": [
+87
+]
+},
+"241": {
+"tutors": [
+75
+]
+},
+"242": {
+"tutors": [
+75
+]
+},
+"248": {
+"tutors": [
+75
+]
+},
+"251": {
+"tutors": [
+126
+]
+},
+"26": {
+"tutors": [
+75
+]
+},
+"279": {
+"tutors": [
+75
+]
+},
+"28": {
+"tutors": [
+75
+]
+},
+"282": {
+"tutors": [
+124
+]
+},
+"285": {
+"tutors": [
+75
+]
+},
+"297": {
+"tutors": [
+75,
+126
+]
+},
+"300": {
+"tutors": [
+75
+]
+},
+"302": {
+"tutors": [
+126
+]
+},
+"307": {
+"tutors": [
+75
+]
+},
+"308": {
+"tutors": [
+126
+]
+},
+"31": {
+"tutors": [
+75,
+87
+]
+},
+"333": {
+"tutors": [
+126
+]
+},
+"334": {
+"tutors": [
+126
+]
+},
+"335": {
+"tutors": [
+75,
+124
+]
+},
+"336": {
+"tutors": [
+75,
+124
+]
+},
+"34": {
+"tutors": [
+75,
+87,
+124
+]
+},
+"341": {
+"machines": [
+618
+]
+},
+"342": {
+"machines": [
+618
+]
+},
+"343": {
+"machines": [
+618
+]
+},
+"345": {
+"tutors": [
+75
+]
+},
+"352": {
+"tutors": [
+75
+]
+},
+"355": {
+"tutors": [
+75
+]
+},
+"36": {
+"tutors": [
+75
+]
+},
+"365": {
+"tutors": [
+75
+]
+},
+"366": {
+"tutors": [
+75
+]
+},
+"372": {
+"tutors": [
+75,
+124
+]
+},
+"373": {
+"tutors": [
+81
+]
+},
+"374": {
+"tutors": [
+81,
+87
+]
+},
+"375": {
+"tutors": [
+81,
+87
+]
+},
+"379": {
+"tutors": [
+87
+]
+},
+"384": {
+"tutors": [
+75,
+87,
+124
+]
+},
+"386": {
+"tutors": [
+126
+]
+},
+"387": {
+"tutors": [
+126
+]
+},
+"390": {
+"tutors": [
+81
+]
+},
+"391": {
+"tutors": [
+81
+]
+},
+"40": {
+"tutors": [
+75
+]
+},
+"401": {
+"tutors": [
+75,
+124
+]
+},
+"402": {
+"machines": [
+618
+],
+"tutors": [
+75,
+124
+]
+},
+"403": {
+"tutors": [
+75,
+124
+]
+},
+"405": {
+"tutors": [
+75
+]
+},
+"406": {
+"tutors": [
+75
+]
+},
+"410": {
+"tutors": [
+75,
+124
+]
+},
+"445": {
+"tutors": [
+124
+]
+},
+"455": {
+"tutors": [
+126
+]
+},
+"46": {
+"tutors": [
+81
+]
+},
+"460": {
+"tutors": [
+126
+]
+},
+"462": {
+"tutors": [
+75,
+99
+]
+},
+"469": {
+"tutors": [
+126
+]
+},
+"47": {
+"tutors": [
+81
+]
+},
+"472": {
+"tutors": [
+75
+]
+},
+"481": {
+"tutors": [
+124
+]
+},
+"506": {
+"tutors": [
+75
+]
+},
+"507": {
+"tutors": [
+75,
+124
+]
+},
+"509": {
+"tutors": [
+126
+]
+},
+"510": {
+"tutors": [
+126
+]
+},
+"512": {
+"machines": [
+618
+]
+},
+"513": {
+"machines": [
+618
+],
+"tutors": [
+75
+]
+},
+"514": {
+"machines": [
+618
+],
+"tutors": [
+75
+]
+},
+"516": {
+"tutors": [
+75
+]
+},
+"517": {
+"tutors": [
+75,
+124
+]
+},
+"518": {
+"tutors": [
+75
+]
+},
+"519": {
+"tutors": [
+75,
+99,
+124
+]
+},
+"520": {
+"tutors": [
+75,
+99
+]
+},
+"530": {
+"tutors": [
+75
+]
+},
+"536": {
+"tutors": [
+87
+]
+},
+"537": {
+"tutors": [
+87
+]
+},
+"539": {
+"tutors": [
+75,
+124
+]
+},
+"540": {
+"tutors": [
+87
+]
+},
+"544": {
+"tutors": [
+75
+]
+},
+"546": {
+"tutors": [
+99
+]
+},
+"547": {
+"tutors": [
+75
+]
+},
+"548": {
+"tutors": [
+87
+]
+},
+"549": {
+"tutors": [
+87
+]
+},
+"55": {
+"tutors": [
+75
+]
+},
+"550": {
+"tutors": [
+87
+]
+},
+"551": {
+"tutors": [
+99
+]
+},
+"552": {
+"tutors": [
+75,
+99
+]
+},
+"553": {
+"tutors": [
+75,
+99,
+124
+]
+},
+"555": {
+"tutors": [
+75
+]
+},
+"556": {
+"tutors": [
+75
+]
+},
+"558": {
+"tutors": [
+75
+]
+},
+"56": {
+"tutors": [
+75
+]
+},
+"565": {
+"tutors": [
+75
+]
+},
+"567": {
+"tutors": [
+75
+]
+},
+"569": {
+"tutors": [
+75
+]
+},
+"57": {
+"tutors": [
+75,
+124
+]
+},
+"575": {
+"tutors": [
+99
+]
+},
+"576": {
+"tutors": [
+99
+]
+},
+"583": {
+"tutors": [
+75
+]
+},
+"584": {
+"tutors": [
+55
+]
+},
+"585": {
+"tutors": [
+75
+]
+},
+"586": {
+"tutors": [
+75,
+124
+]
+},
+"587": {
+"tutors": [
+75,
+124
+]
+},
+"590": {
+"tutors": [
+75
+]
+},
+"591": {
+"tutors": [
+75,
+124
+]
+},
+"592": {
+"tutors": [
+75,
+124
+]
+},
+"595": {
+"tutors": [
+126
+]
+},
+"6": {
+"tutors": [
+75
+]
+},
+"605": {
+"tutors": [
+87
+]
+},
+"606": {
+"tutors": [
+75,
+87
+]
+},
+"608": {
+"tutors": [
+75,
+124
+]
+},
+"609": {
+"tutors": [
+126
+]
+},
+"612": {
+"tutors": [
+75
+]
+},
+"613": {
+"tutors": [
+75
+]
+},
+"616": {
+"tutors": [
+75
+]
+},
+"618": {
+"tutors": [
+75
+]
+},
+"62": {
+"tutors": [
+75
+]
+},
+"620": {
+"tutors": [
+75
+]
+},
+"622": {
+"tutors": [
+75,
+124
+]
+},
+"624": {
+"tutors": [
+75
+]
+},
+"626": {
+"tutors": [
+75
+]
+},
+"632": {
+"tutors": [
+75
+]
+},
+"642": {
+"tutors": [
+75
+]
+},
+"65": {
+"tutors": [
+75
+]
+},
+"658": {
+"tutors": [
+124
+]
+},
+"659": {
+"tutors": [
+75,
+124
+]
+},
+"66": {
+"tutors": [
+75
+]
+},
+"665": {
+"tutors": [
+75
+]
+},
+"666": {
+"machines": [
+618
+]
+},
+"667": {
+"machines": [
+618
+],
+"tutors": [
+75,
+124
+]
+},
+"67": {
+"tutors": [
+75
+]
+},
+"670": {
+"tutors": [
+75,
+126
+]
+},
+"674": {
+"tutors": [
+75,
+87,
+124
+]
+},
+"675": {
+"tutors": [
+75,
+124
+]
+},
+"676": {
+"tutors": [
+75,
+124
+]
+},
+"678": {
+"tutors": [
+75,
+124
+]
+},
+"68": {
+"tutors": [
+75,
+124
+]
+},
+"684": {
+"eggMoves": [
+418
+],
+"tutors": [
+75,
+124
+]
+},
+"688": {
+"tutors": [
+75
+]
+},
+"694": {
+"tutors": [
+75
+]
+},
+"695": {
+"tutors": [
+75
+]
+},
+"696": {
+"tutors": [
+75
+]
+},
+"697": {
+"tutors": [
+75
+]
+},
+"698": {
+"tutors": [
+75
+]
+},
+"699": {
+"tutors": [
+75
+]
+},
+"701": {
+"tutors": [
+75,
+126
+]
+},
+"705": {
+"tutors": [
+75,
+124
+]
+},
+"706": {
+"eggMoves": [
+517
+]
+},
+"707": {
+"tutors": [
+75
+]
+},
+"708": {
+"tutors": [
+75
+]
+},
+"713": {
+"tutors": [
+124
+]
+},
+"728": {
+"tutors": [
+75,
+124
+]
+},
+"736": {
+"tutors": [
+126
+]
+},
+"742": {
+"tutors": [
+75,
+124
+]
+},
+"744": {
+"tutors": [
+75,
+87
+]
+},
+"745": {
+"tutors": [
+81
+]
+},
+"746": {
+"tutors": [
+81
+]
+},
+"748": {
+"tutors": [
+75
+]
+},
+"754": {
+"tutors": [
+75
+]
+},
+"759": {
+"tutors": [
+75
+]
+},
+"76": {
+"tutors": [
+75
+]
+},
+"762": {
+"tutors": [
+75
+]
+},
+"764": {
+"tutors": [
+75
+]
+},
+"765": {
+"machines": [
+618
+]
+},
+"766": {
+"machines": [
+618
+]
+},
+"768": {
+"tutors": [
+75
+]
+},
+"769": {
+"tutors": [
+75
+]
+},
+"77": {
+"tutors": [
+99
+]
+},
+"770": {
+"tutors": [
+75
+]
+},
+"771": {
+"tutors": [
+75
+]
+},
+"773": {
+"tutors": [
+75
+]
+},
+"774": {
+"tutors": [
+75
+]
+},
+"78": {
+"tutors": [
+99
+]
+},
+"780": {
+"tutors": [
+75,
+124
+]
+},
+"792": {
+"tutors": [
+75
+]
+},
+"793": {
+"machines": [
+618
+],
+"tutors": [
+75,
+124
+]
+},
+"80": {
+"tutors": [
+75
+]
+},
+"803": {
+"tutors": [
+75
+]
+},
+"807": {
+"tutors": [
+126
+]
+},
+"812": {
+"tutors": [
+75
+]
+},
+"813": {
+"tutors": [
+75
+]
+},
+"816": {
+"tutors": [
+75
+]
+},
+"818": {
+"tutors": [
+75
+]
+},
+"819": {
+"tutors": [
+75,
+124
+]
+},
+"821": {
+"tutors": [
+75,
+124
+]
+},
+"829": {
+"tutors": [
+75
+]
+},
+"833": {
+"tutors": [
+75
+]
+},
+"837": {
+"tutors": [
+124
+]
+},
+"839": {
+"tutors": [
+75
+]
+},
+"840": {
+"tutors": [
+75,
+124
+]
+},
+"844": {
+"tutors": [
+75
+]
+},
+"845": {
+"tutors": [
+75
+]
+},
+"847": {
+"tutors": [
+124,
+126
+]
+},
+"860": {
+"tutors": [
+124
+]
+},
+"865": {
+"tutors": [
+75,
+124
+]
+},
+"868": {
+"tutors": [
+75
+]
+},
+"87": {
+"machines": [
+618
+]
+},
+"879": {
+"tutors": [
+126
+]
+},
+"89": {
+"tutors": [
+75
+]
+},
+"892": {
+"tutors": [
+124
+]
+},
+"894": {
+"tutors": [
+126
+]
+},
+"905": {
+"tutors": [
+75
+]
+},
+"906": {
+"tutors": [
+75,
+124
+]
+},
+"91": {
+"machines": [
+618
+]
+},
+"914": {
+"tutors": [
+75,
+124
+]
+},
+"915": {
+"tutors": [
+124
+]
+},
+"918": {
+"tutors": [
+124
+]
+},
+"919": {
+"tutors": [
+75
+]
+},
+"923": {
+"tutors": [
+75
+]
+},
+"926": {
+"machines": [
+618
+]
+},
+"927": {
+"tutors": [
+124
+]
+},
+"937": {
+"tutors": [
+124
+]
+},
+"94": {
+"tutors": [
+75
+]
+},
+"941": {
+"tutors": [
+75
+]
+},
+"942": {
+"tutors": [
+75
+]
+},
+"945": {
+"tutors": [
+124
+]
+},
+"949": {
+"machines": [
+609,
+618
+]
+},
+"97": {
+"tutors": [
+75
+]
+},
+"98": {
+"eggMoves": [
+628
+]
+},
+"99": {
+"tutors": [
+124
+]
+}
+}
+}

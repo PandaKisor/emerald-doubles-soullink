@@ -12,11 +12,9 @@ require('src.import.gba.trainer_extract').run(F.rom,require('src.core.game3.data
 local Trainers=require('src.core.game3.scripting.trainers')
 local C=require('src.core.game3.constants').of('emerald')
 local teams=assert(loadfile('../porting/native/campaign/trainer_teams.lua'))()
-for _,file in ipairs({'trainer_teams_rematch.lua','trainer_teams_gen.lua'}) do
-  local layer=assert(loadfile('../porting/native/campaign/'..file))()
-  for _,key in ipairs({'trainers','partners'}) do
-    for name,t in pairs(layer[key]) do if teams[key][name]==nil then teams[key][name]=t end end
-  end
+local rematches=assert(loadfile('../porting/native/campaign/trainer_teams_rematch.lua'))()
+for _,key in ipairs({'trainers','partners'}) do
+  for name,t in pairs(rematches[key]) do if teams[key][name]==nil then teams[key][name]=t end end
 end
 local campaign=F.campaign
 local supported=campaign.battleMoves

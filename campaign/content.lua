@@ -35,13 +35,11 @@ return function(mod, active)
   for id in pairs(routeMoves.supported) do battleMoves[id] = true end
   for id in pairs(moves.supported) do battleMoves[id] = true end
   local gate = source("campaign/moves_gate.lua")(data, battleMoves)
-  -- hand-authored teams, then rematches made from them (tools/gen_rematch_teams.py),
-  -- then the generated draft (tools/gen_trainer_teams.lua) for anything left
+  -- hand-authored teams, then rematches made from them (tools/gen_rematch_teams.py)
   local teams = source("campaign/trainer_teams.lua")
-  for _, layer in ipairs({ source("campaign/trainer_teams_rematch.lua"), source("campaign/trainer_teams_gen.lua") }) do
-    for _, key in ipairs({ "trainers", "partners" }) do
-      for name, t in pairs(layer[key]) do if teams[key][name] == nil then teams[key][name] = t end end
-    end
+  local rematches = source("campaign/trainer_teams_rematch.lua")
+  for _, key in ipairs({ "trainers", "partners" }) do
+    for name, t in pairs(rematches[key]) do if teams[key][name] == nil then teams[key][name] = t end end
   end
   local trainers = source("campaign/trainers.lua")(mod, data, teams, active)
   local partnerNpcs = source("campaign/partner_npcs.lua")(mod, trainers, active)
@@ -84,6 +82,7 @@ return function(mod, active)
   local starterKit = source("campaign/starter_kit.lua")(mod, data, active)
   local guideSync = source("campaign/guide_sync.lua")(mod, active)
   local newGame = source("campaign/new_game.lua")(mod, active)
+  local identity = source("campaign/identity.lua")(mod, active)
   -- after every tool: START > TOOLS gathers their entries
   local startTools = source("campaign/start_tools.lua")(mod, active)
   source("full/tutors.lua").install({ Pokemon = Pokemon,
@@ -103,5 +102,5 @@ return function(mod, active)
     Version = require("src.core.GameVersion"), SaveFileIO = require("src.import.SaveFileIO"),
     SaveConvert = require("src.save_convert.SaveConvert") }, data, active)
   return { content = data, save = Save, active = active, learnsets = gate, moves = moves, trainers = trainers, world = world,
-    battleMoves = battleMoves, candy = candy, repel = repel, heal = heal, partyTools = partyTools, starterKit = starterKit, guideSync = guideSync, startTools = startTools, footprints = footprints, partnerNpcs = partnerNpcs, newGame = newGame }
+    battleMoves = battleMoves, candy = candy, repel = repel, heal = heal, partyTools = partyTools, starterKit = starterKit, guideSync = guideSync, startTools = startTools, footprints = footprints, partnerNpcs = partnerNpcs, newGame = newGame, identity = identity }
 end

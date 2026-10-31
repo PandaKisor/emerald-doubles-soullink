@@ -4,3 +4,5 @@ __pycache__/
 *.zip
 *.g1rcart
 *.gba
+tools/vanilla_trainers.json
+tools/vanilla_wild.tsv

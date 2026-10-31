@@ -98,12 +98,14 @@ PATCHES = [
 function D.ballShow(act, caught, shakes, res, target, song, finish)
   local st = Battle._st
   local Catching = require("src.core.game3.battle.catching")
-  Battle._ballShow = { enemy = st.enemy, playerName = st.playerName, caught = caught, song = song, finish = finish,
-    target = target }
-  st.enemy = State.battler(st, target)
+  Battle._ballShow = { caught = caught, song = song, finish = finish, target = target }
+  -- catch_seq reads the wild mon from st.enemy, but st.enemy IS slot 1
+  -- (st.battlers[1] is an alias of it): moving it put the targeted mon in
+  -- slot 1 on screen. The scene gets its own view of the battle instead.
+  local view = setmetatable({ enemy = State.battler(st, target) }, { __index = st })
   -- a partner's throw is announced with the partner's name
   local thrower = st.link and st.linkNames and st.linkNames[act.battler]
-  if thrower then st.playerName = thrower end
+  if thrower then view.playerName = thrower end
   -- catch_seq names the thrower from the session first (catch_text): give
   -- it one that carries the partner's name, everything else this game's
   local session = st.session
@@ -111,7 +113,7 @@ function D.ballShow(act, caught, shakes, res, target, song, finish)
     session = setmetatable({ name = thrower }, { __index = st.session })
   end
   Catching._replay = res or { success = true, location = "party", firstTimeCaught = false }
-  CatchSeq.begin(st, act.itemId, caught, shakes, {
+  CatchSeq.begin(view, act.itemId, caught, shakes, {
     pushMsg = function(text, wait) if wait then Ui.pushTimed(text, wait) else Ui.push(text) end end,
     session = session, target = target,
   })
@@ -132,7 +134,6 @@ local function ball_show_update()
   if show.caught and Audio._waitSe and #Audio._waitSe > 0 then return end
   Battle._ballShow = nil
   require("src.core.game3.battle.catching")._replay = nil
-  st.enemy, st.playerName = show.enemy, show.playerName
   if show.finish then show.finish() end
   Anim.syncDisplayFromState(st)
   -- the caught mon's sprite and healthbox leave with it, as a fainted one's
@@ -363,16 +364,6 @@ return Coop
     # partner hasn't chosen (user, 2026-10-28). The asking game waits for the
     # partner's answer; the partner says yes only when it hasn't sent its own
     # action for that turn (else it has already played the turn with ours).
-    # The catch scene points st.enemy at the wild Pokemon it targets (D.ballShow),
-    # so slot 1 drew the other wild Pokemon's sprite and healthbox during the
-    # throw (user, 2026-10-28). Slot 1 is st.battlers[1], whatever st.enemy names.
-    ("src/core/game3/battle/ui.lua",
-     "  if id == 1 then return st.enemy end\n  return st.battlers and st.battlers[id]\n",
-     "  if id == 1 then return (st.battlers and st.battlers[1]) or st.enemy end\n  return st.battlers and st.battlers[id]\n"),
-    ("src/core/game3/battle/ui.lua",
-     "b = st and ((side == 0 and st.player) or (side == 1 and st.enemy) or (st.battlers and st.battlers[side]))",
-     "b = st and ((side == 0 and st.player) or (side == 1 and ((st.battlers and st.battlers[1]) or st.enemy))\n"
-     "      or (st.battlers and st.battlers[side]))"),
     # the link layer drops message types it has no schema for
     ("src/link/Wire.lua",
      "Wire.SCHEMAS = SCHEMAS\n",

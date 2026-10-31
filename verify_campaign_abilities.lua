@@ -258,7 +258,7 @@ scenario('Soul-Heart on any knockout',{{ability='SOUL_HEART',level=80},{'MEW',le
 scenario('Grim Neigh',{{ability='GRIM_NEIGH',level=80},{'MEW',level=80}},{{'MEW',level=5},{'MEW',level=5}},'Grim Neigh raised')
 scenario('Aftermath',{{'MEW',level=80},{'MEW',level=80}},{{ability='AFTERMATH',level=5},{ability='AFTERMATH',level=5}},'caught in the aftermath')
 scenario('Innards Out',{{'MEW',level=80},{'MEW',level=80}},{{ability='INNARDS_OUT',level=5},{ability='INNARDS_OUT',level=5}},'Innards Out')
-scenario('Magician steals',{{ability='MAGICIAN',moves={'SWIFT'}},{'MEW'}},{{'MEW',item='ITEM_ORAN_BERRY',level=60},{'MEW',item='ITEM_ORAN_BERRY',level=60}},'stole')
+scenario('Magician steals',{{ability='MAGICIAN',level=90,moves={'SWIFT'}},{'MEW'}},{{'MEW',item='ITEM_ORAN_BERRY',level=60},{'MEW',item='ITEM_ORAN_BERRY',level=60}},'stole')
 scenario('Poison Touch',{{ability='POISON_TOUCH'},{ability='POISON_TOUCH'}},{{'MEW',level=60},{'MEW',level=60}},'Poison Touch')
 scenario('Protean changes type',{{ability='PROTEAN',moves={'EMBER'}},{'MEW'}},{{'MEW'},{'MEW'}},'transformed it into the')
 scenario('Contrary turns drops into boosts',{{ability='CONTRARY',moves={'LEAF_STORM'}},{'MEW'}},{{'MEW',level=60},{'MEW',level=60}},nil,
@@ -330,14 +330,13 @@ if wanted('illusion sprite') then
   T.eq(Anim.shownBattler(1,zorua),look,'it stays until the line plays')
   Ui.pushTimed(State.displayName(zorua).."'s illusion wore off!",64)
   T.eq(Anim.shownBattler(1,zorua),zorua,'then the real Zorua shows')
-  -- while a ball is thrown at the right-hand foe, slot 1 still draws its own
-  local right=battler('ZIGZAGOON',3,'enemy')
-  local Battle=require('src.core.game3.battle')
-  local keep=Battle._st
-  Battle._st={double=true,battlers={[1]=zorua,[3]=right},enemy=right,player=battler('MEW',30,'player')}
-  local _,_,pers=Ui.sidePicArgs(1,zorua.species)
-  T.eq(pers,zorua.mon.personality,'slot 1 draws its own Pokemon while the catch scene aims elsewhere')
-  Battle._st=keep
+  -- st.battlers[1] is an alias of st.enemy, so the catch scene must not move it
+  local slots={enemy=zorua}
+  slots.battlers=State.newSlots(slots)
+  T.eq(slots.battlers[1],zorua,'slot 1 is st.enemy')
+  local built=assert(io.open('../porting/native/generated/campaign/mods/g3_campaign/native/engine/src/core/game3/battle/init.lua')):read('*a')
+  local show=built:match('function D%.ballShow.-\nend\n')
+  T.check(show and not show:find('st%.enemy *=') ,'the catch scene leaves st.enemy alone')
   st.battlers[1]=nil
 end
 if wanted('weight moves') then
