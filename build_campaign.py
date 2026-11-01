@@ -344,6 +344,12 @@ LIB_PATCHES = (
     # versus battles with the co-op partner keep real levels (field.lua
     # LB.keepLevels), and show the partner as Brendan/May (LB.playerPic)
     # HM moves without knowing them (campaign/hm_free.lua)
+    # Wide Gems: this use of the move hits both foes (campaign/battle/items.lua)
+    ("native/engine/src/core/game3/battle/engine.lua",
+     "function Engine.forEachTarget(M, body)\n  local st, ad = M.st, M.adapter\n",
+     "function Engine.forEachTarget(M, body)\n  local st, ad = M.st, M.adapter\n"
+     "  local CampaignWide = require(\"src.core.game3.battle.moves\")._campaignField\n"
+     "  if CampaignWide and CampaignWide.active() and CampaignWide.items then CampaignWide.items.widen(M) end\n"),
     ("native/engine/src/ui/game3/party_menu.lua",
      "      for _, m in ipairs(mon.moves) do\n        local mId = FieldMoves.normalizeMoveId(m)\n        local label\n",
      "      for _, m in ipairs(FieldMoves.campaignMenuMoves and FieldMoves.campaignMenuMoves(mon) or mon.moves) do\n        local mId = FieldMoves.normalizeMoveId(m)\n        local label\n"),

@@ -22,7 +22,8 @@ local sold = {
   VerdanturfTown_Mart = { "ITEM_TM08_BULK_UP" },
   FortreeCity_Mart = { "ITEM_HEAT_ROCK", "ITEM_DAMP_ROCK", "ITEM_SMOOTH_ROCK", "ITEM_ICY_ROCK" },
   LilycoveCity_DepartmentStore_4F = { "ITEM_TM05_ROAR", "ITEM_TM41_TORMENT", "ITEM_TM45_ATTRACT",
-    "ITEM_TM34_SLUDGE_WAVE", "ITEM_TM82_DRAGON_TAIL", "ITEM_TM67_RECYCLE" },
+    "ITEM_TM34_SLUDGE_WAVE", "ITEM_TM82_DRAGON_TAIL", "ITEM_TM67_RECYCLE",
+    "ITEM_WIDE_FIGHTING_GEM", "ITEM_WIDE_POISON_GEM", "ITEM_WIDE_GHOST_GEM", "ITEM_WIDE_STEEL_GEM", "ITEM_WIDE_DARK_GEM" },
 }
 local text = {
   ["g3:081fd181"] = "That TM88 contains LOW SWEEP.\fIt strikes both foes at the legs and\nlowers their SPEED.\f… … … … … …",

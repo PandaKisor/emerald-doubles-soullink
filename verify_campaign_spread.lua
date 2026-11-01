@@ -64,6 +64,33 @@ local function run(symbol,foeUses)
 end
 for _,s in ipairs(SPREAD) do run(s,false); run(s,true) end
 
+-- Wide Gems: only the matching type, only single-target, permanent
+local function wide(symbol,moves,item)
+  current={id=F.move(symbol),uses=0,both=0}
+  current.foes=function(u) local me=State.idOf(u) return (me+1)%4,(me+3)%4 end
+  F.reseed(0x4321)
+  local p={}
+  for i=1,3 do p[i]=F.mon('MEW',40,moves,{item=F.ids.items[item]}) end
+  local foe=Trainers.foeFromId(TRAINER)
+  local q={} for i=1,3 do q[i]=F.mon('MEW',40,{'TACKLE'}) end
+  foe.party=q; foe.doubleBattle=true
+  local ok,err=pcall(F.battle,{playerParty=p,foe=foe,double=true,trainerId=TRAINER})
+  Battle.reset()
+  T.check(ok,symbol..' with '..item..' runs: '..tostring(err))
+  local out={uses=current.uses,both=current.both,left=p[1].item or p[1].heldItem}
+  current=nil
+  return out
+end
+local r=wide('CRUNCH',{'CRUNCH'},'ITEM_WIDE_DARK_GEM')
+T.check(r.uses>0 and r.both>0,'Wide Dark Gem: Crunch hits both foes ('..r.both..'/'..r.uses..')')
+T.eq(r.left,F.ids.items.ITEM_WIDE_DARK_GEM,'the gem is kept')
+r=wide('CRUNCH',{'CRUNCH'},'ITEM_WIDE_STEEL_GEM')
+T.eq(r.both,0,'Wide Steel Gem leaves Crunch alone')
+r=wide('DOUBLE_KICK',{'DOUBLE_KICK'},'ITEM_WIDE_FIGHTING_GEM')
+T.eq(r.both,0,'a multi-hit move stays single-target')
+r=wide('SHADOW_BALL',{'SHADOW_BALL'},'ITEM_WIDE_GHOST_GEM')
+T.check(r.both>0,'Wide Ghost Gem: Shadow Ball hits both foes')
+
 -- key gifts
 local W=F.campaign.world
 local S=W.sources

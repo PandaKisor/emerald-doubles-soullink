@@ -79,6 +79,38 @@ for _, p in ipairs(files("abilities", 99)) do
   write(p, "-- Official text over the generated rows (tools/apply_canon.lua).", t)
 end
 
+-- Wide Gems (user, 2026-11-01): permanent held items, cloned from the matching
+-- Gem for its icon and pocket. campaign/battle/items.lua I.widen is the effect.
+do
+  local WIDE = { { "FIGHTING", "Wide Fight Gem" }, { "POISON", "Wide Poison Gem" }, { "GHOST", "Wide Ghost Gem" },
+    { "STEEL", "Wide Steel Gem" }, { "DARK", "Wide Dark Gem" } }
+  local idPath = out .. "/full/data/identity.lua"
+  local identity = dofile(idPath)
+  local names = identity.namespaces.items
+  local nextId = 0
+  for _, id in pairs(names) do nextId = math.max(nextId, id) end
+  local paths = files("items", 99)
+  local last = paths[#paths]
+  local into = dofile(last)
+  local gems = {}
+  for _, p in ipairs(paths) do
+    for _, row in pairs(dofile(p)) do gems[row.symbol] = row end
+  end
+  for _, w in ipairs(WIDE) do
+    local row = assert(gems["ITEM_" .. w[1] .. "_GEM"], w[1])
+    nextId = nextId + 1
+    local symbol = "ITEM_WIDE_" .. w[1] .. "_GEM"
+    row.id, row.symbol, row.name, row.price, row.sourceId = nextId, symbol, w[2], 6000, nextId + 10000
+    local kind = w[1]:sub(1, 1) .. w[1]:sub(2):lower()
+    row.description = "Makes the holder's single-\ntarget " .. kind .. " moves\nhit both foes."
+    row.sourceFields.holdEffect, row.sourceFields.price, row.sourceFields.itemId = "HOLD_EFFECT_WIDE_GEM", 6000, symbol
+    names[symbol] = nextId
+    into[nextId] = row
+  end
+  write(last, "-- Official data over the generated rows (tools/apply_canon.lua).", into)
+  write(idPath, "-- Identity with the campaign's own items (tools/apply_canon.lua).", identity)
+end
+
 -- the battle layer's own copy of the first 386 species and 354 moves
 local path = out .. "/lib/content.lua"
 local c = dofile(path)

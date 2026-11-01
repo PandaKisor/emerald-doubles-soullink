@@ -24,6 +24,26 @@ return function(mod, U, F)
   -- the donor hold effect a battler's item has right now (nil under Magic
   -- Room, Embargo, or with no item)
   local function rowOf(item) return data.items[tonumber(item) or 0] end
+  -- Wide Gem: a matching single-target attack hits both foes, spread damage
+  -- included. Moves that need one target, or would hit too often, stay as they are.
+  local NO_WIDEN = {}
+  for _, name in ipairs({ "RAZOR_WIND", "SOLAR_BEAM", "SKY_ATTACK", "SKULL_BASH", "SEMI_INVULNERABLE", "MULTI_HIT",
+      "DOUBLE_HIT", "TRIPLE_KICK", "BEAT_UP", "OHKO", "FUTURE_SIGHT", "COUNTER", "MIRROR_COAT", "BIDE", "RAMPAGE",
+      "ROLLOUT", "UPROAR", "FURY_CUTTER", "TWINEEDLE" }) do
+    local id = require("src.core.game3.battle.effect_ids")[name]
+    if id then NO_WIDEN[id] = true end
+  end
+  function I.widen(M)
+    local move = M.move
+    if not (move and M.st and M.st.double and tonumber(move.target) == 0 and (tonumber(move.power) or 0) > 1) then return end
+    local name, _, secondary = I.held(M.user)
+    if name ~= "WIDE_GEM" then return end
+    local kind = tonumber(move.type) or T[tostring(move.type):upper()]
+    if T[tostring(secondary):gsub("^TYPE_", "")] ~= kind then return end
+    if NO_WIDEN[move.effect] or move.hits or move.campaignCharge then return end
+    move.target = 8
+  end
+
   function I.held(b)
     if not b then return nil end
     local item = U.item(b)
