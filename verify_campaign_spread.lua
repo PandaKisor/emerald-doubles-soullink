@@ -196,4 +196,35 @@ do
   for _,m in ipairs(ML.relearnableMoves(g)) do cnt[m]=(cnt[m] or 0)+1; T.check(cnt[m]==1,'no duplicate relearn entries') end
   T.check(F.campaign.partyTools~=nil,'party tools installed')
 end
+-- Nature Mint keeps everything but the nature, and the Soul Link identity
+do
+  local Pokemon=require('src.core.game3.pokemon')
+  local Bag=require('src.core.game3.bag')
+  local P=F.campaign.partyTools
+  local bag=Bag.new()
+  local s={bag=bag}
+  Bag.add(bag,F.ids.items.ITEM_NATURE_MINT,2)
+  T.eq(P.mints(s),2,'two mints in the bag')
+  for try=1,30 do
+    local m=F.mon('MEW',40,{'TACKLE'})
+    m.personality=(try*2654435761)%4294967296; m.otId=(try*40503)%4294967296
+    local p,oldLo,oldHi=m.personality,m.personality%65536,math.floor(m.personality/65536)
+    local want=(try*7)%25
+    if Pokemon.natureId(p)~=want then
+      T.check(P.setNature(m,want),'nature found')
+      T.eq(Pokemon.natureId(m.personality),want,'nature changed')
+      T.eq(m.personality%65536,oldLo,'gender and ability bits kept')
+      T.eq(math.floor(m.personality/65536)%10<5,oldHi%10<5,'Wurmple branch kept')
+      T.eq(m.linkPersonality,p,'link identity kept')
+    end
+  end
+  local m=F.mon('MEW',40,{'TACKLE'})
+  m.personality=0
+  local atk=m.attack or (m.stats and m.stats.attack)
+  T.check(P.useMint(s,m,3),'a mint is spent')
+  T.eq(Pokemon.natureId(m.personality),3,'Adamant')
+  T.eq(P.mints(s),1,'one left')
+  T.check(not P.useMint(s,m,3),'the same nature spends nothing')
+  T.eq(P.mints(s),1,'still one')
+end
 T.finish('campaign spread moves and key gifts')

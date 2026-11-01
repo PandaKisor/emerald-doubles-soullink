@@ -107,6 +107,15 @@ do
     names[symbol] = nextId
     into[nextId] = row
   end
+  -- Nature Mint: spent on START > TOOLS > IV / EV (campaign/party_tools.lua)
+  local mint = assert(gems.ITEM_MENTAL_HERB, "herb")
+  nextId = nextId + 1
+  mint.id, mint.symbol, mint.name, mint.price, mint.sourceId = nextId, "ITEM_NATURE_MINT", "Nature Mint", 3000, nextId + 10000
+  mint.pocket, mint.description = "ITEMS", "Changes a Pokémon's nature.\nUse it from TOOLS > IV / EV\nwith SELECT."
+  mint.sourceFields.holdEffect, mint.sourceFields.holdEffectParam = nil, nil
+  mint.sourceFields.price, mint.sourceFields.itemId, mint.sourceFields.pocket = 3000, "ITEM_NATURE_MINT", "POCKET_ITEMS"
+  names.ITEM_NATURE_MINT = nextId
+  into[nextId] = mint
   write(last, "-- Official data over the generated rows (tools/apply_canon.lua).", into)
   write(idPath, "-- Identity with the campaign's own items (tools/apply_canon.lua).", identity)
 end
