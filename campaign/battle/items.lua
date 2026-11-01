@@ -443,6 +443,7 @@ return function(mod, U, F)
     -- the seed's parameter names its terrain (HOLD_EFFECT_PARAM_GRASSY_TERRAIN)
     if stat and param == "HOLD_EFFECT_PARAM_" .. terrain .. "_TERRAIN" and U.stage(b, stat) < 6 then
       local s = { stat }
+      b.campaignSeedMon, b.campaignHadItem = b.mon, true -- a seed used on entry still counts for Unburden
       consume(ad, b)
       Secondary.changeStat(ad, b, s[1], 1, { user = true, allowPtr = true })
     end

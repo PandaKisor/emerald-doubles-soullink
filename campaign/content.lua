@@ -43,7 +43,7 @@ return function(mod, active)
   end
   local trainers = source("campaign/trainers.lua")(mod, data, teams, active)
   local partnerNpcs = source("campaign/partner_npcs.lua")(mod, trainers, active)
-  local world = source("campaign/item_world.lua")(mod, data, source("campaign/item_sources.lua"), active)
+  local world = source("campaign/item_world.lua")(mod, data, source("campaign/key_gifts.lua")(source("campaign/item_sources.lua")), active)
 
   Content.install(Pokemon, data, active)
   local Art = source("full/species_art.lua")

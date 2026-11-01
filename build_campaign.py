@@ -643,6 +643,7 @@ def apply_canon():
     table = {k: numeric(canon[k]) for k in ("species", "moves", "abilities", "moveText")}
     table["learnsets"] = {int(k): {int(a): b for a, b in v.items()} for k, v in canon["learnsets"].items()}
     table["strip"] = numeric(canon["strip"])
+    table["spread"] = json.loads((CAMPAIGN / "spread_moves.json").read_text())
     path = OUT / "campaign/canon_table.lua"
     def keyed(value):
         if isinstance(value, dict):
@@ -652,6 +653,7 @@ def apply_canon():
     subprocess.run(["luajit", str(HERE / "tools/apply_canon.lua"), str(OUT), str(path)], check=True)
     path.unlink()
     (OUT / "campaign/canon.json").unlink()
+    (OUT / "campaign/spread_moves.json").unlink()
 
 
 def build():

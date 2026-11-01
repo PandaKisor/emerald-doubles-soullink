@@ -60,11 +60,16 @@ for _, p in ipairs(files("species", 99)) do
   end
   write(p, "-- Official data over the generated rows (tools/apply_canon.lua).", t)
 end
+-- single-target moves the campaign turns into spread moves (campaign/spread_moves.json)
+local spread = {}
+for _, name in ipairs(canon.spread) do spread[name] = true end
+local BOTH = 8
 for _, p in ipairs(files("moves", 99)) do
   local t = dofile(p)
   for id, row in pairs(t) do
     moveSymbols[id] = row.symbol
     for k, v in pairs(canon.moves[id] or {}) do row[k] = v end
+    if spread[row.symbol:gsub("^MOVE_", "")] then row.sourceTarget, row.campaignSpread = "MOVE_TARGET_BOTH", true end
   end
   write(p, "-- Official data over the generated rows (tools/apply_canon.lua).", t)
 end
@@ -101,9 +106,20 @@ for id, patch in pairs(canon.moves) do
     end
   end
 end
+for name in pairs(spread) do
+  if c.moves[name] then c.moves[name].target = BOTH end
+end
 write(path, "-- Official data over the generated content (tools/apply_canon.lua).", c)
 
 path = out .. "/full/inventory-ui/model.lua"
 local m = dofile(path)
 for id, text in pairs(canon.moveText) do m.moveDescriptions[id] = text end
+-- spread moves whose text said "the foe"
+local SPREAD_TEXT = { LOW_SWEEP = "Attacks both foes' legs,\nlowering their Speed.",
+  LEAF_TORNADO = "Whirls leaves at both foes\nand may cut their accuracy.",
+  HURRICANE = "A fierce wind hits both foes.\nMay cause confusion." }
+for id, symbol in pairs(moveSymbols) do
+  local text = SPREAD_TEXT[symbol:gsub("^MOVE_", "")]
+  if text then m.moveDescriptions[id] = text end
+end
 write(path, "-- Official text over the generated model (tools/apply_canon.lua).", m)

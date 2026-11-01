@@ -410,14 +410,7 @@ return function(U, F)
       Secondary.set(M, "BURN", false, true)
     end
   end }
-  S.FLAME_BURST = { after = function(M)
-    local ad = M.adapter
-    local p = M.target and U.partner(ad, M.target)
-    if landed(M) and p then
-      ad:applyHpLoss(p, math.max(1, math.floor(ad:maxHp(p) / 16)))
-      ad:say("The bursting flame hit " .. U.name(ad, p) .. "!")
-    end
-  end }
+  S.FLAME_BURST = {}  -- hits both foes as a spread move (spread_moves.json), no splash
   S.MIND_BLOWN = { after = function(M)
     local ad = M.adapter
     if M.campaignMindBlown then return end

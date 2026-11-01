@@ -1358,7 +1358,7 @@ return function(mod, U, F)
     if not F.active() or not b or not ad or ad:isFainted(b) then return did end
     if b.campaignEnteredMon ~= b.mon then
       b.campaignEnteredMon = b.mon
-      b.campaignHadItem = U.item(b) ~= 0 or nil
+      b.campaignHadItem = U.item(b) ~= 0 or b.campaignSeedMon == b.mon or nil
       local k = key(ad, b)
       if k == "MULTITYPE" or k == "RKS_SYSTEM" then
         local t = heldType(b)

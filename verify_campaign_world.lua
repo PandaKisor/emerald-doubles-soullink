@@ -15,7 +15,7 @@ local ModRuntime=require('src.mods.Runtime')
 local function giftKey(item)
   for key,row in pairs(S.gifts) do for v,sym in pairs(row) do if sym==item then return key,tonumber(v) end end end
 end
-for _,sym in ipairs({'ITEM_LIFE_ORB','ITEM_FOCUS_SASH','ITEM_CHOICE_SCARF','ITEM_ROCKY_HELMET'}) do
+for _,sym in ipairs({'ITEM_LIFE_ORB','ITEM_FOCUS_SASH','ITEM_SAFETY_GOGGLES','ITEM_ROCKY_HELMET'}) do
   local key,v=giftKey(sym)
   T.check(key~=nil,sym..' replaces a vanilla gift')
   if key then T.eq(W.substitute('ANY',0,v,0,key),items[sym],sym..' through its script') end
@@ -106,7 +106,7 @@ for _,sym in ipairs({'ITEM_DUSK_STONE','ITEM_SHINY_STONE','ITEM_DAWN_STONE','ITE
   T.check(sources[sym],sym..' can be obtained')
 end
 -- gym TM gifts the donor renamed (GiveAerialAce -> GiveRoost) give its TM
-for _,sym in ipairs({'ITEM_TM51_ROOST','ITEM_TM72_VOLT_SWITCH','ITEM_TM55_SCALD'}) do
+for _,sym in ipairs({'ITEM_TM51_ROOST','ITEM_TM73_THUNDER_WAVE','ITEM_TM55_SCALD'}) do
   local key,v=giftKey(sym)
   T.check(key~=nil,sym..' replaces the gym leader\'s vanilla TM')
   if key then T.eq(W.substitute('ANY',0,v,0,key),items[sym],sym..' through the gym script') end

@@ -151,7 +151,15 @@ return function(data, list, specs, active, own)
     local get, constName, numForName, scriptForMove = Moves.get, Moves.constName, Moves.numForName, Anim.scriptForMove
     Moves.get = function(value, ...)
       local row = record(value)
-      if not row then return get(value, ...) end
+      if not row then
+        -- a ROM move the campaign made spread: the ROM row with the new target
+        local n = bridge.active() and id(value)
+        if not (n and bridge.spread[n]) then return get(value, ...) end
+        local out = {}
+        for key, v in pairs(get(value, ...)) do out[key] = v end
+        out.target = TARGETS.MOVE_TARGET_BOTH
+        return out
+      end
       local out = {}
       for key, v in pairs(row) do out[key] = v end
       return out
@@ -210,6 +218,10 @@ return function(data, list, specs, active, own)
     end
   end
   bridge.data, bridge.active, bridge.records, bridge.anims = data, active, records, anims
+  bridge.spread = {}
+  for id, row in pairs(data.moves) do
+    if row.campaignSpread and not records[id] then bridge.spread[id] = true end
+  end
   bridge.scripts, bridge.labels = scripts, own and own.labels or {}
   -- the donor graphics those animations draw (tools/anim_gfx.py sheets in
   -- the mod's anim_tags/), as the ROM's tags are: RGBA sheet + index sheet

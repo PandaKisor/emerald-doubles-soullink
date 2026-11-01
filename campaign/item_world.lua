@@ -49,8 +49,19 @@ return function(mod, data, sources, active)
   local POCKET_NAME = { MEDICINE = "MEDICINE", BATTLE = "BATTLE ITEMS" }
   W.VANILLA_POCKET, W.POCKET_NAME = VANILLA_POCKET, POCKET_NAME
   local pocketName = setmetatable({}, { __mode = "k" })
+  -- a giver's lines name the campaign's gift (campaign/key_gifts.lua)
+  local TextIR = require("src.core.game3.scripting.text_ir")
+  local giftIr, romIr = {}, {}
   mod.hooks:wrap("script.command", function(next, ctx, op, row)
     local runner = ctx and ctx.runner
+    local line = op == "loadword" and row and sources.giftText and sources.giftText[row.value]
+    if line and runner and runner.text then
+      -- message boxes read the VM's text bundle
+      local key = row.value
+      giftIr[key] = giftIr[key] or TextIR.fromAscii(line)
+      romIr[key] = romIr[key] or runner.text[key]
+      runner.text[key] = active() and giftIr[key] or romIr[key]
+    end
     if active() and runner and runner.store and row and (op == "checkitemtype" or op == "bufferstdstring") then
       local done = next(ctx, op, row)
       local sctx = runner.ctx

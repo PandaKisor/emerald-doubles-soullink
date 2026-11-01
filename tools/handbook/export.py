@@ -166,7 +166,10 @@ def normalize(raw, manifest, coop):
             src["mapName"] = "Pokémon Center · Cable Club event"
         if src["kind"] == "Gift":
             title = re.split(r"_EventScript_",label)[-1]
-            src["note"] = "Script reward: " + friendly(title) + ". Exact trigger/story condition is not evaluated."
+            # a key gift keeps the script's vanilla name: don't print it over the real item
+            name = re.sub(r"[^a-z]", "", data["items"][str(src["item"])]["name"].lower())
+            named = name in re.sub(r"[^a-z]", "", title.lower())
+            src["note"] = ("Script reward: " + friendly(title) if named else "Script reward") + ". Exact trigger/story condition is not evaluated."
         else:
             src["note"] = "Map tile coordinates (x, y); access may require story progress or field moves."
         sources.append(src)
