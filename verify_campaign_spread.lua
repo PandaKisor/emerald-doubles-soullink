@@ -91,6 +91,31 @@ T.eq(r.both,0,'a multi-hit move stays single-target')
 r=wide('SHADOW_BALL',{'SHADOW_BALL'},'ITEM_WIDE_GHOST_GEM')
 T.check(r.both>0,'Wide Ghost Gem: Shadow Ball hits both foes')
 
+-- the prompt: a widened move doesn't ask, others still do
+do
+  local Ui=require('src.core.game3.battle.ui')
+  local function asks(move,item)
+    local m=F.mon('MEW',40,{move},{item=item and F.ids.items[item]})
+    local mk=function(id,side) local x=F.mon('MEW',40,{'TACKLE'}) local b=State.makeBattler(x,side,{partyIndex=1,id=id}) b.hp=x.hp return b end
+    local me=State.makeBattler(m,'player',{partyIndex=1,id=0})
+    local st={double=true,player=me,battlers={[0]=me,[1]=mk(1,'enemy'),[2]=mk(2,'player'),[3]=mk(3,'enemy')}}
+    return Ui.moveTargetType(me,m.moves[1])
+  end
+  T.eq(asks('CRUNCH','ITEM_WIDE_DARK_GEM'),8,'Wide Dark Gem: Crunch reads as both foes')
+  T.eq(asks('CRUNCH','ITEM_WIDE_STEEL_GEM'),0,'a mismatched gem leaves the target choice')
+  T.eq(asks('CRUNCH'),0,'no gem, target choice stays')
+end
+-- Quick Guard stops priority for the whole side, not ordinary attacks
+do
+  local function guarded(moveName)
+    local fake={st={expandedQuickGuard={enemy=7},turn=7},user={side='player'},target={side='enemy'},move=Moves.get(F.move(moveName))}
+    return Moves.expandedQuickGuard(fake)
+  end
+  T.check(guarded('QUICK_ATTACK')==true,'Quick Guard blocks Quick Attack')
+  T.check(guarded('FAKE_OUT')==true,'Quick Guard blocks Fake Out')
+  T.check(guarded('TACKLE')==false,'Quick Guard lets Tackle through')
+end
+
 -- key gifts
 local W=F.campaign.world
 local S=W.sources

@@ -26,7 +26,7 @@ CAMPAIGN = HERE / "campaign"
 
 MOD_ID = "g3_campaign"
 TITLE = "Emerald Doubles Soul Link"
-VERSION = "0.43.0"
+VERSION = "0.43.1"
 CART_ID = "emerald_doubles_soullink"
 COOP_ID, COOP_VERSION = "g3_coop", "0.8.11"
 # GitHub repos the launcher checks for updates and the release cart downloads from
@@ -344,6 +344,23 @@ LIB_PATCHES = (
     # versus battles with the co-op partner keep real levels (field.lua
     # LB.keepLevels), and show the partner as Brendan/May (LB.playerPic)
     # HM moves without knowing them (campaign/hm_free.lua)
+    # Wide Gems skip the target prompt; the move box shows who a spread move hits
+    ("native/engine/src/core/game3/battle/ui.lua",
+     "  local def = mv and Moves.get(mv)\n  return tonumber(def and def.target) or 0\nend\nUi.moveTargetType = move_target_type\n",
+     "  local def = mv and Moves.get(mv)\n"
+     "  local CampaignWide = Moves._campaignField\n"
+     "  if CampaignWide and CampaignWide.active() and CampaignWide.items and CampaignWide.items.widens(battler, def) then return MT.BOTH end\n"
+     "  return tonumber(def and def.target) or 0\nend\nUi.moveTargetType = move_target_type\n"),
+    ("native/engine/src/core/game3/battle/ui.lua",
+     "    local typeLabel = RomText.plain(\"gText_MoveInterfaceType\")\n    rse_text(W.MOVE_TYPE, typeLabel)\n",
+     "    local typeLabel = RomText.plain(\"gText_MoveInterfaceType\")\n"
+     "    local cs = Ui._st\n"
+     "    if cs and cs.double then\n"
+     "      local id = tonumber(Ui._active) or 0\n"
+     "      local tt = move_target_type((id == 0 and cs.player) or (cs.battlers and cs.battlers[id]), mon.moves[slot])\n"
+     "      if tt == MT.BOTH then typeLabel = \"BOTH/\" elseif tt == MT.FOES_AND_ALLY then typeLabel = \"ALL/\" end\n"
+     "    end\n"
+     "    rse_text(W.MOVE_TYPE, typeLabel)\n"),
     # Wide Gems: this use of the move hits both foes (campaign/battle/items.lua)
     ("native/engine/src/core/game3/battle/engine.lua",
      "function Engine.forEachTarget(M, body)\n  local st, ad = M.st, M.adapter\n",

@@ -33,15 +33,16 @@ return function(mod, U, F)
     local id = require("src.core.game3.battle.effect_ids")[name]
     if id then NO_WIDEN[id] = true end
   end
-  function I.widen(M)
-    local move = M.move
-    if not (move and M.st and M.st.double and tonumber(move.target) == 0 and (tonumber(move.power) or 0) > 1) then return end
-    local name, _, secondary = I.held(M.user)
-    if name ~= "WIDE_GEM" then return end
+  function I.widens(user, move)
+    if not (move and tonumber(move.target) == 0 and (tonumber(move.power) or 0) > 1) then return false end
+    local name, _, secondary = I.held(user)
+    if name ~= "WIDE_GEM" then return false end
     local kind = tonumber(move.type) or T[tostring(move.type):upper()]
-    if T[tostring(secondary):gsub("^TYPE_", "")] ~= kind then return end
-    if NO_WIDEN[move.effect] or move.hits or move.campaignCharge then return end
-    move.target = 8
+    if T[tostring(secondary):gsub("^TYPE_", "")] ~= kind then return false end
+    return not (NO_WIDEN[move.effect] or move.hits or move.campaignCharge)
+  end
+  function I.widen(M)
+    if M.move and M.st and M.st.double and I.widens(M.user, M.move) then M.move.target = 8 end
   end
 
   function I.held(b)

@@ -23,6 +23,8 @@ Based on the Pokemon Gen 1 Recompilation Project by BOIS CLUB GAMES, LLC
 - **Wide Gems:** permanent held items for Fighting, Poison, Ghost, Steel and Dark. The
   holder's single-target attacks of that type hit both foes at spread damage.
   Sold at Lilycove Department Store.
+- **The move box shows who a move hits:** BOTH/ for both foes, ALL/ when it also hits
+  your ally.
 - **HM moves in the field** need only the HM and its badge: no Pokémon has to learn them.
   Fly and Flash appear on every Pokémon in the party menu.
 
