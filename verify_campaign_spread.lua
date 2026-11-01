@@ -101,4 +101,32 @@ local shown={}
 for _,seg in ipairs(vm:getText(key)) do if seg.s then shown[#shown+1]=seg.s end end
 T.check(table.concat(shown,' '):find('LOW SWEEP',1,true)~=nil,'Brawly names Low Sweep in the message box')
 T.check(table.concat(shown,' '):find('BULK UP',1,true)==nil,'Bulk Up is gone from his line')
+-- HM moves without knowing them
+local FM=require('src.core.game3.field_moves')
+local Runtime=require('src.core.game3.runtime')
+local Bag=require('src.core.game3.bag')
+local Flags=require('src.core.game3.scripting.flags')
+local party={F.mon('MEW',20,{'TACKLE'}),F.mon('MEW',20,{'TACKLE'})}
+party[1].isEgg=true
+local bag=Bag.new()
+local getSession=Runtime.getSession
+Runtime.getSession=function() return {bag=bag,party=party} end
+T.eq(FM.partyMoveUser(party,'SURF'),nil,'no HM, nobody surfs')
+Bag.add(bag,ids.ITEM_HM03_SURF,1)
+local who,slot=FM.partyMoveUser(party,'SURF')
+T.eq(who,party[2],'holding the HM, the first non-egg surfs')
+T.eq(slot,1,'its party slot')
+local store=Flags.newStore()
+local sctx={specialVars={},stringVars={}}
+local vmH={store=store,ctx=sctx}
+local function check(move)
+  ModRuntime.call('script.command',function() Flags.setVar(store,sctx,0x800D,6) return false end,{runner=vmH},'checkpartymove',{op='checkpartymove',move})
+  return Flags.getVar(store,sctx,0x800D)
+end
+T.eq(check(FM.MOVES.SURF),1,'scripts accept a held HM')
+T.eq(check(FM.MOVES.CUT),6,'scripts still refuse an HM not held')
+T.eq(#FM.campaignMenuMoves(party[2]),#party[2].moves,'no Fly or Flash in the menu without the HM')
+Bag.add(bag,ids.ITEM_HM02_FLY,1)
+T.eq(FM.campaignMenuMoves(party[2])[#party[2].moves+1],FM.MOVES.FLY,'Fly shows once the HM is held')
+Runtime.getSession=getSession
 T.finish('campaign spread moves and key gifts')

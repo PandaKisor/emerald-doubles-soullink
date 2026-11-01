@@ -343,6 +343,10 @@ LIB_PATCHES = (
      "  if ad:status(user) == \"FRZ\" and (M.effect == E.THAW_HIT or M.move.campaignThaw) then\n"),
     # versus battles with the co-op partner keep real levels (field.lua
     # LB.keepLevels), and show the partner as Brendan/May (LB.playerPic)
+    # HM moves without knowing them (campaign/hm_free.lua)
+    ("native/engine/src/ui/game3/party_menu.lua",
+     "      for _, m in ipairs(mon.moves) do\n        local mId = FieldMoves.normalizeMoveId(m)\n        local label\n",
+     "      for _, m in ipairs(FieldMoves.campaignMenuMoves and FieldMoves.campaignMenuMoves(mon) or mon.moves) do\n        local mId = FieldMoves.normalizeMoveId(m)\n        local label\n"),
     ("native/engine/src/core/game3/link/battle.lua",
      "  if not spec then return { strict = true, forceLevel = LB.LINK_LEVEL } end\n",
      "  if not spec then\n"

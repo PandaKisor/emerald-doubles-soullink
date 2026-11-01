@@ -45,6 +45,7 @@ return function(mod, active)
   local partnerNpcs = source("campaign/partner_npcs.lua")(mod, trainers, active)
   local world = source("campaign/item_world.lua")(mod, data, source("campaign/key_gifts.lua")(source("campaign/item_sources.lua")), active)
 
+  world.hmFree = source("campaign/hm_free.lua")(data, active)
   Content.install(Pokemon, data, active)
   local Art = source("full/species_art.lua")
   Art.install({ Pokemon = Pokemon, MonAnim = require("src.core.game3.mon_anim"),

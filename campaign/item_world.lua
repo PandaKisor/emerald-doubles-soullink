@@ -54,6 +54,11 @@ return function(mod, data, sources, active)
   local giftIr, romIr = {}, {}
   mod.hooks:wrap("script.command", function(next, ctx, op, row)
     local runner = ctx and ctx.runner
+    if op == "checkpartymove" and W.hmFree then
+      local done = next(ctx, op, row)
+      W.hmFree.script(ctx, row)
+      return done
+    end
     local line = op == "loadword" and row and sources.giftText and sources.giftText[row.value]
     if line and runner and runner.text then
       -- message boxes read the VM's text bundle

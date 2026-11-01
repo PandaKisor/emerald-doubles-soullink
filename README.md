@@ -20,6 +20,8 @@ Based on the Pokemon Gen 1 Recompilation Project by BOIS CLUB GAMES, LLC
   links, the fallen and your rules.
 - **Trainers** are hand-picked for doubles and use items, switch and focus fire.
   Hard fights have answers in the wild tables nearby.
+- **HM moves in the field** need only the HM and its badge: no Pokémon has to learn them.
+  Fly and Flash appear on every Pokémon in the party menu.
 
 Mega Evolution and Z-Moves are left out.
 
