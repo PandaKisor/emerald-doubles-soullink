@@ -74,7 +74,7 @@ return {
       { "GLAMEOW", 33, ability = "KEEN_EYE", nature = "JOLLY", item = "SILK_SCARF", moves = { "SWIFT", "COVET", "FEINT_ATTACK", "PROTECT" } },
       { "GURDURR", 33, ability = "GUTS", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "ROCK_SLIDE", "MACH_PUNCH", "LOW_SWEEP", "BULK_UP" } },
       { "SKITTY", 33, ability = "WONDER_SKIN", nature = "JOLLY", moves = { "COVET", "DISARMING_VOICE", "SING", "HELPING_HAND" } },
-      { "MACHOKE", 33, ability = "NO_GUARD", nature = "ADAMANT", item = "BLACK_BELT", moves = { "SUBMISSION", "LOW_SWEEP", "WAKE_UP_SLAP", "ROCK_TOMB" } },
+      { "MACHOKE", 33, ability = "NO_GUARD", nature = "ADAMANT", item = "BLACK_BELT", moves = { "SUBMISSION", "LOW_SWEEP", "VITAL_THROW", "ROCK_TOMB" } },
     } },
     ANNA_AND_MEG_3 = { party = {
       { "PURUGLY", 38, ability = "DEFIANT", nature = "JOLLY", item = "SILK_SCARF", moves = { "SLASH", "COVET", "FEINT_ATTACK", "PROTECT" } },
@@ -315,11 +315,11 @@ return {
       { "LOUDRED", 38, ability = "SOUNDPROOF", nature = "MODEST", item = "SITRUS_BERRY", moves = { "STOMP", "BITE", "PROTECT", "SUPERSONIC" } },
     } },
     DALTON_4 = { partner = "RM4_R118_REX", party = {
-      { "VESPIQUEN", 43, ability = "PRESSURE", nature = "JOLLY", moves = { "AIR_SLASH", "TAILWIND", "BUG_BUZZ", "GUST" } },
+      { "VESPIQUEN", 43, ability = "PRESSURE", nature = "JOLLY", moves = { "AIR_SLASH", "TAILWIND", "ATTACK_ORDER", "GUST" } },
       { "EXPLOUD", 43, ability = "SOUNDPROOF", nature = "MODEST", item = "SITRUS_BERRY", moves = { "HYPER_VOICE", "CRUNCH", "PROTECT", "SUPERSONIC" } },
     } },
     DALTON_5 = { partner = "RM5_R118_REX", party = {
-      { "VESPIQUEN", 48, ability = "PRESSURE", nature = "JOLLY", moves = { "AIR_SLASH", "TAILWIND", "BUG_BUZZ", "GUST" } },
+      { "VESPIQUEN", 48, ability = "PRESSURE", nature = "JOLLY", moves = { "AIR_SLASH", "TAILWIND", "ATTACK_ORDER", "GUST" } },
       { "EXPLOUD", 48, ability = "SOUNDPROOF", nature = "MODEST", item = "SITRUS_BERRY", moves = { "HYPER_VOICE", "CRUNCH", "PROTECT", "SUPERSONIC" } },
     } },
     DIANA_2 = { partner = "RM2_JP_BEL", party = {
@@ -540,7 +540,7 @@ return {
     } },
     GINA_AND_MIA_2 = { party = {
       { "PETILIL", 33, ability = "CHLOROPHYLL", nature = "TIMID", moves = { "LEECH_SEED", "FAIRY_WIND", "GIGA_DRAIN", "MAGICAL_LEAF" } },
-      { "FERROSEED", 33, ability = "IRON_BARBS", nature = "ADAMANT", item = "MIRACLE_SEED", moves = { "LEECH_SEED", "FLASH_CANNON", "TACKLE", "PROTECT" } },
+      { "FERROSEED", 33, ability = "IRON_BARBS", nature = "ADAMANT", item = "MIRACLE_SEED", moves = { "LEECH_SEED", "IRON_HEAD", "TACKLE", "PROTECT" } },
       { "LOMBRE", 33, ability = "SWIFT_SWIM", nature = "MODEST", moves = { "GIGA_DRAIN", "BUBBLE_BEAM", "PROTECT", "ASTONISH" } },
       { "NUZLEAF", 33, ability = "EARLY_BIRD", nature = "IMPISH", item = "SITRUS_BERRY", moves = { "ROLLOUT", "GROWTH", "LEAF_BLADE", "PROTECT" } },
     } },
@@ -586,7 +586,7 @@ return {
       { "SYLVEON", 48, ability = "CUTE_CHARM", nature = "JOLLY", item = "SILK_SCARF", moves = { "QUICK_ATTACK", "COVET", "HELPING_HAND", "PROTECT" } },
       { "SUDOWOODO", 48, ability = "STURDY", nature = "IMPISH", moves = { "STONE_EDGE", "LOW_KICK", "FAKE_TEARS", "FLAIL" } },
       { "GARCHOMP", 48, ability = "SAND_VEIL", nature = "ADAMANT", moves = { "DRAGON_CLAW", "TAKE_DOWN", "BULLDOZE", "PROTECT" } },
-      { "GENGAR", 48, ability = "CURSED_BODY", nature = "MODEST", item = "SITRUS_BERRY", moves = { "HEX", "CONFUSE_RAY", "DARK_PULSE", "SHADOW_BALL" } },
+      { "GENGAR", 48, ability = "CURSED_BODY", nature = "MODEST", item = "SITRUS_BERRY", moves = { "HEX", "CONFUSE_RAY", "DARK_PULSE", "SHADOW_PUNCH" } },
     } },
     ISABEL_2 = { partner = "RM2_R110_ANN", party = {
       { "PLUSLE", 33, ability = "PLUS", nature = "TIMID", moves = { "DISCHARGE", "SHOCK_WAVE", "HELPING_HAND", "ENCORE" } },
@@ -1017,7 +1017,7 @@ return {
       { "FLYGON", 55, ability = "LEVITATE", nature = "JOLLY", item = "SOFT_SAND", moves = { "EARTHQUAKE", "DRAGON_CLAW", "ROCK_SLIDE", "U_TURN" } },
     } },
     NOB_2 = { partner = "RM2_R115_KEN", party = {
-      { "MACHOKE", 33, ability = "GUTS", nature = "ADAMANT", item = "FLAME_ORB", moves = { "SUBMISSION", "WAKE_UP_SLAP", "ROCK_TOMB", "BULK_UP" } },
+      { "MACHOKE", 33, ability = "GUTS", nature = "ADAMANT", item = "FLAME_ORB", moves = { "SUBMISSION", "VITAL_THROW", "ROCK_TOMB", "BULK_UP" } },
       { "WOOBAT", 33, ability = "UNAWARE", nature = "TIMID", item = "SITRUS_BERRY", moves = { "PSYSHOCK", "AIR_CUTTER", "IMPRISON", "PROTECT" } },
     } },
     NOB_3 = { partner = "RM3_R115_KEN", party = {
@@ -2064,7 +2064,7 @@ return {
       { "WIGGLYTUFF", 43, ability = "FRISK", nature = "MODEST", item = "SITRUS_BERRY", moves = { "DISARMING_VOICE", "SING", "COVET", "DEFENSE_CURL" } },
     } },
     RM5_R109_KIM = { like = "LOLA_1", name = "KIM", defeat = "Let's go build sandcastles instead.", party = {
-      { "WALREIN", 48, ability = "THICK_FAT", nature = "MODEST", moves = { "WATER_PULSE", "AURORA_BEAM", "DEFENSE_CURL", "ENCORE" } },
+      { "WALREIN", 48, ability = "THICK_FAT", nature = "MODEST", moves = { "WATER_PULSE", "ICE_FANG", "DEFENSE_CURL", "ENCORE" } },
       { "WIGGLYTUFF", 48, ability = "FRISK", nature = "MODEST", item = "SITRUS_BERRY", moves = { "DISARMING_VOICE", "SING", "COVET", "DEFENSE_CURL" } },
     } },
     RM2_R114_BOB = { like = "LUCAS_1", name = "BOB", defeat = "Meteor shower of losses.", party = {
@@ -2372,19 +2372,19 @@ return {
       { "HAXORUS", 48, ability = "MOLD_BREAKER", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "DRAGON_PULSE", "CRUNCH", "ASSURANCE", "TAUNT" } },
     } },
     RM2_R104_ROSA = { like = "CINDY_1", name = "ROSA", defeat = "My, how unladylike of me to lose.", party = {
-      { "FERROSEED", 32, ability = "IRON_BARBS", nature = "ADAMANT", moves = { "LEECH_SEED", "FLASH_CANNON", "TACKLE", "PROTECT" } },
+      { "FERROSEED", 32, ability = "IRON_BARBS", nature = "ADAMANT", moves = { "LEECH_SEED", "IRON_HEAD", "TACKLE", "PROTECT" } },
       { "SHIINOTIC", 32, ability = "ILLUMINATE", nature = "BOLD", item = "SITRUS_BERRY", moves = { "LEECH_SEED", "GIGA_DRAIN", "ASTONISH", "FLASH" } },
     } },
     RM3_R104_ROSA = { like = "CINDY_1", name = "ROSA", defeat = "My, how unladylike of me to lose.", party = {
-      { "FERROSEED", 37, ability = "IRON_BARBS", nature = "ADAMANT", moves = { "LEECH_SEED", "FLASH_CANNON", "TACKLE", "PROTECT" } },
+      { "FERROSEED", 37, ability = "IRON_BARBS", nature = "ADAMANT", moves = { "LEECH_SEED", "IRON_HEAD", "TACKLE", "PROTECT" } },
       { "SHIINOTIC", 37, ability = "ILLUMINATE", nature = "BOLD", item = "SITRUS_BERRY", moves = { "LEECH_SEED", "GIGA_DRAIN", "ASTONISH", "FLASH" } },
     } },
     RM4_R104_ROSA = { like = "CINDY_1", name = "ROSA", defeat = "My, how unladylike of me to lose.", party = {
-      { "FERROTHORN", 42, ability = "IRON_BARBS", nature = "ADAMANT", moves = { "LEECH_SEED", "FLASH_CANNON", "ROCK_CLIMB", "PROTECT" } },
+      { "FERROTHORN", 42, ability = "IRON_BARBS", nature = "ADAMANT", moves = { "LEECH_SEED", "IRON_HEAD", "ROCK_CLIMB", "PROTECT" } },
       { "SHIINOTIC", 42, ability = "ILLUMINATE", nature = "BOLD", item = "SITRUS_BERRY", moves = { "LEECH_SEED", "GIGA_DRAIN", "ASTONISH", "FLASH" } },
     } },
     RM5_R104_ROSA = { like = "CINDY_1", name = "ROSA", defeat = "My, how unladylike of me to lose.", party = {
-      { "FERROTHORN", 47, ability = "IRON_BARBS", nature = "ADAMANT", moves = { "LEECH_SEED", "FLASH_CANNON", "ROCK_CLIMB", "PROTECT" } },
+      { "FERROTHORN", 47, ability = "IRON_BARBS", nature = "ADAMANT", moves = { "LEECH_SEED", "IRON_HEAD", "ROCK_CLIMB", "PROTECT" } },
       { "SHIINOTIC", 47, ability = "ILLUMINATE", nature = "BOLD", item = "SITRUS_BERRY", moves = { "LEECH_SEED", "GIGA_DRAIN", "ASTONISH", "FLASH" } },
     } },
   },
