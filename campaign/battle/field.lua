@@ -573,7 +573,6 @@ return function(mod, U, active)
     end
     return push(text, ...)
   end
-  function F.resetSwaps() pendingSwaps = {} end
   local BattleMod = require("src.core.game3.battle")
   local battleReset = BattleMod.reset
   BattleMod.reset = function(...)

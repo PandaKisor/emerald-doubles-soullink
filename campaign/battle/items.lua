@@ -476,7 +476,6 @@ return function(mod, U, F)
     return next(c)
   end)
   function I.drainBoost(b) return has(b, "BIG_ROOT") and 1.3 or 1 end
-  function I.trapTurns(b) return has(b, "GRIP_CLAW") and 7 or nil end
   function I.blocksStatus(b) return has(b, "ASSAULT_VEST") end
   function I.powderImmune(b) return has(b, "SAFETY_GOGGLES") end
   function I.hazardImmune(b) return has(b, "HEAVY_DUTY_BOOTS") end

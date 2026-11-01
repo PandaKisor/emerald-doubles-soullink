@@ -8,6 +8,21 @@ Pokémon (Gen 4 to 7), moves, abilities and items.
 Based on the Pokemon Gen 1 Recompilation Project by BOIS CLUB GAMES, LLC
 (https://github.com/bryanthaboi/gen1recomp).
 
+## How it plays
+
+- **Every battle is a double**, wild ones included, solo or with a partner.
+- **Co-op:** you and a partner share the world, fight story battles together and
+  each keep your own team. You can also play alone; story fights only wait for a
+  partner while co-op is on.
+- **Soul Link:** one encounter per area, and each of your catches is linked to your
+  partner's. When one falls, so does the other.
+- **Level caps:** the cap is the ace of the next big fight. **F7** shows it, your
+  links, the fallen and your rules.
+- **Trainers** are hand-picked for doubles and use items, switch and focus fire.
+  Hard fights have answers in the wild tables nearby.
+
+Mega Evolution and Z-Moves are left out.
+
 ## Install
 
 You need Gen1Recomp 0.3.73 with your own Emerald ROM already imported.
@@ -22,89 +37,61 @@ You need Gen1Recomp 0.3.73 with your own Emerald ROM already imported.
 
 ## Updating
 
-Each release has a new cart. Download it and import it over the old one, then
-press **Install required mods** again. Your save carries over. Both players
-must be on the same release to play together.
+Each release has a new cart. Import it over the old one, then press **Install
+required mods** again. Both players must be on the same release to play together.
+Saves usually carry over; when a release needs a new game, its notes say so.
 
-## Additional mods
+## Playing together
 
-The cart is **open**: enable other Emerald/Gen 3 mods in the launcher's
-**MODS** screen and they load after the campaign and co-op mods. You do not
-need to break the cart's seal or add them to its manifest. Gen 1-only mods
-still need Gen 3 support, and compatibility depends on the individual mod.
-Both co-op players should use matching gameplay mods.
+One player hosts and the other joins by address (direct connection, port 7777 by
+default). Set it up from **START > CO-OP**. Soul Link and level caps start on; each
+player can change their rules in **F7 > RULES**.
 
-## Co-op
+## START > TOOLS
 
-One player hosts and the other joins by address (direct connection, port 7777
-by default). Set it up in game from **START > CO-OP**. Soul Link and level caps
-start on; each player can change their rules in **F7 > RULES**.
+- **RARE CANDY:** a reusable candy that stops at the level cap. It keeps the normal
+  move-learning and evolution prompts.
+- **REPEL:** an unlimited toggle. Wild Pokémon below your first healthy Pokémon's
+  level stay away. Save to keep your choice.
+- **HEAL TEAM:** restores HP, status and PP for free. With hard rules on, dead
+  Pokémon stay excluded.
+- **RELEARN MOVE:** free and unlimited.
+- **IV / EV:** shows IVs, EVs, nature and Hidden Power type. UP/DOWN picks a stat, LEFT/RIGHT takes or adds 4, A fills or clears
+  it, and L/R changes Pokémon.
+- **GUIDE SYNC:** writes your progress for the field guide (it also happens on every save).
+- **MOVE ANIMS:** a practice battle for viewing move animations.
 
-## Leveling without grinding
+The starter counts as Littleroot Town's Soul Link encounter. Birch's rescue battle,
+Norman's borrowed Zigzagoon and Wally's catching tutorial use no encounters.
 
-Choose **START > RARE CANDY** to receive a reusable Rare Candy and pick a
-Pokémon. It also works from **BAG > MEDICINE**, never runs out when used,
-and keeps the normal move-learning and evolution prompts. With level caps
-on, it stops at the current cap; turn caps off in **F7 > RULES** to level
-up to 100. Existing saves can use it immediately.
+## Field guide
 
-**START > REPEL: OFF/ON** toggles unlimited Repel for this save. While on,
-wild Pokémon below your first healthy Pokémon's level are repelled, without
-using items or running out of steps. Save the game to keep your choice.
-The starter counts as Littleroot Town's Soul Link encounter, including in
-existing run records, so it does not use Route 101's encounter.
+`emerald-field-guide-<version>.html`, attached to each release, is a self-contained
+companion: open it in a modern browser and send the same file to your partner.
 
-**START > TOOLS > IV / EV** shows each party member's IVs, EVs, nature and Hidden
-Power type, and lets you set its EVs directly: UP/DOWN picks a stat, LEFT/RIGHT
-takes or adds 4, A fills it (252 at most, 510 in all) or clears it, and L/R
-flips through the party. Stats update at once.
+- **Route guide:** the story in nine chapters, one per level cap, with each stop's
+  trainers, wild tables and items. Spoilers stay hidden until you reach them.
+- **Load game:** reads your guide sync for badges, beaten trainers, both teams and
+  your Soul Link log.
+- **Battle plans:** your two teams against any trainer, with damage, KOs, spread
+  hits and speed order.
+- **Pokédex, search and calculator**, plus notes you can export and share.
 
-**START > HEAL TEAM** restores your entire party's HP, status and PP for free.
-With Soul Link hard rules on, dead or disallowed Pokémon remain excluded.
-Birch's rescue battle and Norman's borrowed Zigzagoon/Wally's catching tutorial
-do not consume encounters. Recognizable old tutorial records are excluded from
-the run view too; real wild encounters and real faint history remain intact.
+## Other mods
 
-## Offline field guide
+The cart is **open**: enable other Emerald/Gen 3 mods in the launcher's **MODS**
+screen and they load after the campaign and co-op mods. Compatibility depends on
+the mod, and both co-op players should use matching gameplay mods.
 
-`emerald-field-guide-<version>.html` (attached to each GitHub release) is a
-self-contained companion: open it in any modern browser and send the same file
-to your partner. It has:
+## Building
 
-- **Route guide:** vanilla Emerald's story in nine chapters, one per level cap.
-  Each stop lists its trainers (with tag partners and Pokémon icons), wild
-  tables and items; rival cards follow your starter. Tick stops off as you go.
-- **Trainers, wild Pokémon and items:** searchable, with badge-dependent shop stock.
-- **Damage calculator:** load any trainer's Pokémon into either slot.
-- **Our plan:** your own stops with both players' planned encounters; export and
-  import a plan file to share it.
+`python3 build_campaign.py` builds the mod; `--release` adds the zips, the cart and
+the field guide. Building needs inputs that aren't in this repo yet: the stock
+0.3.73 engine tree, the expanded port's generated data (linked under
+`porting/inputs/`) and the donor hack's pokeemerald-1.13 source. The `verify_*.lua`
+suites run headless from the engine tree with luajit.
 
-`python3 build_campaign.py --release` rebuilds and verifies the guide with every
-release. By hand, after building the campaign:
-
-```sh
-python3 tools/handbook/export.py
-(cd ../../gen1recomp-0.3.73 && luajit ../porting/native/tools/handbook/damage_reference.lua)
-python3 tools/handbook/build.py
-node tools/handbook/verify.js
-python3 tools/handbook/browser_smoke.py   # Firefox, screenshots in generated/handbook/browser/
-```
-
-The route guide's chapters live in `tools/handbook/route_guide.py`; the icons
-come from the donor hack's party icons (`tools/handbook/icons.py`).
-
-## What's in this repo
-
-The campaign mod's source: `build_campaign.py` (builds the mod, the release
-zips and the cart), `campaign/` (content, battle effects, trainer teams, AI),
-`tools/` (generators for trainer teams, items and the cart label) and the
-headless `verify_*.lua` suites.
-
-Building needs inputs that aren't in this repo: the stock 0.3.73 engine tree,
-the expanded port's generated data (linked under `porting/inputs/`) and the
-donor hack's pokeemerald-1.13 source.
-No ROM or ROM data is included; the game reads its maps and story from your
-own ROM.
+No ROM or ROM data is included; the game reads its maps and story from your own ROM.
 
 ## Credits
 

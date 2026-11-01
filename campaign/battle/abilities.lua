@@ -107,10 +107,6 @@ return function(mod, U, F)
     for _, b in ipairs(U.all(ad)) do if key(ad, b) == name then return b end end
     return nil
   end
-  local function foeHas(ad, b, name)
-    for _, f in ipairs(U.foes(ad, b)) do if key(ad, f) == name then return f end end
-    return nil
-  end
   A.onSide, A.onField = onSide, onField
   local function say(ad, text) ad:say(text) end
   local function nm(ad, b) return U.name(ad, b) end
@@ -378,8 +374,6 @@ return function(mod, U, F)
     TOXIC_BOOST = function(c) return (c.status == "PSN" or c.status == "TOX") and physical(c.move) and 1.5 end,
     RECKLESS = function(c) return flag(c.move, "FLAG_RECKLESS_BOOST") and 1.2 end,
     IRON_FIST = function(c) return flag(c.move, "FLAG_IRON_FIST_BOOST") and 1.2 end,
-    POWER_FISTS = function(c) return flag(c.move, "FLAG_IRON_FIST_BOOST") and 1.2 end,
-    KEEN_EDGE = function(c) return flag(c.move, "FLAG_KEEN_EDGE_BOOST") and 1.3 end,
     SHEER_FORCE = function(c) return flag(c.move, "FLAG_SHEER_FORCE_BOOST") and 1.3 end,
     SAND_FORCE = function(c)
       return (c.type == T.STEEL or c.type == T.ROCK or c.type == T.GROUND) and weather(c.ad) == "SAND" and 1.3
@@ -640,10 +634,6 @@ return function(mod, U, F)
 
   -- indirect damage: Magic Guard ----------------------------------------------------------
   function A.magicGuard(ad, b) return F.active() and b ~= nil and key(ad, b) == "MAGIC_GUARD" end
-  function A.noRecoil(ad, b)
-    local k = key(ad, b)
-    return k == "ROCK_HEAD" or k == "MAGIC_GUARD"
-  end
   local set = Secondary.set
   local corrode
   Secondary.set = function(M, eff, ...)
