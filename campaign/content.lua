@@ -79,7 +79,8 @@ return function(mod, active)
   local candy = source("campaign/candy.lua")(mod, data, restoratives, active)
   local repel = source("campaign/repel.lua")(mod, active)
   local heal = source("campaign/heal.lua")(mod, active)
-  local partyTools = source("campaign/party_tools.lua")(mod, active)
+  local partyTools = source("campaign/party_tools.lua")(mod, active, data,
+    { source("full/restoratives/model.lua").rules, source("full/evolution-items/model.lua").rules })
   local starterKit = source("campaign/starter_kit.lua")(mod, data, active)
   local guideSync = source("campaign/guide_sync.lua")(mod, active)
   local newGame = source("campaign/new_game.lua")(mod, active)
@@ -88,6 +89,7 @@ return function(mod, active)
   local startTools = source("campaign/start_tools.lua")(mod, active)
   source("full/tutors.lua").install({ Pokemon = Pokemon,
     MoveLearn = require("src.core.game3.move_learn") }, data, active)
+  partyTools.installEggRelearn()
   source("full/inventory_ui.lua").install({ ItemsData = require("src.core.game3.items_data"),
     SummaryData = require("src.core.game3.summary_data"),
     Pokemon = Pokemon, BagChrome = require("src.ui.game3.rse.bag_chrome") },

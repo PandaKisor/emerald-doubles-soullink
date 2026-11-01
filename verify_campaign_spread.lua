@@ -181,4 +181,19 @@ T.eq(#FM.campaignMenuMoves(party[2]),#party[2].moves,'no Fly or Flash in the men
 Bag.add(bag,ids.ITEM_HM02_FLY,1)
 T.eq(FM.campaignMenuMoves(party[2])[#party[2].moves+1],FM.MOVES.FLY,'Fly shows once the HM is held')
 Runtime.getSession=getSession
+-- RELEARN MOVE offers the line's egg moves
+do
+  local ML=require('src.core.game3.move_learn')
+  local function has(list,n) for _,m in ipairs(list) do if m==n then return true end end return false end
+  local egg=F.data.species[277].eggMoves[1]
+  T.check(egg~=nil,'Treecko has egg moves')
+  local g=F.mon('GROVYLE',20,{'POUND'})
+  T.check(has(ML.relearnableMoves(g),egg),'Grovyle can relearn Treecko\'s egg move')
+  local known=F.mon('GROVYLE',20,{'POUND'})
+  known.moves[2]=egg
+  T.check(not has(ML.relearnableMoves(known),egg),'a known egg move isn\'t offered')
+  local cnt={}
+  for _,m in ipairs(ML.relearnableMoves(g)) do cnt[m]=(cnt[m] or 0)+1; T.check(cnt[m]==1,'no duplicate relearn entries') end
+  T.check(F.campaign.partyTools~=nil,'party tools installed')
+end
 T.finish('campaign spread moves and key gifts')

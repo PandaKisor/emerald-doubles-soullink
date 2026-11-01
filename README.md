@@ -62,7 +62,7 @@ player can change their rules in **F7 > RULES**.
   level stay away. Save to keep your choice.
 - **HEAL TEAM:** restores HP, status and PP for free. With hard rules on, dead
   Pokémon stay excluded.
-- **RELEARN MOVE:** free and unlimited.
+- **RELEARN MOVE:** free and unlimited, and it includes egg moves.
 - **IV / EV:** shows IVs, EVs, nature and Hidden Power type. UP/DOWN picks a stat, LEFT/RIGHT takes or adds 4, A fills or clears
   it, and L/R changes Pokémon.
 - **GUIDE SYNC:** writes your progress for the field guide (it also happens on every save).

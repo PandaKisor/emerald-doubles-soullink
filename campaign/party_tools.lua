@@ -5,11 +5,51 @@
 -- trainers are EV trained, grinding them isn't fun): UP/DOWN picks a stat,
 -- LEFT/RIGHT takes or adds 4, A fills it (up to 252, within 510 in all) or
 -- clears it. Stats are recalculated at once; HP keeps its damage.
-return function(mod, active)
+-- RELEARN MOVE also offers the egg moves of the Pokémon's line.
+return function(mod, active, data, evolutions)
   local Runtime = require("src.core.game3.runtime")
   local Pokemon = require("src.core.game3.pokemon")
   local MoveLearn = require("src.core.game3.move_learn")
   local P = {}
+
+  -- species -> what it evolves from, by the evolution rules
+  local pre = {}
+  for _, rules in ipairs(evolutions or {}) do
+    for from, rows in pairs(rules) do
+      for _, row in ipairs(rows) do
+        local to = type(row) == "table" and tonumber(row.target or row.species)
+        if to and not pre[to] then pre[to] = tonumber(from) end
+      end
+    end
+  end
+  -- egg moves of this species and everything before it, not yet known
+  function P.eggMoves(mon)
+    local out, seen = {}, {}
+    for _, m in ipairs(mon.moves or {}) do seen[tonumber(type(m) == "table" and (m.id or m.move) or m) or 0] = true end
+    local species, guard = Pokemon.speciesOf(mon), 0
+    while species and guard < 4 do
+      local row = data and data.species[species]
+      for _, move in ipairs(row and row.eggMoves or {}) do
+        if not seen[move] then seen[move] = true; out[#out + 1] = move end
+      end
+      species, guard = pre[species], guard + 1
+    end
+    return out
+  end
+  -- content.lua calls this after full/tutors.lua, which replaces the same function
+  function P.installEggRelearn()
+    local relearnable = MoveLearn.relearnableMoves
+    function MoveLearn.relearnableMoves(mon, ...)
+      local moves = relearnable(mon, ...)
+      if not (mon and active()) then return moves end
+      local have = {}
+      for _, m in ipairs(moves) do have[m] = true end
+      for _, m in ipairs(P.eggMoves(mon)) do
+        if not have[m] then moves[#moves + 1] = m end
+      end
+      return moves
+    end
+  end
 
   local NATURES = { "HARDY", "LONELY", "BRAVE", "ADAMANT", "NAUGHTY", "BOLD", "DOCILE", "RELAXED", "IMPISH", "LAX",
     "TIMID", "HASTY", "SERIOUS", "JOLLY", "NAIVE", "MODEST", "MILD", "QUIET", "BASHFUL", "RASH",
