@@ -5,7 +5,7 @@ return function(mod, active)
   local R = {}
   function R.open(game, session)
     if not active() then return end
-    require("src.ui.game3.start_menu").close(true)
+    -- START stays open under it, so B comes back to TOOLS
     require("src.ui.game3.pc_menu").show({
       session = session or require("src.core.game3.runtime").getSession(),
       startMode = "storage", closeOnExit = true, silentClose = true,

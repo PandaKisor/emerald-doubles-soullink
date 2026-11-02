@@ -26,9 +26,9 @@ CAMPAIGN = HERE / "campaign"
 
 MOD_ID = "g3_campaign"
 TITLE = "Emerald Doubles Soul Link"
-VERSION = "0.43.18"
+VERSION = "0.43.19"
 CART_ID = "emerald_doubles_soullink"
-COOP_ID, COOP_VERSION = "g3_coop", "0.8.20"
+COOP_ID, COOP_VERSION = "g3_coop", "0.8.21"
 # GitHub repos the launcher checks for updates and the release cart downloads from
 REPO, COOP_REPO = "PandaKisor/emerald-doubles-soullink", "PandaKisor/g3-coop"
 COOP_SRC = GEN3 / "coop/g3_coop"
@@ -140,6 +140,10 @@ STOCK_PATCHES = {
          "local Pokedex = {}\n-- rows the list can hold: the campaign's species run past 386\nlocal MAX_ROWS = 1024\n"),
         ("  if i < 0 or i >= 386 then return NONE end", "  if i < 0 or i >= MAX_ROWS then return NONE end"),
         ("  if entryNum < 0 or entryNum >= 386 then", "  if entryNum < 0 or entryNum >= MAX_ROWS then"),
+        # (user, 2026-11-02) a seen entry shows its text, category, height and
+        # weight too: in a Soul Link run most species are seen, never caught
+        ("    info.text = monInfo(s, info.dexNum, s.dexMode ~= List.DEX_MODE_HOENN, info.owned, false)",
+         "    info.text = monInfo(s, info.dexNum, s.dexMode ~= List.DEX_MODE_HOENN, true, false)"),
     ),
 }
 

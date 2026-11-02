@@ -92,7 +92,7 @@ return function(mod, active, data, evolutions)
     if not active() then return end
     local s, mons = party(session)
     if not (mons and #mons > 0) then return end
-    require("src.ui.game3.start_menu").close(true)
+    -- START stays open under it, so B comes back to TOOLS
     local PartyMenu = require("src.ui.game3.party_menu")
     PartyMenu.show(mons, s.moveOverlay, {
       session = s, mode = "choose",
@@ -281,7 +281,7 @@ return function(mod, active, data, evolutions)
     if not active() then return end
     local s, mons = party(session)
     if not (mons and #mons > 0) then return end
-    require("src.ui.game3.start_menu").close(true)
+    -- START stays open under it, so B comes back to TOOLS
     Screen.show(s, 1)
   end
   P.screen = Screen

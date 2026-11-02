@@ -32,8 +32,8 @@ return function(mod, data, restoratives, active)
     if not active() then return end
     session = session or Runtime.getSession()
     if not (session and session.party and #session.party > 0) then return end
-    require("src.ui.game3.start_menu").close(true)
     if not C.grant(session) then
+      require("src.ui.game3.start_menu").close(true)
       require("src.ui.game3.message").show("Make room in your MEDICINE pocket\nfor a reusable RARE CANDY.")
       return
     end

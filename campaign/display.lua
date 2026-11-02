@@ -340,17 +340,23 @@ return function(mod, active)
   local DOT = { linked = { 0.25, 0.72, 0.35 }, fallen = { 0.82, 0.22, 0.2 }, none = { 0.55, 0.57, 0.6 } }
   local PartyMenu = require("src.ui.game3.party_menu")
   local partyDraw = PartyMenu.draw
+  -- the dot's spot in each slot window: the single layout, and the doubles
+  -- one the battle's party screen uses (two big slots on the left)
   local SLOTS = { { 76, 28 }, { 230, 11 }, { 230, 35 }, { 230, 59 }, { 230, 83 }, { 230, 107 } }
+  local SLOTS_DOUBLE = { { 76, 12 }, { 76, 68 }, { 230, 11 }, { 230, 43 }, { 230, 75 }, { 230, 107 } }
+  -- only while choosing: the action menu, messages and YES/NO sit over the slots
+  local DOT_MODES = { list = true, switch = true, use = true, give = true, choose = true,
+    choose_multi = true, move_tutor = true }
   PartyMenu.draw = function(...)
     partyDraw(...)
-    if not (active() and PartyMenu.open and PartyMenu.mode ~= "summary" and game and love and love.graphics) then return end
+    if not (active() and PartyMenu.open and DOT_MODES[PartyMenu.mode] and game and love and love.graphics) then return end
     local Sm = package.loaded["src.ui.game3.summary_menu"]
     if Sm and Sm.isOpen and Sm.isOpen() then return end
     local ex = game.mods and game.mods.exports and game.mods.exports.g3_coop
     local state = ex and ex.coopLinkState
     local party = PartyMenu._party or (PartyMenu._session and PartyMenu._session.party)
     if not (state and party) then return end
-    for i, xy in ipairs(SLOTS) do
+    for i, xy in ipairs(PartyMenu._layout == "double" and SLOTS_DOUBLE or SLOTS) do
       local mon = party[i]
       if mon then
         local c = DOT[state(mon) or "none"]
@@ -361,6 +367,24 @@ return function(mod, active)
       end
     end
     love.graphics.setColor(1, 1, 1, 1)
+  end
+
+  -- the panel is 8 pixels shorter, so your side comes down to meet it: your
+  -- health boxes, and the Pokémon whose feet stopped short of the panel
+  -- (doubles' right one already stands on it). Animations aim at the same
+  -- coordinates, so they follow. The campaign cart only loads this mod.
+  do
+    local HB = require("src.core.game3.battle.healthbox")
+    local AC = require("src.core.game3.battle.anim_coords")
+    if not HB._campaignLowered then
+      HB._campaignLowered = true
+      local function down(p, by) if p then p.y = p.y + by; if p[2] then p[2] = p.y end end end
+      down(HB.PLAYER_CENTER, SLIM)
+      down(HB.CENTERS[true][0], SLIM)
+      down(HB.CENTERS[true][2], SLIM)
+      down(AC.SINGLES[0], SLIM)
+      down(AC.DOUBLES[0], SLIM)
+    end
   end
 
   local Healthbox = require("src.core.game3.battle.healthbox")
