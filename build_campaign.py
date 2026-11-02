@@ -26,7 +26,7 @@ CAMPAIGN = HERE / "campaign"
 
 MOD_ID = "g3_campaign"
 TITLE = "Emerald Doubles Soul Link"
-VERSION = "0.43.7"
+VERSION = "0.43.8"
 CART_ID = "emerald_doubles_soullink"
 COOP_ID, COOP_VERSION = "g3_coop", "0.8.16"
 # GitHub repos the launcher checks for updates and the release cart downloads from
@@ -361,6 +361,13 @@ LIB_PATCHES = (
      "      if tt == MT.BOTH then typeLabel = \"BOTH/\" elseif tt == MT.FOES_AND_ALLY then typeLabel = \"ALL/\" end\n"
      "    end\n"
      "    rse_text(W.MOVE_TYPE, typeLabel)\n"),
+    # choosing who a ball goes at: a plain prompt, not the move list
+    ("native/engine/src/core/game3/battle/ui.lua",
+     "  local panelMode = \"none\"\n  if Ui._mode == \"menu\" then\n    panelMode = \"menu\"\n  elseif Ui._mode == \"moves\" or Ui._mode == \"target\" then\n    panelMode = \"moves\"\n  end\n",
+     "  local panelMode = \"none\"\n  local ballTarget = Ui._mode == \"target\" and Ui._target and Ui._target.ball\n  if Ui._mode == \"menu\" then\n    panelMode = \"menu\"\n  elseif (Ui._mode == \"moves\" or Ui._mode == \"target\") and not ballTarget then\n    panelMode = \"moves\"\n  end\n"),
+    ("native/engine/src/core/game3/battle/ui.lua",
+     "  if Ui._mode == \"menu\" then\n    draw_action_menu(st)\n  elseif Ui._mode == \"moves\" or Ui._mode == \"target\" then\n    draw_move_menu(st)\n  end\n",
+     "  if ballTarget then\n    local px, py = BattleChrome.textOrigin(BattleChrome.WIN.ACTION_PROMPT)\n    battle_font().draw(\"Throw the ball\\nat which one?\", px, py, { colors = BattleChrome.textboxColors(1, 6) })\n  elseif Ui._mode == \"menu\" then\n    draw_action_menu(st)\n  elseif Ui._mode == \"moves\" or Ui._mode == \"target\" then\n    draw_move_menu(st)\n  end\n"),
     # Wide Gems: this use of the move hits both foes (campaign/battle/items.lua)
     ("native/engine/src/core/game3/battle/engine.lua",
      "function Engine.forEachTarget(M, body)\n  local st, ad = M.st, M.adapter\n",
