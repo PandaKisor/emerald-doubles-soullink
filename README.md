@@ -32,7 +32,7 @@ Based on the Pokemon Gen 1 Recompilation Project by BOIS CLUB GAMES, LLC
   F6 or SELECT sends a quick line such as "Focus Torchic" or "I'll Protect".
 - **Dropped connections:** a shared battle waits up to a minute for your partner and carries on
   where it stopped. If they don't return, you can continue alone or end it.
-- **Look:** START > TOOLS > LOOK or F9 switches between OFF, SOFT and LCD.
+- **Look:** START > TOOLS > LOOK or F9 switches between OFF, VIVID and LCD.
 - **Pledges and Round:** two different Pledges on one side merge into a 150-power attack with a
   four-turn effect; starter lines get them from RELEARN MOVE after two badges. Round brings an
   ally's Round straight after it, at double power.

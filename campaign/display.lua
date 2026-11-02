@@ -1,7 +1,7 @@
 -- The campaign's look (user, 2026-11-02). Close to the original screens, a
 -- little cleaner:
---   * an optional display mode, a shader over the finished frame: SOFT lifts
---     colour and depth, LCD adds a faint pixel grid. F9 or TOOLS > LOOK cycles it,
+--   * an optional display mode, a shader over the game's picture that never
+--     dims it: VIVID boosts colour with a soft glow, LCD adds a pixel grid. F9 or TOOLS > LOOK cycles it,
 --     and it's off by default. Purely visual, so linked games needn't match.
 --   * your HP as numbers while you choose in a double, the bar while the turn
 --     plays (the same swap START does in Gen 3, made automatic; START still
@@ -9,28 +9,41 @@
 return function(mod, active)
   local D = {}
   local SHADER = [[
-    extern float grid;
-    extern vec2 size;
-    extern float cell;
-    vec4 effect(vec4 color, Image tex, vec2 tc, vec2 sc) {
-      vec3 c = Texel(tex, tc).rgb;
+    extern float grid;      // 0 for VIVID, 1 for LCD
+    extern vec2 texel;      // one canvas pixel in texture units
+    extern vec2 origin;     // the game's picture starts here, in window pixels
+    extern float cell;      // one game pixel, in window pixels
+    vec3 grade(vec3 c) {
       float l = dot(c, vec3(0.299, 0.587, 0.114));
-      c = mix(vec3(l), c, 1.12);                        // a little more colour
-      c = pow(max(c, vec3(0.0)), vec3(0.94));           // lift the shadows
-      c = (c - 0.5) * 1.05 + 0.5;
-      vec2 p = (tc * size) / cell;
-      vec2 f = abs(fract(p) - 0.5) * 2.0;
-      float line = smoothstep(0.72, 1.0, max(f.x, f.y));
-      c *= 1.0 - grid * line;
-      vec2 v = tc - 0.5;
-      c *= 1.0 - dot(v, v) * 0.22;                      // the faintest vignette
+      c = mix(vec3(l), c, 1.16);                      // colour, without pushing it neon
+      return clamp(c, 0.0, 1.0);
+    }
+    vec4 effect(vec4 color, Image tex, vec2 tc, vec2 sc) {
+      vec3 src = Texel(tex, tc).rgb;
+      vec3 c = grade(src);
+      // a soft glow from the bright parts around this pixel
+      vec3 glow = vec3(0.0);
+      float r = cell * 1.5;
+      for (int i = 0; i < 8; i++) {
+        float a = float(i) * 0.7854;
+        vec3 s = Texel(tex, tc + vec2(cos(a), sin(a)) * r * texel).rgb;
+        glow += max(s - 0.75, vec3(0.0));
+      }
+      c += glow / 8.0 * 0.12;
+      if (grid > 0.5) {
+        // each game pixel keeps a thin dark edge, and the rest is lifted to pay for it
+        vec2 p = fract((sc - origin) / cell);
+        vec2 e = smoothstep(0.0, 0.16, p) * (1.0 - smoothstep(0.84, 1.0, p));
+        float m = mix(0.80, 1.0, e.x * e.y);
+        c = pow(max(c, vec3(0.0)), vec3(0.92)) * m * 1.05;
+      }
       return vec4(clamp(c, 0.0, 1.0), 1.0) * color;
     }
   ]]
   local shader, failed
 
-  -- OFF, SOFT, LCD; saved for this game
-  D.LEVELS = { "OFF", "SOFT", "LCD" }
+  -- OFF, VIVID, LCD; saved for this game
+  D.LEVELS = { "OFF", "VIVID", "LCD" }
   D.level = 0
   local game
   local function load()
@@ -60,10 +73,12 @@ return function(mod, active)
   mod.hooks:wrap("render.output", function(next, ctx)
     if not (active() and D.level > 0 and ctx and ctx.canvas) or not compile() then return next(ctx) end
     local g = love.graphics
-    local w, h = ctx.canvas:getDimensions()
-    shader:send("grid", D.level >= 2 and 0.10 or 0)
-    shader:send("size", { w, h })
-    shader:send("cell", math.max(2, tonumber(ctx.scale) or 4))
+    local w, h = ctx.canvas:getPixelDimensions()
+    local dx, dy = tonumber(ctx.dpiX) or 1, tonumber(ctx.dpiY) or 1
+    shader:send("grid", D.level >= 2 and 1 or 0)
+    shader:send("texel", { 1 / w, 1 / h })
+    shader:send("origin", { (ctx.gameX or 0) * dx, (ctx.gameY or 0) * dy })
+    shader:send("cell", math.max(1, (tonumber(ctx.scale) or 4) * dx))
     g.push("all")
     g.setShader(shader)
     g.setColor(1, 1, 1, 1)
