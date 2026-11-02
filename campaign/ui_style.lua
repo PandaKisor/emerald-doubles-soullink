@@ -11,6 +11,7 @@
 -- passes come after. Purely visual, so linked games needn't match.
 return function(mod, active)
   local S = {}
+  local game -- the Game3 owner, from input.step
   local function hex(h, a)
     return { math.floor(h / 65536) / 255, math.floor(h / 256) % 256 / 255, h % 256 / 255, a or 1 }
   end
@@ -228,6 +229,88 @@ return function(mod, active)
       love.graphics.setColor(1, 1, 1, 1)
     end
   end
+
+  -- ------------------------------------------------- screens as windows
+  -- (user, 2026-11-02) The party, bag, Pokédex, summary, PC, options, MODS
+  -- and the rest open as a window over the field instead of covering it:
+  -- the field keeps drawing, the screen draws into its own 240x160 canvas,
+  -- and that is shown one whole step smaller than the game (3x in a 4x
+  -- window), so its pixels stay square and the overworld shows around it.
+  -- Only in the field, and only where the window is 3x or more.
+  local Stack = require("src.ui.game3.stack")
+  S.WINDOWED = { party = true, summary = true, bag = true, pokedex = true, rse_pokedex = true,
+    mod_manager = true, option = true, trainer = true, box_storage = true, item_pc = true,
+    move_relearner = true, controls = true, berry_pouch = true, tm_case = true, naming = true }
+  local view = { scale = 0, at = 0 }
+  local canvas, drawn = nil, false
+  local stackFull = Stack.fullscreen
+  local function windowed()
+    if not active() or (view.scale or 0) < 3 then return false end
+    local B = package.loaded["src.core.game3.battle"]
+    if B and B.isActive and B.isActive() then return false end
+    if not (game and game.phase == "field") then return false end
+    local any = false
+    for _, layer in ipairs(Stack.drawOrder()) do
+      local f = layer.fullscreen
+      if type(f) == "function" then f = f() end
+      if f then
+        if not S.WINDOWED[layer.id] then return false end
+        any = true
+      end
+    end
+    return any
+  end
+  S.windowed = windowed
+  -- the field keeps drawing under these screens
+  Stack.fullscreen = function(...)
+    if windowed() then return false end
+    return stackFull(...)
+  end
+  local UiPass = require("src.ui.game3.ui_pass")
+  local drawUi = UiPass.drawUi
+  UiPass.drawUi = function(...)
+    if not windowed() then drawn = false return drawUi(...) end
+    if not canvas then
+      local ok, c = pcall(love.graphics.newCanvas, 240, 160, { dpiscale = 1 })
+      if not ok then return drawUi(...) end
+      canvas = c
+      canvas:setFilter("nearest", "nearest")
+    end
+    -- left set on purpose: the screen's sprites flush after this returns,
+    -- and the plane's push("all")/pop puts the game's canvas back
+    love.graphics.setCanvas(canvas)
+    love.graphics.clear(0, 0, 0, 0)
+    drawn = true
+    return drawUi(...)
+  end
+  mod.hooks:wrap("render.hud", function(next, g, vp)
+    if vp and tonumber(vp.scale) then view.scale = tonumber(vp.scale) end
+    if drawn and canvas and windowed() then
+      drawn = false
+      local k = math.max(1, view.scale - 1)
+      local w, h = 240 * k, 160 * k
+      local x = math.floor((vp.gameX or 0) + ((vp.gameWidth or w) - w) / 2)
+      local y = math.floor((vp.gameY or 0) + ((vp.gameHeight or h) - h) / 2)
+      local p = k
+      local gfx = love.graphics
+      gfx.push("all")
+      gfx.origin()
+      gfx.setColor(C.ink[1], C.ink[2], C.ink[3], 0.22)
+      gfx.rectangle("fill", x - p * 2 + p, y - p * 2 + p * 2, w + p * 4, h + p * 4, p * 2, p * 2)
+      gfx.setColor(C.ink)
+      gfx.rectangle("fill", x - p * 2, y - p * 2, w + p * 4, h + p * 4, p * 2, p * 2)
+      gfx.setColor(C.accent)
+      gfx.rectangle("fill", x - p, y - p, w + p * 2, h + p * 2, p, p)
+      gfx.setColor(1, 1, 1, 1)
+      gfx.draw(canvas, x, y, 0, k, k)
+      gfx.pop()
+    end
+    return next(g, vp)
+  end)
+  mod.hooks:wrap("input.step", function(next, g2, dt)
+    game = g2
+    return next(g2, dt)
+  end)
 
   mod.exports.uiColors = C
   mod.exports.uiFrame = S.framePx

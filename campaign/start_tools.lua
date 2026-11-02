@@ -11,6 +11,7 @@ return function(mod, active)
     "g3_campaign_relearn", "g3_campaign_guide", "g3_campaign_anims" }
   local rank = {}
   for i, id in ipairs(T.ORDER) do rank[id] = i end
+  T.rank = rank
 
   local function se(id)
     pcall(function() require("src.core.game3.audio").playSe(require("src.core.game3.se_ids").resolve(id)) end)
@@ -66,17 +67,21 @@ return function(mod, active)
   mod.exports.startSub = function(entries, info) if active() and StartMenu.open then T.push(entries, info) return true end end
   mod.exports.startSubBack = function() T.back() end
 
+  -- START's wrappers below are installed once per game session but must
+  -- reach the live T: a second load of the mod (back to the title and in
+  -- again) builds a new one, and B kept talking to the old, empty stack
+  StartMenu._g3toolsT = T
   if not StartMenu._g3toolsShow then
     StartMenu._g3toolsShow, StartMenu._g3toolsCancel, StartMenu._g3toolsClose =
       StartMenu.show, StartMenu.cancel, StartMenu.close
     StartMenu.show = function(opts, ...)
-      T.stack, StartMenu._g3tools, StartMenu._g3info = {}, nil, nil
+      StartMenu._g3toolsT.stack, StartMenu._g3tools, StartMenu._g3info = {}, nil, nil
       local r = StartMenu._g3toolsShow(opts, ...)
       if active() and not StartMenu._tutorial then
         local cursorId = StartMenu.ENTRIES[StartMenu.cursor] and StartMenu.ENTRIES[StartMenu.cursor].id
-        StartMenu.ENTRIES = T.group(StartMenu.ENTRIES)
+        StartMenu.ENTRIES = StartMenu._g3toolsT.group(StartMenu.ENTRIES)
         -- the remembered cursor stays on its entry (a tool's goes to TOOLS)
-        local want = rank[cursorId] and "g3_campaign_tools" or cursorId
+        local want = StartMenu._g3toolsT.rank[cursorId] and "g3_campaign_tools" or cursorId
         for i, e in ipairs(StartMenu.ENTRIES) do
           if type(e) == "table" and e.id == want then StartMenu.cursor = i break end
         end
@@ -88,13 +93,13 @@ return function(mod, active)
     StartMenu.cancel = function(...)
       if StartMenu._g3tools and not StartMenu._confirmExit then
         se("SE_SELECT")
-        return T.back()
+        return StartMenu._g3toolsT.back()
       end
       return StartMenu._g3toolsCancel(...)
     end
     StartMenu.close = function(...)
       -- a tool that closes START: next time it opens on TOOLS
-      if StartMenu._g3tools then T.reset() end
+      if StartMenu._g3tools then StartMenu._g3toolsT.reset() end
       return StartMenu._g3toolsClose(...)
     end
   end
