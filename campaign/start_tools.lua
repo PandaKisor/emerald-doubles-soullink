@@ -7,7 +7,7 @@ return function(mod, active)
   local StartMenu = require("src.ui.game3.start_menu")
   local T = {}
   -- the tools, in the order the list shows them
-  T.ORDER = { "g3_campaign_candy", "g3_campaign_repel", "g3_campaign_heal", "g3_campaign_pc", "g3_campaign_ivs",
+  T.ORDER = { "g3_campaign_candy", "g3_campaign_repel", "g3_campaign_heal", "g3_campaign_pc", "g3_campaign_teams", "g3_campaign_ivs",
     "g3_campaign_relearn", "g3_campaign_guide", "g3_campaign_anims" }
   local rank = {}
   for i, id in ipairs(T.ORDER) do rank[id] = i end

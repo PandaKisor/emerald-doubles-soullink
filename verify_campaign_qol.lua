@@ -309,4 +309,48 @@ do
   StartMenu.close(true)
 end
 
+-- team presets: party, boxes, items, the fallen
+do
+  local TP=F.campaign.teamPresets
+  local Storage=require('src.core.game3.storage')
+  local Bag2=require('src.core.game3.bag')
+  local items=F.ids.items
+  local q=F.session and F.session() or nil
+  local a,b,c=F.mon('MEW',20,{'TACKLE'},{item=items.ITEM_LIFE_ORB}),F.mon('MUDKIP',20,{'TACKLE'}),F.mon('ZIGZAGOON',20,{'TACKLE'})
+  for i,m in ipairs({a,b,c}) do m.personality=1000+i; m.otId=5; m.heldItem=m.item end
+  local t={party={a,b},bag=Bag2.new(),modData={}}
+  local st=Storage.ensure(t)
+  st.boxes[1].mons=st.boxes[1].mons or {}
+  st.boxes[1].mons[1]=c
+  T.eq(TP.save(t,1),2,'a team saves')
+  t.party={c,b}; st.boxes[1].mons[1]=a; a.item,a.heldItem=nil,nil
+  Bag2.add(t.bag,items.ITEM_LIFE_ORB,1)
+  local got,missing=TP.load(t,1)
+  T.eq(got,2,'the team loads'); T.eq(missing,0,'nobody missing')
+  T.eq(t.party[1],a,'in saved order'); T.eq(t.party[2],b,'both members')
+  T.eq(st.boxes[1].mons[1],c,'the other went to the box tile')
+  T.eq(a.item,items.ITEM_LIFE_ORB,'the held item comes back from the bag')
+  T.check(not Bag2.has(t.bag,items.ITEM_LIFE_ORB,1),'and leaves the bag')
+  t.party={c,b}; st.boxes[1].mons[1]=a; a.item,a.heldItem=nil,nil
+  got,missing=TP.load(t,1,function(m) return m==a end)
+  T.eq(got,1,'a banned Pokemon stays boxed'); T.eq(missing,1,'and is counted')
+  T.eq(st.boxes[1].mons[1],a,'still in its tile')
+  T.eq(a.item,nil,'no item conjured')
+end
+
+-- Ability Capsule and Patch on sale; TMs stay
+do
+  local ID=require('src.core.game3.items_data')
+  local Marts=require('src.core.game3.marts')
+  local w=Marts._campaignWorld
+  local found={}
+  for _,m in pairs(w.sources.marts) do
+    if tostring(m.label):find('LilycoveCity_DepartmentStore_4F',1,true) then
+      for _,it in ipairs(m.items or m.extra or {}) do found[it]=true end
+    end
+  end
+  T.check(found.ITEM_ABILITY_CAPSULE and found.ITEM_ABILITY_PATCH,'Lilycove 4F sells the ability items')
+  T.check(ID.expandedReusableMachine(F.ids.items.ITEM_TM31_BRICK_BREAK),'TMs are reusable')
+end
+
 T.finish('campaign reusable candy, repel, team healing, relearner, IV check, starter kit, berries and guide sync')
