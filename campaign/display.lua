@@ -3,6 +3,7 @@
 --   * an optional display mode, a shader over the game's picture that never
 --     dims it: VIVID boosts colour with a soft glow, LCD adds a pixel grid. F9 or TOOLS > LOOK cycles it,
 --     and it's off by default. Purely visual, so linked games needn't match.
+--   * a slimmer battle panel, with the scene running down to it
 --   * your HP as numbers while you choose in a double, the bar while the turn
 --     plays (the same swap START does in Gen 3, made automatic; START still
 --     flips it)
@@ -125,6 +126,64 @@ return function(mod, active)
   local tints = {}
   for i = 1, 19 do if TINT[i] then tints[i - 1] = rgb(TINT[i]) end end
   require("src.core.game3.battle.ui").TYPE_TINT = tints
+
+  -- A slimmer battle panel: 40 pixels, not 48. The original art with 8 rows cut
+  -- from its middle, so its frame keeps its shape and the scene shows beneath.
+  local BC = require("src.ui.game3.battle_chrome")
+  local SLIM, TOP = 8, 24
+  local drawPanel, windowOf, frames = BC.drawPanel, BC.window, BC.menuFrameRects
+  local slimQuads = {}
+  BC.drawPanel = function(mode, ...)
+    if not (active() and BC._textbox and love and love.graphics) then return drawPanel(mode, ...) end
+    local scroll = (mode == "menu" and 160) or (mode == "moves" and 320) or 0
+    local q = slimQuads[scroll]
+    if not q then
+      local m = BC._manifest or {}
+      local tw, th = m.textboxW or 256, m.textboxH or 512
+      local y = 112 + scroll
+      if y + 48 > th then y = math.max(0, th - 48) end
+      q = { love.graphics.newQuad(0, y, 240, TOP, tw, th),
+            love.graphics.newQuad(0, y + TOP + SLIM, 240, 48 - TOP - SLIM, tw, th) }
+      slimQuads[scroll] = q
+    end
+    love.graphics.setColor(1, 1, 1, 1)
+    love.graphics.draw(BC._textbox, q[1], 0, 112 + SLIM)
+    love.graphics.draw(BC._textbox, q[2], 0, 112 + SLIM + TOP)
+  end
+  -- the art stops where the old panel began, so its last rows run on underneath
+  local stripQuads = {}
+  local function extendScene(key)
+    local entry = BC.terrain(key or "building") or BC.terrain("building") or BC.terrain("grass")
+    local img = entry and (entry.bgImage or entry.image)
+    if not (active() and img and love and love.graphics) then return end
+    local q = stripQuads[img]
+    if not q then
+      q = love.graphics.newQuad(0, 110, 240, 2, img:getDimensions())
+      stripQuads[img] = q
+    end
+    love.graphics.setColor(1, 1, 1, 1)
+    love.graphics.draw(img, q, 0, 112, 0, 1, SLIM / 2)
+  end
+  for _, name in ipairs({ "drawTerrain", "drawCleanBg", "drawPostDexBg" }) do
+    local draw = BC[name]
+    BC[name] = function(key, ...)
+      local r = draw(key, ...)
+      extendScene(key)
+      return r
+    end
+  end
+  BC.window = function(id, ...)
+    local w = windowOf(id, ...)
+    if active() and w.y >= 112 then w.y = w.y + 2 end
+    return w
+  end
+  BC.menuFrameRects = function(mode, layout, ...)
+    local rects = frames(mode, layout, ...)
+    if not (active() and rects) then return rects end
+    local out = {}
+    for i, r in ipairs(rects) do out[i] = { r[1], r[2] + 1, r[3], r[4] - 1 } end
+    return out
+  end
 
   local Healthbox = require("src.core.game3.battle.healthbox")
   local shown = Healthbox.hpTextShown
