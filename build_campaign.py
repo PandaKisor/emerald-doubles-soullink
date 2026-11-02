@@ -26,7 +26,7 @@ CAMPAIGN = HERE / "campaign"
 
 MOD_ID = "g3_campaign"
 TITLE = "Emerald Doubles Soul Link"
-VERSION = "0.43.9"
+VERSION = "0.43.10"
 CART_ID = "emerald_doubles_soullink"
 COOP_ID, COOP_VERSION = "g3_coop", "0.8.17"
 # GitHub repos the launcher checks for updates and the release cart downloads from
@@ -361,6 +361,13 @@ LIB_PATCHES = (
      "      if tt == MT.BOTH then typeLabel = \"BOTH/\" elseif tt == MT.FOES_AND_ALLY then typeLabel = \"ALL/\" end\n"
      "    end\n"
      "    rse_text(W.MOVE_TYPE, typeLabel)\n"),
+    # the move's type in its own colour
+    ("native/engine/src/core/game3/battle/ui.lua",
+     "    rse_text(W.MOVE_TYPE, Types.name(Ui.moveTypeOf(mon, slot, def)), tw, { narrow = false })\n",
+     "    local typeId = Ui.moveTypeOf(mon, slot, def)\n"
+     "    local tint = Ui.TYPE_TINT and Ui.TYPE_TINT[tonumber(typeId) or -1]\n"
+     "    rse_text(W.MOVE_TYPE, Types.name(typeId), tw, { narrow = false,\n"
+     "      colors = tint and { fg = tint, shadow = { tint[1] * 0.45 + 0.5, tint[2] * 0.45 + 0.5, tint[3] * 0.45 + 0.5, 1 }, bg = { 0, 0, 0, 0 } } or nil })\n"),
     # choosing who a ball goes at: a plain prompt, not the move list
     ("native/engine/src/core/game3/battle/ui.lua",
      "  local panelMode = \"none\"\n  if Ui._mode == \"menu\" then\n    panelMode = \"menu\"\n  elseif Ui._mode == \"moves\" or Ui._mode == \"target\" then\n    panelMode = \"moves\"\n  end\n",

@@ -87,6 +87,7 @@ return function(mod, active)
   local identity = source("campaign/identity.lua")(mod, active)
   -- after every tool: START > TOOLS gathers their entries
   source("campaign/remote_pc.lua")(mod, active)
+  local display = source("campaign/display.lua")(mod, active)
   local teamPresets = source("campaign/team_presets.lua")(mod, active)
   source("campaign/battle_info.lua")(mod, active)
   local startTools = source("campaign/start_tools.lua")(mod, active)
@@ -108,5 +109,5 @@ return function(mod, active)
     Version = require("src.core.GameVersion"), SaveFileIO = require("src.import.SaveFileIO"),
     SaveConvert = require("src.save_convert.SaveConvert") }, data, active)
   return { content = data, save = Save, active = active, learnsets = gate, moves = moves, trainers = trainers, world = world,
-    battleMoves = battleMoves, teamPresets = teamPresets, candy = candy, repel = repel, heal = heal, partyTools = partyTools, starterKit = starterKit, guideSync = guideSync, startTools = startTools, footprints = footprints, partnerNpcs = partnerNpcs, newGame = newGame, identity = identity }
+    battleMoves = battleMoves, teamPresets = teamPresets, display = display, candy = candy, repel = repel, heal = heal, partyTools = partyTools, starterKit = starterKit, guideSync = guideSync, startTools = startTools, footprints = footprints, partnerNpcs = partnerNpcs, newGame = newGame, identity = identity }
 end
