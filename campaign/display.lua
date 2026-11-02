@@ -314,13 +314,43 @@ return function(mod, active)
     love.graphics.setColor(1, 1, 1, 1)
     love.graphics.draw(img, q, 0, 112, 0, 1, SLIM / 2)
   end
-  for _, name in ipairs({ "drawTerrain", "drawCleanBg", "drawPostDexBg" }) do
+  for _, name in ipairs({ "drawCleanBg", "drawPostDexBg" }) do
     local draw = BC[name]
     BC[name] = function(key, ...)
       local r = draw(key, ...)
       extendScene(key)
       return r
     end
+  end
+  -- the terrain with your platform 8 pixels lower, under your Pokémon now
+  -- that they stand lower: the plain backdrop, its rows run on under the
+  -- old panel, then the two platforms (the enemy's where it was)
+  local terrainDraw = BC.drawTerrain
+  local bgQuads = {}
+  BC.drawTerrain = function(key, enemyOx, playerOx, bgOx, ...)
+    local entry = active() and love and love.graphics
+      and (BC.terrain(key or "building") or BC.terrain("building") or BC.terrain("grass"))
+    if not (entry and entry.bgImage and entry.enemyPlat and entry.playerPlat) then
+      local r = terrainDraw(key, enemyOx, playerOx, bgOx, ...)
+      extendScene(key)
+      return r
+    end
+    local g = love.graphics
+    bgOx = tonumber(bgOx) or 0
+    local q = bgQuads[entry]
+    if not q then
+      q = g.newQuad(0, 0, 256, 160, 256, 160)
+      bgQuads[entry] = q
+    end
+    g.setColor(1, 1, 1, 1)
+    local off = -(bgOx % 256)
+    g.draw(entry.bgImage, q, off, 0)
+    if off ~= 0 then g.draw(entry.bgImage, q, off + 256, 0) end
+    extendScene(key)
+    g.setColor(1, 1, 1, 1)
+    g.draw(entry.enemyPlat, tonumber(enemyOx) or 0, 0)
+    g.draw(entry.playerPlat, tonumber(playerOx) or 0, SLIM)
+    return true
   end
   BC.window = function(id, ...)
     local w = windowOf(id, ...)
@@ -346,7 +376,7 @@ return function(mod, active)
   local SLOTS_DOUBLE = { { 76, 12 }, { 76, 68 }, { 230, 11 }, { 230, 43 }, { 230, 75 }, { 230, 107 } }
   -- only while choosing: the action menu, messages and YES/NO sit over the slots
   local DOT_MODES = { list = true, switch = true, use = true, give = true, choose = true,
-    choose_multi = true, move_tutor = true }
+    choose_multi = true, move_tutor = true, battle_switch = true, battle_faint = true }
   PartyMenu.draw = function(...)
     partyDraw(...)
     if not (active() and PartyMenu.open and DOT_MODES[PartyMenu.mode] and game and love and love.graphics) then return end
