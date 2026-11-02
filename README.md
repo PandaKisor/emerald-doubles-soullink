@@ -28,6 +28,8 @@ Based on the Pokemon Gen 1 Recompilation Project by BOIS CLUB GAMES, LLC
 - **PC anywhere:** START > TOOLS > PC opens your boxes.
 - **Soul Link panel:** the TEAM tab shows your partner's party, and AREA shows whether this area's
   encounter is used and what lives here. You're warned before boxing or releasing a linked Pokémon.
+- **Dropped connections:** a shared battle waits up to a minute for your partner and carries on
+  where it stopped. If they don't return, you can continue alone or end it.
 - **Pledges and Round:** two different Pledges on one side merge into a 150-power attack with a
   four-turn effect; starter lines get them from RELEARN MOVE after two badges. Round brings an
   ally's Round straight after it, at double power.
