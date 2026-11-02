@@ -125,6 +125,81 @@ return function(mod, active)
     love.graphics.setColor(1, 1, 1, 1)
   end
 
+  -- --------------------------------------------------------------- Options
+  -- Emerald's own colours stay; the shared frames, and a soft bar on the
+  -- chosen row in place of dimming every other row
+  local okO, RseOpt = pcall(require, "src.ui.game3.rse.option_menu")
+  local okK, Kit = pcall(require, "src.ui.game3.rse.scene_kit")
+  if okO and okK and RseOpt.draw then
+    local optDraw = RseOpt.draw
+    RseOpt.draw = function(...)
+      local st = RseOpt._st
+      local p = st and st.pages and st.pages[#st.pages]
+      local fx = package.loaded["src.ui.game3.shaderfx_menu"]
+      if not (active() and p) or (fx and fx.isOpen and fx.isOpen()) then return optDraw(...) end
+      local g = love.graphics
+      local setColor, userFrame, frames = g.setColor, Kit.userFrame, 0
+      g.setColor = function(r, gg, b, a, ...)
+        if r == 0 and gg == 0 and b == 0 and a == 4 / 16 then return setColor(0, 0, 0, 0) end
+        return setColor(r, gg, b, a, ...)
+      end
+      Kit.userFrame = function(tx, ty, tw, th, ft, fill)
+        userFrame(tx, ty, tw, th, ft, fill)
+        frames = frames + 1
+        if frames == 2 then
+          local y = ty * 8 + (p.index - p.scroll - 1) * 16
+          rounded(C.soft, tx * 8, y, tw * 8, 16, 1)
+          rect(C.accent, tx * 8, y + 1, 2, 14)
+          setColor(1, 1, 1, 1)
+        end
+      end
+      local ok, err = pcall(optDraw, ...)
+      g.setColor, Kit.userFrame = setColor, userFrame
+      if not ok then error(err, 0) end
+    end
+  end
+
+  -- --------------------------------------------------------------- Summary
+  -- the stats page marks what the nature raises (red) and lowers (blue)
+  local okS, RseSum = pcall(require, "src.ui.game3.rse.summary_menu")
+  if okS and okK and RseSum.draw then
+    local sumDraw = RseSum.draw
+    local SummaryData = require("src.core.game3.summary_data")
+    -- nature order: Atk, Def, Spe, SpA, SpD -> { window, row }
+    local AT = { { 10, 2 }, { 10, 3 }, { 11, 3 }, { 11, 1 }, { 11, 2 } }
+    local function mark(m, which, up)
+      local at = AT[which + 1]
+      local w = m.windows and m.windows[at[1] + 1]
+      if not w then return end
+      local cw = at[1] == 10 and 48 or 40
+      local x, y = w.left * 8, w.top * 8 + (at[2] - 1) * 16
+      local c = up and { 0.86, 0.2, 0.18 } or { 0.2, 0.4, 0.86 }
+      rect({ c[1], c[2], c[3], 0.22 }, x, y, cw, 16)
+      local ax, ay = x + cw + 1, y + 6
+      for i = 0, 2 do
+        local row = up and i or (2 - i)
+        rect({ c[1], c[2], c[3], 1 }, ax + 2 - i, ay + row, 1 + i * 2, 1)
+      end
+    end
+    RseSum.draw = function(Sm, ...)
+      sumDraw(Sm, ...)
+      if not active() then return end
+      Sm = Sm or require("src.ui.game3.summary_menu")
+      local okP, page, egg = pcall(RseSum.page, Sm)
+      if not (okP and page == 1 and not egg and Sm.open) then return end
+      local mon = Sm._party and Sm._party[Sm._cursor]
+      local m = Kit.manifest(RseSum.SUB)
+      local okN, n = pcall(SummaryData.nature, mon)
+      n = okN and tonumber(n)
+      if not (m and n) then return end
+      local up, down = math.floor(n / 5), n % 5
+      if up == down then return end
+      mark(m, up, true)
+      mark(m, down, false)
+      love.graphics.setColor(1, 1, 1, 1)
+    end
+  end
+
   mod.exports.uiColors = C
   mod.exports.uiFrame = S.framePx
   return S
