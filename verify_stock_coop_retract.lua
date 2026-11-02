@@ -69,4 +69,19 @@ run('refused',function(worlds,hold,slot,steps)
   steps(30)
   T.check(phase(worlds[1])~='command' or worlds[1].LB._retract==nil,'refused: the guest does not choose again')
 end)
+-- the partner's locked-in pick shows while we choose, and a take-back clears it
+run('partner pick',function(worlds,hold,slot,steps)
+  hold[0]=true
+  T.check(until_(steps,function() return phase(worlds[1])=='linkwait' end),'pick: the guest picked')
+  local pick
+  T.check(until_(steps,function() H.run(worlds[0],function() pick=worlds[0].Battle.partnerPick() end) return pick~=nil end),'pick: the host sees it')
+  T.eq(pick and pick.kind,'move','pick: it is a move')
+  T.check(pick and type(pick.move)=='string' and pick.move~='','pick: the move has a name')
+  T.check(pick and (pick.target or pick.spread),'pick: it says who it hits')
+  H.run(worlds[1],function() worlds[1].LB.requestRetract(worlds[1].Battle._st.turn) end)
+  T.check(until_(steps,function() return phase(worlds[1])=='command' end),'pick: the guest takes it back')
+  H.run(worlds[0],function() pick=worlds[0].Battle.partnerPick() end)
+  T.eq(pick,nil,'pick: the host no longer sees it')
+  hold[0]=false
+end)
 T.finish('Campaign co-op take-back (B)')

@@ -110,6 +110,41 @@ return function(mod, data, teams, active)
     return base
   end
 
+  -- Steven's Space Center team: the engine builds it from the ROM's stevenMons,
+  -- so those rows are swapped while it does, then the authored fields go on
+  local Story = require("src.core.game3.scripting.natives_frontier_story")
+  local stevenParty = Story.stevenParty
+  Story.stevenParty = function(sess)
+    if not (active() and teams.steven) then return stevenParty(sess) end
+    local Prize = require("src.core.game3.battle.prize")
+    local Pokemon = require("src.core.game3.pokemon")
+    local rom = Prize.rseData()
+    local rows = party(teams.steven.party, teams.tiers[teams.steven.tier])
+    local saved, stand = rom.stevenMons, {}
+    for i, r in ipairs(rows) do
+      local moves = {}
+      for m, id in ipairs(r.moves) do moves[m] = { id = id } end
+      stand[i] = { species = r.species, level = r.level, fixedIV = r.iv, evs = {}, moves = moves }
+    end
+    rom.stevenMons = stand
+    local ok, out = pcall(stevenParty, sess)
+    rom.stevenMons = saved
+    if not ok then error(out, 0) end
+    for i, mon in ipairs(out) do
+      local r, extra = rows[i], rows[i].campaign
+      mon.ivs, mon.evs, mon.nature = extra.ivs, extra.evs, extra.nature
+      mon.ability, mon.abilityId = extra.ability, extra.ability
+      local sp = data.species[tonumber(mon.species) or 0]
+      for slot, a in ipairs(sp and sp.abilities or {}) do
+        if a == extra.ability then mon.abilityNum = slot - 1 break end
+      end
+      mon.heldItem, mon.item = r.heldItem, r.heldItem
+      Pokemon.applyStats(mon)
+      mon.hp = mon.maxHp
+    end
+    return out
+  end
+
   -- the trainer's mons get their authored IVs, EVs, nature, ability, gender
   local foeFromId = Trainers.foeFromId
   Trainers.foeFromId = function(trainerId, ...)

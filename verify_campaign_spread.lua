@@ -91,6 +91,29 @@ T.eq(r.both,0,'a multi-hit move stays single-target')
 r=wide('SHADOW_BALL',{'SHADOW_BALL'},'ITEM_WIDE_GHOST_GEM')
 T.check(r.both>0,'Wide Ghost Gem: Shadow Ball hits both foes')
 
+-- the AI treats a gem's move as hitting both foes, and the bosses carry them
+do
+  current={id=F.move('CRUNCH'),uses=0,both=0}
+  current.foes=function(u) local me=State.idOf(u) return (me+1)%4,(me+3)%4 end
+  F.reseed(0x4321)
+  local p={} for i=1,3 do p[i]=F.mon('MEW',40,{'TACKLE'}) end
+  local q={} for i=1,3 do q[i]=F.mon('MEW',40,{'CRUNCH'},{item=F.ids.items.ITEM_WIDE_DARK_GEM}) end
+  local foe=Trainers.foeFromId(TRAINER)
+  foe.party=q; foe.doubleBattle=true
+  local ok,err=pcall(F.battle,{playerParty=p,foe=foe,double=true,trainerId=TRAINER})
+  Battle.reset()
+  T.check(ok,'AI gem battle runs: '..tostring(err))
+  T.check(current.both>0,'the AI\'s gem Crunch hits both foes ('..current.both..'/'..current.uses..')')
+  current=nil
+  local function holds(name,item)
+    for _,m in ipairs(Trainers.get(C.trainers.byName['TRAINER_'..name]).party) do
+      if tonumber(m.heldItem)==F.ids.items[item] then return true end
+    end
+  end
+  T.check(holds('SIDNEY','ITEM_WIDE_DARK_GEM'),'Sidney holds a Wide Dark Gem')
+  T.check(holds('PHOEBE','ITEM_WIDE_GHOST_GEM'),'Phoebe holds a Wide Ghost Gem')
+end
+
 -- the prompt: a widened move doesn't ask, others still do
 do
   local Ui=require('src.core.game3.battle.ui')

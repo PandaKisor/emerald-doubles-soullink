@@ -86,6 +86,8 @@ return function(mod, active)
   local newGame = source("campaign/new_game.lua")(mod, active)
   local identity = source("campaign/identity.lua")(mod, active)
   -- after every tool: START > TOOLS gathers their entries
+  source("campaign/remote_pc.lua")(mod, active)
+  source("campaign/battle_info.lua")(mod, active)
   local startTools = source("campaign/start_tools.lua")(mod, active)
   source("full/tutors.lua").install({ Pokemon = Pokemon,
     MoveLearn = require("src.core.game3.move_learn") }, data, active)

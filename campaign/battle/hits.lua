@@ -92,6 +92,64 @@ return function(U, F)
   S.STOMPING_TANTRUM = { calc = function(M) return double(M, M.user.campaignLastFailed) end }
   S.LASH_OUT = { calc = function(M) return double(M, F.statsChangedThisTurn(M.adapter, M.user, -1)) end }
   S.ROUND = { calc = function(M) return double(M, U.turn(M.adapter).round and U.turn(M.adapter).round[M.user.side]) end }
+  -- Pledges: two different ones on a side merge. The first waits, the second
+  -- goes straight after at 150 and leaves a four-turn effect on a side.
+  local PLEDGE = { MOVE_GRASS_PLEDGE = "GRASS", MOVE_FIRE_PLEDGE = "FIRE", MOVE_WATER_PLEDGE = "WATER" }
+  local PLEDGE_COMBO = {
+    FIRE_GRASS = { type = T.FIRE, key = "campaignSeaOfFire", foe = true, text = "A sea of fire enveloped %s!" },
+    FIRE_WATER = { type = T.WATER, key = "campaignRainbow", text = "A rainbow appeared in the sky on %s side!" },
+    GRASS_WATER = { type = T.GRASS, key = "campaignSwamp", foe = true, text = "A swamp enveloped %s!" },
+  }
+  local function pledgeOf(num)
+    for symbol, kind in pairs(PLEDGE) do
+      if U.data.identity.namespaces.moves[symbol] == num then return kind end
+    end
+  end
+  local function teamName(side, possessive)
+    if side == "player" then return possessive and "your team's" or "your team" end
+    return possessive and "the opposing team's" or "the opposing team"
+  end
+  local PLEDGE_SPEC = {
+    pre = function(M)
+      local st, ad = M.st, M.adapter
+      local turn = st and st.campaignTurn
+      if not (turn and st.double) then return false end
+      turn.pledge = turn.pledge or {}
+      local mine, side = pledgeOf(M.mnum), M.user.side
+      local first = turn.pledge[side]
+      turn.pledge[side] = nil
+      if first and first ~= mine then
+        local a, b = first, mine
+        if a > b then a, b = b, a end
+        M.campaignPledge = PLEDGE_COMBO[a .. "_" .. b]
+        ad:say("The two moves have become one! It's a combined move!")
+        return false
+      end
+      local ally = State.battler(st, State.PARTNER(State.idOf(M.user)))
+      if not (ally and U.alive(ad, ally)) then return false end
+      local i, actions, at = U.pendingAction(ally)
+      local act = i and actions[i]
+      local other = act and act.kind == "move" and pledgeOf(U.moveNum(act.move))
+      if not other or other == mine then return false end
+      table.insert(actions, at, table.remove(actions, i))
+      turn.pledge[side] = mine
+      ad:say(U.name(ad, M.user) .. " is waiting for " .. U.name(ad, ally) .. "'s move...")
+      return true
+    end,
+    calc = function(M)
+      if M.campaignPledge then return { power = 150, moveType = M.campaignPledge.type } end
+    end,
+    after = function(M)
+      local combo = M.campaignPledge
+      if not (combo and landed(M)) then return end
+      local who = combo.foe and M.target or M.user
+      local side = who and M.adapter:ownSide(who)
+      if not side or (side[combo.key] or 0) > 0 then return end
+      side[combo.key] = 4
+      U.say(M.adapter, combo.text:format(teamName(who.side, not combo.foe)))
+    end,
+  }
+  S.GRASS_PLEDGE, S.FIRE_PLEDGE, S.WATER_PLEDGE = PLEDGE_SPEC, PLEDGE_SPEC, PLEDGE_SPEC
   local function fusion(other)
     return { calc = function(M)
       local last = F.field(M.st).lastMove

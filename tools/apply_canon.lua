@@ -158,7 +158,11 @@ for id, text in pairs(canon.moveText) do m.moveDescriptions[id] = text end
 -- spread moves whose text said "the foe"
 local SPREAD_TEXT = { LOW_SWEEP = "Attacks both foes' legs,\nlowering their Speed.",
   LEAF_TORNADO = "Whirls leaves at both foes\nand may cut their accuracy.",
-  HURRICANE = "A fierce wind hits both foes.\nMay cause confusion." }
+  HURRICANE = "A fierce wind hits both foes.\nMay cause confusion.",
+  GRASS_PLEDGE = "A column of grass. Combines\nwith an ally's other Pledge.",
+  FIRE_PLEDGE = "A column of fire. Combines\nwith an ally's other Pledge.",
+  WATER_PLEDGE = "A column of water. Combines\nwith an ally's other Pledge.",
+  ROUND = "A song that hits both foes. An\nally's Round follows, doubled." }
 for id, symbol in pairs(moveSymbols) do
   local text = SPREAD_TEXT[symbol:gsub("^MOVE_", "")]
   if text then m.moveDescriptions[id] = text end

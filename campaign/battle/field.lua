@@ -90,7 +90,17 @@ return function(mod, U, active)
       if turn then
         turn.moved[State.idOf(user)] = true
         turn.lastMove = M.mnum
-        if M.mnum == U.data.identity.namespaces.moves.MOVE_ROUND then turn.round[user.side] = true end
+        if M.mnum == U.data.identity.namespaces.moves.MOVE_ROUND then
+          turn.round[user.side] = true
+          -- the ally's Round goes straight after, whatever its Speed
+          local ally = M.st.double and State.battler(M.st, State.PARTNER(State.idOf(user)))
+          local i, actions, at
+          if ally then i, actions, at = U.pendingAction(ally) end
+          local a = i and actions[i]
+          if a and a.kind == "move" and U.moveNum(a.move) == M.mnum then
+            table.insert(actions, at, table.remove(actions, i))
+          end
+        end
       end
       user.campaignLastFailed = (M.failed or M.noEffect or (M.anim and M.anim.missed)) and true or false
       M.adapter._campaignIgnoreAbility, M.adapter._campaignTrapText = nil, nil
@@ -253,6 +263,9 @@ return function(mod, U, active)
         tick(ad, side, "campaignTailwind", whose .. " tailwind petered out!")
         tick(ad, side, "campaignLuckyChant", whose .. " Lucky Chant wore off!")
         tick(ad, side, "campaignAuroraVeil", whose .. " Aurora Veil wore off!")
+        tick(ad, side, "campaignSeaOfFire", "The sea of fire around " .. whose:lower() .. " side disappeared!")
+        tick(ad, side, "campaignRainbow", "The rainbow on " .. whose:lower() .. " side disappeared!")
+        tick(ad, side, "campaignSwamp", "The swamp around " .. whose:lower() .. " side disappeared!")
       end
     end
     tick(ad, f, "trickRoom", "The twisted dimensions returned to normal!")
@@ -271,6 +284,12 @@ return function(mod, U, active)
     local ad, b = ctx.adapter, ctx.target or ctx.user
     if not F.active() or not b or ad:isFainted(b) then return end
     local st = ad._st
+    local fireSide = ad:ownSide(b)
+    if fireSide and (fireSide.campaignSeaOfFire or 0) > 0 and not U.hasType(b, U.TYPE.FIRE) and ad:abilityOf(b) ~= "MAGIC_GUARD" then
+      ad:applyHpLoss(b, math.max(1, math.floor(ad:maxHp(b) / 8)))
+      U.say(ad, U.name(ad, b) .. " is hurt by the sea of fire!")
+      if ad:isFainted(b) then return end
+    end
     if F.terrain(st) == "GRASSY" and U.grounded(ad, b) and ad:hp(b) < ad:maxHp(b) and not U.healBlocked(b) then
       U.heal(ad, b, ad:maxHp(b) / 16)
       U.say(ad, U.name(ad, b) .. " restored a little HP using its Grassy Terrain!")
@@ -313,7 +332,7 @@ return function(mod, U, active)
     local f = st.campaignField or {}
     local tailwind = function(x)
       local side = x.side == "player" and st.playerSide or st.enemySide
-      return side and (side.campaignTailwind or 0) > 0
+      return side and ((side.campaignTailwind or 0) > 0 or (side.campaignSwamp or 0) > 0)
     end
     local ad = require("src.core.game3.battle")._adapter
     local function glide(x, mv)

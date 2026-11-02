@@ -149,4 +149,32 @@ for i,name in ipairs(names) do
   Battle.reset()
   T.check(ok,name..' battle runs'..(ok and '' or (' '..tostring(err))))
 end
+-- Steven: Meteor Falls is his trainer entry, the Space Center ally is the ROM's stevenMons
+for i,m in ipairs(teams.steven.party) do checkMon('Steven ally '..i,m) end
+T.eq(F.P.name(Trainers.get(C.trainers.byName.TRAINER_STEVEN).party[6].species),'Metagross','Meteor Falls ace is authored')
+local Story=require('src.core.game3.scripting.natives_frontier_story')
+local sess={name='A',party={}}
+local Rse=require('src.core.game3.rse.init')
+local oldSession=Rse.session
+Rse.session=function() return sess end
+-- the campaign swaps these rows out, and the headless cache has no rse_data
+local Prize=require('src.core.game3.battle.prize')
+local oldData=Prize.rseData
+local romRows={stevenMons={}}
+Prize.rseData=function() return romRows end
+local ok,ally=pcall(Story.stevenParty,sess)
+Rse.session,Prize.rseData=oldSession,oldData
+T.eq(#romRows.stevenMons,0,'the ROM rows are put back')
+T.check(ok,'Steven ally builds '..(ok and '' or tostring(ally)))
+if ok then
+  T.eq(#ally,3,'Steven brings three')
+  local third=ally[3]
+  T.eq(F.P.name(third.species),'Aggron','the ally ace')
+  T.eq(third.level,44,'ally ace level')
+  T.eq(third.item,F.ids.items.ITEM_AIR_BALLOON,'ally held item')
+  T.eq(third.moves[3],F.ids.moves.MOVE_SUPERPOWER,'ally move')
+  T.check(third.stevenPartner==true,'still marked as Steven\'s')
+  T.eq(third.hp,third.maxHp,'ally at full HP')
+  T.check(third.evs.hp==252 and third.ivs.atk==31,'ally has leader-tier training')
+end
 T.finish('campaign trainer teams')

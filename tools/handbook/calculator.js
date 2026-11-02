@@ -221,7 +221,9 @@
     const base=floor(floor(attack*power*(floor(2*a.level/5)+2)/defense)/50)+2;
     let damage=base, modifier=4096;
     const combine=m=>{modifier=q(m,modifier);};
-    const spread=field.doubles!==false && (field.spread ?? [8,32].includes(move.target));
+    // a Wide Gem of the move's type makes a single-target attack hit both foes
+    const wide=ai==='WIDE_GEM' && move.target===0 && Number(paramType(ar.secondaryId||ar.holdEffectParam))===type;
+    const spread=field.doubles!==false && (field.spread ?? ([8,32].includes(move.target)||wide));
     if(spread)combine(3072);combine(floor(eff*4096));
     if(critical)damage=q(6144,damage);
     if(a.status==='BRN' && physical && ak!=='GUTS' && name!=='FACADE')damage=q(2048,damage);

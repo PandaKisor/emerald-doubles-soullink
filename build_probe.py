@@ -469,6 +469,50 @@ return Coop
      '      if LB and LB.requestRetract then LB.requestRetract(Battle._st.turn) end\n'
      '    end\n'
      '    link_turn_step()\n    return\n  end\n'),
+    # co-op: what the partner has locked in this turn, for g3_coop's HUD (user,
+    # 2026-11-01). Read from the action already sent, so nothing new goes over
+    # the link and a take-back clears it.
+    ("src/core/game3/battle/init.lua",
+     "local function link_turn_step()\n",
+     "function Battle.partnerPick()\n"
+     "  local st = Battle._st\n"
+     "  local LB = st and st.multi and st.link and not st.coopSolo and not st.spectate and link_battle()\n"
+     "  if not (LB and LB.isActive() and st.linkOwn and st.linkSeatOf) then return nil end\n"
+     "  local choosing = Battle._dblSel ~= nil\n"
+     "  if not (choosing or Battle._phase == \"linkwait\") then return nil end\n"
+     "  local id = (st.linkOwn + 2) % 4\n"
+     "  local b = State.battler(st, id)\n"
+     "  if not b or State.isAbsent(st, id) then return nil end\n"
+     "  LB.pumpActions()\n"
+     "  local rows = LB._seatActions and LB._seatActions[st.linkSeatOf[id]]\n"
+     "  local msg = rows and rows[st.turn + (choosing and 1 or 0)]\n"
+     "  local act = msg and link_side_action(st, msg, id, \"player\")\n"
+     "  if not act then return nil end\n"
+     "  local function nameOf(target)\n"
+     "    local t = target ~= nil and target ~= id and State.battler(st, target)\n"
+     "    return t and not State.isAbsent(st, target) and State.displayName(t) or nil\n"
+     "  end\n"
+     "  local pick = { kind = act.kind, mon = State.displayName(b) }\n"
+     "  if act.kind == \"move\" then\n"
+     "    pick.move = Moves.displayName(act.move)\n"
+     "    local tt = Ui.moveTargetType(b, act.move)\n"
+     "    local one\n"
+     "    if tt == 8 then\n"
+     "      local left, right = nameOf(1), nameOf(3)\n"
+     "      if left and right then pick.spread = \"both foes\" else one = left or right end\n"
+     "    elseif tt == 32 then pick.spread = \"everyone\"\n"
+     "    elseif tt == 0 then one = nameOf(act.locked and act.target or link_local(st, msg.target)) end\n"
+     "    pick.target = one\n"
+     "  elseif act.kind == \"ball\" then\n"
+     "    pick.item = require(\"src.core.game3.items_data\").displayName(act.itemId)\n"
+     "    pick.target = nameOf(link_local(st, msg.target))\n"
+     "  elseif act.kind == \"switch\" then\n"
+     "    local mon = st.playerParty and act.slot and st.playerParty[act.slot]\n"
+     "    pick.to = mon and State.displayName({ mon = mon, species = mon.species }) or nil\n"
+     "  end\n"
+     "  return pick\n"
+     "end\n\n"
+     "local function link_turn_step()\n"),
     ("src/core/game3/scripting/space.lua",
      "  Space.store = Flags.newStore()\n",
      "  Space.store = Flags.newStore()\n  Space._storeSession = nil\n"),

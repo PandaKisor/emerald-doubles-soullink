@@ -615,6 +615,12 @@ return function(mod, U, F)
     if F.active() and M and M.user and not certainFlag then
       local k = key(M.adapter, M.user)
       if k == "SHEER_FORCE" and flag(M.move, "FLAG_SHEER_FORCE_BOOST") then return false end
+      local rainbow = M.adapter:ownSide(M.user)
+      if rainbow and (rainbow.campaignRainbow or 0) > 0 and not M.noEffect and (tonumber(M.move.secondaryChance) or 0) > 0 then
+        local chance = tonumber(M.move.secondaryChance) * (k == "SERENE_GRACE" and 4 or 2)
+        if M.adapter:roll(0, 99) < chance then return Secondary.set(M, eff, false, chance >= 100, affectsUser) end
+        return false
+      end
       if k == "PYROMANCY" and tonumber(M.moveType or M.move.type) == T.FIRE and eff == "BURN" and not M.noEffect then
         local chance = (tonumber(M.move.secondaryChance) or 0) * 5
         if M.adapter:roll(0, 99) < chance then return Secondary.set(M, eff, false, chance >= 100, affectsUser) end
@@ -627,7 +633,9 @@ return function(mod, U, F)
   function A.chance(M, pct)
     local k = key(M.adapter, M.user)
     if k == "SHEER_FORCE" and flag(M.move, "FLAG_SHEER_FORCE_BOOST") then return 0 end
-    if k == "SERENE_GRACE" then return pct * 2 end
+    if k == "SERENE_GRACE" then pct = pct * 2 end
+    local side = M.adapter:ownSide(M.user)
+    if side and (side.campaignRainbow or 0) > 0 then pct = pct * 2 end
     return pct
   end
   function A.sheerForced(M) return key(M.adapter, M.user) == "SHEER_FORCE" and flag(M.move, "FLAG_SHEER_FORCE_BOOST") end

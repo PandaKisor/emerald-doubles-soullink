@@ -36,6 +36,25 @@ return function(mod, active, data, evolutions)
     end
     return out
   end
+  -- the Pledges come from RELEARN MOVE once two badges are in, for the Pokémon
+  -- their tutor rows allow (no NPC teaches them on the vanilla map)
+  local PLEDGE_BADGES = 2
+  function P.pledges(mon)
+    local out = {}
+    local world = require("src.core.game3.marts")._campaignWorld
+    if not (world and world.badges() >= PLEDGE_BADGES) then return out end
+    local known = {}
+    for _, m in ipairs(mon.moves or {}) do known[tonumber(type(m) == "table" and (m.id or m.move) or m) or 0] = true end
+    local species = Pokemon.speciesOf(mon)
+    for tutor, move in pairs(data.manifest.tutorMoves) do
+      local name = data.moves[move] and data.moves[move].symbol
+      if name and name:find("_PLEDGE$") and not known[move] and MoveLearn.canLearnTutorMove(species, tutor) then
+        out[#out + 1] = move
+      end
+    end
+    table.sort(out)
+    return out
+  end
   -- content.lua calls this after full/tutors.lua, which replaces the same function
   function P.installEggRelearn()
     local relearnable = MoveLearn.relearnableMoves
@@ -45,6 +64,9 @@ return function(mod, active, data, evolutions)
       local have = {}
       for _, m in ipairs(moves) do have[m] = true end
       for _, m in ipairs(P.eggMoves(mon)) do
+        if not have[m] then moves[#moves + 1] = m end
+      end
+      for _, m in ipairs(P.pledges(mon)) do
         if not have[m] then moves[#moves + 1] = m end
       end
       return moves

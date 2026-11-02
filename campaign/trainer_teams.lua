@@ -2630,14 +2630,14 @@ return {
     SIDNEY = { tier = "leader", party = {
       { "SABLEYE", 49, ability = "PRANKSTER", nature = "CAREFUL", spread = "spdef", item = "SITRUS_BERRY", moves = { "FAKE_OUT", "WILL_O_WISP", "KNOCK_OFF", "RECOVER" } },
       { "LIEPARD", 49, ability = "PRANKSTER", nature = "JOLLY", item = "SITRUS_BERRY", moves = { "FAKE_OUT", "ENCORE", "TAUNT", "KNOCK_OFF" } },
-      { "BISHARP", 49, ability = "DEFIANT", nature = "ADAMANT", item = "BLACK_GLASSES", moves = { "IRON_HEAD", "KNOCK_OFF", "SUCKER_PUNCH", "PROTECT" } },
+      { "BISHARP", 49, ability = "DEFIANT", nature = "ADAMANT", item = "WIDE_DARK_GEM", moves = { "IRON_HEAD", "KNOCK_OFF", "SUCKER_PUNCH", "PROTECT" } },
       { "CRAWDAUNT", 49, ability = "ADAPTABILITY", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "CRABHAMMER", "KNOCK_OFF", "AQUA_JET", "SWORDS_DANCE" } },
       { "MANDIBUZZ", 49, ability = "OVERCOAT", nature = "IMPISH", spread = "bulk", item = "SITRUS_BERRY", moves = { "TAILWIND", "FOUL_PLAY", "ROOST", "KNOCK_OFF" } },
       { "ABSOL", 50, ability = "SUPER_LUCK", nature = "JOLLY", item = "SCOPE_LENS", moves = { "NIGHT_SLASH", "SUPERPOWER", "PLAY_ROUGH", "SUCKER_PUNCH" } },
     } },
     PHOEBE = { tier = "leader", party = {
       { "SPIRITOMB", 51, ability = "INFILTRATOR", nature = "CAREFUL", spread = "spdef", item = "SITRUS_BERRY", moves = { "WILL_O_WISP", "PAIN_SPLIT", "SUCKER_PUNCH", "SHADOW_SNEAK" } },
-      { "GENGAR", 51, ability = "CURSED_BODY", nature = "TIMID", spread = "spa", item = "SPELL_TAG", moves = { "SHADOW_BALL", "SLUDGE_BOMB", "DESTINY_BOND", "PROTECT" } },
+      { "GENGAR", 51, ability = "CURSED_BODY", nature = "TIMID", spread = "spa", item = "WIDE_GHOST_GEM", moves = { "SHADOW_BALL", "SLUDGE_BOMB", "DESTINY_BOND", "PROTECT" } },
       { "GOLURK", 51, ability = "NO_GUARD", nature = "ADAMANT", item = "SITRUS_BERRY", moves = { "DYNAMIC_PUNCH", "EARTHQUAKE", "SHADOW_PUNCH", "PROTECT" } },
       { "DRIFBLIM", 51, ability = "UNBURDEN", nature = "TIMID", spread = "bulk", item = "SITRUS_BERRY", moves = { "TAILWIND", "WILL_O_WISP", "SHADOW_BALL", "DESTINY_BOND" } },
       { "DOUBLADE", 51, ability = "NO_GUARD", nature = "ADAMANT", item = "EVIOLITE", moves = { "SACRED_SWORD", "SHADOW_CLAW", "SWORDS_DANCE", "PROTECT" } },
@@ -2666,6 +2666,16 @@ return {
       { "GYARADOS", 57, ability = "INTIMIDATE", nature = "JOLLY", item = "SITRUS_BERRY", moves = { "DRAGON_DANCE", "WATERFALL", "EARTHQUAKE", "PROTECT" } },
       { "TENTACRUEL", 57, ability = "RAIN_DISH", nature = "TIMID", spread = "spa", item = "BLACK_SLUDGE", moves = { "MUDDY_WATER", "SLUDGE_BOMB", "KNOCK_OFF", "TOXIC" } },
       { "MILOTIC", 58, ability = "COMPETITIVE", nature = "BOLD", spread = "bulk", item = "LEFTOVERS", moves = { "SCALD", "ICE_BEAM", "RECOVER", "HYPNOSIS" } },
+    } },
+    -- Steven in Meteor Falls (post-game; vanilla species and levels, 2026-11-01):
+    -- Tailwind and screens up front, Earthquake beside Flying, Levitate and a Balloon
+    STEVEN = { tier = "leader", party = {
+      { "SKARMORY", 77, ability = "STURDY", nature = "IMPISH", spread = "bulk", item = "LEFTOVERS", moves = { "TAILWIND", "BRAVE_BIRD", "IRON_HEAD", "ROOST" } },
+      { "CLAYDOL", 75, ability = "LEVITATE", nature = "MODEST", spread = "spa", item = "LIGHT_CLAY", moves = { "REFLECT", "LIGHT_SCREEN", "EARTH_POWER", "PSYCHIC" } },
+      { "AGGRON", 76, ability = "ROCK_HEAD", nature = "ADAMANT", spread = "tank", item = "AIR_BALLOON", moves = { "IRON_HEAD", "ROCK_SLIDE", "SUPERPOWER", "PROTECT" } },
+      { "CRADILY", 76, ability = "STORM_DRAIN", nature = "CALM", spread = "spdef", item = "SITRUS_BERRY", moves = { "GIGA_DRAIN", "POWER_GEM", "RECOVER", "PROTECT" } },
+      { "ARMALDO", 76, ability = "BATTLE_ARMOR", nature = "ADAMANT", item = "FOCUS_SASH", moves = { "SWORDS_DANCE", "X_SCISSOR", "ROCK_SLIDE", "AQUA_JET" } },
+      { "METAGROSS", 78, ability = "CLEAR_BODY", nature = "ADAMANT", item = "LIFE_ORB", moves = { "METEOR_MASH", "EARTHQUAKE", "BULLET_PUNCH", "PROTECT" } },
     } },
     -- Post-game and stragglers: Rusturf Mike, Jagged Pass grunt, S.S. Tidal, Trick House 8 (draft 1, 2026-10-27) ----
     -- Rusturf Tunnel, Verdanturf side: a tag battle at 21
@@ -2737,6 +2747,14 @@ return {
       { "MILOTIC", 63, ability = "MARVEL_SCALE", nature = "BOLD", spread = "bulk", item = "SITRUS_BERRY", moves = { "SCALD", "ICE_BEAM", "RECOVER", "HYPNOSIS" } },
     } },
   },
+
+  -- Steven beside the player at the Space Center (the ROM's stevenMons, so this
+  -- is not TRAINER_STEVEN, his Meteor Falls team): vanilla's three and levels
+  steven = { tier = "leader", party = {
+    { "METANG", 42, ability = "CLEAR_BODY", nature = "ADAMANT", spread = "tank", item = "EVIOLITE", moves = { "METEOR_MASH", "ZEN_HEADBUTT", "BULLET_PUNCH", "PROTECT" } },
+    { "SKARMORY", 43, ability = "STURDY", nature = "IMPISH", spread = "bulk", item = "ROCKY_HELMET", moves = { "TAILWIND", "DRILL_PECK", "IRON_HEAD", "PROTECT" } },
+    { "AGGRON", 44, ability = "ROCK_HEAD", nature = "ADAMANT", spread = "tank", item = "AIR_BALLOON", moves = { "IRON_HEAD", "ROCK_SLIDE", "SUPERPOWER", "PROTECT" } },
+  } },
 
   partners = {
     R102_DALE = { like = "CALVIN_1", name = "DALE", defeat = "Aw, we were a good team, too!", party = {
@@ -3598,7 +3616,7 @@ return {
       { "GOOMY", 34, ability = "SAP_SIPPER", nature = "MODEST", item = "ORAN_BERRY", ev = 128, moves = { "DRAGON_BREATH", "WATER_PULSE", "PROTECT", "RAIN_DANCE" } },
     } },
     PYRE_GOR = { like = "ATSUSHI", name = "GORO", defeat = "Hrr! Bested!", party = {
-      { "SAWK", 34, ability = "STURDY", nature = "ADAMANT", item = "ORAN_BERRY", ev = 128, moves = { "SEISMIC_TOSS", "BULK_UP", "ROCK_TOMB", "BRICK_BREAK" } },
+      { "QUILLADIN", 34, ability = "OVERGROW", nature = "ADAMANT", item = "ORAN_BERRY", ev = 128, moves = { "GRASS_PLEDGE", "BULK_UP", "ROCK_TOMB", "BRICK_BREAK" } },
       { "THROH", 34, ability = "GUTS", nature = "ADAMANT", item = "BLACK_BELT", ev = 128, moves = { "LOW_SWEEP", "ROCK_TOMB", "COUNTER", "VITAL_THROW" } },
     } },
     PYRE_VIC = { like = "WILLIAM", name = "VICK", defeat = "I sensed a different outcome.", party = {

@@ -200,6 +200,7 @@ return function(data)
     local s = Engine.speedOf(b, ad._st, ad)
     local side = ad:ownSide(b)
     if side and (side.campaignTailwind or 0) > 0 then s = s * 2 end
+    if side and (side.campaignSwamp or 0) > 0 then s = math.floor(s / 4) end
     local field = require("src.core.game3.battle.moves")._campaignField
     if field and field.items then s = field.items.speed(b, s) end
     return math.max(1, s)
@@ -216,6 +217,20 @@ return function(data)
 
   -- current turn bookkeeping (field.lua)
   function U.turn(ad) return ad._st.campaignTurn or {} end
+  function U.moveNum(move)
+    local Moves = require("src.core.game3.battle.moves")
+    local row = type(move) == "table" and move or (move and Moves.get(move))
+    return row and tonumber(row.numId or row.num or row.id) or tonumber(move)
+  end
+  -- the turn's next actions: Battle._actionI already points past the running one
+  function U.pendingAction(battler)
+    local Battle = require("src.core.game3.battle")
+    local actions, at = Battle._actions or {}, Battle._actionI or 1
+    for i = at, #actions do
+      local a = actions[i]
+      if a and (a.battler == State.idOf(battler) or a.user == battler) and not a.finished and not a.done then return i, actions, at end
+    end
+  end
   function U.movedThisTurn(ad, b) return U.turn(ad).moved and U.turn(ad).moved[State.idOf(b)] or false end
 
   return U

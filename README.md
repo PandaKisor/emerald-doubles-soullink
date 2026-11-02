@@ -23,6 +23,14 @@ Based on the Pokemon Gen 1 Recompilation Project by BOIS CLUB GAMES, LLC
 - **Wide Gems:** permanent held items for Fighting, Poison, Ghost, Steel and Dark. The
   holder's single-target attacks of that type hit both foes at spread damage.
   Sold at Lilycove Department Store.
+- **In battle:** a box shows stat changes, weather, terrain, screens and other effects with turns
+  left, and how the highlighted move does against each foe.
+- **PC anywhere:** START > TOOLS > PC opens your boxes.
+- **Soul Link panel:** the TEAM tab shows your partner's party, and AREA shows whether this area's
+  encounter is used and what lives here. You're warned before boxing or releasing a linked Pokémon.
+- **Pledges and Round:** two different Pledges on one side merge into a 150-power attack with a
+  four-turn effect; starter lines get them from RELEARN MOVE after two badges. Round brings an
+  ally's Round straight after it, at double power.
 - **The move box shows who a move hits:** BOTH/ for both foes, ALL/ when it also hits
   your ally.
 - **HM moves in the field** need only the HM and its badge: no Pokémon has to learn them.

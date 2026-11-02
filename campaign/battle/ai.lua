@@ -201,6 +201,36 @@ return function(mod, U, F)
     return st.campaignAiPlan
   end
 
+  -- a Wide Gem makes a single-target move hit both foes
+  local function targetOf(st, user, rec)
+    if st.double and F.items and F.items.widens(user, rec) then return TARGET.BOTH end
+    return tonumber(rec.target) or 0
+  end
+  -- Pledges: scored as the merged attack when the partner can bring a different one
+  local PLEDGE = { GRASS_PLEDGE = "GRASS", FIRE_PLEDGE = "FIRE", WATER_PLEDGE = "WATER" }
+  local PLEDGE_TYPE = { FIRE_GRASS = T.FIRE, FIRE_WATER = T.WATER, GRASS_WATER = T.GRASS }
+  local function pledgeRec(ad, st, user, rec, plan)
+    local mine = st.double and PLEDGE[sym(rec)]
+    local partner = mine and U.partner(ad, user)
+    if not (partner and alive(ad, partner)) then return nil end
+    local other
+    local picked = plan.chosen and plan.chosen[State.idOf(partner)]
+    if picked then other = PLEDGE[picked]
+    else
+      for _, m in ipairs(usableMoves(ad, partner)) do
+        local k = PLEDGE[sym(m.rec)]
+        if k and k ~= mine then other = k break end
+      end
+    end
+    if not other or other == mine then return nil end
+    local a, b = mine, other
+    if a > b then a, b = b, a end
+    local out = {}
+    for k, v in pairs(rec) do out[k] = v end
+    out.power, out.type = 150, PLEDGE_TYPE[a .. "_" .. b]
+    return out
+  end
+
   -- damaging moves --------------------------------------------------------------------
   -- how dangerous a target is to the AI's side this turn: the largest share of
   -- an AI-side Pokémon's HP it can take, and whether it knocks one out first
@@ -267,7 +297,9 @@ return function(mod, U, F)
   end
 
   local function damagingScore(ad, st, user, rec, tid, plan)
-    local tgt = tonumber(rec.target) or 0
+    local tgt = targetOf(st, user, rec)
+    local combo = pledgeRec(ad, st, user, rec, plan)
+    if combo then rec = combo end
     local foes = U.foes(ad, user)
     local partner = U.partner(ad, user)
     local s, detail, expect = 0, nil, {}
@@ -314,6 +346,7 @@ return function(mod, U, F)
       s = s + 10
     end
     if named(rec, "ICY_WIND", "ELECTROWEB", "SNARL", "STRUGGLE_BUG", "BREAKING_SWIPE") then s = s + 8 end
+    if combo then s = s + 25 end
     return s, expect
   end
 
@@ -735,7 +768,7 @@ return function(mod, U, F)
   -- targets a move could be aimed at
   local ALLY_TARGET = { HEAL_PULSE = true, FLORAL_HEALING = true, DECORATE = true, INSTRUCT = true, AFTER_YOU = true }
   local function targetsFor(ad, st, user, rec)
-    local tgt = tonumber(rec.target) or 0
+    local tgt = targetOf(st, user, rec)
     if ALLY_TARGET[sym(rec)] then
       local p = U.partner(ad, user)
       return { p and State.idOf(p) or false }
@@ -750,7 +783,7 @@ return function(mod, U, F)
   end
   -- the target byte the action carries
   local function actionTarget(st, user, rec, tid)
-    local tgt = tonumber(rec.target) or 0
+    local tgt = targetOf(st, user, rec)
     local id = State.idOf(user)
     if tgt == TARGET.USER then return id end
     if tid then return tid end
@@ -811,6 +844,8 @@ return function(mod, U, F)
     for tid, d in pairs(best.expect or {}) do plan.damage[tid] = (plan.damage[tid] or 0) + d end
     local rec = best.m.rec
     local s = sym(rec)
+    plan.chosen = plan.chosen or {}
+    plan.chosen[id] = s
     if PROTECTS[s] or eff(rec) == E.PROTECT then plan.moves[id] = "protect"
     elseif s == "TRICK_ROOM" then plan.moves.trickRoom = true
     elseif E.STAT_CHANGES and E.STAT_CHANGES[eff(rec)] and E.STAT_CHANGES[eff(rec)].self then plan.moves[id] = "setup" end

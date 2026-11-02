@@ -653,19 +653,12 @@ return function(U, F)
   end }
 
   -- turn order --------------------------------------------------------------
-  local function actionIndex(battler)
-    local Battle = require("src.core.game3.battle")
-    local actions, at = Battle._actions or {}, Battle._actionI or 1
-    for i = at + 1, #actions do
-      local a = actions[i]
-      if a and (a.battler == State.idOf(battler) or a.user == battler) and not a.finished then return i, actions, at end
-    end
-  end
+  local actionIndex = U.pendingAction
   S.AFTER_YOU = { status = function(ctx, M)
     local i, actions, at = actionIndex(ctx.target)
     if not i then return failed(ctx, M) end
     anim(M)
-    table.insert(actions, at + 1, table.remove(actions, i))
+    table.insert(actions, at, table.remove(actions, i))
     ctx.adapter:say(U.name(ctx.adapter, ctx.target) .. " took the kind offer!")
   end }
   S.QUASH = { status = function(ctx, M)
