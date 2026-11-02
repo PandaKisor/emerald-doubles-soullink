@@ -102,7 +102,7 @@ do
     local symbol = "ITEM_WIDE_" .. w[1] .. "_GEM"
     row.id, row.symbol, row.name, row.price, row.sourceId = nextId, symbol, w[2], 6000, nextId + 10000
     local kind = w[1]:sub(1, 1) .. w[1]:sub(2):lower()
-    row.description = "Makes the holder's single-\ntarget " .. kind .. " moves\nhit both foes."
+    row.description = "Single-target " .. kind .. "\nmoves hit both\nfoes."
     row.sourceFields.holdEffect, row.sourceFields.price, row.sourceFields.itemId = "HOLD_EFFECT_WIDE_GEM", 6000, symbol
     names[symbol] = nextId
     into[nextId] = row
@@ -111,7 +111,7 @@ do
   local mint = assert(gems.ITEM_MENTAL_HERB, "herb")
   nextId = nextId + 1
   mint.id, mint.symbol, mint.name, mint.price, mint.sourceId = nextId, "ITEM_NATURE_MINT", "Nature Mint", 3000, nextId + 10000
-  mint.pocket, mint.description = "ITEMS", "Changes a Pokémon's nature.\nUse it from TOOLS > IV / EV\nwith SELECT."
+  mint.pocket, mint.description = "ITEMS", "Changes nature.\nUse in TOOLS >\nIV / EV, SELECT."
   mint.sourceFields.holdEffect, mint.sourceFields.holdEffectParam = nil, nil
   mint.sourceFields.price, mint.sourceFields.itemId, mint.sourceFields.pocket = 3000, "ITEM_NATURE_MINT", "POCKET_ITEMS"
   names.ITEM_NATURE_MINT = nextId

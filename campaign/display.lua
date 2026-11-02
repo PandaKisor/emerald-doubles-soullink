@@ -335,6 +335,34 @@ return function(mod, active)
     return out
   end
 
+  -- the party screen: a link dot on each Pokémon. g3_coop answers with
+  -- mod.exports.coopLinkState(mon): "linked", "fallen" or nil
+  local DOT = { linked = { 0.25, 0.72, 0.35 }, fallen = { 0.82, 0.22, 0.2 }, none = { 0.55, 0.57, 0.6 } }
+  local PartyMenu = require("src.ui.game3.party_menu")
+  local partyDraw = PartyMenu.draw
+  local SLOTS = { { 76, 28 }, { 230, 11 }, { 230, 35 }, { 230, 59 }, { 230, 83 }, { 230, 107 } }
+  PartyMenu.draw = function(...)
+    partyDraw(...)
+    if not (active() and PartyMenu.open and PartyMenu.mode ~= "summary" and game and love and love.graphics) then return end
+    local Sm = package.loaded["src.ui.game3.summary_menu"]
+    if Sm and Sm.isOpen and Sm.isOpen() then return end
+    local ex = game.mods and game.mods.exports and game.mods.exports.g3_coop
+    local state = ex and ex.coopLinkState
+    local party = PartyMenu._party or (PartyMenu._session and PartyMenu._session.party)
+    if not (state and party) then return end
+    for i, xy in ipairs(SLOTS) do
+      local mon = party[i]
+      if mon then
+        local c = DOT[state(mon) or "none"]
+        love.graphics.setColor(0.1, 0.12, 0.16, 1)
+        love.graphics.rectangle("fill", xy[1] - 1, xy[2] - 1, 6, 6)
+        love.graphics.setColor(c[1], c[2], c[3], 1)
+        love.graphics.rectangle("fill", xy[1], xy[2], 4, 4)
+      end
+    end
+    love.graphics.setColor(1, 1, 1, 1)
+  end
+
   local Healthbox = require("src.core.game3.battle.healthbox")
   local shown = Healthbox.hpTextShown
   Healthbox.hpTextShown = function(st, id, ...)
