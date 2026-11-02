@@ -87,35 +87,39 @@ return function(mod, active)
     return #party, missing
   end
 
+  -- START > TOOLS > TEAMS: the teams, then LOAD / SAVE, as submenus in the
+  -- START window (B goes back a level); the result shows over the field
   function P.open(game, session)
     if not active() then return end
     local s = session or require("src.core.game3.runtime").getSession()
-    local Message, Choice = require("src.ui.game3.message"), require("src.ui.game3.choice")
-    require("src.ui.game3.start_menu").close(true)
-    local labels = {}
-    for i = 1, P.SLOTS do labels[i] = ("TEAM %d (%d)"):format(i, P.size(s, i)) end
-    labels[#labels + 1] = "CANCEL"
-    Message.show("Which team?", { stay = true })
-    Choice.multi(labels, 0, function(index)
-      if Message.isOpen() then Message.close() end
-      local slot = index ~= 127 and index + 1 or nil
-      if not slot or slot > P.SLOTS then return end
-      Message.show(("TEAM %d: load it, or save\nyour party there?"):format(slot), { stay = true })
-      Choice.multi({ "LOAD", "SAVE", "CANCEL" }, 0, function(act)
-        if Message.isOpen() then Message.close() end
-        if act == 0 then
+    local StartMenu = require("src.ui.game3.start_menu")
+    local function say(text)
+      StartMenu.close(true)
+      require("src.ui.game3.message").show(text)
+    end
+    local function act(slot)
+      return {
+        { id = "g3_campaign_team_load", label = "LOAD", onSelect = function()
           local got, missing = P.load(s, slot, function(mon)
             local ex = game and game.mods and game.mods.exports and game.mods.exports.g3_coop
             return ex and ex.coopBanned and ex.coopBanned(mon)
           end)
-          if got == 0 then Message.show("That team has nobody to load.")
-          elseif missing > 0 then Message.show(("Team loaded. %d couldn't come."):format(missing))
-          else Message.show("Team loaded.") end
-        elseif act == 1 then
-          Message.show(("Saved %d POKéMON to TEAM %d."):format(P.save(s, slot), slot))
-        end
-      end)
-    end)
+          if got == 0 then say("That team has nobody to load.")
+          elseif missing > 0 then say(("Team loaded. %d couldn't come."):format(missing))
+          else say("Team loaded.") end
+        end },
+        { id = "g3_campaign_team_save", label = "SAVE", onSelect = function()
+          say(("Saved %d POKéMON to TEAM %d."):format(P.save(s, slot), slot))
+        end },
+      }
+    end
+    local teams = {}
+    for i = 1, P.SLOTS do
+      teams[i] = { id = "g3_campaign_team_" .. i, label = ("TEAM %d (%d)"):format(i, P.size(s, i)), onSelect = function()
+        mod.exports.startSub(act(i), ("TEAM %d: load it, or save\nyour party there?"):format(i))
+      end }
+    end
+    mod.exports.startSub(teams, "Which team?")
   end
 
   mod.hooks:wrap("ui.start_menu.items", function(next, game, items)

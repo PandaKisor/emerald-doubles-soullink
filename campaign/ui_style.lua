@@ -122,6 +122,35 @@ return function(mod, active)
     -- arrows when a long list runs past the window
     if first > 0 then rect(C.accent, x + w / 2 - 3, y - 2, 6, 1); rect(C.accent, x + w / 2 - 2, y - 3, 4, 1) end
     if first + rows < n then rect(C.accent, x + w / 2 - 3, y + h + 1, 6, 1); rect(C.accent, x + w / 2 - 2, y + h + 2, 4, 1) end
+    -- a submenu's line about it (CO-OP's connection, TEAMS' question), in a
+    -- window beside the list
+    local info = StartMenu._g3info
+    if type(info) == "string" and info ~= "" then
+      local maxW = x - 2 * S.EDGE - 14
+      local lines = {}
+      for para in (info .. "\n"):gmatch("(.-)\n") do
+        local line = ""
+        for word in para:gmatch("%S+") do
+          local try = line == "" and word or (line .. " " .. word)
+          if line ~= "" and (FrlgFont.measure(try, { small = true }) or 0) > maxW - PAD * 2 then
+            lines[#lines + 1] = line
+            line = word
+          else
+            line = try
+          end
+        end
+        lines[#lines + 1] = line
+      end
+      local iw = 0
+      for _, l in ipairs(lines) do iw = math.max(iw, FrlgFont.measure(l, { small = true }) or 0) end
+      iw = math.min(maxW, iw + PAD * 2 + 2)
+      local ih = #lines * PITCH + PAD * 2 - 1
+      local ix = x - S.EDGE * 2 - 4 - iw
+      S.framePx(ix, y, iw, ih)
+      for i, l in ipairs(lines) do
+        FrlgFont.draw(l, ix + PAD + 1, y + PAD - 1 + (i - 1) * PITCH, { small = true, colors = FrlgFont.COLOR.NORMAL })
+      end
+    end
     love.graphics.setColor(1, 1, 1, 1)
   end
 

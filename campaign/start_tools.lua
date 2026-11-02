@@ -33,27 +33,44 @@ return function(mod, active)
     return main, tools
   end
 
-  function T.open(tools)
-    T.main, T.mainCursor = StartMenu.ENTRIES, StartMenu.cursor
-    StartMenu.ENTRIES = tools
+  -- Submenus in the START window (TOOLS, TEAMS, g3_coop's CO-OP): each
+  -- level keeps the list and cursor under it, and B goes back one level.
+  -- info: a line or two shown in a small window beside the list.
+  T.stack = {}
+  function T.push(entries, info)
+    T.stack[#T.stack + 1] = { entries = StartMenu.ENTRIES, cursor = StartMenu.cursor, info = StartMenu._g3info }
+    StartMenu.ENTRIES = entries
     StartMenu.cursor, StartMenu._scrollOffset = 1, 0
+    StartMenu._g3info = info
     StartMenu.clampScroll()
     StartMenu._g3tools = true
   end
+  function T.open(tools) T.push(tools) end
 
   function T.back()
-    StartMenu.ENTRIES = T.main or StartMenu.ENTRIES
-    StartMenu.cursor = T.mainCursor or 1
+    local top = table.remove(T.stack)
+    if not top then return end
+    StartMenu.ENTRIES, StartMenu.cursor, StartMenu._g3info = top.entries, top.cursor or 1, top.info
     StartMenu._scrollOffset = 0
     StartMenu.clampScroll()
-    StartMenu._g3tools, T.main = nil, nil
+    StartMenu._g3tools = #T.stack > 0 or nil
   end
+  -- the main list again (when START closes from inside a submenu)
+  function T.reset()
+    if T.stack[1] then
+      StartMenu.ENTRIES, StartMenu.cursor = T.stack[1].entries, T.stack[1].cursor or 1
+    end
+    T.stack, StartMenu._g3tools, StartMenu._g3info = {}, nil, nil
+  end
+  -- other mods open their own submenus here
+  mod.exports.startSub = function(entries, info) if active() and StartMenu.open then T.push(entries, info) return true end end
+  mod.exports.startSubBack = function() T.back() end
 
   if not StartMenu._g3toolsShow then
     StartMenu._g3toolsShow, StartMenu._g3toolsCancel, StartMenu._g3toolsClose =
       StartMenu.show, StartMenu.cancel, StartMenu.close
     StartMenu.show = function(opts, ...)
-      StartMenu._g3tools, T.main = nil, nil
+      T.stack, StartMenu._g3tools, StartMenu._g3info = {}, nil, nil
       local r = StartMenu._g3toolsShow(opts, ...)
       if active() and not StartMenu._tutorial then
         local cursorId = StartMenu.ENTRIES[StartMenu.cursor] and StartMenu.ENTRIES[StartMenu.cursor].id
@@ -77,10 +94,7 @@ return function(mod, active)
     end
     StartMenu.close = function(...)
       -- a tool that closes START: next time it opens on TOOLS
-      if StartMenu._g3tools then
-        StartMenu.ENTRIES, StartMenu.cursor = T.main or StartMenu.ENTRIES, T.mainCursor or 1
-        StartMenu._g3tools, T.main = nil, nil
-      end
+      if StartMenu._g3tools then T.reset() end
       return StartMenu._g3toolsClose(...)
     end
   end
