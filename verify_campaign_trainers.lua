@@ -58,7 +58,7 @@ end
 local calvin=C.trainers.byName.TRAINER_CALVIN_1
 local t=Trainers.get(calvin)
 T.eq(F.P.name(t.party[1].species),'Poochyena','Calvin leads with the authored Poochyena')
-T.eq(t.party[1].level,15,'at the next gym cap')
+T.eq(t.party[1].level,12,'one under the top gym trainer')
 local foe=Trainers.foeFromId(calvin)
 T.eq(foe.party[2].nature,3,'Lillipup is Adamant')
 T.eq(foe.party[1].ivs.atk,20,'route IVs 20')

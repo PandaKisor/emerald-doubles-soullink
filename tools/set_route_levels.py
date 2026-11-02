@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-"""Every route trainer and tag partner stands at the level cap of the next gym
-(user, 2026-11-01): all their Pokémon at that chapter's cap, evolved once the level
+"""Every route trainer and tag partner stands one level under the chapter's top gym
+trainer (user, 2026-11-02; Victory Road has no gym, so ROAD): evolved once the level
 allows, with a stronger same-type move where one fits. Gym trainers, grunts, bosses and
 rivals are left alone. Rewrites campaign/trainer_teams.lua; run after export.py.
 """
@@ -28,12 +28,22 @@ def ace(trainer):
     return max(m["level"] for m in trainer["party"])
 
 
+ROAD = 47
+
+
+def gym_top(chapter, by_id):
+    levels = [m["level"] for step in chapter["steps"] for tid in step["trainers"] if tid not in chapter["bosses"]
+              and any("_GYM" in x["id"] for x in by_id[tid].get("maps", [])) for m in by_id[tid]["party"]]
+    return max(levels) if levels else ROAD + 1
+
+
 def bounds():
-    """party signature -> the cap of the chapter it first appears in"""
+    """party signature -> the level of the chapter it first appears in"""
     by_id = {t["id"]: t for t in D["trainers"]}
     out = {}
     for chapter in D["routeGuide"]:
         bosses = set(chapter["bosses"])
+        level = gym_top(chapter, by_id) - 1
         for step in chapter["steps"]:
             for tid in step["trainers"]:
                 t = by_id[tid]
@@ -42,7 +52,7 @@ def bounds():
                 for x in (t, by_id.get(t.get("partnerId"))):
                     if x:
                         sig = tuple((D["species"][str(m["species"])]["symbol"][8:], m["level"]) for m in x["party"])
-                        out.setdefault(sig, chapter["cap"])
+                        out.setdefault(sig, level)
     return out
 
 
